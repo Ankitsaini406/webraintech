@@ -1,0 +1,17 @@
+
+.mainFlex {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+.imageBox {
+    width: 100%;
+    height: auto;
+}
+
+.image{
+    height: 100%;
+    width: 100%;
+}
