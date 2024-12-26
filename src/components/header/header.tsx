@@ -7,7 +7,7 @@ import Image from "next/image";
 
 export default function Header() {
     return (
-        <header className="sticky top-0 w-full bg-red-800 text-white p-4 border-b shadow-lg">
+        <header className="sticky top-0 w-full bg-red-800 text-white p-4 shadow-lg border-b-0">
             <div className="h-14 container flex items-center justify-between">
 
             <Link href='/'>
