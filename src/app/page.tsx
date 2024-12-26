@@ -3,9 +3,9 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className='container m-auto flex flex-col'>
+    <div className='container m-auto flex flex-col min-h-full'>
       <DevelopmentAlert />
-      <main className='w-full h-auto'>
+      <main className=''>
         <Image
           className='h-full w-full'
           src="/images/front_image.jpg"
