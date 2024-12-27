@@ -13,7 +13,7 @@ export default function Header() {
     const { theme, toggleTheme } = useTheme();
 
     return (
-        <header className="sticky top-0 w-full bg-background text-foreground p-4 shadow-lg dark:shadow-gray-800 border-b-0">
+        <header className="sticky top-0 w-full z-10 bg-background text-foreground p-4 shadow-lg dark:shadow-gray-800 border-b-0">
             <div className="h-14 container flex items-center justify-between">
 
                 <Link href='/'>

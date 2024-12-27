@@ -65,9 +65,31 @@ const config: Config = {
                 md: "calc(var(--radius) - 2px)",
                 sm: "calc(var(--radius) - 4px)",
             },
+            animationDelay: {
+                "0s": "0s",
+                "1s": "1s",
+                "2s": "2s",
+                "3s": "3s",
+                "4s": "4s",
+                "5s": "5s",
+            },
         },
     },
-    plugins: [tailwindcssAnimate],
+    plugins: [
+        tailwindcssAnimate,
+        function (pluginApi: { addUtilities: (utilities: Record<string, { animationDelay: string }>) => void }) {
+            const { addUtilities } = pluginApi;
+            const delays = {
+                ".animation-delay-0s": { animationDelay: "0s !important" },
+                ".animation-delay-1s": { animationDelay: "1s !important" },
+                ".animation-delay-2s": { animationDelay: "2s !important" },
+                ".animation-delay-3s": { animationDelay: "3s !important" },
+                ".animation-delay-4s": { animationDelay: "4s !important" },
+                ".animation-delay-5s": { animationDelay: "5s !important" },
+            };
+            addUtilities(delays);
+        },
+    ],
 };
 
 export default config;

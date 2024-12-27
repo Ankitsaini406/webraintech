@@ -1,4 +1,5 @@
 import DevelopmentAlert from "@/components/DevelopmentAlert";
+import Hero from "@/components/hero/hero";
 // import Image from "next/image";
 
 export default function Home() {
@@ -6,6 +7,8 @@ export default function Home() {
     <div className='container m-auto h-dvh'>
       <DevelopmentAlert />
       <main className=''>
+
+        <Hero />
         {/* <Image
           className='h-full w-full'
           src="/images/front_image.jpg"

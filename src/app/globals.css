@@ -94,3 +94,53 @@ body {
     text-shadow: 0 0 8px rgba(255, 255, 255, 0.7), 0 0 16px rgba(255, 255, 255, 0.5);
   }
 }
+
+@keyframes moveLeftToRight {
+  0% {
+    transform: translateY(-100%);
+  }
+  50% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+/* Applying the animation to the class */
+.animate-moveLeftToRight {
+  animation: moveLeftToRight 10s linear infinite;
+}
+
+.animate-moveImageUpTODown {
+  animation: upTODown 10s linear infinite;
+}
+
+@keyframes upTODown {
+  0% {
+    transform: translateY(-20%);
+  }
+  50% {
+    transform: translateY(20%);
+  }
+  100% {
+    transform: translateY(-20%);
+  }
+}
+
+
+.round::before {
+  content: '';
+  position: absolute;
+  background: url(/svg/lineborder.svg) no-repeat;
+  width: 366px;
+  height: 99px;
+  left: -11px;
+  top: 0;
+  z-index: -1;
+}
+
+.round2::before {
+  content: '';
+  display: none;
+}
