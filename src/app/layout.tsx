@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/Theme/ThemeContext";
-import WhatsAppWidget from "@/components/whatsappWidget";
+// import WhatsAppWidget from "@/components/whatsappWidget";
 import Header from "@/components/header/header";
 import TailwindIndicator from "@/lib/tailwindIndicater";
 import Footer from "@/components/footer/Footer";
@@ -26,7 +26,7 @@ export default function RootLayout({
           <Header />
           {children}
           <TailwindIndicator />
-          <WhatsAppWidget />
+          {/* <WhatsAppWidget /> */}
           <Footer />
         </ThemeProvider>
       </body>
