@@ -1,30 +1,40 @@
+'use client';
+
 import Link from "next/link";
+import Image from "next/image";
 import MainNav from "./main-nav";
 import MobileNav from "./mobile-nav";
-import { CircleUserRound } from "lucide-react";
-import Image from "next/image";
+import { CircleUserRound, Moon, Sun } from "lucide-react";
+import { useTheme } from "@/Theme/ThemeContext";
 
 
 export default function Header() {
+
+    const { theme, toggleTheme } = useTheme();
+
     return (
-        <header className="sticky top-0 w-full bg-red-800 text-white p-4 shadow-lg border-b-0">
+        <header className="sticky top-0 w-full bg-background text-foreground p-4 shadow-lg border-b-0">
             <div className="h-14 container flex items-center justify-between">
 
-            <Link href='/'>
-                <Image alt="WeBrainTech" width={50} height={50} src='/favicon.ico' />
-            </Link>
+                <Link href='/'>
+                    <Image alt="WeBrainTech" width={50} height={50} src='/favicon.ico' />
+                </Link>
 
                 {/* Desktop */}
                 <div className="flex gap-3 lg:gap-4 items-start">
-                <MainNav />
+                    <MainNav />
 
-                {/* Desktop & mobile */}
-                <h1 className="flex items-center justify-end flex-1">
-                    <Link href='/'><CircleUserRound /></Link>
-                </h1>
+                    {/* Desktop & mobile */}
+                    <h1 className="flex items-center justify-end flex-1 gap-2">
+                        <Link href='/'><CircleUserRound /></Link>
+                        <button onClick={toggleTheme}
+                            className="text-foreground ">
+                            {theme === "light" ? <Moon /> : <Sun />}
+                        </button>
+                    </h1>
 
-                {/* Mobile */}
-                <MobileNav />
+                    {/* Mobile */}
+                    <MobileNav />
                 </div>
             </div>
         </header>
