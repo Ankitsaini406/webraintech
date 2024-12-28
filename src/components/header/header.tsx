@@ -6,7 +6,6 @@ import MobileNav from "./mobile-nav";
 import { CircleUserRound } from "lucide-react";
 import ThemeSwitcher from "@/utils/ThemeSwitcher";
 
-
 export default function Header() {
 
     return (

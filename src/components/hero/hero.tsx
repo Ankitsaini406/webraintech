@@ -4,7 +4,7 @@ import Image from "next/image";
 
 function Hero() {
     return (
-        <div className="my-7 p-8 rounded-lg flex items-center justify-between flex-col-reverse sm:flex-row relative gap-8 sm:gap-8">
+        <div className="container my-7 p-4 sm:p-8 rounded-lg flex items-center justify-between flex-col-reverse sm:flex-row relative gap-8 sm:gap-8">
             <Image className="absolute top-1/4 left-8 animate-moveLeftToRight" alt="pen" src="/svg/pen.svg" width={50} height={50} />
             <Image className="absolute top-10 right-10 animate-moveLeftToRight" alt="pen" src="/svg/airoplan.svg" width={50} height={50} />
 
