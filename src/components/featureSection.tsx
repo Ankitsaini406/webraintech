@@ -26,7 +26,9 @@ export function FeatureListSection() {
     return (
         <div className="relative my-7 p-4 sm:p-8 h-96 sm:h-auto">
             {/* Background Image */}
-            <div className="absolute inset-0 bg-cover bg-center" ></div>
+            <div className="absolute inset-0 bg-cover bg-center" 
+            // style={{ backgroundImage: "url('/images/front_image.jpg')" }}
+            ></div>
             <div className=" container bg-gradient-to-b from-transparent to-black/30 aspect-video w-full">
 
                 {/* Overlay */}
