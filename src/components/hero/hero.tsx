@@ -18,9 +18,9 @@ function Hero() {
             </div>
 
             <div className="w-2/4 justify-center flex relative">
-                <Image className="max-w-56 sm:max-w-full" alt="WeBrainTech" src="/svg/1.png" width={500} height={500} />
-                <Image className="absolute bottom-0 right-0 animation-delay-2s animate-moveImageUpTODown w-0 sm:w-24 md:w-32" alt="WeBrainTech" src="/svg/2.png" width={150} height={150} />
-                <Image className="absolute bottom-0 left-0 animate-moveImageUpTODown w-0 sm:w-24 md:w-32" alt="WeBrainTech" src="/svg/3.png" width={150} height={150} />
+                <Image className="bg-gradient-to-b from-transparent to-black-opacity-30 rounded-full max-w-56 sm:max-w-full" alt="WeBrainTech" src="/svg/1.png" width={500} height={500} />
+                <Image className="bg-gradient-to-b from-transparent to-black-opacity-30 rounded-full absolute bottom-0 right-0 animation-delay-2s animate-moveImageUpTODown w-0 sm:w-24 md:w-32" alt="WeBrainTech" src="/svg/2.png" width={150} height={150} />
+                <Image className="bg-gradient-to-b from-transparent to-black-opacity-30 rounded-full absolute bottom-0 left-0 animate-moveImageUpTODown w-0 sm:w-24 md:w-32" alt="WeBrainTech" src="/svg/3.png" width={150} height={150} />
             </div>
         </div>
     )

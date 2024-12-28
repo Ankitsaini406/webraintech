@@ -59,6 +59,7 @@ const config: Config = {
                     "4": "hsl(var(--chart-4))",
                     "5": "hsl(var(--chart-5))",
                 },
+                'black-opacity-30': 'rgba(0, 0, 0, 0.3)',
             },
             backdropFilter: ['responsive'],
             borderRadius: {

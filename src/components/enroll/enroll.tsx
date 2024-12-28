@@ -2,7 +2,6 @@ import { ButtonWhite } from "@/utils/Buttons";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
-
 function Enroll() {
 
     const enrollData = [
@@ -31,18 +30,18 @@ function Enroll() {
             <h1 className="text-4xl sm:text-5xl font-bold mb-6 sm:w-full">Simple Steps to Enroll in Courses</h1>
             <h2 className="w-full sm:w-3/4 xl:w-1/2 pb-8">Enrolling in our courses is a straightforward process. Just choose your desired course, complete the registration, and start learning immediately.</h2>
 
-            <div className="flex pb-10 gap-4 items-center sm:items-start lg:gap-8 flex-col sm:flex-row lg:items-stretch">
-
-                {
-                    enrollData.map((item) => (
-                        <div key={item.title} className="flex flex-col w-3/4 items-center sm:items-start">
-                        <div className="bg-gray-500 aspect-square w-full sm:w-40 lg:w-full"></div>
-                        <h3 className="py-2 sm:py-4 text-base sm:text-xl font-bold">{item.title}</h3>
-                        <h4>{item.description}</h4>
-                    </div>
-                    ))
-                }
-            </div>
+                {/* Card Items */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 pb-10">
+                    {
+                        enrollData.map((item) => (
+                            <div key={item.title} className="flex flex-col items-center sm:items-start cursor-pointer">
+                                <div className="border bg-gradient-to-b from-transparent to-black/30 aspect-square w-full sm:w-40 lg:w-full"></div>
+                                <h3 className="py-2 sm:py-4 text-base sm:text-xl font-bold">{item.title}</h3>
+                                <h4>{item.description}</h4>
+                            </div>
+                        ))
+                    }
+                </div>
 
             <div className="flex gap-8 items-center">
             <ButtonWhite title="Learn More" />
