@@ -24,7 +24,7 @@ function Enroll() {
     return (
         <div className="my-7 p-4 sm:p-8 bg-gray-100 dark:bg-zinc-800">
         <div className="container">
-            <p className="pb-6">Enroll</p>
+            <p className="pb-6 text-red-500">Enroll</p>
             <h1 className="text-4xl sm:text-5xl font-bold mb-6 sm:w-full">Simple Steps to Enroll in Courses</h1>
             <h2 className="w-full sm:w-3/4 xl:w-1/2 pb-8">Enrolling in our courses is a straightforward process. Just choose your desired course, complete the registration, and start learning immediately.</h2>
 

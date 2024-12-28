@@ -1,6 +1,6 @@
 import DevelopmentAlert from "@/components/DevelopmentAlert";
 import Enroll from "@/components/enroll";
-import FeatureSection from "@/components/featureSection";
+import FeatureSection, { FeatureListSection } from "@/components/featureSection";
 import Hero from "@/components/hero/hero";
 // import Image from "next/image";
 
@@ -27,6 +27,7 @@ export default function Home() {
         /> */}
         <Enroll />
         <FeatureSection />
+        <FeatureListSection />
       </main>
     </div>
   );
