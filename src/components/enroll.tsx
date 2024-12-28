@@ -1,6 +1,4 @@
-import { ButtonWhite } from "@/utils/Buttons";
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { ButtonLink, ButtonWhite } from "@/utils/Buttons";
 
 function Enroll() {
 
@@ -45,7 +43,7 @@ function Enroll() {
 
             <div className="flex gap-8 items-center">
             <ButtonWhite title="Learn More" />
-            <Link className="flex gap-2" href='/' >Sign Up<ArrowRight /></Link>
+            <ButtonLink title="Sign Up" />
             </div>
         </div>
         </div>

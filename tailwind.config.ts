@@ -59,6 +59,14 @@ const config: Config = {
                     "4": "hsl(var(--chart-4))",
                     "5": "hsl(var(--chart-5))",
                 },
+                selection: {
+                    DEFAULT: '#000000',
+                    dark: '#ffffff',
+                },
+                selectionText: {
+                    DEFAULT: '#ffffff',
+                    dark: '#000000',
+                },
                 'black-opacity-30': 'rgba(0, 0, 0, 0.3)',
             },
             backdropFilter: ['responsive'],
@@ -74,6 +82,11 @@ const config: Config = {
                 "3s": "3s",
                 "4s": "4s",
                 "5s": "5s",
+            },
+            listStyleType: {
+                'none': 'none',
+                'decimal': 'decimal', // Default decimal styling
+                'disc': 'disc', // Default dot styling
             },
         },
     },
