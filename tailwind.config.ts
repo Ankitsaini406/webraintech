@@ -18,6 +18,9 @@ const config: Config = {
             }
         },
         extend: {
+            screens: {
+                xs: '300px', // Custom xs breakpoint for min-width of 300px
+            },
             colors: {
                 background: "hsl(var(--background))",
                 foreground: "hsl(var(--foreground))",
