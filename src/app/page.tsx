@@ -1,7 +1,7 @@
 import CtaSection from "@/components/cta";
 import DevelopmentAlert from "@/components/DevelopmentAlert";
 import Enroll from "@/components/enroll";
-import FeatureSection, { AboutSection, CourseSection, FeatureListSection } from "@/components/HomeComponet";
+import FeatureSection, { AboutSection, BlogSection, CourseSection, FeatureListSection } from "@/components/HomeComponet";
 import Hero from "@/components/hero/hero";
 // import TestimonialsSection from "@/components/testimonials";
 // import Image from "next/image";
@@ -31,6 +31,7 @@ export default function Home() {
         <FeatureSection />
         <FeatureListSection />
         <CourseSection />
+        <BlogSection />
         <CtaSection />
         <AboutSection />
         {/* <TestimonialsSection /> */}

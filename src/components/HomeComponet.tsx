@@ -44,6 +44,31 @@ export function FeatureListSection() {
     )
 }
 
+export function BlogSection() {
+    return (
+        <div className="container p-4 sm:p-8">
+            <div className="flex flex-col gap-4 sm:gap-8">
+                <div className="flex flex-col md:flex-row justify-between items-start gap-4 md:gap-0 md:items-end pb-4 sm:pb-8">
+                    <div>
+                        <p className="text-red-500 pb-4 sm:pb-8">Blog</p>
+                        <h3 className="text-2xl sm:text-5xl pb-2 sm:pb-6 font-bold">Insights and Inspirations</h3>
+                        <p>Explore our latest articles and success stories.</p>
+                    </div>
+                    <ButtonWhite title="View all" />
+                </div>
+
+                <div className="flex flex-row gap-4 sm:gap-8">
+                    <div className="flex flex-row w-full">
+                        <div>
+                            <div className="bg-gradient-to-b from-transparent to-black/30 w-1/3 h-60"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
 export function CourseSection() {
     return (
         <div className="container p-4 sm:p-8">
@@ -54,7 +79,6 @@ export function CourseSection() {
             <div className="flex flex-col md:flex-row gap-4 sm:gap-6 justify-center">
 
                 <div className="flex flex-col justify-between gap-4 lg:flex-row">
-
                     <div className="border border-black dark:border-white p-2 sm:p-4 flex flex-col justify-between gap-10">
                         <div>
                             <h4 className="font-bold text-lg sm:text-xl">Find Your Perfect Course</h4>
@@ -70,8 +94,8 @@ export function CourseSection() {
                         </div>
                         <ButtonLink title="Enroll" />
                     </div>
-
                 </div>
+
                 <div className="border border-black dark:border-white flex flex-col lg:flex-row gap-4">
                     <div className="bg-gradient-to-b from-transparent to-black/30 w-full h-40 lg:w-80 lg:h-60">
                     </div>
