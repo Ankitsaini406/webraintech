@@ -1,7 +1,7 @@
 import CtaSection from "@/components/cta";
 import DevelopmentAlert from "@/components/DevelopmentAlert";
 import Enroll from "@/components/enroll";
-import FeatureSection, { FeatureListSection } from "@/components/featureSection";
+import FeatureSection, { CourseSection, FeatureListSection } from "@/components/featureSection";
 import Hero from "@/components/hero/hero";
 // import TestimonialsSection from "@/components/testimonials";
 // import Image from "next/image";
@@ -30,6 +30,7 @@ export default function Home() {
         <Enroll />
         <FeatureSection />
         <FeatureListSection />
+        <CourseSection />
         <CtaSection />
         {/* <TestimonialsSection /> */}
       </main>

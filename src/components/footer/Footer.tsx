@@ -8,17 +8,17 @@ function Footer() {
         <footer className="w-full bg-background dark:bg-black bg-gray-100 p-4 sm:p-8">
             <div className="flex flex-col gap-8 sm:flex-row justify-around items-center sm:items-start">
                 <div className="flex flex-col gap-2 sm:gap-4 items-center sm:items-start">
-                <Image className="h-full" src='/favicon.ico' alt="WeBrainTech" width={100} height={100} />
-                <div className="flex flex-col gap-2 sm:gap-4 items-center sm:items-start">
-                    <h5 className="font-bold text-xl sm:text-2xl">Follow Us</h5>
-                    <div className="flex flex-row gap-4 sm:gap-8">
-                    <Facebook className="cursor-pointer hover:text-red-500 transition-all duration-300"/>
-                    <Instagram className="cursor-pointer hover:text-red-500 transition-all duration-300"/>
-                    <X className="cursor-pointer hover:text-red-500 transition-all duration-300"/>
-                    <Linkedin className="cursor-pointer hover:text-red-500 transition-all duration-300"/>
-                    <Youtube className="cursor-pointer hover:text-red-500 transition-all duration-300"/>
+                    <Image className="h-14 w-14 sm:h-full" src='/favicon.ico' alt="WeBrainTech" width={100} height={100} />
+                    <div className="flex flex-col gap-2 sm:gap-4 items-center sm:items-start">
+                        <h5 className="font-bold text-xl sm:text-2xl">Follow Us</h5>
+                        <div className="flex flex-row gap-4 sm:gap-8">
+                            <Facebook className="cursor-pointer hover:text-red-500 transition-all duration-300" />
+                            <Instagram className="cursor-pointer hover:text-red-500 transition-all duration-300" />
+                            <X className="cursor-pointer hover:text-red-500 transition-all duration-300" />
+                            <Linkedin className="cursor-pointer hover:text-red-500 transition-all duration-300" />
+                            <Youtube className="cursor-pointer hover:text-red-500 transition-all duration-300" />
+                        </div>
                     </div>
-                </div>
                 </div>
                 <div className="flex flex-col gap-2 sm:gap-4 items-center sm:items-start">
                     <h5 className="font-bold text-xl sm:text-2xl">Ouick Links</h5>

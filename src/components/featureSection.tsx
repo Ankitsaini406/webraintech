@@ -1,3 +1,4 @@
+import { ButtonLink } from "@/utils/Buttons";
 
 
 function FeatureSection() {
@@ -26,7 +27,7 @@ export function FeatureListSection() {
     return (
         <div className="relative my-7 p-4 sm:p-8 h-96 sm:h-auto">
             {/* Background Image */}
-            <div className="absolute inset-0 bg-cover bg-center" 
+            <div className="absolute inset-0 bg-cover bg-center"
             // style={{ backgroundImage: "url('/images/front_image.jpg')" }}
             ></div>
             <div className=" container bg-gradient-to-b from-transparent to-black/30 aspect-video w-full">
@@ -38,6 +39,50 @@ export function FeatureListSection() {
                 <div className="absolute inset-0 flex flex-col justify-center items-center text-white px-4 text-center">
                     <h1 className="container text-2xl sm:text-5xl font-bold mb-4 w-full">Unlock Your Potential with Our Expert-Led Courses and Flexible Learning Options</h1>
                 </div>
+            </div>
+        </div>
+    )
+}
+
+export function CourseSection() {
+    return (
+        <div className="container p-4 sm:p-8">
+            <p className="text-red-500 text-center pb-4 sm:pb-8">Courses</p>
+            <h3 className="text-center text-2xl sm:text-4xl pb-4 sm:pb-8">Explore Our Course Offerings</h3>
+            <p className="text-center pb-4 sm:pb-8">Diverse course tailored for every learner&#39;s needs.</p>
+
+            <div className="flex flex-col md:flex-row gap-4 sm:gap-6 justify-center">
+
+                <div className="flex flex-col justify-between gap-4 lg:flex-row">
+
+                    <div className="border border-black dark:border-white p-2 sm:p-4 flex flex-col justify-between gap-10">
+                        <div>
+                            <h4 className="font-bold text-lg sm:text-xl">Find Your Perfect Course</h4>
+                            <p>Choose from beginner to advanced levels.</p>
+                        </div>
+                        <ButtonLink title="Learn" />
+                    </div>
+
+                    <div className="border border-black dark:border-white p-2 sm:p-4 flex flex-col justify-between gap-10">
+                        <div>
+                            <h4 className="font-bold text-lg sm:text-xl">Specialized Courses for Professionals</h4>
+                            <p>Enhance your skills with expert-led training.</p>
+                        </div>
+                        <ButtonLink title="Enroll" />
+                    </div>
+
+                </div>
+                <div className="border border-black dark:border-white flex flex-col lg:flex-row gap-4">
+                    <div className="bg-gradient-to-b from-transparent to-black/30 w-full h-40 lg:w-80 lg:h-60">
+                    </div>
+                    <div className="flex flex-col gap-4 justify-center p-2 lg:p-0">
+                        <p>Topics</p>
+                        <h4>Flexible Learning Options Available</h4>
+                        <h6>Study at your own pace, anytime, anywhere.</h6>
+                        <ButtonLink title="Join" />
+                    </div>
+                </div>
+
             </div>
         </div>
     )
