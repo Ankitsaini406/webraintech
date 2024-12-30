@@ -1,4 +1,4 @@
-import { ButtonLink } from "@/utils/Buttons";
+import { ButtonLink, ButtonWhite } from "@/utils/Buttons";
 
 
 function FeatureSection() {
@@ -48,7 +48,7 @@ export function CourseSection() {
     return (
         <div className="container p-4 sm:p-8">
             <p className="text-red-500 text-center pb-4 sm:pb-8">Courses</p>
-            <h3 className="text-center text-2xl sm:text-4xl pb-4 sm:pb-8">Explore Our Course Offerings</h3>
+            <h3 className="text-center text-2xl sm:text-5xl pb-4 sm:pb-8 font-bold">Explore Our Course Offerings</h3>
             <p className="text-center pb-4 sm:pb-8">Diverse course tailored for every learner&#39;s needs.</p>
 
             <div className="flex flex-col md:flex-row gap-4 sm:gap-6 justify-center">
@@ -83,6 +83,31 @@ export function CourseSection() {
                     </div>
                 </div>
 
+            </div>
+        </div>
+    )
+}
+
+export function AboutSection() {
+    return (
+        <div className="container p-4 sm:p-8">
+            <div className="flex gap-4 flex-col">
+                <div className="flex flex-col lg:flex-row gap-8">
+                    <div>
+                        <p className="text-red-500 pb-2 sm:pb-4">Learn</p>
+                        <h3 className="text-2xl sm:text-5xl font-bold">Empowering Your Learning Journey with Us</h3>
+                    </div>
+                    <div className="flex flex-col gap-8 w-full">
+                        <p>Founded with a vision to make education accessible, our platform has evolved to offer a diverse range of courses tailored to various learning styles. Our mission is to empower individuals through quality education, fostering a community of lifelong learners. Join us as we continue to innovate and inspire learning experiences that transform lives.</p>
+                        <div className="flex gap-4 items-center">
+                            <ButtonWhite title="Enroll" />
+                            <ButtonLink title="Explore" />
+                        </div>
+                    </div>
+                </div>
+                <div className="bg-gradient-to-b from-transparent to-black/30 w-full aspect-video ">
+
+                </div>
             </div>
         </div>
     )
