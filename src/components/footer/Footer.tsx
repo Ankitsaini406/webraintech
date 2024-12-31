@@ -6,7 +6,7 @@ import Link from "next/link";
 function Footer() {
     return (
         <footer className="w-full bg-background dark:bg-black bg-gray-100 p-4 sm:p-8">
-            <div className="flex flex-col gap-8 sm:flex-row justify-around items-center sm:items-start">
+            <div className=" container flex flex-col gap-8 sm:flex-row justify-around items-center sm:items-start">
                 <div className="flex flex-col gap-2 sm:gap-4 items-center sm:items-start">
                     <Image className="h-14 w-14 sm:h-full" src='/favicon.ico' alt="WeBrainTech" width={100} height={100} />
                     <div className="flex flex-col gap-2 sm:gap-4 items-center sm:items-start">

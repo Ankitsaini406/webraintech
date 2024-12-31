@@ -9,7 +9,7 @@ import ThemeSwitcher from "@/utils/ThemeSwitcher";
 export default function Header() {
 
     return (
-        <header className="sticky top-0 w-full z-10 bg-white dark:bg-black text-foreground p-4 shadow-lg dark:shadow-lg border-none border-gray-200 dark:border-gray-700">
+        <header className="sticky top-0 w-full z-20 bg-white dark:bg-black text-foreground p-4 shadow-lg dark:shadow-lg border-none border-gray-200 dark:border-gray-700">
             <div className="h-14 container flex items-center justify-between">
 
                 <Link href='/'>

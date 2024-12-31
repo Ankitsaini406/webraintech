@@ -19,6 +19,6 @@ export function ButtonBlack({ title }: { title: string }) {
 
 export function ButtonLink({title}: {title: string}) {
     return (
-        <Link className="flex gap-2" href='/' >{title}<ArrowRight /></Link>
+        <Link className="flex gap-2 transition-all duration-300 transform hover:scale-105" href='/' >{title}<ArrowRight /></Link>
     )
 }
