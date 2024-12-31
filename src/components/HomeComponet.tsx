@@ -57,10 +57,46 @@ export function BlogSection() {
                     <ButtonWhite title="View all" />
                 </div>
 
-                <div className="flex flex-row gap-4 sm:gap-8">
-                    <div className="flex flex-row w-full">
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-8">
+                    <div className="block w-full">
                         <div>
-                            <div className="bg-gradient-to-b from-transparent to-black/30 w-1/3 h-60"></div>
+                            <div className="bg-gradient-to-b from-transparent to-black/30 h-60 mb-4"></div>
+                            <div className="flex flex-row gap-4 sm:gap-8 items-center mb-2">
+                                <h5 className="bg-gray-200 p-1 text-sm">Education</h5>
+                                <p className="text-sm">5 min read</p>
+                            </div>
+                            <h4 className="font-bold text-base sm:text-lg pb-3">Unlocking Potential Through Education</h4>
+                            <p className="text-sm pb-2">Discover how education transforms lives and careers.</p>
+
+                            <ButtonLink title="Read more" />
+                        </div>
+                    </div>
+
+                    <div className="block w-full">
+                        <div>
+                            <div className="bg-gradient-to-b from-transparent to-black/30 h-60 mb-4"></div>
+                            <div className="flex flex-row gap-4 sm:gap-8 items-center mb-2">
+                                <h5 className="bg-gray-200 p-1 text-sm">Success</h5>
+                                <p className="text-sm">6 min read</p>
+                            </div>
+                            <h4 className="font-bold text-base sm:text-lg pb-3">Empowering Stories of Achievement</h4>
+                            <p className="text-sm pb-2">Read inspiring stories from our successful students.</p>
+
+                            <ButtonLink title="Read more" />
+                        </div>
+                    </div>
+
+                    <div className="block w-full">
+                        <div>
+                            <div className="bg-gradient-to-b from-transparent to-black/30 h-60 mb-4"></div>
+                            <div className="flex flex-row gap-4 sm:gap-8 items-center mb-2">
+                                <h5 className="bg-gray-200 p-1 text-sm">Upadates</h5>
+                                <p className="text-sm">4 min read</p>
+                            </div>
+                            <h4 className="font-bold text-base sm:text-lg pb-3">Latest News in Education</h4>
+                            <p className="text-sm pb-2">Stay informed with latest updates from our community.</p>
+
+                            <ButtonLink title="Read more" />
                         </div>
                     </div>
                 </div>
