@@ -37,8 +37,9 @@ export function Enroll() {
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 pb-10">
                     {
                         enrollData.map((item) => (
-                            <div key={item.title} className="flex flex-col items-center sm:items-start cursor-pointer">
-                                <div className="border bg-gradient-to-b from-transparent to-black/30 aspect-square w-full sm:w-40 lg:w-full overflow-hidden relative z-10">
+                            <div key={item.title} className="flex flex-col items-center sm:items-start cursor-pointer hover:bg-red-500 hover:text-white transition-all duration-300 p-4">
+
+                                <div className="bg-gradient-to-b from-transparent to-black/30 aspect-square w-full sm:w-40 lg:w-full overflow-hidden relative z-10">
                                     <Image className="object-cover h-full hover:scale-105 transition-transform duration-300" src={item.images} alt={item.images} width={720} height={300} />
                                 </div>
                                 <h3 className="py-2 sm:py-4 text-base sm:text-xl font-bold">{item.title}</h3>
@@ -161,13 +162,13 @@ export function BlogSection() {
                     {
                         blogPosts.map((blog, index) => {
                             return (
-                                <div key={index} className="block w-full">
+                                <div key={index} className="block cursor-pointer w-full hover:text-red-500 transition-all duration-300">
                                     <div>
                                         <div className="bg-gradient-to-b from-transparent to-black/30 mb-4 overflow-hidden relative z-10">
                                             <Image className="h-60 w-full object-cover hover:scale-105 transition-transform duration-300" src={blog.images} alt={blog.title} width={500} height={400} />
                                         </div>
                                         <div className="flex flex-row gap-4 sm:gap-8 items-center mb-2">
-                                            <h5 className="bg-gray-200 p-1 dark:text-black text-sm">{blog.categorie}</h5>
+                                            <h5 className="bg-gray-200 p-1 text-black text-sm">{blog.categorie}</h5>
                                             <p className="text-sm">{blog.time}</p>
                                         </div>
                                         <h4 className="font-bold text-base sm:text-lg pb-3">{blog.title}</h4>
