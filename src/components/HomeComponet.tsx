@@ -73,7 +73,7 @@ export function FeatureSection() {
                 </ul>
             </div>
             <div className="border bg-gradient-to-b from-transparent to-black/30 aspect-video w-full overflow-hidden relative z-10">
-            <Image className="object-cover w-full h-full hover:scale-105 transition-transform duration-300" src='/images/front_image.jpg' alt="cta" width={1500} height={900} />
+                <Image className="object-cover w-full h-full hover:scale-105 transition-transform duration-300" src='/images/front_image.jpg' alt="cta" width={1500} height={900} />
             </div>
         </div>
     )
@@ -196,21 +196,21 @@ export function CourseSection() {
 
                 <div className="flex flex-col justify-between gap-4 lg:flex-row">
                     <div className="group relative border border-black hover:border-red-500 hover:dark:border-red-500 dark:border-white p-2 sm:p-4 flex flex-col justify-between gap-10 overflow-hidden">
-                    <div className="absolute -inset-1 -translate-x-full group-hover:translate-x-0 bg-red-500 transition-transform duration-300"></div>
+                        <div className="absolute -inset-1 -translate-x-full group-hover:translate-x-0 bg-red-500 transition-transform duration-300"></div>
 
-                    <div className="relative z-10">
-                    <h4 className="font-bold text-lg sm:text-xl group-hover:text-white transition-colors duration-300">Find Your Perfect Course</h4>
-                    <p className="group-hover:text-white transition-colors duration-300">Choose from beginner to advanced levels.</p>
+                        <div className="relative z-10">
+                            <h4 className="font-bold text-lg sm:text-xl group-hover:text-white transition-colors duration-300">Find Your Perfect Course</h4>
+                            <p className="group-hover:text-white transition-colors duration-300">Choose from beginner to advanced levels.</p>
                         </div>
                         <ButtonLink className="relative z-10 group-hover:text-white transition-colors duration-300" title="Learn" />
                     </div>
 
                     <div className="group relative border border-black hover:border-red-500 hover:dark:border-red-500 dark:border-white p-2 sm:p-4 flex flex-col justify-between gap-10 overflow-hidden">
-                    <div className="absolute -inset-1 -translate-x-full group-hover:translate-x-0 bg-red-500 transition-transform duration-300"></div>
+                        <div className="absolute -inset-1 -translate-x-full group-hover:translate-x-0 bg-red-500 transition-transform duration-300"></div>
 
-                    <div className="relative z-10">
-                    <h4 className="font-bold text-lg sm:text-xl group-hover:text-white transition-colors duration-300">Specialized Courses for Professionals</h4>
-                    <p className="group-hover:text-white transition-colors duration-300">Enhance your skills with expert-led training.</p>
+                        <div className="relative z-10">
+                            <h4 className="font-bold text-lg sm:text-xl group-hover:text-white transition-colors duration-300">Specialized Courses for Professionals</h4>
+                            <p className="group-hover:text-white transition-colors duration-300">Enhance your skills with expert-led training.</p>
                         </div>
                         <ButtonLink className="relative z-10 group-hover:text-white transition-colors duration-300" title="Enroll" />
                     </div>
@@ -218,7 +218,7 @@ export function CourseSection() {
 
                 <div className="border border-black dark:border-white flex flex-col lg:flex-row gap-4">
                     <div className="bg-gradient-to-b from-transparent to-black/30 w-full h-40 lg:w-80 lg:h-60 overflow-hidden relative z-10">
-                    <Image className="object-cover w-full h-full hover:scale-105 transition-transform duration-300" src='/images/course.png' alt="cta" width={1500} height={900} />
+                        <Image className="object-cover w-full h-full hover:scale-105 transition-transform duration-300" src='/images/course.png' alt="cta" width={1500} height={900} />
                     </div>
                     <div className="flex flex-col gap-4 justify-center p-2 lg:p-0">
                         <p>Topics</p>
