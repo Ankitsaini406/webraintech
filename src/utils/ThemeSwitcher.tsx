@@ -13,8 +13,11 @@ export default function ThemeSwitcher() {
         <button
             onClick={() => dispatch(toggleTheme())}
             aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-            className="text-foreground hover:opacity-80 transition-opacity"
+            className="relative group text-foreground hover:opacity-80 transition-opacity"
         >
+            <span className="absolute top-8 right-0 bg-slate-500 text-white p-1 text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {theme === "light" ? <span>Dark&nbsp;Mode</span> : <span>Light&nbsp;Mode</span>}
+            </span>
             {theme === "light" ? <Moon /> : <Sun />}
         </button>
     );
