@@ -195,20 +195,24 @@ export function CourseSection() {
             <div className="flex flex-col md:flex-row gap-4 sm:gap-6 justify-center">
 
                 <div className="flex flex-col justify-between gap-4 lg:flex-row">
-                    <div className="border border-black dark:border-white p-2 sm:p-4 flex flex-col justify-between gap-10">
-                        <div>
-                            <h4 className="font-bold text-lg sm:text-xl">Find Your Perfect Course</h4>
-                            <p>Choose from beginner to advanced levels.</p>
+                    <div className="group relative border border-black hover:border-red-500 hover:dark:border-red-500 dark:border-white p-2 sm:p-4 flex flex-col justify-between gap-10 overflow-hidden">
+                    <div className="absolute -inset-1 -translate-x-full group-hover:translate-x-0 bg-red-500 transition-transform duration-300"></div>
+
+                    <div className="relative z-10">
+                    <h4 className="font-bold text-lg sm:text-xl group-hover:text-white transition-colors duration-300">Find Your Perfect Course</h4>
+                    <p className="group-hover:text-white transition-colors duration-300">Choose from beginner to advanced levels.</p>
                         </div>
-                        <ButtonLink title="Learn" />
+                        <ButtonLink className="relative z-10 group-hover:text-white transition-colors duration-300" title="Learn" />
                     </div>
 
-                    <div className="border border-black dark:border-white p-2 sm:p-4 flex flex-col justify-between gap-10">
-                        <div>
-                            <h4 className="font-bold text-lg sm:text-xl">Specialized Courses for Professionals</h4>
-                            <p>Enhance your skills with expert-led training.</p>
+                    <div className="group relative border border-black hover:border-red-500 hover:dark:border-red-500 dark:border-white p-2 sm:p-4 flex flex-col justify-between gap-10 overflow-hidden">
+                    <div className="absolute -inset-1 -translate-x-full group-hover:translate-x-0 bg-red-500 transition-transform duration-300"></div>
+
+                    <div className="relative z-10">
+                    <h4 className="font-bold text-lg sm:text-xl group-hover:text-white transition-colors duration-300">Specialized Courses for Professionals</h4>
+                    <p className="group-hover:text-white transition-colors duration-300">Enhance your skills with expert-led training.</p>
                         </div>
-                        <ButtonLink title="Enroll" />
+                        <ButtonLink className="relative z-10 group-hover:text-white transition-colors duration-300" title="Enroll" />
                     </div>
                 </div>
 
