@@ -13,7 +13,7 @@ export default function Header() {
             <div className="h-14 container flex items-center justify-between">
 
                 <Link href='/'>
-                    <Image alt="WeBrainTech" width={50} height={50} src='/favicon.ico' />
+                    <Image className="w-40 sm:w-60" alt="WeBrainTech" width={250} height={150} src='/weBrain.png' />
                 </Link>
 
                 {/* Desktop */}

@@ -5,7 +5,7 @@ import Script from 'next/script';
 const WhatsAppWidget = () => {
     const widgetId = "xiStMw"; // Replace with the correct widget-id
 
-    return (
+    return process.env.NODE_ENV === "production" ? (
         <>
             <Script
                 type="text/javascript"
@@ -18,6 +18,8 @@ const WhatsAppWidget = () => {
                 data-widget-id={widgetId}
             />
         </>
+    ) : (
+        <></>
     );
 };
 

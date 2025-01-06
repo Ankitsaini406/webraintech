@@ -7,7 +7,7 @@ import Header from "@/components/header/header";
 import Footer from "@/components/footer/Footer";
 import TailwindIndicator from "@/lib/tailwindIndicater";
 import { setTheme } from "@/store/features/themeSlice";
-// import WhatsAppWidget from "@/components/whatsappWidget";
+import WhatsAppWidget from "@/components/whatsappWidget";
 
 export default function ChildLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
 
@@ -19,14 +19,14 @@ export default function ChildLayout({ children }: Readonly<{ children: React.Rea
     }, []);
 
     return (
-        <>
-            <Provider store={store}>
-                    <Header />
-                    {children}
-                    <TailwindIndicator />
-                    {/* <WhatsAppWidget /> */}
-                    <Footer />
-            </Provider>
-        </>
+        <Provider store={store}>
+            <Header />
+            <main>
+                {children}
+            </main>
+            <TailwindIndicator />
+            <WhatsAppWidget />
+            <Footer />
+        </Provider>
     )
 }
