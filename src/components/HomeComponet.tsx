@@ -5,24 +5,39 @@ export function Enroll() {
 
     const enrollData = [
         {
-            title: "Accessing Course Content Made Easy",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.",
+            title: "Web Technology",
+            description: "Learn how to create a secure system to manage users, handle logins, and store data safely for an application.",
             images: '/images/study_3.png',
         },
         {
-            title: "Stay Engaged with Interactive Learning",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.",
+            title: "Digital Marketing",
+            description: "Learn how to create and manage online campaigns, analyze data, and improve strategies to grow businesses digitally.",
             images: '/images/study_2.png',
         },
         {
-            title: "Support at Every Step of Your Journey",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.",
+            title: "Graphic Animation",
+            description: "Learn how to create engaging animations, design dynamic visuals, and bring concepts to life using graphic animation techniques.",
             images: '/images/study.png',
         },
         {
-            title: "Medium length section heading goes here",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.",
+            title: "Ethical Hacking",
+            description: "Learn how to identify security vulnerabilities, protect systems, and ethically test networks to prevent cyber threats and attacks.",
             images: '/images/study_4.png',
+        },
+        {
+            title: "AI Python",
+            description: "Learn how to build intelligent systems using Python, implement machine learning algorithms, and solve real-world problems with AI.",
+            images: '/images/study_3.png',
+        },
+        {
+            title: "German Language",
+            description: "Learn to speak, read, and write in German, understand grammar, and develop conversational skills for everyday communication.",
+            images: '/images/study_2.png',
+        },
+        {
+            title: "Spoken English",
+            description: "Learn to speak English confidently, improve pronunciation, and develop conversational skills for everyday interactions and professional settings.",
+            images: '/images/study.png',
         },
     ]
 
@@ -34,12 +49,12 @@ export function Enroll() {
                 <h2 className="w-full sm:w-3/4 xl:w-1/2 pb-8">Enrolling in our courses is a straightforward process. Just choose your desired course, complete the registration, and start learning immediately.</h2>
 
                 {/* Card Items */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 pb-10">
+                <div className="flex gap-4 sm:gap-8 pb-10 overflow-x-auto w-full">
                     {
                         enrollData.map((item) => (
-                            <div key={item.title} className="flex flex-col items-center sm:items-start cursor-pointer hover:bg-red-500 hover:text-white transition-all duration-300 p-4">
+                            <div key={item.title} className="w-60 sm:w-60 lg:w-96 flex-shrink-0 flex flex-col items-start cursor-pointer hover:bg-red-500 hover:text-white transition-all duration-300 p-4">
 
-                                <div className="bg-gradient-to-b from-transparent to-black/30 aspect-square w-full sm:w-40 lg:w-full overflow-hidden relative z-10">
+                                <div className="bg-gradient-to-b from-transparent to-black/30 aspect-square w-full overflow-hidden relative z-10">
                                     <Image className="object-cover h-full hover:scale-105 transition-transform duration-300" src={item.images} alt={item.images} width={720} height={300} />
                                 </div>
                                 <h3 className="py-2 sm:py-4 text-base sm:text-xl font-bold">{item.title}</h3>
