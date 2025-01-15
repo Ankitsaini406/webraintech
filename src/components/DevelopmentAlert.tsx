@@ -20,7 +20,7 @@ const DevelopmentAlert = () => {
 
     return (
         process.env.NODE_ENV === "development" ? null : (
-            <Alert className="sticky top-20 left-0 w-full rounded-none bg-red-300 text-center border-none" role="alert">
+            <Alert className="sticky z-50 top-20 left-0 w-full rounded-none bg-red-300 text-center border-none" role="alert">
                 <AlertDescription>
                     Our platform is currently under development mode. Coming Soon...
                 </AlertDescription>
