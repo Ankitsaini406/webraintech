@@ -6,38 +6,38 @@ export function Enroll() {
     const enrollData = [
         {
             title: "Web Technology",
-            description: "Learn how to create a secure system to manage users, handle logins, and store data safely for an application.",
-            images: '/images/study_3.png',
-        },
-        {
-            title: "Digital Marketing",
-            description: "Learn how to create and manage online campaigns, analyze data, and improve strategies to grow businesses digitally.",
-            images: '/images/study_2.png',
-        },
-        {
-            title: "Graphic Animation",
-            description: "Learn how to create engaging animations, design dynamic visuals, and bring concepts to life using graphic animation techniques.",
-            images: '/images/study.png',
-        },
-        {
-            title: "Ethical Hacking",
-            description: "Learn how to identify security vulnerabilities, protect systems, and ethically test networks to prevent cyber threats and attacks.",
-            images: '/images/study_4.png',
+            description: "Our Web Technology course teaches front-end and back-end development with frameworks and databases, preparing students for careers as developers or designers.",
+            images: '/courses/web-tech.webp',
         },
         {
             title: "AI Python",
-            description: "Learn how to build intelligent systems using Python, implement machine learning algorithms, and solve real-world problems with AI.",
-            images: '/images/study_3.png',
+            description: "The AI Python course covers Python programming, machine learning, deep learning, and data science, preparing students for careers in AI, data analysis, and development.",
+            images: '/courses/ai-python.webp',
+        },
+        {
+            title: "Ethical Hacking",
+            description: "Our Ethical Hacking course covers penetration testing, network security, and tools, preparing students for certifications like CEH and careers in cybersecurity.",
+            images: '/courses/ethical-hacking.webp',
+        },
+        {
+            title: "Digital Marketing",
+            description: "The Digital Marketing course covers SEO, social media, PPC, content marketing, and analytics, preparing students for careers in digital marketing and campaign management.",
+            images: '/courses/digital-marketing.webp',
+        },
+        {
+            title: "Graphic Animation",
+            description: "This course covers animation and VFX using Adobe Animate, After Effects, and Blender, preparing students for careers in animation, design, and multimedia.",
+            images: '/courses/graphic-design.webp',
         },
         {
             title: "German Language",
-            description: "Learn to speak, read, and write in German, understand grammar, and develop conversational skills for everyday communication.",
-            images: '/images/study_2.png',
+            description: "Our German Language course improves speaking, listening, reading, and writing skills, building grammar and vocabulary for careers in translation, teaching, and international business.",
+            images: '/courses/german.webp',
         },
         {
             title: "Spoken English",
-            description: "Learn to speak English confidently, improve pronunciation, and develop conversational skills for everyday interactions and professional settings.",
-            images: '/images/study.png',
+            description: "This course improves speaking, listening, and conversational skills, enhancing pronunciation, vocabulary, and grammar for careers in teaching, customer service, and business.",
+            images: '/courses/spoken-english.webp',
         },
     ]
 
@@ -45,8 +45,8 @@ export function Enroll() {
         <div className="my-7 p-4 sm:p-8 bg-gray-100 dark:bg-zinc-800">
             <div className="container">
                 <p className="pb-6 text-red-500">Enroll</p>
-                <h1 className="text-4xl sm:text-5xl font-bold mb-6 sm:w-full">Simple Steps to Enroll in Courses</h1>
-                <h2 className="w-full sm:w-3/4 xl:w-1/2 pb-8">Enrolling in our courses is a straightforward process. Just choose your desired course, complete the registration, and start learning immediately.</h2>
+                <h1 className="text-4xl sm:text-5xl font-bold mb-6 sm:w-full">Start Your Creative Journey With Us.</h1>
+                <h2 className="w-full sm:w-3/4 xl:w-1/2 pb-8">Enrolling in our courses is hassle-free & choose your course, sign up, and start learning today!</h2>
 
                 {/* Card Items */}
                 <div className="flex gap-4 sm:gap-8 pb-10 overflow-x-auto w-full">
@@ -79,16 +79,20 @@ export function FeatureSection() {
         <div className="container my-7 p-4 sm:p-8 flex flex-col-reverse sm:flex-row gap-4">
             <div className="flex flex-col gap-4 w-full">
                 <p className="text-red-500">A Vision for Next-Gen</p>
-                <h2 className="text-4xl sm:text-5xl font-bold mb-6">Medium length section heading goes here</h2>
-                <p className="pb-0 sm:pb-4">Our courses are designed to equip you with practical skills and knowledge. Whether you are a beginner or looking to advance, we have something for everyone.</p>
+                <h2 className="text-3xl sm:text-5xl font-bold sm:mb-6">Excellence In Education</h2>
+                <p className="pb-0 sm:pb-4 text-lg sm:text-xl"><span className="text-red-500 text-2xl sm:text-3xl">WeBrainTech</span> embrace these principles by
+                    providing a comprehensive curriculum that fosters creativity,
+                    critical thinking, and ethical practices. Our courses are
+                    designed to equip students with the skills needed to lead and
+                    innovate in the technology landscape.</p>
                 <ul className="list-disc counter-reset list-counter pl-8 sm:pl-6">
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                    <li className="sm:text-lg">To give self-employment after completing the Software Courses.</li>
+                    <li className="sm:text-lg">Special attention on Programming computer education.</li>
+                    <li className="sm:text-lg">Modern & Hi-tech  teaching methodology.</li>
                 </ul>
             </div>
-            <div className="border bg-gradient-to-b from-transparent to-black/30 aspect-video w-full overflow-hidden relative z-10">
-                <Image className="object-cover w-full h-full hover:scale-105 transition-transform duration-300" src='/images/front_image.jpg' alt="cta" width={1500} height={900} />
+            <div className="h-1/2 w-full sm:w-1/2 overflow-hidden relative z-10">
+                <Image className="object-cover w-full h-full hover:scale-105 transition-transform duration-300" src='/images/subline-image.webp' alt="cta" width={1500} height={900} />
             </div>
         </div>
     )
