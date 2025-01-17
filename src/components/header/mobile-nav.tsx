@@ -20,7 +20,7 @@ function MobileNav() {
                         <Link href="/" className="block text-lg font-medium text-foreground hover:text-primary">
                             Home
                         </Link>
-                        <Link href="/about" className="block text-lg font-medium text-foreground hover:text-primary">
+                        <Link href="/about-us" className="block text-lg font-medium text-foreground hover:text-primary">
                             About
                         </Link>
                         <Link href="/services" className="block text-lg font-medium text-foreground hover:text-primary">

@@ -20,9 +20,9 @@ function MainNav() {
                     </li>
                     <li>
                         <Link
-                            href="/about"
+                            href="/about-us"
                             className={`p-2 border-2 transition duration-300 transform 
-                                ${pathname === '/about' ? 'text-red-500 border-red-500' : 'border-transparent hover:border-red-500'}`}
+                                ${pathname === '/about-us' ? 'text-red-500 border-red-500' : 'border-transparent hover:border-red-500'}`}
                         >
                             About
                         </Link>
