@@ -40,7 +40,7 @@ export default function FacebookAnalytics() {
 
         // Replace with your Pixel ID
         if (window.fbq) {
-            window.fbq("init", `${FACEBOOK_ID}`);
+            window.fbq("init", `28341679498781027`);
             window.fbq("track", "PageView");
         }
     }, [FACEBOOK_ID]);
@@ -54,7 +54,7 @@ export default function FacebookAnalytics() {
                     width="1"
                     style={{ display: "none" }}
                     alt="Facebook Pixel"
-                    src={`https://www.facebook.com/tr?id=${FACEBOOK_ID}&ev=PageView&noscript=1`}
+                    src={`https://www.facebook.com/tr?id=28341679498781027&ev=PageView&noscript=1`}
                 />
             </noscript>
         </>
