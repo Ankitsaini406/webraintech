@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 export default function FacebookAnalytics() {
 
-    const FACEBOOK_ID = process.env.FACEBOOK_ID;
+    // const FACEBOOK_ID = process.env.FACEBOOK_ID;
 
     useEffect(() => {
         if (process.env.NODE_ENV !== "production") {
@@ -43,7 +43,7 @@ export default function FacebookAnalytics() {
             window.fbq("init", `28341679498781027`);
             window.fbq("track", "PageView");
         }
-    }, [FACEBOOK_ID]);
+    }, []);
 
     return (
         <>
