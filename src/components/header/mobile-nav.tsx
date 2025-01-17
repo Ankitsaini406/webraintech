@@ -19,7 +19,7 @@ function MobileNav() {
 
                     {/* Mobile Menu Links */}
                     <div className="space-y-4 flex flex-col items-center mt-10">
-                        <Accordion type="single" collapsible className="w-full">
+                        <Accordion type="single" collapsible className="w-full mt-0">
                             <AccordionItem value="item-1">
                                 <AccordionTrigger className="text-xl px-4">Courses</AccordionTrigger>
                                 <div className="bg-slate-100 dark:bg-black-opacity-30">
@@ -36,7 +36,7 @@ function MobileNav() {
                                 </div>
                             </AccordionItem>
                         </Accordion>
-                        <Accordion type="single" collapsible className="w-full">
+                        <Accordion type="single" collapsible className="!mt-0 w-full">
                             <AccordionItem value="item-2">
                                 <AccordionTrigger className="text-xl px-4">Services</AccordionTrigger>
                                 <div className="bg-slate-100 dark:bg-black-opacity-30">
@@ -45,8 +45,8 @@ function MobileNav() {
                                 </div>
                             </AccordionItem>
                         </Accordion>
-                        <Link href="/about-us" className="pl-4 text-xl w-full">About Us</Link>
-                        <Link href="/contact-us" className="pl-4 text-xl w-full">Contact Us</Link>
+                        <Link href="/about-us" className="!mt-0 pl-4 py-4 text-xl w-full">About Us</Link>
+                        <Link href="/contact-us" className="!mt-0 pl-4 py-4 text-xl w-full">Contact Us</Link>
                     </div>
                 </SheetContent>
             </Sheet>
