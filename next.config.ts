@@ -1,4 +1,7 @@
 import type { NextConfig } from "next";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const nextConfig: NextConfig = {
   images: {
@@ -8,6 +11,9 @@ const nextConfig: NextConfig = {
       'drive.google.com',
     ],
   },
+  env: {
+    FACEBOOK_ID: process.env.NEXT_APP_FACEBOOK_ID,
+  }
 };
 
 export default nextConfig;
