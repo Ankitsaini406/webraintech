@@ -45,7 +45,6 @@ function MobileNav() {
                                 </div>
                             </AccordionItem>
                         </Accordion>
-                        <Link href="/services" className="pl-4 text-xl w-full">Services</Link>
                         <Link href="/about-us" className="pl-4 text-xl w-full">About Us</Link>
                         <Link href="/contact-us" className="pl-4 text-xl w-full">Contact Us</Link>
                     </div>
