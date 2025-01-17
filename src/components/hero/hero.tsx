@@ -4,13 +4,14 @@ import Image from "next/image";
 
 function Hero() {
     return (
-        <div className="container my-7 p-4 sm:p-8 rounded-lg flex items-center justify-between flex-col-reverse sm:flex-row relative gap-8 sm:gap-8">
+    <div className="container">
+        <div className=" my-7 p-4 rounded-lg flex justify-around flex-col-reverse sm:flex-row relative items-center">
             <Image className="absolute top-1/4 left-8 animate-moveLeftToRight" alt="pen" src="/svg/pen.svg" width={50} height={50} />
             <Image className="absolute top-10 right-10 animate-moveLeftToRight" alt="pen" src="/svg/airoplan.svg" width={50} height={50} />
 
             <div className="w-full sm:w-2/3">
-                <h1 className="text-4xl leading-tight sm:text-5xl sm:leading-snug lg:text-6xl lg:leading-tight font-bold">Transform Your <span className="text-red-500">Skills</span> Start Achieving <span className="text-red-500">Goals</span></h1>
-                <p className="mt-4 sm:mt-8 lg:leading-loose">Step into the future with confidence—start learning today!</p>
+                <h1 className="text-4xl leading-tight sm:text-5xl lg:text-6xl sm:leading-snug lg:leading-tight font-bold">Transform Your <span className="text-red-500">Skills</span><br></br> Start Achieving <span className="text-red-500">Goals</span></h1>
+                {/* <p className="mt-4 sm:mt-8 lg:leading-loose">Step into the future with confidence—start learning today!</p> */}
                 <div className="flex gap-4 mt-8">
                     <ButtonBlack title="Enroll" />
                     <ButtonWhite title="Learn More" />
@@ -23,6 +24,16 @@ function Hero() {
                 <Image className="bg-gradient-to-b from-transparent to-black-opacity-30 rounded-full absolute bottom-0 left-0 animate-moveImageUpTODown w-0 sm:w-24 md:w-32" alt="WeBrainTech" src="/svg/hero-2.webp" width={150} height={150} />
             </div>
         </div>
+        <div className="flex flex-wrap justify-center gap-4 lg:gap-8 items-center">
+                <button className="px-6 py-2 rounded-full bg-red-500 text-white w-max font-bold animate-moveImageUpTODown">Web&nbsp;Technology</button>
+                <button className="px-6 py-2 rounded-full bg-red-500 text-white w-max font-bold animate-moveImageUpTODown">AI&nbsp;Python</button>
+                <button className="px-6 py-2 rounded-full bg-red-500 text-white w-max font-bold animate-moveImageUpTODown">Ethical&nbsp;Hacking</button>
+                <button className="px-6 py-2 rounded-full bg-red-500 text-white w-max font-bold animate-moveImageUpTODown">Digital&nbsp;Markting</button>
+                <button className="px-6 py-2 rounded-full bg-red-500 text-white w-max font-bold animate-moveImageUpTODown">Graphic&nbsp;Animation</button>
+                <button className="px-6 py-2 rounded-full bg-red-500 text-white w-max font-bold animate-moveImageUpTODown">German&nbsp;Language</button>
+                <button className="px-6 py-2 rounded-full bg-red-500 text-white w-max font-bold animate-moveImageUpTODown">Spoken&nbsp;English</button>
+                </div>
+    </div>
     )
 }
 

@@ -44,7 +44,7 @@ export function Enroll() {
     return (
         <div className="my-7 p-4 sm:p-8 bg-gray-100 dark:bg-zinc-800">
             <div className="container">
-                <p className="pb-6 text-red-500">Enroll</p>
+                {/* <p className="pb-6 text-red-500">Enroll</p> */}
                 <h1 className="text-4xl sm:text-5xl font-bold mb-6 sm:w-full">Start Your Creative Journey With Us.</h1>
                 <h2 className="w-full sm:w-3/4 xl:w-1/2 pb-8">Enrolling in our courses is hassle-free & choose your course, sign up, and start learning today!</h2>
 
@@ -66,7 +66,7 @@ export function Enroll() {
 
                 <div className="flex gap-8 items-center">
                     <ButtonWhite title="Learn More" />
-                    <ButtonLink title="Sign Up" />
+                    <ButtonLink title="Register" className="text-red-500" />
                 </div>
             </div>
         </div>
@@ -114,7 +114,7 @@ export function FeatureListSection() {
 
                 {/* Text Content */}
                 <div className="absolute inset-0 flex flex-col justify-center items-center text-white px-4 text-center">
-                    <h1 className="container text-2xl sm:text-4xl xl:text-5xl font-bold mb-4 w-full">Unlock Your Potential with Our Expert-Led Courses and Flexible Learning Options</h1>
+                    <h1 className="container text-2xl sm:text-4xl xl:text-5xl font-bold mb-4 w-full">Transform Your Future with Expert-Led Courses and Unmatched Learning Flexibility</h1>
                 </div>
             </div>
         </div>
@@ -258,14 +258,16 @@ export function AboutSection() {
             <div className="flex gap-4 flex-col">
                 <div className="flex flex-col lg:flex-row gap-8">
                     <div>
-                        <p className="text-red-500 pb-2 sm:pb-4">Learn</p>
                         <h3 className="text-2xl sm:text-5xl font-bold">Empowering Your Learning Journey with Us</h3>
                     </div>
                     <div className="flex flex-col gap-8 w-full">
-                        <p>Founded with a vision to make education accessible, our platform has evolved to offer a diverse range of courses tailored to various learning styles. Our mission is to empower individuals through quality education, fostering a community of lifelong learners. Join us as we continue to innovate and inspire learning experiences that transform lives.</p>
+                        <p> The Academy provides the facility of Faculty Training for lab and
+                            theory classes under the “Faculty Training” program by WeBrainTech Those candidates
+                            which provide better performance in their modular courses, then the would get that
+                            opportunity to join this program and make his / her career themselves with a great
+                            experience.</p>
                         <div className="flex gap-4 items-center">
-                            <ButtonWhite title="Enroll" />
-                            <ButtonLink title="Explore" />
+                            <ButtonLink title="Explore" href="/about-us" />
                         </div>
                     </div>
                 </div>

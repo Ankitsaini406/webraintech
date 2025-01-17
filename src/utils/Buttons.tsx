@@ -17,8 +17,8 @@ export function ButtonBlack({ title }: { title: string }) {
     )
 }
 
-export function ButtonLink({title, className}: {title: string, className?: string}) {
+export function ButtonLink({title, href, className,}: {title: string, href?: string, className?: string}) {
     return (
-        <Link className={`flex gap-2 transition-all duration-300 transform hover:scale-105 ${className}`} href='/' >{title}<ArrowRight /></Link>
+        <Link className={`flex gap-2 transition-all duration-300 transform hover:scale-105 ${className}`} href={`${href}`} >{title}<ArrowRight /></Link>
     )
 }

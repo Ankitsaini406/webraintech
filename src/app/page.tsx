@@ -1,6 +1,6 @@
 
 import DevelopmentAlert from "@/components/DevelopmentAlert";
-import { Enroll, FeatureSection, AboutSection, CtaSection, BlogSection, CourseSection, FeatureListSection } from "@/components/HomeComponet";
+import { Enroll, FeatureSection, AboutSection } from "@/components/HomeComponet";
 import Hero from "@/components/hero/hero";
 // import TestimonialsSection from "@/components/testimonials";
 // import Image from "next/image";
@@ -14,10 +14,10 @@ export default function Home() {
         <Hero />
         <Enroll />
         <FeatureSection />
-        <FeatureListSection />
-        <CourseSection />
-        <BlogSection />
-        <CtaSection />
+        {/* <FeatureListSection /> */}
+        {/* <CourseSection /> */}
+        {/* <BlogSection /> */}
+        {/* <CtaSection /> */}
         <AboutSection />
         {/* <TestimonialsSection /> */}
       </main>
