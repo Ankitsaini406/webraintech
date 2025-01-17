@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname  } from "next/navigation";
 
 function MainNav() {
-    const pathname  = usePathname (); // Get current route
+    const pathname  = usePathname ();
 
     return (
         <div className="hidden md:flex items-center gap-3 lg:gap-4">
@@ -11,20 +11,11 @@ function MainNav() {
                 <ul className="hidden md:flex space-x-6">
                     <li>
                         <Link
-                            href="/"
+                            href="/courses"
                             className={`p-2 border-2 transition duration-300 transform 
-                                ${pathname === '/' ? 'text-red-500 border-red-500' : 'border-transparent hover:border-red-500'}`}
+                                ${pathname === '/courses' ? 'text-red-500 border-red-500' : 'border-transparent hover:border-red-500'}`}
                         >
-                            Home
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            href="/about-us"
-                            className={`p-2 border-2 transition duration-300 transform 
-                                ${pathname === '/about-us' ? 'text-red-500 border-red-500' : 'border-transparent hover:border-red-500'}`}
-                        >
-                            About
+                            Courses
                         </Link>
                     </li>
                     <li>
@@ -38,11 +29,20 @@ function MainNav() {
                     </li>
                     <li>
                         <Link
-                            href="/contact"
+                            href="/about-us"
                             className={`p-2 border-2 transition duration-300 transform 
-                                ${pathname === '/contact' ? 'text-red-500 border-red-500' : 'border-transparent hover:border-red-500'}`}
+                                ${pathname === '/about-us' ? 'text-red-500 border-red-500' : 'border-transparent hover:border-red-500'}`}
                         >
-                            Contact
+                            About Us
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            href="/contact-us"
+                            className={`p-2 border-2 transition duration-300 transform 
+                                ${pathname === '/contact-us' ? 'text-red-500 border-red-500' : 'border-transparent hover:border-red-500'}`}
+                        >
+                            Contact Us
                         </Link>
                     </li>
                 </ul>
