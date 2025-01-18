@@ -10,7 +10,7 @@ function Hero() {
             <Image className="absolute top-10 right-10 animate-moveLeftToRight" alt="pen" src="/svg/airoplan.svg" width={50} height={50} />
 
             <div className="w-full sm:w-2/3">
-                <h1 className="text-4xl leading-tight sm:text-4xl lg:text-6xl sm:leading-snug lg:leading-tight font-bold">Transform Your <span className="text-red-500">Skills</span><br></br> Start Achieving <span className="text-red-500">Goals</span></h1>
+                <h1 className="leading-tight text-3xl sm:text-4xl lg:text-5xl xl:text-6xl sm:leading-snug lg:leading-tight font-bold">Transform Your <span className="text-red-500">Skills</span><br></br> Start Achieving <span className="text-red-500">Goals</span></h1>
                 {/* <p className="mt-4 sm:mt-8 lg:leading-loose">Step into the future with confidence—start learning today!</p> */}
                 <div className="flex gap-4 mt-8">
                     <ButtonBlack title="Enroll" />
