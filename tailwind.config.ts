@@ -70,7 +70,11 @@ const config: Config = {
 					DEFAULT: '#ffffff',
 					dark: '#000000'
 				},
-				'black-opacity-30': 'rgba(0, 0, 0, 0.3)'
+				'black-opacity-30': 'rgba(0, 0, 0, 0.3)',
+				'custom-purple': '#1b0e5d',
+				'custom-blue': '#247bac',
+				'custom-mahroon': '#88251f',
+				'custom-gold': '#dabb61',
 			},
 			backdropFilter: [
 				'responsive'

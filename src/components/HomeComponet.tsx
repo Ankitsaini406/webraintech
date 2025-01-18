@@ -1,5 +1,6 @@
 import { ButtonBlack, ButtonLink, ButtonWhite } from "@/utils/Buttons";
 import Image from "next/image";
+import Link from "next/link";
 
 export function Enroll() {
 
@@ -197,6 +198,72 @@ export function BlogSection() {
                                 </div>
                             )
                         })
+                    }
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export function Events() {
+
+    const eventData = [
+        {
+            image: "/events/ai-pyhon.webp",
+            title: "Master AI with Python – Join Our Exclusive Workshop!",
+            description: "Are you ready to dive into the world of Artificial Intelligence and Python? Join our exclusive AI & Python Seminar and equip yourself with the knowledge to stay ahead in the tech industry!",
+        },
+        {
+            image: "/events/web-technology.webp",
+            title: "Web Technology Workshop",
+            description: "This is a description of event 1",
+        },
+        {
+            image: "/events/digital-marketing.webp",
+            title: "Digital Marketing Workshop",
+            description: "This is a description of event 1",
+        },
+        {
+            image: "/events/gaphic-design.webp",
+            title: "Graphic Design Workshop",
+            description: "This is a description of event 1",
+        },
+        {
+            image: "/events/cyber-security.webp",
+            title: "Cyber Security Workshop",
+            description: "This is a description of event 1",
+        },
+    ];
+
+    return (
+        <div className="mb-7 p-4 sm:p-8 bg-gray-100 dark:bg-zinc-800 shadow-inner">
+            <div className="container">
+                <p className="pb-6 text-red-500">Events</p>
+                <h1 className="text-2xl sm:text-5xl font-bold mb-6">Explore Our Exciting Events</h1>
+                <h2 className="w-full sm:text-xl pb-8">Join our carefully curated events to gain hands-on experience and expand your knowledge.</h2>
+
+                {/* Card Items */}
+                <div className="flex gap-4 sm:gap-8 pb-10 overflow-x-auto w-full">
+                    {
+                        eventData.map((item, index) => (
+                            <Link key={item.title} href='/'>
+                            <div
+                                className={`w-60 sm:w-60 lg:w-96 flex-shrink-0 flex flex-col items-start cursor-pointer transition-all duration-300 p-4 
+                                    ${index === 0 ? "hover:bg-custom-purple hover:text-white" : ""}
+                                    ${index === 1 ? "hover:bg-custom-blue hover:text-white" : ""}
+                                    ${index === 2 ? "hover:bg-custom-gold hover:text-white" : ""}
+                                    ${index === 3 ? "hover:bg-custom-mahroon hover:text-white" : ""}
+                                    ${index === 4 ? "hover:bg-black hover:text-white" : ""}
+                                `}
+                            >
+                                <div className="bg-gradient-to-b from-transparent to-black/30 aspect-square w-full overflow-hidden relative z-10">
+                                    <Image className="object-cover h-full hover:scale-105 transition-transform duration-300" src={item.image} alt={item.image} width={720} height={300} />
+                                </div>
+                                <h3 className="py-2 sm:py-4 text-base sm:text-xl font-bold">{item.title}</h3>
+                                <h4>{item.description}</h4>
+                            </div>
+                            </Link>
+                        ))
                     }
                 </div>
             </div>

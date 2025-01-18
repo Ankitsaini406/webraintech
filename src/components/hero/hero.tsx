@@ -38,7 +38,7 @@ function Hero() {
                     ].map((course, index) => (
                         <button
                             key={index}
-                            className="rounded-full text-black dark:text-white w-52 text-xl font-bold"
+                            className="rounded-full text-black dark:text-white w-52 text-base sm:text-xl font-bold"
                         >
                             {course}
                         </button>
