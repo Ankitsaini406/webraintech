@@ -1,5 +1,5 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@radix-ui/react-accordion";
-import { Facebook, Instagram, Linkedin, X, Youtube, ChevronDown } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Facebook, Instagram, Linkedin, X, Youtube } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -42,37 +42,25 @@ function Footer() {
 
                 {/* Mobile and other small screens */}
                 <div className="flex sm:hidden flex-col gap-4 w-full mb-8">
-                    <Accordion type="single" collapsible>
-                        <AccordionItem value="item-1" className="flex flex-col gap-4 border-b border-black dark:border-white">
-                            <AccordionTrigger className="flex justify-between items-center font-bold text-xl sm:text-2xl group w-full">
-                                Quick Links
-                                <ChevronDown
-                                    className="ml-2 h-5 w-5 text-black dark:text-white group-data-[state=open]:rotate-180 transition-transform duration-300"
-                                />
-                            </AccordionTrigger>
-                            <AccordionContent className="flex sm:hidden flex-col gap-2 sm:gap-4 items-start">
-                                <Link className="hover:text-red-500 transition-all duration-300" href="/">About Us</Link>
-                                <Link className="hover:text-red-500 transition-all duration-300" href="/">Contact Us</Link>
-                                <Link className="hover:text-red-500 transition-all duration-300" href="/">Support Center</Link>
-                                <Link className="hover:text-red-500 transition-all duration-300" href="/">Blog Post</Link>
-                                <Link className="hover:text-red-500 transition-all duration-300 pb-4" href="/">Careers</Link>
+                    <Accordion type="single" collapsible className="w-full">
+                        <AccordionItem value="item-1">
+                            <AccordionTrigger className="text-base py-4">Quick Links</AccordionTrigger>
+                            <AccordionContent className="pl-8 pt-4 text-lg">
+                                <Link className="hover:text-red-500 transition-all duration-300" href="/about-us"><AccordionContent>About Us</AccordionContent></Link>
+                                <Link className="hover:text-red-500 transition-all duration-300" href="/contact-us"><AccordionContent>Contact Us</AccordionContent></Link>
+                                <Link className="hover:text-red-500 transition-all duration-300" href="/"><AccordionContent>Support Center</AccordionContent></Link>
+                                <Link className="hover:text-red-500 transition-all duration-300" href="/"><AccordionContent>Blog Post</AccordionContent></Link>
+                                <Link className="hover:text-red-500 transition-all duration-300 pb-4" href="/"><AccordionContent>Careers</AccordionContent></Link>
                             </AccordionContent>
                         </AccordionItem>
-                    </Accordion>
 
-                    <Accordion type="single" collapsible>
-                        <AccordionItem value="item-2" className="flex flex-col gap-4 border-b border-black dark:border-white">
-                            <AccordionTrigger className="flex justify-between items-center font-bold text-xl sm:text-2xl group w-full">
-                                Connect With Us
-                                <ChevronDown
-                                    className="ml-2 h-5 w-5 text-black dark:text-white group-data-[state=open]:rotate-180 transition-transform duration-300"
-                                />
-                            </AccordionTrigger>
-                            <AccordionContent className="flex sm:hidden flex-col gap-2 sm:gap-4 items-start">
-                                <Link className="hover:text-red-500 transition-all duration-300" href="/">Events</Link>
-                                <Link className="hover:text-red-500 transition-all duration-300" href="/">Testimonials</Link>
-                                <Link className="hover:text-red-500 transition-all duration-300" href="/">Resources</Link>
-                                <Link className="hover:text-red-500 transition-all duration-300 pb-4" href="/">FAQs</Link>
+                        <AccordionItem value="item-2">
+                            <AccordionTrigger className="text-base py-4">Connect With Us</AccordionTrigger>
+                            <AccordionContent className="pl-8 pt-4 text-lg">
+                                <Link className="hover:text-red-500 transition-all duration-300" href="/"><AccordionContent>Events</AccordionContent></Link>
+                                <Link className="hover:text-red-500 transition-all duration-300" href="/"><AccordionContent>Testimonials</AccordionContent></Link>
+                                <Link className="hover:text-red-500 transition-all duration-300" href="/"><AccordionContent>Resources</AccordionContent></Link>
+                                <Link className="hover:text-red-500 transition-all duration-300 pb-4" href="/"><AccordionContent>FAQs</AccordionContent></Link>
                             </AccordionContent>
                         </AccordionItem>
                     </Accordion>

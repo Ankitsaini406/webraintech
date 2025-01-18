@@ -230,8 +230,8 @@ export function Events() {
         },
         {
             image: "/events/cyber-security.webp",
-            title: "Cyber Security Workshop",
-            description: "This is a description of event 1",
+            title: "🚨 FREE Cyber Security Workshop – Limited Seats! 🚨",
+            description: "Cyber threats are everywhere, but you can protect yourself! Join our FREE Cyber Security Workshop and learn how to safeguard your personal and professional data from cybercriminals.",
         },
     ];
 

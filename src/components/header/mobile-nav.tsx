@@ -7,6 +7,10 @@ function MobileNav() {
 
     const courses = [
         {
+            title: "All Courses",
+            href: '/courses'
+        },
+        {
             title: "Web Technology",
             href: "/",
         },
@@ -65,9 +69,6 @@ function MobileNav() {
                             <AccordionItem value="item-1">
                                 <AccordionTrigger className="text-xl px-4">Courses</AccordionTrigger>
                                 <div className="bg-slate-100 dark:bg-black-opacity-30">
-                                    <AccordionContent className="pl-8 pt-4 text-lg">
-                                        <Link href='/courses'>All Courses</Link>
-                                    </AccordionContent>
                                     {courses.map((course, index) => (
                                         <AccordionContent key={index} className="pl-8 pt-4 text-lg">{course.title}</AccordionContent>
                                     ))}
