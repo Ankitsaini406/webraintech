@@ -42,7 +42,7 @@ export function Enroll() {
     ]
 
     return (
-        <div className="my-7 p-4 sm:p-8 bg-gray-100 dark:bg-zinc-800">
+        <div className="mb-7 p-4 sm:p-8 bg-gray-100 dark:bg-zinc-800">
             <div className="container">
                 {/* <p className="pb-6 text-red-500">Enroll</p> */}
                 <h1 className="text-4xl sm:text-5xl font-bold mb-6 sm:w-full">Start Your Future IT Journey With Us.</h1>
