@@ -17,7 +17,7 @@ export default function Header() {
                 </Link>
 
                 {/* Desktop */}
-                <div className="flex gap-3 lg:gap-4 items-start">
+                <div className="flex gap-3 lg:gap-4 items-start md:items-center">
                     <MainNav />
 
                     {/* Desktop & mobile */}

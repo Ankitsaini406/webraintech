@@ -26,25 +26,18 @@ function Hero() {
             </div>
 
             <div className="relative py-2 overflow-hidden bg-neutral-200 dark:bg-neutral-700">
-                <div className="flex gap-4 sm:gap-8 animate-marquee whitespace-nowrap">
-                    {[
-                        "Web Technology",
-                        "AI Python",
-                        "Ethical Hacking",
-                        "Digital Marketing",
-                        "Graphic Animation",
-                        "German Language",
-                        "Spoken English",
-                    ].map((course, index) => (
+                <div className="flex gap-4 sm:gap-8 animate-marquee-phone sm:animate-marquee whitespace-nowrap min-w-max">
+                    {["Web Technology", "AI Python", "Ethical Hacking", "Digital Marketing", "Graphic Animation", "German Language", "Spoken English"].map((course, index) => (
                         <button
                             key={index}
-                            className="rounded-full text-black dark:text-white w-52 text-base sm:text-xl font-bold"
+                            className="rounded-full text-black dark:text-white text-base sm:text-xl font-bold w-36 sm:w-52"
                         >
                             {course}
                         </button>
                     ))}
                 </div>
             </div>
+
         </>
     )
 }

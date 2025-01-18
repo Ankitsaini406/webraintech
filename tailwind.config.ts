@@ -98,7 +98,8 @@ const config: Config = {
 				disc: 'disc'
 			},
 			animation: {
-				marquee: "marquee 15s linear infinite",
+				'marquee': "marquee 15s linear infinite",
+				'marquee-phone': "marquee-phone 10s linear infinite",
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 			},
@@ -119,10 +120,14 @@ const config: Config = {
 						height: '0'
 					}
 				},
-				marquee: {
+				'marquee': {
 					'0%': { transform: 'translateX(100%)' },
 					'100%': { transform: 'translateX(-100%)' },
 				},
+				'marquee-phone': {
+					'0%': { transform: 'translateX(100%)' },
+					'100%': { transform: 'translateX(-100%)' },
+				}
 			},
 		}
 	},

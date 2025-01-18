@@ -210,13 +210,13 @@ export function Events() {
     const eventData = [
         {
             image: "/events/ai-pyhon.webp",
-            title: "Master AI with Python – Join Our Exclusive Workshop!",
+            title: "AI Python – Join Our Exclusive Workshop!",
             description: "Are you ready to dive into the world of Artificial Intelligence and Python? Join our exclusive AI & Python Seminar and equip yourself with the knowledge to stay ahead in the tech industry!",
         },
         {
             image: "/events/web-technology.webp",
-            title: "Web Technology Workshop",
-            description: "This is a description of event 1",
+            title: "Join Our Web Technology Workshop – Learn Fast!",
+            description: "Want to build stunning websites and web apps? Join our Web Technology Workshop and kickstart your journey in web development!",
         },
         {
             image: "/events/digital-marketing.webp",
@@ -236,7 +236,7 @@ export function Events() {
     ];
 
     return (
-        <div className="mb-7 p-4 sm:p-8 bg-gray-100 dark:bg-zinc-800 shadow-inner">
+        <div className="mb-7 p-4 sm:p-8 bg-gray-100 dark:bg-zinc-800">
             <div className="container">
                 <p className="pb-6 text-red-500">Events</p>
                 <h1 className="text-2xl sm:text-5xl font-bold mb-6">Explore Our Exciting Events</h1>

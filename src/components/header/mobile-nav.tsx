@@ -5,6 +5,48 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 function MobileNav() {
 
+    const courses = [
+        {
+            title: "Web Technology",
+            href: "/",
+        },
+        {
+            title: "AI Python",
+            href: "/",
+        },
+        {
+            title: "Ethical Hacking",
+            href: "/",
+        },
+        {
+            title: "Digital Marketing",
+            href: "/",
+        },
+        {
+            title: "Graphic Animation",
+            href: "/",
+        },
+        {
+            title: "German Language",
+            href: "/",
+        },
+        {
+            title: "Spoken English",
+            href: "/",
+        },
+    ];
+
+    const services = [
+        {
+            title: "Career Counselling",
+            href: "/",
+        },
+        {
+            title: "Placement",
+            href: "/",
+        },
+    ]
+
     return (
         <div className="md:hidden">
             <Sheet>
@@ -26,22 +68,17 @@ function MobileNav() {
                                     <AccordionContent className="pl-8 pt-4 text-lg">
                                         <Link href='/courses'>All Courses</Link>
                                     </AccordionContent>
-                                    <AccordionContent className="pl-8 pt-4 text-lg">Web Technology</AccordionContent>
-                                    <AccordionContent className="pl-8 pt-4 text-lg">AI Python</AccordionContent>
-                                    <AccordionContent className="pl-8 pt-4 text-lg">Ethical Hacking</AccordionContent>
-                                    <AccordionContent className="pl-8 pt-4 text-lg">Digital Marketing</AccordionContent>
-                                    <AccordionContent className="pl-8 pt-4 text-lg">Graohic Animation</AccordionContent>
-                                    <AccordionContent className="pl-8 pt-4 text-lg">German Language</AccordionContent>
-                                    <AccordionContent className="pl-8 pt-4 text-lg">Spoken English</AccordionContent>
+                                    {courses.map((course, index) => (
+                                        <AccordionContent key={index} className="pl-8 pt-4 text-lg">{course.title}</AccordionContent>
+                                    ))}
                                 </div>
                             </AccordionItem>
-                        </Accordion>
-                        <Accordion type="single" collapsible className="!mt-0 w-full">
                             <AccordionItem value="item-2">
                                 <AccordionTrigger className="text-xl px-4">Services</AccordionTrigger>
                                 <div className="bg-slate-100 dark:bg-black-opacity-30">
-                                    <AccordionContent className="pl-8 pt-4 text-lg">Career Counselling</AccordionContent>
-                                    <AccordionContent className="pl-8 pt-4 text-lg">Placement</AccordionContent>
+                                    {services.map((service, index) => (
+                                        <AccordionContent key={index} className="pl-8 pt-4 text-lg">{service.title}</AccordionContent>
+                                    ))}
                                 </div>
                             </AccordionItem>
                         </Accordion>
