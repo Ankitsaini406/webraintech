@@ -1,5 +1,38 @@
 import Image from "next/image";
 
+export const metadata = {
+    title: "About Us",
+    description:
+        "Webraintech Academy specializes in career-focused training in Digital Marketing, Web Technology, AI, and more. Read our story to see how we help students turn their aspirations into achievements.",
+    keywords: [
+        "About Webraintech Academy",
+        "Webraintech Academy Overview",
+        "Webraintech Academy Mission",
+        "Learn More About Webraintech",
+        "Webraintech Academy Story",
+        "About Our Academy",
+        "Our Mission at Webraintech Academy",
+        "Why Choose Webraintech Academy",
+        "Webraintech Academy Values",
+        "Webraintech Academy Team",
+    ],
+    openGraph: {
+        title: "About Webraintech Academy",
+        description:
+            "Webraintech Academy empowers students with career-focused training in Digital Marketing, AI, and more. Discover how we're shaping the future through education.",
+        url: "https://webraintech.in/about-us",
+        type: "website",
+        images: [
+            {
+                url: "https://webraintech.in/faculty/founder.webp",
+                width: 1200,
+                height: 630,
+                alt: "Webraintech Academy - Empowering Future Careers",
+            },
+        ],
+    },
+};
+
 function AboutUs() {
     return (
         <div className="container py-4 sm:py-8 px-4 sm:px-8">

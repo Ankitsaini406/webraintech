@@ -24,14 +24,14 @@ function Hero() {
                 <Image className="bg-gradient-to-b from-transparent to-black-opacity-30 rounded-full absolute bottom-0 left-0 animate-moveImageUpTODown w-0 sm:w-24 lg:w-32" alt="WeBrainTech" src="/svg/hero-2.webp" width={150} height={150} />
             </div>
         </div>
-        <div className="hidden sm:flex flex-wrap justify-center gap-4 lg:gap-8 items-center">
-                <button className="px-6 py-2 rounded-full bg-red-500 text-white w-max font-bold animate-moveImageUpTODown">Web&nbsp;Technology</button>
-                <button className="px-6 py-2 rounded-full bg-red-500 text-white w-max font-bold animate-moveImageUpTODown">AI&nbsp;Python</button>
-                <button className="px-6 py-2 rounded-full bg-red-500 text-white w-max font-bold animate-moveImageUpTODown">Ethical&nbsp;Hacking</button>
-                <button className="px-6 py-2 rounded-full bg-red-500 text-white w-max font-bold animate-moveImageUpTODown">Digital&nbsp;Markting</button>
-                <button className="px-6 py-2 rounded-full bg-red-500 text-white w-max font-bold animate-moveImageUpTODown">Graphic&nbsp;Animation</button>
-                <button className="px-6 py-2 rounded-full bg-red-500 text-white w-max font-bold animate-moveImageUpTODown">German&nbsp;Language</button>
-                <button className="px-6 py-2 rounded-full bg-red-500 text-white w-max font-bold animate-moveImageUpTODown">Spoken&nbsp;English</button>
+        <div className="hidden sm:flex gap-2">
+                <button className="px-6 py-2 rounded-full bg-red-500 text-white text-base w-52 font-bold">Web&nbsp;Technology</button>
+                <button className="px-6 py-2 rounded-full bg-red-500 text-white text-base w-52 font-bold">AI&nbsp;Python</button>
+                <button className="px-6 py-2 rounded-full bg-red-500 text-white text-base w-52 font-bold">Ethical&nbsp;Hacking</button>
+                <button className="px-6 py-2 rounded-full bg-red-500 text-white text-base w-52 font-bold">Digital&nbsp;Markting</button>
+                <button className="px-6 py-2 rounded-full bg-red-500 text-white text-base w-52 font-bold">Graphic&nbsp;Animation</button>
+                <button className="px-6 py-2 rounded-full bg-red-500 text-white text-base w-52 font-bold">German&nbsp;Language</button>
+                <button className="px-6 py-2 rounded-full bg-red-500 text-white text-base w-52 font-bold">Spoken&nbsp;English</button>
                 </div>
     </div>
     )
