@@ -25,7 +25,7 @@ function Hero() {
                 </div>
             </div>
 
-            <div className="relative py-2 overflow-hidden bg-neutral-200 dark:bg-neutral-700">
+            {/* <div className="relative py-2 overflow-hidden bg-neutral-200 dark:bg-neutral-700">
                 <div className="flex gap-4 sm:gap-8 animate-marquee-phone sm:animate-marquee whitespace-nowrap min-w-max">
                     {["Web Technology", "AI Python", "Ethical Hacking", "Digital Marketing", "Graphic Animation", "German Language", "Spoken English"].map((course, index) => (
                         <button
@@ -36,7 +36,7 @@ function Hero() {
                         </button>
                     ))}
                 </div>
-            </div>
+            </div> */}
 
         </>
     )
