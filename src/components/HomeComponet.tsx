@@ -1,6 +1,7 @@
 import { ButtonBlack, ButtonLink, ButtonWhite } from "@/utils/Buttons";
 import Image from "next/image";
 import Link from "next/link";
+import StudentEnquery from "./dialogs/StudentEnquery";
 
 export function Enroll() {
 
@@ -67,7 +68,7 @@ export function Enroll() {
 
                 <div className="flex gap-8 items-center">
                     <ButtonWhite title="Learn More" />
-                    <ButtonLink title="Register" className="text-red-500" />
+                    <StudentEnquery />
                 </div>
             </div>
         </div>
@@ -220,13 +221,13 @@ export function Events() {
         },
         {
             image: "/events/digital-marketing.webp",
-            title: "Digital Marketing Workshop",
-            description: "This is a description of event 1",
+            title: "🚀 Join Our Free Digital Marketing Workshop! 🎯",
+            description: "Take your digital marketing skills to the next level! 🌟 Whether you're a beginner or want to sharpen your expertise, this 3-day workshop is perfect for you.",
         },
         {
             image: "/events/gaphic-design.webp",
-            title: "Graphic Design Workshop",
-            description: "This is a description of event 1",
+            title: "🚀 3-Day Graphic Design Workshop",
+            description: "Want to master the art of graphic design? Join us for a FREE 3-Day Workshop and take your design skills to the next level!",
         },
         {
             image: "/events/cyber-security.webp",
