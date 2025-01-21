@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from "react";
-import { Alert, AlertDescription } from "./ui/alert";
+// import { Alert, AlertDescription } from "./ui/alert";
 
 const DevelopmentAlert = () => {
     useEffect(() => {
@@ -19,13 +19,14 @@ const DevelopmentAlert = () => {
     }, []);
 
     return (
-        process.env.NODE_ENV === "development" ? null : (
-            <Alert className="sticky z-50 top-20 left-0 w-full rounded-none bg-red-300 text-center border-none" role="alert">
-                <AlertDescription>
-                    Our platform is currently under development mode. Coming Soon...
-                </AlertDescription>
-            </Alert>
-        )
+        null
+        // process.env.NODE_ENV === "development" ? null : (
+        //     <Alert className="sticky z-50 top-20 left-0 w-full rounded-none bg-red-300 text-center border-none" role="alert">
+        //         <AlertDescription>
+        //             Our platform is currently under development mode. Coming Soon...
+        //         </AlertDescription>
+        //     </Alert>
+        // )
     );
 };
 
