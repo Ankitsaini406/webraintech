@@ -12,6 +12,8 @@ const nextConfig: NextConfig = {
     ],
   },
   env: {
+    API_URL: process.env.LOCAL_HOST_URL,
+    HOST_URL: process.env.HOST_URL,
     FACEBOOK_ID: process.env.NEXT_APP_FACEBOOK_ID,
   }
 };
