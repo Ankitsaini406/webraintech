@@ -8,6 +8,7 @@ import Footer from "@/components/footer/Footer";
 import TailwindIndicator from "@/lib/tailwindIndicater";
 import { setTheme } from "@/store/features/themeSlice";
 import WhatsAppWidget from "@/components/whatsappWidget";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function ChildLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
 
@@ -26,6 +27,7 @@ export default function ChildLayout({ children }: Readonly<{ children: React.Rea
             </main>
             <TailwindIndicator />
             <WhatsAppWidget />
+            <Toaster position="top-right" richColors />
             <Footer />
         </Provider>
     )
