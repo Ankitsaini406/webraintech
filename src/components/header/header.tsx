@@ -5,8 +5,15 @@ import MainNav from "./main-nav";
 import MobileNav from "./mobile-nav";
 import { CircleUserRound } from "lucide-react";
 import ThemeSwitcher from "@/utils/ThemeSwitcher";
+import { decodeToken } from "@/utils/jwt";
+import { getCookie } from "cookies-next";
 
 export default function Header() {
+
+    const token = getCookie('authToken');
+    const role = token ? decodeToken(token as string) : null;
+
+    console.log(role);
 
     return (
         <header className="sticky top-0 w-full z-20 bg-white dark:bg-black text-foreground p-4 shadow-lg dark:shadow-lg border-none border-gray-200 dark:border-gray-700">
@@ -23,6 +30,11 @@ export default function Header() {
                     {/* Desktop & mobile */}
                     <h1 className="flex items-center justify-end flex-1 gap-2">
                         <Link href='/'><CircleUserRound /></Link>
+                        {/* {
+                            student ? (
+                                <p className="text-sm font-bold text-foreground dark:text-white">{student.name}</p>
+                            ): (<p>No Name</p>)
+                        } */}
                         <ThemeSwitcher />
                     </h1>
 

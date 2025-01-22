@@ -1,4 +1,5 @@
 import prisma from '@/lib/db';
+import { createToken } from '@/utils/jwt';
 import { NextResponse } from 'next/server';
 
 
@@ -19,5 +20,7 @@ export async function POST(req: Request) {
         return NextResponse.json({ message: 'Invalid credentials' }, { status: 400 });
     }
 
-    return NextResponse.json({ student, token: 'some_jwt_token' });
+    const token = createToken({ id: student.id, email: student.email, role: student.role });
+
+    return NextResponse.json({ student, token: token });
 }

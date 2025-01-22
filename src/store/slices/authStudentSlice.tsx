@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { authStudentInitialState } from "@/utils/InitialState";
+import { deleteCookie, setCookie } from "cookies-next"
 import { loginStudent, registerStudent, updatePassword, updateStudent } from "../actions/StudentActions";
 
 const authStudentSlice = createSlice({
@@ -9,6 +10,8 @@ const authStudentSlice = createSlice({
         logoutStudent: (state) => {
             state.student = null;
             state.token = null;
+            deleteCookie("authToken");
+            localStorage.removeItem("authToken");
         },
     },
     extraReducers: (builder) => {
@@ -22,6 +25,8 @@ const authStudentSlice = createSlice({
             state.loading = false;
             state.student = action.payload.student;
             state.token = action.payload.token;
+            setCookie("authToken", action.payload.token, {maxAge: 60 * 60 * 24 * 7});
+            localStorage.setItem("authToken", action.payload.token);
         })
         .addCase(loginStudent.rejected, (state, action) => {
             state.loading = false;
