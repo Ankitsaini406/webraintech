@@ -3,7 +3,7 @@
 import { AppDispatch, RootState } from "@/store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { Moon, Sun } from "lucide-react";
-import { toggleTheme } from "@/store/features/themeSlice";
+import { toggleTheme } from "@/store/slices/themeSlice";
 
 export default function ThemeSwitcher() {
     const theme = useSelector((state: RootState) => state.theme.theme);

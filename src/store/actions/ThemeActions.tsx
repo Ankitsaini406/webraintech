@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '@/store/store';
-import { setTheme, toggleTheme } from '@/store/features/themeSlice';
+import { setTheme, toggleTheme } from '@/store/slices/themeSlice';
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const theme = useSelector((state: RootState) => state.theme.theme);

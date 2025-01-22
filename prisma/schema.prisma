@@ -18,34 +18,37 @@ model Enquery {
   createdAt DateTime @default(now())
 }
 
-model Students {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String
-  course    String
-  phoneNumber String
-  fatherName String
-  motherName String
-  fatherPhoneNumber String
-  DOB       DateTime
-  address   String
-  password  String
-  verifyPassword String
-  updatedAt DateTime @default(now())
-  createdAt DateTime @default(now())
+model Student {
+  id                Int      @id @default(autoincrement())
+  name              String
+  email             String   @unique
+  course            String
+  phoneNumber       String   @unique
+  fatherName        String
+  motherName        String
+  alternativeNumber String
+  DOB               DateTime
+  address           String
+  password          String
+  confirmPassword    String
+  role              String   @default("student")
+  updatedAt         DateTime @updatedAt
+  createdAt         DateTime @default(now())
 }
 
-model Teachers {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String
-  subject   String
-  phoneNumber String
-  aaadharNumber String
-  DOB       DateTime
-  address   String
-  password  String
-  verifyPassword String
-  updatedAt DateTime @default(now())
-  createdAt DateTime @default(now())
+model Teacher {
+  id            Int      @id @default(autoincrement())
+  name          String
+  email         String   @unique
+  subject       String
+  phoneNumber   String   @unique
+  alternativeNumber String
+  aadhaarNumber String   @unique
+  DOB           DateTime
+  address       String
+  password      String
+  confirmPassword String
+  role          String   @default("teacher")
+  updatedAt     DateTime @updatedAt
+  createdAt     DateTime @default(now())
 }
