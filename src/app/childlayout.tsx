@@ -9,8 +9,13 @@ import TailwindIndicator from "@/lib/tailwindIndicater";
 import { setTheme } from "@/store/features/themeSlice";
 import WhatsAppWidget from "@/components/whatsappWidget";
 import { Toaster } from "@/components/ui/sonner";
+import { usePathname } from "next/navigation";
 
 export default function ChildLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
+
+    const pathName = usePathname();
+    const noHeaderFooterRoutes = ['/auth/students/login', 'auth/teachers/login', 'auth/students/register', 'auth/teachers/register'];
+    const noHeaderFooter = noHeaderFooterRoutes.includes(pathName);
 
     useEffect(() => {
         const savedTheme = localStorage.getItem("theme") as "light" | "dark";
@@ -21,14 +26,12 @@ export default function ChildLayout({ children }: Readonly<{ children: React.Rea
 
     return (
         <Provider store={store}>
-            <Header />
-            <main>
-                {children}
-            </main>
+            {!noHeaderFooter && <Header />}
+            <main>{children}</main>
             <TailwindIndicator />
-            <WhatsAppWidget />
+            {!noHeaderFooter && <WhatsAppWidget />}
             <Toaster position="top-right" richColors />
-            <Footer />
+            {!noHeaderFooter && <Footer />}
         </Provider>
     )
 }

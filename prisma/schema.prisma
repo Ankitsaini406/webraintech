@@ -17,3 +17,35 @@ model Enquery {
   phoneNumber String
   createdAt DateTime @default(now())
 }
+
+model Students {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  course    String
+  phoneNumber String
+  fatherName String
+  motherName String
+  fatherPhoneNumber String
+  DOB       DateTime
+  address   String
+  password  String
+  verifyPassword String
+  updatedAt DateTime @default(now())
+  createdAt DateTime @default(now())
+}
+
+model Teachers {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  subject   String
+  phoneNumber String
+  aaadharNumber String
+  DOB       DateTime
+  address   String
+  password  String
+  verifyPassword String
+  updatedAt DateTime @default(now())
+  createdAt DateTime @default(now())
+}
