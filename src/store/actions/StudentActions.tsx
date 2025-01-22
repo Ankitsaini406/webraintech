@@ -5,25 +5,25 @@ import axios from "axios";
 // Login Student
 export const loginStudent = createAsyncThunk(
     "authStudent/login",
-    async (creadentials, { rejectWithValue }) => {
+    async (credentials: { email: string; password: string }, { rejectWithValue }) => {
         try {
-            const response = await axios.post("/api/auth/students/login", creadentials);
+            const response = await axios.post("/api/students/login", credentials);
             return response.data;
-        } catch (error) {
+        } catch (error: unknown) {
             if (axios.isAxiosError(error)) {
                 return rejectWithValue(error.response?.data?.message || "Login failed");
             }
             return rejectWithValue("An unexpected error occurred");
         }
     }
-)
+);
 
 // Register Student
 export const registerStudent = createAsyncThunk(
     "authStudent/register",
     async (studentData, { rejectWithValue }) => {
         try {
-            const response = await axios.post("/api/auth/students/register", studentData);
+            const response = await axios.post("/api/students/register", studentData);
             return response.data;
         } catch (error) {
             if (axios.isAxiosError(error)) {
@@ -39,7 +39,7 @@ export const updateStudent = createAsyncThunk(
     "authStudent/update",
     async ({ id, updateData }: { id: string, updateData: StudentUpdateData }, { rejectWithValue }) => {
         try {
-            const response = await axios.put(`/api/auth/students/${id}`, updateData);
+            const response = await axios.put(`/api/students/${id}`, updateData);
             return response.data;
         } catch (error) {
             if (axios.isAxiosError(error)) {
@@ -55,7 +55,7 @@ export const updatePassword = createAsyncThunk(
     "authStudent/updatePassword",
     async ({ id, passwordData }: { id: string, passwordData: UpdatePassword }, { rejectWithValue }) => {
         try {
-            const response = await axios.put(`/api/auth/students/${id}/password`, passwordData);
+            const response = await axios.put(`/api/students/${id}/password`, passwordData);
             return response.data;
         } catch (error) {
             if (axios.isAxiosError(error)) {
@@ -71,7 +71,7 @@ export const deleteStudent = createAsyncThunk(
     "authStudent/delete",
     async (id: string, { rejectWithValue }) => {
         try {
-            const response = await axios.delete(`/api/auth/students/${id}`);
+            const response = await axios.delete(`/api/students/${id}`);
             return response.data;
         } catch (error) {
             if (axios.isAxiosError(error)) {
