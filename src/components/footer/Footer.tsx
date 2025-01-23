@@ -1,4 +1,5 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { NewsLetter } from "@/utils/FormFields";
 import { Facebook, Instagram, Linkedin, X, Youtube } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,43 +8,72 @@ import Link from "next/link";
 function Footer() {
     return (
         <footer className="mt-auto w-full bg-[ghostwhite] dark:bg-black p-4 sm:p-8">
-            <div className=" container flex flex-col gap-8 sm:flex-row justify-around items-center sm:items-start">
-                <div className="flex flex-row sm:flex-col gap-4 sm:gap-8 items-center sm:items-start">
-                    <Image className="h-12 w-12 sm:h-full" src='/favicon.ico' alt="WeBrainTech" width={100} height={100} />
-                    <div className="flex flex-col gap-2 sm:gap-4 items-start">
-                        <h5 className="font-bold text-xl sm:text-2xl">Follow Us</h5>
-                        <div className="flex flex-row gap-4 sm:gap-8">
-                            <Facebook className="cursor-pointer hover:text-red-500 transition-all duration-300" />
-                            <Instagram className="cursor-pointer hover:text-red-500 transition-all duration-300" />
-                            <X className="cursor-pointer hover:text-red-500 transition-all duration-300" />
-                            <Linkedin className="cursor-pointer hover:text-red-500 transition-all duration-300" />
-                            <Youtube className="cursor-pointer hover:text-red-500 transition-all duration-300" />
+            <div className="flex flex-col gap-4 md:gap-8 justify-around items-center sm:items-start">
+                <div className="flex flex-col md:flex-row gap-8 md:gap-0 w-full items-start sm:justify-around">
+                    <div className="w-full md:w-auto flex items-center flex-row md:flex-col justify-around md:items-start gap-0 md:gap-4">
+                        <Image className="h-12 w-12 sm:h-full" src='/favicon.ico' alt="WeBrainTech" width={100} height={100} />
+                        <div className="flex flex-col gap-2 sm:gap-4 items-start">
+                            <h5 className="font-bold text-xl sm:text-2xl">Follow Us</h5>
+                            <div className="flex flex-row gap-4 sm:gap-8">
+                                <Facebook className="cursor-pointer hover:text-red-500 transition-all duration-300" />
+                                <Instagram className="cursor-pointer hover:text-red-500 transition-all duration-300" />
+                                <X className="cursor-pointer hover:text-red-500 transition-all duration-300" />
+                                <Linkedin className="cursor-pointer hover:text-red-500 transition-all duration-300" />
+                                <Youtube className="cursor-pointer hover:text-red-500 transition-all duration-300" />
+                            </div>
                         </div>
                     </div>
+                    <NewsLetter />
                 </div>
 
                 {/* Desktop and other large screens */}
-                <div className="hidden sm:flex flex-col gap-2 sm:gap-4 items-start">
-                    <h5 className="font-bold text-xl sm:text-2xl">Ouick Links</h5>
-                    <Link className="hover:text-red-500 transition-all duration-300" href='/' >Abouts Us</Link>
-                    <Link className="hover:text-red-500 transition-all duration-300" href='/' >Contact Us</Link>
-                    <Link className="hover:text-red-500 transition-all duration-300" href='/' >Support Center</Link>
-                    <Link className="hover:text-red-500 transition-all duration-300" href='/' >Blog Post</Link>
-                    <Link className="hover:text-red-500 transition-all duration-300" href='/' >Careers</Link>
-                </div>
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 w-full items-start sm:justify-around">
+                    <div className="hidden md:flex flex-col gap-2 sm:gap-4 items-start">
+                        <h5 className="font-bold text-xl sm:text-2xl">Courses</h5>
+                        <Link className="hover:text-red-500 transition-all duration-300" href='/' >Web Technlogy</Link>
+                        <Link className="hover:text-red-500 transition-all duration-300" href='/' >AI Python</Link>
+                        <Link className="hover:text-red-500 transition-all duration-300" href='/' >Ethical Hacking</Link>
+                        <Link className="hover:text-red-500 transition-all duration-300" href='/' >Digital Marketing</Link>
+                        <Link className="hover:text-red-500 transition-all duration-300" href='/' >Graphic Animation</Link>
+                        <Link className="hover:text-red-500 transition-all duration-300" href='/' >German Language</Link>
+                        <Link className="hover:text-red-500 transition-all duration-300" href='/' >Spoken English</Link>
+                    </div>
 
-                <div className="hidden sm:flex flex-col gap-2 sm:gap-4 items-start">
-                    <h5 className="font-bold text-xl sm:text-2xl">Connect With Us</h5>
-                    <Link className="hover:text-red-500 transition-all duration-300" href='/' >Events</Link>
-                    <Link className="hover:text-red-500 transition-all duration-300" href='/' >Testimonials</Link>
-                    <Link className="hover:text-red-500 transition-all duration-300" href='/' >Resources</Link>
-                    <Link className="hover:text-red-500 transition-all duration-300" href='/' >FAQs</Link>
+                    <div className="hidden md:flex flex-col gap-2 sm:gap-4 items-start">
+                        <h5 className="font-bold text-xl sm:text-2xl">Ouick Links</h5>
+                        <Link className="hover:text-red-500 transition-all duration-300" href='/' >Abouts Us</Link>
+                        <Link className="hover:text-red-500 transition-all duration-300" href='/' >Contact Us</Link>
+                        <Link className="hover:text-red-500 transition-all duration-300" href='/' >Support Center</Link>
+                        <Link className="hover:text-red-500 transition-all duration-300" href='/' >Blog Post</Link>
+                        <Link className="hover:text-red-500 transition-all duration-300" href='/' >Careers</Link>
+                    </div>
+
+                    <div className="hidden md:flex flex-col gap-2 sm:gap-4 items-start">
+                        <h5 className="font-bold text-xl sm:text-2xl">Connect With Us</h5>
+                        <Link className="hover:text-red-500 transition-all duration-300" href='/' >Events</Link>
+                        <Link className="hover:text-red-500 transition-all duration-300" href='/' >Testimonials</Link>
+                        <Link className="hover:text-red-500 transition-all duration-300" href='/' >Resources</Link>
+                        <Link className="hover:text-red-500 transition-all duration-300" href='/' >FAQs</Link>
+                    </div>
                 </div>
 
                 {/* Mobile and other small screens */}
-                <div className="flex sm:hidden flex-col gap-4 w-full mb-8">
+                <div className="flex md:hidden flex-col gap-4 w-full mb-8">
                     <Accordion type="single" collapsible className="w-full">
                         <AccordionItem value="item-1">
+                            <AccordionTrigger className="text-base py-4">Courses</AccordionTrigger>
+                            <AccordionContent className="pl-8 pt-4 text-lg">
+                                <Link className="hover:text-red-500 transition-all duration-300" href="/about-us"><AccordionContent>Web Technlogy</AccordionContent></Link>
+                                <Link className="hover:text-red-500 transition-all duration-300" href="/contact-us"><AccordionContent>AI Python</AccordionContent></Link>
+                                <Link className="hover:text-red-500 transition-all duration-300" href="/"><AccordionContent>Ethical Hacking</AccordionContent></Link>
+                                <Link className="hover:text-red-500 transition-all duration-300" href="/"><AccordionContent>Digital Marketing</AccordionContent></Link>
+                                <Link className="hover:text-red-500 transition-all duration-300 pb-4" href="/"><AccordionContent>Graphic Animation</AccordionContent></Link>
+                                <Link className="hover:text-red-500 transition-all duration-300 pb-4" href="/"><AccordionContent>German Language</AccordionContent></Link>
+                                <Link className="hover:text-red-500 transition-all duration-300 pb-4" href="/"><AccordionContent>Spoken English</AccordionContent></Link>
+                            </AccordionContent>
+                        </AccordionItem>
+
+                        <AccordionItem value="item-2">
                             <AccordionTrigger className="text-base py-4">Quick Links</AccordionTrigger>
                             <AccordionContent className="pl-8 pt-4 text-lg">
                                 <Link className="hover:text-red-500 transition-all duration-300" href="/about-us"><AccordionContent>About Us</AccordionContent></Link>
@@ -54,7 +84,7 @@ function Footer() {
                             </AccordionContent>
                         </AccordionItem>
 
-                        <AccordionItem value="item-2">
+                        <AccordionItem value="item-3">
                             <AccordionTrigger className="text-base py-4">Connect With Us</AccordionTrigger>
                             <AccordionContent className="pl-8 pt-4 text-lg">
                                 <Link className="hover:text-red-500 transition-all duration-300" href="/"><AccordionContent>Events</AccordionContent></Link>

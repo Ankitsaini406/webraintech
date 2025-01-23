@@ -48,12 +48,12 @@ export const ButtonLink = React.forwardRef<HTMLButtonElement | HTMLAnchorElement
 
 ButtonLink.displayName = "ButtonLink";
 
-export function FormButton({ title, disabled }: { title: string; disabled: boolean }) {
+export function FormButton({ title, disabled, className }: { title: string; disabled: boolean; className?: string }) {
     return (
         <button
             disabled={disabled}
             type="submit"
-            className={`w-40 ${disabled ? 'bg-zinc-500' : 'bg-red-500'} ${disabled ? '' : 'hover:bg-red-600'} text-white px-4 py-2 rounded-md  transition`}
+            className={`w-auto sm:w-40 ${disabled ? 'bg-zinc-500' : 'bg-red-500'} ${disabled ? '' : 'hover:bg-red-600'} text-white px-4 py-2 rounded-md  transition ${className}`}
         >
             {title}
         </button>
