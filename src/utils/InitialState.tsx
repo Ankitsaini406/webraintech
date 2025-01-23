@@ -7,6 +7,14 @@ export const enqueryInitialState = {
     message: "",
 }
 
+export interface Users {
+    id: string;
+    name: string;
+    email: string;
+    role: string;
+    // Add other fields as required
+}
+
 export interface Student {
     id: string;
     name: string;
