@@ -14,7 +14,7 @@ import ThankYouDialog from "../dialogs/Thankyou";
 function Footer() {
     const dispatch = useDispatch<AppDispatch>();
     const [email, setEmail] = useState('');
-    const [showDialog, setShowDialog] = useState(false);
+    const [showDialog, setShowDialog] = useState(true);
     const newsletterState = useSelector((state: RootState) => state.newsletter);
     const { loading, error } = newsletterState;
 
@@ -141,6 +141,7 @@ function Footer() {
                 onClose={() => setShowDialog(false)}
                 title="🎉 Thank you for subscribing! 🎉"
                 description="Thank you for subscribing! Get ready for the latest courses, trends, and tips straight to your inbox. Stay tuned for exciting updates! 🚀"
+                gifUrl="/tank-you.gif"
             />
         </>
     );
