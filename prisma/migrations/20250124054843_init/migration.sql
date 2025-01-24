@@ -51,6 +51,17 @@ CREATE TABLE "Teacher" (
     CONSTRAINT "Teacher_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "NewsLetter" (
+    "id" SERIAL NOT NULL,
+    "email" TEXT NOT NULL,
+    "subscribed" BOOLEAN NOT NULL,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "NewsLetter_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Student_email_key" ON "Student"("email");
 
@@ -65,3 +76,6 @@ CREATE UNIQUE INDEX "Teacher_phoneNumber_key" ON "Teacher"("phoneNumber");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Teacher_aadhaarNumber_key" ON "Teacher"("aadhaarNumber");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "NewsLetter_email_key" ON "NewsLetter"("email");

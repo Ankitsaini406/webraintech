@@ -1,11 +1,39 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+
+import React, { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { useDispatch, useSelector } from "react-redux";
 import { NewsLetter } from "@/utils/FormFields";
 import { Facebook, Instagram, Linkedin, X, Youtube } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { AppDispatch, RootState } from "@/store/store";
+import { updateNewsLetter } from "@/store/actions/NewsLetterActions";
+import { toast } from "sonner";
 
 
 function Footer() {
+
+    const dispatch = useDispatch<AppDispatch>();
+    const [email, setEmail] = useState('');
+    const newsletterState = useSelector((state: RootState) => state.newsletter);
+    const { loading, error } = newsletterState;
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            return;
+        }
+
+        dispatch(updateNewsLetter(email)).unwrap().then(() => {
+            toast.success("You have subscribed to the newsletter!");
+            setEmail('');
+        }).catch((err) => {
+            toast.error(err.message || 'Failed to subscribe to newsletter');
+        });
+    }
+
+
     return (
         <footer className="mt-auto w-full bg-[ghostwhite] dark:bg-black p-4 sm:p-8">
             <div className="flex flex-col gap-4 md:gap-8 justify-around items-center sm:items-start">
@@ -23,7 +51,7 @@ function Footer() {
                             </div>
                         </div>
                     </div>
-                    <NewsLetter />
+                    <NewsLetter email={email} setEmail={setEmail} loading={loading} error={error as string} onSubmit={handleSubmit} />
                 </div>
 
                 {/* Desktop and other large screens */}

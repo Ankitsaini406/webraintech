@@ -50,3 +50,11 @@ model Teacher {
   updatedAt         DateTime @updatedAt
   createdAt         DateTime @default(now())
 }
+
+model NewsLetter {
+  id          Int      @id @default(autoincrement())
+  email       String   @unique
+  subscribed  Boolean
+  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now())
+}

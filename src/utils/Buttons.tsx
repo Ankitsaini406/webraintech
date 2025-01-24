@@ -55,7 +55,7 @@ export function FormButton({ title, disabled, className }: { title: string; disa
             type="submit"
             className={`w-auto sm:w-40 ${disabled ? 'bg-zinc-500' : 'bg-red-500'} ${disabled ? '' : 'hover:bg-red-600'} text-white px-4 py-2 rounded-md  transition ${className}`}
         >
-            {title}
+            {disabled ? "Loading..." : title}
         </button>
     );
 }
