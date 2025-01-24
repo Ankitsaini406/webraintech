@@ -14,7 +14,7 @@ import ThankYouDialog from "../dialogs/Thankyou";
 function Footer() {
     const dispatch = useDispatch<AppDispatch>();
     const [email, setEmail] = useState('');
-    const [showDialog, setShowDialog] = useState(true);
+    const [showDialog, setShowDialog] = useState(false);
     const newsletterState = useSelector((state: RootState) => state.newsletter);
     const { loading, error } = newsletterState;
 
