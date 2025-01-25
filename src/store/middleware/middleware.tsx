@@ -5,7 +5,7 @@ export const authMiddleware: Middleware = (store) => (next) => (action: AnyActio
     // Action type check
     if (action.type === setProtected.type || action.type === setAuthToken.type) {
         const state = store.getState();
-        const { user, authToken } = state.protected;
+        const { user, authToken } = state.user;
 
         // If no authToken or user, clear state and possibly redirect
         if (!authToken || !user) {
