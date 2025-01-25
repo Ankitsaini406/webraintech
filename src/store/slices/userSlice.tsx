@@ -7,7 +7,7 @@ const userSlice = createSlice({
     name: "user",
     initialState: authUserInitialState,
     reducers: {
-        logoutStudent: (state) => {
+        logoutStudent(state) {
             state.user = null;
             state.token = null;
             deleteCookie("authToken");
@@ -15,9 +15,6 @@ const userSlice = createSlice({
         },
         setUser(state, action: PayloadAction<Users>) {
             state.user = action.payload;
-        },
-        clearUser(state) {
-            state.user = null;
         },
     },
     extraReducers: (builder) => {
@@ -84,5 +81,5 @@ const userSlice = createSlice({
     }
 });
 
-export const { logoutStudent, setUser, clearUser } = userSlice.actions;
+export const { logoutStudent, setUser } = userSlice.actions;
 export default userSlice.reducer;

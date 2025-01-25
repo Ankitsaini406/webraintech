@@ -5,8 +5,7 @@ import { LayoutDashboard, LogIn, Settings, User } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/store";
 import { Skeleton } from "@/components/ui/skeleton";
-import { clearUser } from "@/store/slices/userSlice";
-import { deleteCookie } from "cookies-next";
+import { logoutStudent } from "@/store/slices/userSlice";
 import { useRouter } from "next/navigation";
 import { Users } from "@/utils/InitialState";
 
@@ -22,9 +21,7 @@ export function ProfileComponent({user} : ProfileComponentProps) {
     const firstLetter = user?.name?.charAt(0).toUpperCase();
 
     const handleSignout = () => {
-        dispatch(clearUser());
-        deleteCookie("authToken");
-        localStorage.clear();
+        dispatch(logoutStudent());
         router.push("/auth/login");
     };
 
