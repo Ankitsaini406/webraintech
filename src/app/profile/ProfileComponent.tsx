@@ -17,7 +17,6 @@ interface ProfileComponentProps {
 export function ProfileComponent({user} : ProfileComponentProps) {
     const [activeTab, setActiveTab] = useState("dashboard");
     const dispatch = useDispatch<AppDispatch>();
-    // const user = useSelector((state: RootState) => state.user.user);
     const router = useRouter();
 
     const firstLetter = user?.name?.charAt(0).toUpperCase();

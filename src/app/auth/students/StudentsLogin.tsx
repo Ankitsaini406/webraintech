@@ -6,7 +6,7 @@ import { Input } from "@/utils/FormFields";
 import { AppDispatch } from "@/store/store";
 import { FormButton } from "@/utils/Buttons";
 import { useDispatch, useSelector } from "react-redux";
-import { loginStudent } from "@/store/actions/StudentActions";
+import { loginUser } from "@/store/actions/UserActions";
 import { useRouter } from "next/navigation";
 
 export default function StudentLogin() {
@@ -14,8 +14,8 @@ export default function StudentLogin() {
     const router = useRouter();
     const dispatch = useDispatch<AppDispatch>();
     const { loading, error } = useSelector(
-        (state: { student: { loading: boolean; error: string | null } }) =>
-            state.student
+        (state: { user: { loading: boolean; error: string | null } }) =>
+            state.user
     );
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,8 +25,12 @@ export default function StudentLogin() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const fullData = { 
+            role: "student", 
+            credentials: formData,
+        };
         try {
-            await dispatch(loginStudent(formData)).unwrap();
+            await dispatch(loginUser(fullData)).unwrap();
             router.push("/");
         } catch (error: unknown) {
             if (error instanceof Error) {

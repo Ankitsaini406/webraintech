@@ -26,15 +26,7 @@ export interface Users {
     // Add other fields as required
 }
 
-export interface Student {
-    id: string;
-    name: string;
-    email: string;
-    role: string;
-    // Add other fields as required
-}
-
-export interface StudentUpdateData {
+export interface UserUpdateData {
     name?: string;
     email?: string;
     phoneNumber?: string;
@@ -48,15 +40,15 @@ export interface UpdatePassword {
     confirmPassword: string;
 }
 
-export interface StudentAuthState {
-    student: Student | null;
+export interface UsersAuthState {
+    user: Users | null;
     token: string | null;
     error: string | null;
     loading: boolean;
 }
 
-export const authStudentInitialState: StudentAuthState = {
-    student: null,
+export const authUserInitialState: UsersAuthState = {
+    user: null,
     token: null,
     error: null,
     loading: false,
