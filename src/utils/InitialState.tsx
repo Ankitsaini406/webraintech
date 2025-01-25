@@ -11,6 +11,7 @@ export interface Users {
     id: string;
     name: string;
     email: string;
+    course: string;
     role: string;
     // Add other fields as required
 }
