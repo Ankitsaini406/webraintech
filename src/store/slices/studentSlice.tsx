@@ -25,7 +25,7 @@ const authStudentSlice = createSlice({
             state.loading = false;
             state.student = action.payload.student;
             state.token = action.payload.token;
-            setCookie("authToken", action.payload.token, {maxAge: 60 * 60 * 24 * 7});
+            setCookie("authToken", action.payload.token, { maxAge: 60 * 60 * 24 * 7 });
             localStorage.setItem("authToken", action.payload.token);
         })
         .addCase(loginStudent.rejected, (state, action) => {

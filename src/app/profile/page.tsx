@@ -11,11 +11,8 @@ export default async function Page() {
 
     if (authToken) {
         try {
-            // Decode the token or fetch user details
             const decoded = decodeToken(authToken.value);
-            if (typeof decoded === "object" && decoded !== null) {
                 user = decoded as Users;
-            }
         } catch (error) {
             console.error("Failed to decode token:", error);
         }
@@ -23,7 +20,7 @@ export default async function Page() {
 
     return (
         <ProfileComponent
-            user={user || null} // Pass null if no user
+            user={user || null}
         />
     );
 }

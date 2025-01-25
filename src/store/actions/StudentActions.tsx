@@ -6,6 +6,9 @@ import axios from "axios";
 export const loginStudent = createAsyncThunk(
     "authStudent/login",
     async (credentials: { email: string; password: string }, { rejectWithValue }) => {
+        if (!credentials || !credentials.email || !credentials.password) {
+            return rejectWithValue("Invalid login credentials");
+        }
         try {
             const response = await axios.post("/api/students/login", credentials);
             return response.data;

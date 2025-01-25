@@ -17,11 +17,12 @@ CREATE TABLE "Student" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "course" TEXT NOT NULL,
+    "course" TEXT[],
     "phoneNumber" TEXT NOT NULL,
     "fatherName" TEXT NOT NULL,
     "motherName" TEXT NOT NULL,
     "alternativeNumber" TEXT NOT NULL,
+    "aadhaarNumber" TEXT NOT NULL,
     "dob" TIMESTAMP(3) NOT NULL,
     "address" TEXT NOT NULL,
     "password" TEXT NOT NULL,
@@ -37,8 +38,10 @@ CREATE TABLE "Teacher" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "subject" TEXT NOT NULL,
+    "course" TEXT[],
     "phoneNumber" TEXT NOT NULL,
+    "fatherName" TEXT NOT NULL,
+    "motherName" TEXT NOT NULL,
     "alternativeNumber" TEXT NOT NULL,
     "aadhaarNumber" TEXT NOT NULL,
     "dob" TIMESTAMP(3) NOT NULL,
@@ -67,6 +70,9 @@ CREATE UNIQUE INDEX "Student_email_key" ON "Student"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Student_phoneNumber_key" ON "Student"("phoneNumber");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Student_aadhaarNumber_key" ON "Student"("aadhaarNumber");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Teacher_email_key" ON "Teacher"("email");

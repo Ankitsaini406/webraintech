@@ -4,23 +4,29 @@ import { NextResponse } from 'next/server';
 
 
 export async function POST(req: Request) {
-    const { email, password } = await req.json();
+    try {
+        const body = await req.json();
+        const { email, password } = body;
 
-    // Fetch student from database
-    const student = await prisma.student.findUnique({ where: {email}});
-    if (!student) {
-        return NextResponse.json({ message: 'Student not found' }, { status: 404 });
+        if (!email || !password) {
+            return NextResponse.json({ message: 'Missing email or password' }, { status: 400 });
+        }
+
+        const student = await prisma.student.findUnique({ where: { email } });
+        if (!student) {
+            return NextResponse.json({ message: 'Student not found' }, { status: 404 });
+        }
+
+        if (password !== student.password) {
+            return NextResponse.json({ message: 'Invalid credentials' }, { status: 400 });
+        }
+
+        const token = createToken({ id: student.id, name: student.name, email: student.email, role: student.role });
+        return NextResponse.json({ student, token });
+
+    } catch (error) {
+        console.error('Error in login API:', error);
+        return NextResponse.json({ message: 'Server error' }, { status: 500 });
     }
-
-    // Hash the provided password with the stored salt
-    // const passwordHash = hashPassword(password, student.password);
-
-    // Compare the hashed password with the stored hash
-    if (password !== student.password) {
-        return NextResponse.json({ message: 'Invalid credentials' }, { status: 400 });
-    }
-
-    const token = createToken({ id: student.id, name: student.name, course: student.course, email: student.email, role: student.role });
-
-    return NextResponse.json({ student, token: token });
 }
+

@@ -11,8 +11,18 @@ export interface Users {
     id: string;
     name: string;
     email: string;
-    course: string;
+    course: string[];
+    phoneNumber: string;
+    fatherName: string;
+    motherName: string;
+    alternativeNumber: string;
+    aadhaarNumber: string;
+    dob: Date;
+    address: string;
+    password: string;
     role: string;
+    updateAt: Date;
+    createdAt: Date;
     // Add other fields as required
 }
 
