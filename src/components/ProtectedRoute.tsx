@@ -24,7 +24,7 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
             if (protectedRoutes.includes(pathname)) {
                 if (!authToken && !tokenFromCookie) {
                     dispatch(clearProtected());
-                    router.push("/auth/students/login");
+                    router.push("/auth/login");
                 }
             }
         };

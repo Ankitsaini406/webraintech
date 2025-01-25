@@ -15,7 +15,7 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 export default function ChildLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
 
     const pathName = usePathname();
-    const noHeaderFooterRoutes = ['/auth/students/login', 'auth/teachers/login', 'auth/students/register', 'auth/teachers/register'];
+    const noHeaderFooterRoutes = ['/auth/login', 'auth/register'];
     const noHeaderFooter = noHeaderFooterRoutes.includes(pathName);
 
     useEffect(() => {

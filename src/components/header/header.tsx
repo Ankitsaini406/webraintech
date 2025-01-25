@@ -35,7 +35,7 @@ export default function Header() {
                 <div className="flex gap-3 lg:gap-4 items-start md:items-center">
                     <MainNav />
                     <h1 className="flex items-center justify-end flex-1 gap-2">
-                        <Link href={user ? "/profile" : "/auth/students/login"}>
+                        <Link href={user ? "/profile" : "/auth/login"}>
                             <CircleUserRound />
                         </Link>
                         <ThemeSwitcher />

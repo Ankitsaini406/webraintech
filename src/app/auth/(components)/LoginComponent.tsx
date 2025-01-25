@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "@/store/actions/UserActions";
 import { useRouter } from "next/navigation";
 
-export default function StudentLogin() {
+export default function LoginComponent() {
     const [formData, setFormData] = useState({ email: "", password: "" });
     const router = useRouter();
     const dispatch = useDispatch<AppDispatch>();

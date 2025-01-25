@@ -25,7 +25,7 @@ export function ProfileComponent({user} : ProfileComponentProps) {
         dispatch(clearUser());
         deleteCookie("authToken");
         localStorage.clear();
-        router.push("/auth/students/login");
+        router.push("/auth/login");
     };
 
     // Content for each tab
