@@ -24,8 +24,8 @@ type LoginFormProps = {
 
 // Login form component
 const LoginForm = ({ role, formData, onInputChange, onSubmit, loading, error }: LoginFormProps) => (
-    <div className="bg-white bg-opacity-30 backdrop-blur-sm p-8 rounded-lg shadow-lg w-full">
-        <h1 className="text-2xl font-semibold text-center mb-6 text-white">
+    <div className="bg-background dark:bg-neutral-800 p-8 rounded-lg shadow-lg w-full">
+        <h1 className="text-2xl font-semibold text-center mb-6 text-slate-600 dark:text-white">
             {role.charAt(0).toUpperCase() + role.slice(1)} Login
         </h1>
         <form className="w-full" onSubmit={onSubmit}>
@@ -85,15 +85,15 @@ const LoginComponent = () => {
     };
 
     return (
-        <div className="bg-gradient-to-r from-slate-500 min-h-screen flex justify-center items-center">
+        <div className="bg-gray-600 dark:bg-gray-800 min-h-screen flex justify-center items-center">
             <Tabs
                 defaultValue="student"
                 className="w-[400px]"
                 onValueChange={(value) => setRole(value as UserRole)}
             >
-                <TabsList className="w-full">
-                    <TabsTrigger value="student" className="w-full">Student</TabsTrigger>
-                    <TabsTrigger value="teacher" className="w-full">Teacher</TabsTrigger>
+                <TabsList className="w-full dark:bg-neutral-800">
+                    <TabsTrigger value="student" className="w-full font-bold">Student</TabsTrigger>
+                    <TabsTrigger value="teacher" className="w-full font-bold">Teacher</TabsTrigger>
                 </TabsList>
                 <TabsContent value="student">
                     <LoginForm
