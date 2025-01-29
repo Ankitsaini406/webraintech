@@ -1,7 +1,7 @@
-import { Middleware, AnyAction } from "@reduxjs/toolkit";
+import { Middleware } from "@reduxjs/toolkit";
 import { clearProtected, setAuthToken, setProtected } from "./protectedSlice";
 
-export const authMiddleware: Middleware = (store) => (next) => (action: AnyAction) => {
+export const authMiddleware: Middleware = (store) => (next) => (action: any) => {
     // Action type check
     if (action.type === setProtected.type || action.type === setAuthToken.type) {
         const state = store.getState();
