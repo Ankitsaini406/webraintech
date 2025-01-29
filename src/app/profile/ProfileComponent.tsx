@@ -61,7 +61,7 @@ export function ProfileComponent({ user }: ProfileComponentProps) {
     };
 
     return (
-        <div className="container mx-auto my-4 sm:my-8 grid grid-cols-[300px_1fr] md:grid-cols-[300px_1fr]">
+        <div className="container mx-auto my-4 sm:my-8 grid grid-cols-1 md:grid-cols-[300px_1fr]">
             {/* Profile Tabs */}
             <div className="border rounded p-4 h-full">
                 <div className="flex gap-4 flex-col items-center sticky top-24">
