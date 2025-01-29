@@ -61,7 +61,7 @@ export function ProfileComponent({ user }: ProfileComponentProps) {
     };
 
     return (
-        <div className="container mx-auto my-4 sm:my-8 grid grid-cols-[300px_1fr] md:grid-cols-[400px_1fr]">
+        <div className="container mx-auto my-4 sm:my-8 grid grid-cols-[300px_1fr] md:grid-cols-[300px_1fr]">
             {/* Profile Tabs */}
             <div className="border rounded p-4 h-full">
                 <div className="flex gap-4 flex-col items-center sticky top-24">
@@ -72,7 +72,7 @@ export function ProfileComponent({ user }: ProfileComponentProps) {
                             <h1 className="text-white text-9xl">{firstLetter}</h1>
                         </div>
                     )}
-                    <div className="flex flex-col gap-1 items-center">
+                    <div className="flex flex-col gap-1 items-center w-full">
                         {user === null ? (
                             <Skeleton className="h-8 w-[250px]" />
                         ) : (
@@ -85,7 +85,7 @@ export function ProfileComponent({ user }: ProfileComponentProps) {
                         )}
                     </div>
 
-                    <div className="flex flex-col gap-4 w-2/3">
+                    <div className="flex flex-col gap-4 w-full">
                         <button
                             onClick={() => setActiveTab("dashboard")}
                             className={`flex gap-2 font-bold w-full py-2 px-4 rounded duration-300 ${activeTab === "dashboard"

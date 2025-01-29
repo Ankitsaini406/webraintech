@@ -44,7 +44,7 @@ export default function TeachersSection({ userCourses }: { userCourses: string[]
                 // )}
                 teachers.map((teacher: Teachers) => {
                     return (
-                        <div key={teacher.id} className="w-full shadow-md p-4 flex gap-4 border">
+                        <div key={teacher.id} className="w-full shadow-md p-4 flex flex-col md:flex-row gap-4 border">
                             <div className="bg-gradient-to-b from-transparent to-black-opacity-30 w-[200px] h-[200px] rounded-full shrink-0">
                             </div>
                             <div className="flex flex-col">
