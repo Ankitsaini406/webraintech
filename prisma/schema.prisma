@@ -50,6 +50,13 @@ model Teacher {
   address           String
   password          String
   role              String   @default("teacher")
+  details           String   @default("")
+  brief             String   @default("")
+  facebook          String   @default("")
+  instagram         String   @default("")
+  linkdin           String   @default("")
+  youtube           String   @default("")
+  x                 String   @default("")
   updatedAt         DateTime @updatedAt
   createdAt         DateTime @default(now())
 }

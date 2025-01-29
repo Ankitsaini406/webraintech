@@ -21,7 +21,7 @@ export async function POST(req: Request) {
             return NextResponse.json({ message: 'Invalid credentials' }, { status: 400 });
         }
 
-        const token = createToken({ id: student.id, name: student.name, email: student.email, role: student.role });
+        const token = createToken({ id: student.id, name: student.name, email: student.email, role: student.role, course: student.course });
         return NextResponse.json({ student, token });
 
     } catch (error) {

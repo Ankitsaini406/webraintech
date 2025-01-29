@@ -4,14 +4,16 @@ import themeReducer from "./actions/ThemeActions";
 import userReducer from "./actions/UserActions";
 import protecedReducer from "./middleware/protectedSlice";
 import newsLetterReducer from "./actions/NewsLetterActions";
+import findTeacherByCourseReducer from "./actions/FindTeacherByCourseAction"
 import { authMiddleware } from "./middleware/middleware";
 
 const store = configureStore({
     reducer: {
-        theme: themeReducer,
         user: userReducer,
+        theme: themeReducer,
         proteced: protecedReducer,
         newsletter: newsLetterReducer,
+        findTeacherByCourse: findTeacherByCourseReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(authMiddleware),

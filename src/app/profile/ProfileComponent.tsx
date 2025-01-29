@@ -9,7 +9,7 @@ import { logoutStudent } from "@/store//actions/UserActions";
 import { useRouter } from "next/navigation";
 import { Users } from "@/utils/InitialState";
 import Dashboard from "./(components)/Dashboard";
-import Teachers from "./(components)/Teachers";
+import TeachersSection from "./(components)/TeachersSection";
 
 interface ProfileComponentProps {
     user: Users | null;
@@ -27,12 +27,6 @@ export function ProfileComponent({ user }: ProfileComponentProps) {
         router.push("/auth/login");
     };
 
-    const teachers = [
-        { id: 1, name: 'Web Shankar', subject: 'Math' },
-        { id: 2, name: 'Graphic Rohit', subject: 'Science' },
-        { id: 3, name: 'Digital Parshant', subject: 'History' },
-    ];
-
     // Content for each tab
     const renderTabContent = () => {
         const userRole = user?.role;
@@ -42,7 +36,7 @@ export function ProfileComponent({ user }: ProfileComponentProps) {
                 return <Dashboard />;
             case "teacher":
                 if (userRole === "student") {
-                    return <Teachers teachers={teachers} />;
+                    return <TeachersSection userCourses={user?.course || []} />;
                 }
                 return <div>Unauthorized to view this content.</div>;
             case "student":

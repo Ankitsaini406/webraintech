@@ -53,3 +53,29 @@ export const authUserInitialState: UsersAuthState = {
     error: null,
     loading: false,
 };
+
+export interface Teachers {
+    id: string;
+    name: string;
+    email: string;
+    course: string[];
+    phoneNumber: string;
+    fatherName: string;
+    motherName: string;
+    alternativeNumber: string;
+    aadhaarNumber: string;
+    dob: Date;
+    address: string;
+    password: string;
+    role: string;
+    details: string;
+    brief: string;
+    facebook: string;
+    instagram: string;
+    linkdin: string;
+    youtube: string;
+    x: string;
+    updateAt: Date;
+    createdAt: Date;
+    // Add other fields as required
+}
