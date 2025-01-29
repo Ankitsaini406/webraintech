@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import Header from "@/components/header/header";
 import Footer from "@/components/footer/Footer";
 import TailwindIndicator from "@/lib/tailwindIndicater";
-import { setTheme } from "@/store/slices/themeSlice";
+import { setTheme } from "@/store/actions/ThemeActions";
 import WhatsAppWidget from "@/components/whatsappWidget";
 import { Toaster } from "@/components/ui/sonner";
 import { usePathname } from "next/navigation";

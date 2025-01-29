@@ -5,7 +5,7 @@ import { LayoutDashboard, LogIn, Settings, User } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/store";
 import { Skeleton } from "@/components/ui/skeleton";
-import { logoutStudent } from "@/store/slices/userSlice";
+import { logoutStudent } from "@/store//actions/UserActions";
 import { useRouter } from "next/navigation";
 import { Users } from "@/utils/InitialState";
 import Dashboard from "./(components)/Dashboard";
@@ -27,6 +27,12 @@ export function ProfileComponent({ user }: ProfileComponentProps) {
         router.push("/auth/login");
     };
 
+    const teachers = [
+        { id: 1, name: 'Web Shankar', subject: 'Math' },
+        { id: 2, name: 'Graphic Rohit', subject: 'Science' },
+        { id: 3, name: 'Digital Parshant', subject: 'History' },
+    ];
+
     // Content for each tab
     const renderTabContent = () => {
         const userRole = user?.role;
@@ -36,7 +42,7 @@ export function ProfileComponent({ user }: ProfileComponentProps) {
                 return <Dashboard />;
             case "teacher":
                 if (userRole === "student") {
-                    return <Teachers />;
+                    return <Teachers teachers={teachers} />;
                 }
                 return <div>Unauthorized to view this content.</div>;
             case "student":
@@ -64,7 +70,7 @@ export function ProfileComponent({ user }: ProfileComponentProps) {
         <div className="container mx-auto my-4 sm:my-8 grid grid-cols-[300px_1fr] md:grid-cols-[400px_1fr]">
             {/* Profile Tabs */}
             <div className="border rounded p-4 h-full">
-                <div className="flex gap-4 flex-col items-center">
+                <div className="flex gap-4 flex-col items-center sticky top-24">
                     {user === null ? (
                         <Skeleton className="w-[200px] aspect-square rounded-full" />
                     ) : (
@@ -76,7 +82,7 @@ export function ProfileComponent({ user }: ProfileComponentProps) {
                         {user === null ? (
                             <Skeleton className="h-8 w-[250px]" />
                         ) : (
-                            <h2 className="text-2xl font-bold">Howdy! {user.name}</h2>
+                            <h2 className="text-2xl font-bold">{user.name}</h2>
                         )}
                         {user === null ? (
                             <Skeleton className="h-6 w-[300px]" />

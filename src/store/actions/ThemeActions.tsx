@@ -3,10 +3,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '@/store/store';
-import { setTheme, toggleTheme } from '@/store/slices/themeSlice';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const theme = useSelector((state: RootState) => state.theme.theme);
+    const theme = useSelector((state: RootState) => (state.theme as ThemeState).theme);
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
@@ -38,3 +38,35 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         </div>
     );
 };
+
+type Theme = "light" | "dark";
+
+interface ThemeState {
+    theme: Theme;
+}
+
+const initialState: ThemeState = {
+    theme: "light", // Default theme
+};
+
+const themeSlice = createSlice({
+    name: "theme",
+    initialState,
+    reducers: {
+        toggleTheme: (state) => {
+            const newTheme = state.theme === "light" ? "dark" : "light";
+            state.theme = newTheme;
+            // Update the HTML class
+            document.documentElement.classList.toggle("dark", newTheme === "dark");
+        },
+        setTheme: (state, action: PayloadAction<Theme>) => {
+            state.theme = action.payload;
+            // Update the HTML class
+            document.documentElement.classList.toggle("dark", action.payload === "dark");
+        },
+    },
+});
+
+export const { toggleTheme, setTheme } = themeSlice.actions;
+
+export default themeSlice.reducer;

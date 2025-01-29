@@ -8,7 +8,7 @@ import ThemeSwitcher from "@/utils/ThemeSwitcher";
 import { getCookie } from "cookies-next";
 import { decodeToken } from "@/utils/jwt";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "@/store/slices/userSlice";
+import { setUser } from "@/store/actions/UserActions";
 import { AppDispatch, RootState } from "@/store/store";
 import { Users } from "@/utils/InitialState";
 

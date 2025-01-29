@@ -1,9 +1,9 @@
 
 import { configureStore } from "@reduxjs/toolkit";
-import themeReducer from "./slices/themeSlice";
-import userReducer from "./slices/userSlice";
+import themeReducer from "./actions/ThemeActions";
+import userReducer from "./actions/UserActions";
 import protecedReducer from "./middleware/protectedSlice";
-import newsLetterReducer from "./slices/newsLetterSlice";
+import newsLetterReducer from "./actions/NewsLetterActions";
 import { authMiddleware } from "./middleware/middleware";
 
 const store = configureStore({
