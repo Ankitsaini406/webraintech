@@ -23,8 +23,8 @@ export default function TeachersSection({ userCourses }: { userCourses: string[]
                         <Skeleton className="w-[150px] h-[150px] rounded-full shrink-0"></Skeleton>
                         <div className="flex flex-col w-full">
                             <Skeleton className="w-[200px] h-[20px]"></Skeleton>
-                            <Skeleton className="text-lg mt-4 mb-2 min-w-[250px] w-full h-[30px]"></Skeleton>
-                            <Skeleton className="min-w-[250px] max-w-[400px] h-[70px]"></Skeleton>
+                            <Skeleton className="text-lg mt-4 mb-2 min-w-[250px] w-[300px] h-[30px]"></Skeleton>
+                            <Skeleton className="min-w-[250px] w-full h-[70px]"></Skeleton>
                         </div>
                     </div>
 
@@ -32,8 +32,8 @@ export default function TeachersSection({ userCourses }: { userCourses: string[]
                         <Skeleton className="w-[150px] h-[150px] rounded-full shrink-0"></Skeleton>
                         <div className="flex flex-col w-full">
                             <Skeleton className="w-[200px] h-[20px]"></Skeleton>
-                            <Skeleton className="text-lg mt-4 mb-2 min-w-[250px] w-full h-[30px]"></Skeleton>
-                            <Skeleton className="min-w-[250px] max-w-[400px] h-[70px]"></Skeleton>
+                            <Skeleton className="text-lg mt-4 mb-2 min-w-[250px] w-[300px] h-[30px]"></Skeleton>
+                            <Skeleton className="min-w-[250px] w-full h-[70px]"></Skeleton>
                         </div>
                     </div>
 
@@ -41,8 +41,8 @@ export default function TeachersSection({ userCourses }: { userCourses: string[]
                         <Skeleton className="w-[150px] h-[150px] rounded-full shrink-0"></Skeleton>
                         <div className="flex flex-col w-full">
                             <Skeleton className="w-[200px] h-[20px]"></Skeleton>
-                            <Skeleton className="text-lg mt-4 mb-2 min-w-[250px] w-full h-[30px]"></Skeleton>
-                            <Skeleton className="min-w-[250px] max-w-[400px] h-[70px]"></Skeleton>
+                            <Skeleton className="text-lg mt-4 mb-2 min-w-[250px] w-[300px] h-[30px]"></Skeleton>
+                            <Skeleton className="min-w-[250px] w-full h-[70px]"></Skeleton>
                         </div>
                     </div>
                 </>
