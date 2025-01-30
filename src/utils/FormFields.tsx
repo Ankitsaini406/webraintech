@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 import { FormButton } from "./Buttons";
 
 export function Input({ title, palceholder, value, name, onChange, type = 'text', error }: {
@@ -29,7 +30,6 @@ export function Input({ title, palceholder, value, name, onChange, type = 'text'
     );
 }
 
-
 export function TextArea({ title, value, name, onChange, error }: {
     title: string;
     value: string;
@@ -53,6 +53,46 @@ export function TextArea({ title, value, name, onChange, error }: {
         </div>
     );
 }
+
+export function Password({ title, placeholder, value, name, onChange, error
+}: {
+    title: string;
+    placeholder?: string;
+    value: string;
+    name: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    error?: string;
+}) {
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+    return (
+        <div className="mb-4 relative">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">{title}</label>
+            <div className="relative">
+                <input
+                    type={isPasswordVisible ? "text" : "password"}
+                    value={value}
+                    name={name}
+                    onChange={onChange}
+                    placeholder={placeholder ? placeholder : title}
+                    className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-1 sm:text-sm 
+                        ${error ? 'border-red-500 focus:ring-red-500 dark:border-red-500 dark:focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400'} 
+                        dark:bg-gray-700 dark:text-white pr-10`}
+                />
+                {/* Eye Icon Button */}
+                <button
+                    type="button"
+                    onClick={() => setIsPasswordVisible(!isPasswordVisible)}
+                    className="absolute inset-y-0 right-3 flex items-center text-gray-500 dark:text-gray-300"
+                >
+                    {isPasswordVisible ? <Eye size={20} /> : <EyeOff size={20} />}
+                </button>
+            </div>
+            {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
+        </div>
+    );
+}
+
 
 type NewsLetterProps = {
     email: string;
