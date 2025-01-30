@@ -10,7 +10,6 @@ import { setTheme } from "@/store/actions/ThemeActions";
 import WhatsAppWidget from "@/components/whatsappWidget";
 import { Toaster } from "@/components/ui/sonner";
 import { usePathname } from "next/navigation";
-import ProtectedRoute from "@/components/ProtectedRoute";
 
 export default function ChildLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
 
@@ -29,7 +28,7 @@ export default function ChildLayout({ children }: Readonly<{ children: React.Rea
         <Provider store={store}>
             {!noHeaderFooter && <Header />}
             <main>
-                <ProtectedRoute>{children}</ProtectedRoute>
+                {children}
             </main>
             <TailwindIndicator />
             {!noHeaderFooter && <WhatsAppWidget />}

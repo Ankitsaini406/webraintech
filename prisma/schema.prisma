@@ -18,29 +18,16 @@ model Enquery {
   createdAt   DateTime @default(now())
 }
 
-model Student {
-  id                 Int      @id @default(autoincrement())
-  name               String
-  email              String   @unique
-  course             String[]
-  phoneNumber        String   @unique
-  fatherName         String
-  motherName         String
-  alternativeNumber  String
-  aadhaarNumber      String   @unique
-  dob                DateTime
-  address            String
-  password           String
-  role               String   @default("student")
-  updatedAt          DateTime @updatedAt
-  createdAt          DateTime @default(now())
+enum Role {
+  STUDENT
+  TEACHER
 }
 
-model Teacher {
-  id                Int      @id @default(autoincrement())
+model User {
+  id                String   @id @default(cuid())
   name              String
   email             String   @unique
-  course            String[]
+  course            String[] // For both students & teachers
   phoneNumber       String   @unique
   fatherName        String
   motherName        String
@@ -49,16 +36,55 @@ model Teacher {
   dob               DateTime
   address           String
   password          String
-  role              String   @default("teacher")
-  details           String   @default("")
-  brief             String   @default("")
-  facebook          String   @default("")
-  instagram         String   @default("")
-  linkdin           String   @default("")
-  youtube           String   @default("")
-  x                 String   @default("")
-  updatedAt         DateTime @updatedAt
-  createdAt         DateTime @default(now())
+  isDeleted         Boolean @default(false)
+  role              Role   @default(STUDENT)
+  session           Session[]
+  accounts          Account[]
+
+  // Teacher-specific fields (will be empty for students)
+  details          String?   @default("")
+  brief            String?   @default("")
+  facebook         String?    @default("")
+  instagram        String?    @default("")
+  linkdin          String?    @default("")
+  youtube          String?    @default("")
+  x                String?    @default("")
+
+  updatedAt        DateTime @updatedAt
+  createdAt        DateTime @default(now())
+}
+
+
+model Session {
+  id           String  @id @default(uuid())
+  sessionToken String  @unique
+  userId       String
+  user         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expires      DateTime
+  createdAt    DateTime @default(now())
+  updateAt     DateTime @updatedAt
+}
+
+model Account {
+  id                String  @id @default(uuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String @id
+  token      String @unique
+  expires    DateTime
 }
 
 model NewsLetter {

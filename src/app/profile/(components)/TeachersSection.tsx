@@ -5,15 +5,15 @@ import { Teachers } from "@/utils/InitialState";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function TeachersSection({ userCourses }: { userCourses: string[] }) {
+export default function TeachersSection({ studentId }: { studentId: string }) {
     const dispatch = useDispatch<AppDispatch>();
     const { teachers, status, error } = useSelector((state: RootState) => state.findTeacherByCourse);
 
     useEffect(() => {
-        if (userCourses?.length > 0) {
-            dispatch(fetchTeachersByCourses(userCourses));
+        if (studentId) {
+            dispatch(fetchTeachersByCourses(studentId));
         }
-    }, [userCourses, dispatch]);
+    }, [studentId, dispatch]);
 
     return (
         <div className="flex flex-col gap-8">

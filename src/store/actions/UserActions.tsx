@@ -1,19 +1,19 @@
-import { UserUpdateData, UpdatePassword, Users, authUserInitialState } from "@/utils/InitialState";
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { deleteCookie, setCookie } from "cookies-next";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { UserUpdateData, UpdatePassword, Users, authUserInitialState } from "@/utils/InitialState";
 
 // Login Student
 export const loginUser = createAsyncThunk(
-    "authUser/login",
+    "users/login",
     async (
-        { role, credentials }: { role: "student" | "teacher"; credentials: { email: string; password: string } },
+        { credentials }: { credentials: { email: string; password: string } },
         { rejectWithValue }
     ) => {
         try {
-            const endpoint = role === "student" ? "/api/students/login" : "/api/teachers/login";
+            const endpoint = "/api/users/login";
             const response = await axios.post(endpoint, credentials);
-            return { role, ...response.data };
+            return response.data;
         } catch (error: unknown) {
             if (axios.isAxiosError(error)) {
                 return rejectWithValue(error.response?.data?.message || "Login failed");
@@ -26,15 +26,15 @@ export const loginUser = createAsyncThunk(
 
 // Register Student
 export const registerUser = createAsyncThunk(
-    "authUser/register",
+    "users/register",
     async (
-        { role, userData }: { role: "student" | "teacher"; userData: Users },
+        { userData }: { userData: Users },
         { rejectWithValue }
     ) => {
         try {
-            const endpoint = role === "student" ? "/api/students/register" : "/api/teachers/register";
+            const endpoint = "/api/users/register";
             const response = await axios.post(endpoint, userData);
-            return { role, ...response.data };
+            return response.data;
         } catch (error: unknown) {
             if (axios.isAxiosError(error)) {
                 return rejectWithValue(error.response?.data?.message || "Registration failed");
@@ -46,10 +46,10 @@ export const registerUser = createAsyncThunk(
 
 // Update Student
 export const updateUser = createAsyncThunk(
-    "authUser/update",
-    async ({ role, id, updateData }: { role: "student" | "teacher"; id: string, updateData: UserUpdateData }, { rejectWithValue }) => {
+    "users/update",
+    async ({ id, updateData }: { id: string, updateData: UserUpdateData }, { rejectWithValue }) => {
         try {
-            const endpoint = role === "student" ? `/api/students/register/${id}` : `/api/teachers/register/${id}`;
+            const endpoint = `/api/users/register/${id}`;
             const response = await axios.put(endpoint, updateData);
             return response.data;
         } catch (error) {
@@ -63,10 +63,10 @@ export const updateUser = createAsyncThunk(
 
 // Update Password
 export const updatePassword = createAsyncThunk(
-    "authUser/updatePassword",
-    async ({ role, id, passwordData }: { role: "student" | "teacher"; id: string, passwordData: UpdatePassword }, { rejectWithValue }) => {
+    "users/updatePassword",
+    async ({ id, passwordData }: { id: string, passwordData: UpdatePassword }, { rejectWithValue }) => {
         try {
-            const endpoint = role === "student" ? `/api/students/register/${id}/password` : `/api/teachers/register/${id}/password`;
+            const endpoint = `/api/users/register/${id}/password`;
             const response = await axios.put(endpoint, passwordData);
             return response.data;
         } catch (error) {
@@ -80,10 +80,10 @@ export const updatePassword = createAsyncThunk(
 
 // Delete Student
 export const deleteStudent = createAsyncThunk(
-    "authUser/delete",
-    async ({ role, id}: { role: "student" | "teacher"; id: string,}, { rejectWithValue }) => {
+    "users/delete",
+    async ({ id }: { id: string, }, { rejectWithValue }) => {
         try {
-            const endpoint = role === "student" ? `/api/students/${id}` : `/api/teachers/${id}`;
+            const endpoint = `/api/users/${id}`;
             const response = await axios.delete(endpoint);
             return response.data;
         } catch (error) {

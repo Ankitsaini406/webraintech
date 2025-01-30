@@ -2,7 +2,6 @@ import prisma from '@/lib/db';
 import { createToken } from '@/utils/jwt';
 import { NextResponse } from 'next/server';
 
-
 export async function POST(req: Request) {
     try {
         const body = await req.json();
@@ -12,21 +11,31 @@ export async function POST(req: Request) {
             return NextResponse.json({ message: 'Missing email or password' }, { status: 400 });
         }
 
-        const student = await prisma.student.findUnique({ where: { email } });
-        if (!student) {
-            return NextResponse.json({ message: 'Student not found' }, { status: 404 });
+        // Find user by email (applies to both students & teachers)
+        const user = await prisma.user.findUnique({ where: { email } });
+
+        if (!user) {
+            return NextResponse.json({ message: 'User not found' }, { status: 404 });
         }
 
-        if (password !== student.password) {
+        // Check password (In production, use bcrypt for hashing)
+        if (password !== user.password) {
             return NextResponse.json({ message: 'Invalid credentials' }, { status: 400 });
         }
 
-        const token = createToken({ id: student.id, name: student.name, email: student.email, role: student.role, course: student.course });
-        return NextResponse.json({ student, token });
+        // Generate JWT token with role-based access
+        const token = createToken({
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            course: user.course,
+        });
+
+        return NextResponse.json({ user, token });
 
     } catch (error) {
         console.error('Error in login API:', error);
         return NextResponse.json({ message: 'Server error' }, { status: 500 });
     }
 }
-

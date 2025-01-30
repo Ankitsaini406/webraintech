@@ -2,10 +2,10 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const fetchTeachersByCourses = createAsyncThunk(
-    "teachsers/fetchByCourses",
-    async (courses: string[], { rejectWithValue }) => {
+    "users/fetchByCourses",
+    async (studentId: string, { rejectWithValue }) => {
         try {
-            const response = await axios.post(`/api/teachers/courses`, { courses });
+            const response = await axios.post(`/api/users/courses`, { studentId });
             return response.data;
         } catch (error) {
             if (axios.isAxiosError(error)) {
@@ -17,7 +17,7 @@ export const fetchTeachersByCourses = createAsyncThunk(
 );
 
 const teacherSlice = createSlice({
-    name: "teachers",
+    name: "users",
     initialState: {
         teachers: [],
         status: "idle",

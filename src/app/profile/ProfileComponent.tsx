@@ -35,12 +35,12 @@ export function ProfileComponent({ user }: ProfileComponentProps) {
             case "dashboard":
                 return <Dashboard />;
             case "teacher":
-                if (userRole === "student") {
-                    return <TeachersSection userCourses={user?.course || []} />;
+                if (userRole === "STUDENT") {
+                    return <TeachersSection studentId={user?.id ?? ''} />;
                 }
                 return <div>Unauthorized to view this content.</div>;
             case "student":
-                if (userRole === "teacher") {
+                if (userRole === "TEACHER") {
                     return <div>Here is the list of students.</div>;
                 }
                 return <div>Unauthorized to view this content.</div>;
@@ -98,7 +98,7 @@ export function ProfileComponent({ user }: ProfileComponentProps) {
                         </button>
                         <button
                             onClick={() => {
-                                if (user?.role === "student") {
+                                if (user?.role === "STUDENT") {
                                     setActiveTab("teacher");
                                 } else {
                                     setActiveTab("student");
@@ -110,7 +110,7 @@ export function ProfileComponent({ user }: ProfileComponentProps) {
                                 }`}
                         >
                             <User />
-                            {user?.role === "student" ? "Teachers" : "Students"}
+                            {user?.role === "STUDENT" ? "Teachers" : "Students"}
                         </button>
                         <button
                             onClick={() => setActiveTab("account")}
