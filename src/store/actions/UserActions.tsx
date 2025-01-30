@@ -3,7 +3,7 @@ import { deleteCookie, setCookie } from "cookies-next";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserUpdateData, UpdatePassword, Users, authUserInitialState } from "@/utils/InitialState";
 
-// Login Student
+// Login User
 export const loginUser = createAsyncThunk(
     "users/login",
     async (
@@ -23,8 +23,7 @@ export const loginUser = createAsyncThunk(
     }
 );
 
-
-// Register Student
+// Register User
 export const registerUser = createAsyncThunk(
     "users/register",
     async (
@@ -44,7 +43,7 @@ export const registerUser = createAsyncThunk(
     }
 );
 
-// Update Student
+// Update User
 export const updateUser = createAsyncThunk(
     "users/update",
     async ({ id, updateData }: { id: string, updateData: UserUpdateData }, { rejectWithValue }) => {
@@ -61,7 +60,7 @@ export const updateUser = createAsyncThunk(
     }
 );
 
-// Update Password
+// Update User
 export const updatePassword = createAsyncThunk(
     "users/updatePassword",
     async ({ id, passwordData }: { id: string, passwordData: UpdatePassword }, { rejectWithValue }) => {
@@ -78,7 +77,7 @@ export const updatePassword = createAsyncThunk(
     }
 );
 
-// Delete Student
+// Delete User
 export const deleteStudent = createAsyncThunk(
     "users/delete",
     async ({ id }: { id: string, }, { rejectWithValue }) => {
@@ -94,6 +93,28 @@ export const deleteStudent = createAsyncThunk(
         }
     }
 );
+
+// Logout User
+export const logOutUser = createAsyncThunk(
+    "users/logout",
+    async (_, { dispatch, rejectWithValue }) => {
+        try {
+            const endpoint = "/api/users/logout";
+            await axios.post(endpoint);
+            deleteCookie("authToken");
+            localStorage.removeItem("authToken");
+            dispatch(logoutStudent());
+
+            return "Logout successful";
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                return rejectWithValue(error.response?.data?.message || "Logout failed");
+            }
+            return rejectWithValue("An unexpected error occurred");
+        }
+    }
+);
+
 
 const userSlice = createSlice({
     name: "user",
@@ -112,64 +133,81 @@ const userSlice = createSlice({
     extraReducers: (builder) => {
         builder
 
-        // Login Student
-        .addCase(loginUser.pending, (state) => {
-            state.loading = true;
-            state.error = null;
-        })
-        .addCase(loginUser.fulfilled, (state, action) => {
-            state.loading = false;
-            state.user = action.payload.users;
-            state.token = action.payload.token;
-            setCookie("authToken", action.payload.token, { maxAge: 60 * 60 * 24 * 7 });
-            localStorage.setItem("authToken", action.payload.token);
-        })
-        .addCase(loginUser.rejected, (state, action) => {
-            state.loading = false;
-            state.error = action.payload as string;
-        })
+            // Login Student
+            .addCase(loginUser.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(loginUser.fulfilled, (state, action) => {
+                state.loading = false;
+                state.user = action.payload.users;
+                state.token = action.payload.token;
+                setCookie("authToken", action.payload.token, { maxAge: 60 * 60 * 24 * 7 });
+                localStorage.setItem("authToken", action.payload.token);
+            })
+            .addCase(loginUser.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload as string;
+            })
 
-        // Register Student
-        .addCase(registerUser.pending, (state) => {
-            state.loading = true;
-            state.error = null;
-        })
-        .addCase(registerUser.fulfilled, (state, action) => {
-            state.loading = false;
-            state.user = action.payload.users;
-            state.token = action.payload.token;
-        })
-        .addCase(registerUser.rejected, (state, action) => {
-            state.loading = false;
-            state.error = action.payload as string;
-        })
+            // Register Student
+            .addCase(registerUser.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(registerUser.fulfilled, (state, action) => {
+                state.loading = false;
+                state.user = action.payload.users;
+                state.token = action.payload.token;
+            })
+            .addCase(registerUser.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload as string;
+            })
 
-        // Update Student
-        .addCase(updateUser.pending, (state) => {
-            state.loading = true;
-            state.error = null;
-        })
-        .addCase(updateUser.fulfilled, (state, action) => {
-            state.loading = false;
-            state.user = {...state.user, ...action.payload};
-        })
-        .addCase(updateUser.rejected, (state, action) => {
-            state.loading = false;
-            state.error = action.payload as string;
-        })
+            // Update Student
+            .addCase(updateUser.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(updateUser.fulfilled, (state, action) => {
+                state.loading = false;
+                state.user = { ...state.user, ...action.payload };
+            })
+            .addCase(updateUser.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload as string;
+            })
 
-        // Update Password
-        .addCase(updatePassword.pending, (state) => {
-            state.loading = true;
-            state.error = null;
-        })
-        .addCase(updatePassword.fulfilled, (state) => {
-            state.loading = false;
-        })
-        .addCase(updatePassword.rejected, (state, action) => {
-            state.loading = false;
-            state.error = action.payload as string;
-        })
+            // Update Password
+            .addCase(updatePassword.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(updatePassword.fulfilled, (state) => {
+                state.loading = false;
+            })
+            .addCase(updatePassword.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload as string;
+            })
+
+            // Logout User
+            .addCase(logOutUser.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(logOutUser.fulfilled, (state) => {
+                state.loading = false;
+                state.user = null;
+                state.token = null;
+                deleteCookie("authToken");
+                localStorage.removeItem("authToken");
+            })
+            .addCase(logOutUser.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload as string;
+            })
     }
 });
 

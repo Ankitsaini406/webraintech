@@ -5,7 +5,7 @@ import { LayoutDashboard, LogIn, Settings, User } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/store";
 import { Skeleton } from "@/components/ui/skeleton";
-import { logoutStudent } from "@/store//actions/UserActions";
+import { logOutUser } from "@/store//actions/UserActions";
 import { useRouter } from "next/navigation";
 import { Users } from "@/utils/InitialState";
 import Dashboard from "./(components)/Dashboard";
@@ -22,8 +22,8 @@ export function ProfileComponent({ user }: ProfileComponentProps) {
 
     const firstLetter = user?.name?.charAt(0).toUpperCase();
 
-    const handleSignout = () => {
-        dispatch(logoutStudent());
+    const handleSignout = async () => {
+        await dispatch(logOutUser());
         router.push("/auth/login");
     };
 

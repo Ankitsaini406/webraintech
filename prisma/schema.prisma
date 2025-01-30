@@ -54,7 +54,6 @@ model User {
   createdAt        DateTime @default(now())
 }
 
-
 model Session {
   id           String  @id @default(uuid())
   sessionToken String  @unique
