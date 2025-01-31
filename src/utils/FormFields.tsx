@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { FormButton } from "./Buttons";
 
-export function Input({ title, palceholder, value, name, onChange, type = 'text', error }: {
+export function Input({ title, palceholder, value, name, onChange, type = 'text', error, className }: {
     title: string;
     palceholder?: string;
     value: string;
@@ -10,6 +10,7 @@ export function Input({ title, palceholder, value, name, onChange, type = 'text'
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     type?: string;
     error?: string;
+    className?: string;
 }) {
     return (
         <div className="mb-4">
@@ -23,19 +24,20 @@ export function Input({ title, palceholder, value, name, onChange, type = 'text'
                 placeholder={palceholder ? palceholder : title}
                 className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-1 sm:text-sm 
                     ${error ? 'border-red-500 focus:ring-red-500 dark:border-red-500 dark:focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400'} 
-                    dark:bg-gray-700 dark:text-white`}
+                    dark:bg-gray-700 dark:text-white ${className}`}
             />
             {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
         </div>
     );
 }
 
-export function TextArea({ title, value, name, onChange, error }: {
+export function TextArea({ title, value, name, onChange, error, className }: {
     title: string;
     value: string;
     name: string;
     onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
     error?: string;
+    className?: string;
 }) {
     return (
         <div className="mb-4">
@@ -47,21 +49,21 @@ export function TextArea({ title, value, name, onChange, error }: {
                 placeholder={title}
                 className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-1 sm:text-sm 
                     ${error ? 'border-red-500 focus:ring-red-500 dark:border-red-500 dark:focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400'} 
-                    dark:bg-gray-700 dark:text-white`}
+                    dark:bg-gray-700 dark:text-white ${className}`}
             />
             {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
         </div>
     );
 }
 
-export function Password({ title, placeholder, value, name, onChange, error
-}: {
+export function Password({ title, placeholder, value, name, onChange, error, className }: {
     title: string;
     placeholder?: string;
     value: string;
     name: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     error?: string;
+    className?: string;
 }) {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -77,13 +79,13 @@ export function Password({ title, placeholder, value, name, onChange, error
                     placeholder={placeholder ? placeholder : title}
                     className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-1 sm:text-sm 
                         ${error ? 'border-red-500 focus:ring-red-500 dark:border-red-500 dark:focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400'} 
-                        dark:bg-gray-700 dark:text-white pr-10`}
+                        dark:bg-gray-700 dark:text-white pr-10 ${className}`}
                 />
                 {/* Eye Icon Button */}
                 <button
                     type="button"
                     onClick={() => setIsPasswordVisible(!isPasswordVisible)}
-                    className="absolute inset-y-0 right-3 flex items-center text-gray-500 dark:text-gray-300"
+                    className="absolute inset-y-0 right-3 text-gray-500 dark:text-gray-300"
                 >
                     {isPasswordVisible ? <Eye size={20} /> : <EyeOff size={20} />}
                 </button>
@@ -92,7 +94,6 @@ export function Password({ title, placeholder, value, name, onChange, error
         </div>
     );
 }
-
 
 type NewsLetterProps = {
     email: string;
