@@ -15,7 +15,7 @@ export default function ChildLayout({ children }: Readonly<{ children: React.Rea
 
     const pathName = usePathname();
     const noHeaderFooterRoutes = ['/auth/login', 'auth/register', '/admin'];
-    const noHeaderFooter = noHeaderFooterRoutes.includes(pathName);
+    const noHeaderFooter = noHeaderFooterRoutes.some(route => pathName.startsWith(route));
 
     useEffect(() => {
         const savedTheme = localStorage.getItem("theme") as "light" | "dark";
