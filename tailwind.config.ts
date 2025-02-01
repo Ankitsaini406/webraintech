@@ -75,6 +75,16 @@ const config: Config = {
 				'custom-blue': '#247bac',
 				'custom-mahroon': '#88251f',
 				'custom-gold': '#dabb61',
+				sidebar: {
+					DEFAULT: 'hsl(var(--sidebar-background))',
+					foreground: 'hsl(var(--sidebar-foreground))',
+					primary: 'hsl(var(--sidebar-primary))',
+					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
+					accent: 'hsl(var(--sidebar-accent))',
+					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
+					border: 'hsl(var(--sidebar-border))',
+					ring: 'hsl(var(--sidebar-ring))'
+				}
 			},
 			backdropFilter: [
 				'responsive'
@@ -98,10 +108,10 @@ const config: Config = {
 				disc: 'disc'
 			},
 			animation: {
-				'marquee': "marquee 15s linear infinite",
-				'marquee-phone': "marquee-phone 10s linear infinite",
+				marquee: 'marquee 15s linear infinite',
+				'marquee-phone': 'marquee-phone 10s linear infinite',
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out',
+				'accordion-up': 'accordion-up 0.2s ease-out'
 			},
 			keyframes: {
 				'accordion-down': {
@@ -120,15 +130,23 @@ const config: Config = {
 						height: '0'
 					}
 				},
-				'marquee': {
-					'0%': { transform: 'translateX(100%)' },
-					'100%': { transform: 'translateX(-100%)' },
+				marquee: {
+					'0%': {
+						transform: 'translateX(100%)'
+					},
+					'100%': {
+						transform: 'translateX(-100%)'
+					}
 				},
 				'marquee-phone': {
-					'0%': { transform: 'translateX(100%)' },
-					'100%': { transform: 'translateX(-100%)' },
+					'0%': {
+						transform: 'translateX(100%)'
+					},
+					'100%': {
+						transform: 'translateX(-100%)'
+					}
 				}
-			},
+			}
 		}
 	},
 	plugins: [

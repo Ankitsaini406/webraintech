@@ -14,7 +14,7 @@ import { usePathname } from "next/navigation";
 export default function ChildLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
 
     const pathName = usePathname();
-    const noHeaderFooterRoutes = ['/auth/login', 'auth/register'];
+    const noHeaderFooterRoutes = ['/auth/login', 'auth/register', '/admin'];
     const noHeaderFooter = noHeaderFooterRoutes.includes(pathName);
 
     useEffect(() => {
