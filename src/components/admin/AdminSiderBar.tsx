@@ -22,11 +22,11 @@ const data = {
       items: [
         {
           title: "Add Students",
-          url: "#",
+          url: "/admin/students/add-student",
         },
         {
           title: "Fees",
-          url: "#",
+          url: "/admin/students/all-students",
         },
       ],
     },
@@ -75,7 +75,7 @@ const data = {
   ],
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AdminSiderBar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
