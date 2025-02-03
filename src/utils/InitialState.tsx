@@ -54,6 +54,21 @@ export const authUserInitialState: UsersAuthState = {
     loading: false,
 };
 
+export interface Student {
+    name: string;
+    email: string;
+    course: string[];
+    phoneNumber: string;
+    fatherName: string;
+    motherName: string;
+    alternativeNumber: string;
+    aadhaarNumber: string;
+    dob: Date | null;
+    address: string;
+    password: string;
+    confirmPassword: string;
+}
+
 export interface Teachers {
     id: string;
     name: string;
