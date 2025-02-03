@@ -1,5 +1,6 @@
 "use client";
 
+import { ButtonBlack } from "@/utils/Buttons";
 import { DateField, Input, MultipleSlection, Password, Section } from "@/utils/FormFields";
 import { Student } from "@/utils/InitialState";
 import { useState } from "react";
@@ -18,6 +19,7 @@ export default function AddStudent() {
         dob: new Date(),
         password: "",
         confirmPassword: "",
+        role: "STUDENT",
     });
 
     const courseOptions = [
@@ -62,7 +64,7 @@ export default function AddStudent() {
     };
 
     return (
-        <div className="p-4 bg-white dark:bg-gray-900 rounded-md shadow-md">
+        <form className="p-4">
             <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Add Student</h2>
 
             {/* Personal Information */}
@@ -99,10 +101,8 @@ export default function AddStudent() {
 
             {/* Submit Button */}
             <div className="mt-6">
-                <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Submit
-                </button>
+                <ButtonBlack title="Submit" />
             </div>
-        </div>
+        </form>
     );
 }

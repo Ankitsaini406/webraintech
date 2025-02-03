@@ -79,7 +79,7 @@ export function MultipleSlection({ label, options, selectedOptions, onSelect, on
         <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">{label}</label>
             <select
-                className="mt-1 block w-full p-2 border rounded-md shadow-sm focus:ring-1 sm:text-sm dark:bg-gray-700 dark:text-white"
+                className="mt-1 block p-2 border rounded-md shadow-sm focus:ring-1 sm:text-sm dark:bg-gray-700 dark:text-white"
                 onChange={(e) => onSelect(e.target.value)}
                 value=""
             >
@@ -96,11 +96,11 @@ export function MultipleSlection({ label, options, selectedOptions, onSelect, on
             {/* Selected Courses as Tags */}
             <div className="mt-2 flex flex-wrap gap-2">
                 {selectedOptions.map((option) => (
-                    <div key={option} className="flex items-center bg-blue-500 text-white px-2 py-1 rounded-md">
+                    <div key={option} className="flex items-center px-2 py-1 rounded-md border hover:shadow-lg duration-300 dark:hover:shadow-slate-700">
                         {option}
                         <button
                             onClick={() => onRemove(option)}
-                            className="ml-2 text-white bg-red-500 hover:bg-red-600 rounded-full w-5 h-5 flex items-center justify-center"
+                            className="ml-2 rounded-full font-bold w-5 h-5 flex items-center justify-center"
                         >
                             ✕
                         </button>
@@ -119,7 +119,7 @@ interface DateFieldProps {
     endYear?: number;
 }
 
-export function DateField({ title, value, onChange, startYear = getYear(new Date()) - 70, endYear = getYear(new Date()) }: DateFieldProps) {
+export function DateField({ title, value, onChange, startYear = getYear(new Date()) - 70, endYear = getYear(new Date())}: DateFieldProps) {
 
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const years = Array.from({ length: endYear - startYear + 1 }, (_, i) => startYear + i);
@@ -146,12 +146,12 @@ export function DateField({ title, value, onChange, startYear = getYear(new Date
     return (
         <Popover>
             <PopoverTrigger asChild>
-                <Button variant={"outline"} className="w-[240px] justify-start text-left font-normal">
+                <Button variant={"outline"} className="w-[240px] justify-start text-left font-normal dark:bg-gray-700 dark:text-white">
                     <CalendarIcon />
                     {value ? format(value, "PPP") : <span>{title}</span>}
                 </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-auto p-0" align="start">
+            <PopoverContent className="w-auto p-0 " align="start">
                 <div className="flex justify-between p-2">
                     {/* Month Selector */}
                     <Select onValueChange={handleMonthChange} value={months[getMonth(value || new Date())]}>

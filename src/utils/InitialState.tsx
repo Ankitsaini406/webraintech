@@ -64,6 +64,7 @@ export interface Student {
     alternativeNumber: string;
     aadhaarNumber: string;
     dob: Date | null;
+    role: 'STUDENT',
     address: string;
     password: string;
     confirmPassword: string;
