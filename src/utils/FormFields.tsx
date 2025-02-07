@@ -12,9 +12,9 @@ import {
 } from "@/components/ui/popover"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-export function Input({ title, palceholder, value, name, onChange, type = 'text', error, className }: {
+export function Input({ title, placeholder, value, name, onChange, type = 'text', error, className }: {
     title: string;
-    palceholder?: string;
+    placeholder?: string;
     value: string;
     name: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -27,11 +27,10 @@ export function Input({ title, palceholder, value, name, onChange, type = 'text'
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">{title}</label>
             <input
                 type={type === 'phone' ? 'tel' : type}
-                inputMode={type === 'phone' ? 'tel' : undefined}
                 value={value}
                 name={name}
                 onChange={onChange}
-                placeholder={palceholder ? palceholder : title}
+                placeholder={placeholder || title}
                 className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-1 sm:text-sm 
                     ${error ? 'border-red-500 focus:ring-red-500 dark:border-red-500 dark:focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400'} 
                     dark:bg-gray-700 dark:text-white ${className}`}
@@ -70,16 +69,17 @@ interface MultiSelectProps {
     label: string;
     options: string[];
     selectedOptions: string[];
+    error?: string;
     onSelect: (value: string) => void;
     onRemove: (value: string) => void;
 }
 
-export function MultipleSlection({ label, options, selectedOptions, onSelect, onRemove }: MultiSelectProps) {
+export function MultipleSlection({ label, options, selectedOptions, error, onSelect, onRemove }: MultiSelectProps) {
     return (
         <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">{label}</label>
             <select
-                className="mt-1 block p-2 border rounded-md shadow-sm focus:ring-1 sm:text-sm dark:bg-gray-700 dark:text-white"
+                className={`mt-1 block p-2 border rounded-md shadow-sm focus:ring-1 sm:text-sm dark:bg-gray-700 dark:text-white ${error ? 'border-red-500 focus:ring-red-500 dark:border-red-500 dark:focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400'} `}
                 onChange={(e) => onSelect(e.target.value)}
                 value=""
             >
@@ -107,6 +107,7 @@ export function MultipleSlection({ label, options, selectedOptions, onSelect, on
                     </div>
                 ))}
             </div>
+            {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
         </div>
     );
 };
@@ -119,7 +120,7 @@ interface DateFieldProps {
     endYear?: number;
 }
 
-export function DateField({ title, value, onChange, startYear = getYear(new Date()) - 70, endYear = getYear(new Date())}: DateFieldProps) {
+export function DateField({ title, value, onChange, startYear = getYear(new Date()) - 60, endYear = getYear(new Date())}: DateFieldProps) {
 
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const years = Array.from({ length: endYear - startYear + 1 }, (_, i) => startYear + i);
@@ -183,9 +184,10 @@ export function DateField({ title, value, onChange, startYear = getYear(new Date
                     mode="single"
                     selected={value || undefined}
                     onSelect={(selectedDate) => selectedDate && handleSelect(selectedDate)}
-                    initialFocus
                     month={value || new Date()}
+                    disabled={(date) => date > new Date() || date < new Date("1960-01-01")}
                     onMonthChange={(newDate) => onChange(newDate)}
+                    initialFocus
                 />
             </PopoverContent>
         </Popover>
@@ -267,7 +269,7 @@ export function Section({ title, children }: { title: string; children: React.Re
     return (
         <div className="mb-6">
             <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-3">{title}</h3>
-            <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 items-center">{children}</div>
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 items-baseline">{children}</div>
         </div>
     );
 }

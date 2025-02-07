@@ -1,10 +1,14 @@
 "use client";
 
+import { createStudent, createTeacher } from "@/actions/AddPerson";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ButtonBlack } from "@/utils/Buttons";
 import { DateField, Input, MultipleSlection, Password, Section, TextArea } from "@/utils/FormFields";
 import { AddPersons } from "@/utils/InitialState";
+import { studentSchema } from "@/utils/ValidationSchema";
+import { z } from "zod";
 import { useState } from "react";
+import { toast } from "sonner";
 
 enum Role {
     STUDENT = 'STUDENT',
@@ -36,6 +40,8 @@ export default function AddPerson() {
         updateAt: new Date(),
         createdAt: new Date(),
     });
+
+    const [errors, setErrors] = useState<Record<string, string>>({});
 
     const courseOptions = [
         "Web Development",
@@ -78,13 +84,51 @@ export default function AddPerson() {
         }));
     };
 
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setErrors({}); // Reset previous errors
+
+        try {
+            const validatedData = studentSchema.parse(formData);
+
+            // Convert dob to string format
+            const form = new FormData();
+            Object.entries(validatedData).forEach(([key, value]) => {
+                if (Array.isArray(value)) {
+                    value.forEach((val) => form.append(key, val));
+                } else {
+                    form.append(key, String(value));
+                }
+            });
+
+            if (validatedData.role === Role.TEACHER) {
+                await createTeacher(form);
+                toast.success("Teacher added successfully!");
+            } else {
+                await createStudent(form);
+                toast.success("Student added successfully!");
+            }
+        } catch (error) {
+            if (error instanceof z.ZodError) {
+                const formattedErrors: Record<string, string> = {};
+                error.errors.forEach((err) => {
+                    formattedErrors[err.path[0]] = err.message;
+                });
+                setErrors(formattedErrors);
+            } else {
+                console.error("Error submitting form:", error);
+                toast.error("Error submitting form. Please try again.");
+            }
+        }
+    };
+
     return (
-        <form className="p-4">
+        <form className="p-4" onSubmit={handleSubmit}>
             <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Add Person</h2>
 
             {/* Role Selection */}
             <Section title="Select Role">
-                <Select onValueChange={(value) => setFormData((prev) => ({ ...prev, role: value }))}>
+            <Select onValueChange={(value) => setFormData((prev) => ({ ...prev, role: value as Role }))}>
                     <SelectTrigger className="w-[200px]">
                         <SelectValue placeholder="Select Role" />
                     </SelectTrigger>
@@ -97,28 +141,28 @@ export default function AddPerson() {
 
             {/* Personal Information */}
             <Section title="Personal Information">
-                <Input title="Name" name="name" value={formData.name} onChange={handleChange} />
-                <Input title="Email" name="email" value={formData.email} onChange={handleChange} />
-                <Input title="Phone Number" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} />
+                <Input title="Name" name="name" value={formData.name} onChange={handleChange} error={errors.name}/>
+                <Input title="Email" name="email" value={formData.email} onChange={handleChange} error={errors.email}/>
+                <Input title="Phone Number" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} error={errors.phoneNumber}/>
                 <Input title="Alternative Number" name="alternativeNumber" value={formData.alternativeNumber} onChange={handleChange} />
                 <DateField title="Birthday Date" value={formData.dob} onChange={handleDateChange} />
             </Section>
 
             {/* Parent Information (only for students) */}
-                <Section title="Parent Information">
-                    <Input title="Father Name" name="fatherName" value={formData.fatherName} onChange={handleChange} />
-                    <Input title="Mother Name" name="motherName" value={formData.motherName} onChange={handleChange} />
-                </Section>
+            <Section title="Parent Information">
+                <Input title="Father Name" name="fatherName" value={formData.fatherName} onChange={handleChange} error={errors.fatherName}/>
+                <Input title="Mother Name" name="motherName" value={formData.motherName} onChange={handleChange} error={errors.motherName}/>
+            </Section>
 
             {/* Course Selection */}
             <Section title="Course Selection">
-                <MultipleSlection label="Courses" options={courseOptions} selectedOptions={formData.course} onSelect={handleCourseChange} onRemove={removeCourse} />
+                <MultipleSlection label="Courses" options={courseOptions} selectedOptions={formData.course} onSelect={handleCourseChange} onRemove={removeCourse} error={errors.course} />
             </Section>
 
             {/* Identification */}
             <Section title="Identification">
-                <Input title="Aadhaar Number" name="aadhaarNumber" value={formData.aadhaarNumber} onChange={handleChange} />
-                <Input title="Address" name="address" value={formData.address} onChange={handleChange} />
+                <Input title="Aadhaar Number" name="aadhaarNumber" value={formData.aadhaarNumber} onChange={handleChange} error={errors.aadhaarNumber}/>
+                <Input title="Address" name="address" value={formData.address} onChange={handleChange} error={errors.address} />
             </Section>
 
             {/* Teacher-Specific Fields (Only shown if role is TEACHER) */}
@@ -136,8 +180,8 @@ export default function AddPerson() {
 
             {/* Password Section */}
             <Section title="Account Security">
-                <Password title="Password" name="password" value={formData.password} onChange={handleChange} />
-                <Password title="Confirm Password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} />
+                <Password title="Password" name="password" value={formData.password} onChange={handleChange} error={errors.password} />
+                <Password title="Confirm Password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} error={errors.confirmPassword}/>
             </Section>
 
             {/* Submit Button */}

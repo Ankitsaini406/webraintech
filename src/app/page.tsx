@@ -10,7 +10,6 @@ export default function Home() {
     <div className='m-auto min-h-screen'>
       <DevelopmentAlert />
       <main>
-
         <Hero />
         <Enroll />
         <FeatureSection />
