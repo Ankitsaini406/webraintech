@@ -116,11 +116,12 @@ interface DateFieldProps {
     title: string;
     value: Date | null;
     onChange: (date: Date) => void;
+    error?: string;
     startYear?: number;
     endYear?: number;
 }
 
-export function DateField({ title, value, onChange, startYear = getYear(new Date()) - 60, endYear = getYear(new Date())}: DateFieldProps) {
+export function DateField({ title, value, onChange, error, startYear = getYear(new Date()) - 60, endYear = getYear(new Date())}: DateFieldProps) {
 
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const years = Array.from({ length: endYear - startYear + 1 }, (_, i) => startYear + i);
@@ -147,7 +148,7 @@ export function DateField({ title, value, onChange, startYear = getYear(new Date
     return (
         <Popover>
             <PopoverTrigger asChild>
-                <Button variant={"outline"} className="w-[240px] justify-start text-left font-normal dark:bg-gray-700 dark:text-white">
+                <Button variant={"outline"} className={`w-[240px] justify-start text-left font-normal dark:bg-gray-700 dark:text-white ${error ? 'border-red-500 focus:ring-red-500 dark:border-red-500 dark:focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400'} `}>
                     <CalendarIcon />
                     {value ? format(value, "PPP") : <span>{title}</span>}
                 </Button>

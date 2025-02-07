@@ -7,41 +7,64 @@ import { DateField, Input, MultipleSlection, Password, Section, TextArea } from 
 import { AddPersons } from "@/utils/InitialState";
 import { studentSchema } from "@/utils/ValidationSchema";
 import { z } from "zod";
-import { useState } from "react";
+import { useReducer } from "react";
 import { toast } from "sonner";
 
+// Role Enum
 enum Role {
-    STUDENT = 'STUDENT',
-    TEACHER = 'TEACHER',
+    STUDENT = "STUDENT",
+    TEACHER = "TEACHER",
 }
 
-export default function AddPerson() {
-    const [formData, setFormData] = useState<AddPersons>({
-        name: "",
-        email: "",
-        fatherName: "",
-        motherName: "",
-        phoneNumber: "",
-        alternativeNumber: "",
-        aadhaarNumber: "",
-        course: [],
-        address: "",
-        dob: new Date(),
-        password: "",
-        confirmPassword: "",
-        role: Role.STUDENT,
-        details: "",
-        brief: "",
-        facebook: "",
-        instagram: "",
-        linkdin: "",
-        youtube: "",
-        x: "",
-        updateAt: new Date(),
-        createdAt: new Date(),
-    });
+// Initial State
+const initialState: AddPersons = {
+    name: "",
+    email: "",
+    fatherName: "",
+    motherName: "",
+    phoneNumber: "",
+    alternativeNumber: "",
+    aadhaarNumber: "",
+    course: [],
+    address: "",
+    dob: new Date(),
+    password: "",
+    confirmPassword: "",
+    role: Role.STUDENT,
+    details: "",
+    brief: "",
+    facebook: "",
+    instagram: "",
+    linkdin: "",
+    youtube: "",
+    x: "",
+    updateAt: new Date(),
+    createdAt: new Date(),
+};
 
-    const [errors, setErrors] = useState<Record<string, string>>({});
+// Action Types
+type Action =
+    | { type: "SET_FIELD"; field: keyof AddPersons; value: string | string[] | Date }
+    | { type: "RESET_FORM" };
+
+// Reducer Function
+const formReducer = (state: AddPersons, action: Action): AddPersons => {
+    switch (action.type) {
+        case "SET_FIELD":
+            return { ...state, [action.field]: action.value };
+        case "RESET_FORM":
+            return { ...initialState, dob: new Date() }; // Ensure fresh date instance
+        default:
+            return state;
+    }
+};
+
+export default function AddPerson() {
+    const [formData, dispatch] = useReducer(formReducer, initialState);
+    const [errors, setErrors] = useReducer(
+        (state: Record<string, string>, action: Record<string, string>) => ({ ...state, ...action }),
+        {}
+    );
 
     const courseOptions = [
         "Web Development",
@@ -55,44 +78,39 @@ export default function AddPerson() {
 
     // Handle Input Change
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
+        dispatch({ type: "SET_FIELD", field: e.target.name as keyof AddPersons, value: e.target.value });
     };
 
     // Handle Date Change
     const handleDateChange = (date: Date) => {
-        if (date) {
-            setFormData((prev) => ({ ...prev, dob: date }));
-        }
+        dispatch({ type: "SET_FIELD", field: "dob", value: date });
     };
 
     // Handle Course Selection
     const handleCourseChange = (selectedCourse: string) => {
-        if (selectedCourse && !formData.course.includes(selectedCourse)) {
-            setFormData((prev) => ({
-                ...prev,
-                course: [...prev.course, selectedCourse],
-            }));
+        if (!formData.course.includes(selectedCourse)) {
+            dispatch({ type: "SET_FIELD", field: "course", value: [...formData.course, selectedCourse] });
         }
     };
 
     // Remove Selected Course
     const removeCourse = (courseToRemove: string) => {
-        setFormData((prev) => ({
-            ...prev,
-            course: prev.course.filter((course) => course !== courseToRemove),
-        }));
+        dispatch({
+            type: "SET_FIELD",
+            field: "course",
+            value: formData.course.filter((course) => course !== courseToRemove),
+        });
     };
 
+    // Handle Form Submission
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setErrors({}); // Reset previous errors
 
         try {
             const validatedData = studentSchema.parse(formData);
-
-            // Convert dob to string format
             const form = new FormData();
+
             Object.entries(validatedData).forEach(([key, value]) => {
                 if (Array.isArray(value)) {
                     value.forEach((val) => form.append(key, val));
@@ -108,6 +126,8 @@ export default function AddPerson() {
                 await createStudent(form);
                 toast.success("Student added successfully!");
             }
+
+            dispatch({ type: "RESET_FORM" }); // Reset form after submission
         } catch (error) {
             if (error instanceof z.ZodError) {
                 const formattedErrors: Record<string, string> = {};
@@ -116,7 +136,6 @@ export default function AddPerson() {
                 });
                 setErrors(formattedErrors);
             } else {
-                console.error("Error submitting form:", error);
                 toast.error("Error submitting form. Please try again.");
             }
         }
@@ -128,31 +147,36 @@ export default function AddPerson() {
 
             {/* Role Selection */}
             <Section title="Select Role">
-            <Select onValueChange={(value) => setFormData((prev) => ({ ...prev, role: value as Role }))}>
+                <Select
+                    onValueChange={(value) => dispatch({ type: "SET_FIELD", field: "role", value: value as Role })}
+                    value={formData.role}
+                >
                     <SelectTrigger className="w-[200px]">
                         <SelectValue placeholder="Select Role" />
                     </SelectTrigger>
                     <SelectContent>
-                        <SelectItem value="STUDENT">Student</SelectItem>
-                        <SelectItem value="TEACHER">Teacher</SelectItem>
+                        <SelectItem value={Role.STUDENT}>Student</SelectItem>
+                        <SelectItem value={Role.TEACHER}>Teacher</SelectItem>
                     </SelectContent>
                 </Select>
             </Section>
 
             {/* Personal Information */}
             <Section title="Personal Information">
-                <Input title="Name" name="name" value={formData.name} onChange={handleChange} error={errors.name}/>
-                <Input title="Email" name="email" value={formData.email} onChange={handleChange} error={errors.email}/>
-                <Input title="Phone Number" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} error={errors.phoneNumber}/>
+                <Input title="Name" name="name" value={formData.name} onChange={handleChange} error={errors.name} />
+                <Input title="Email" name="email" value={formData.email} onChange={handleChange} error={errors.email} />
+                <Input title="Phone Number" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} error={errors.phoneNumber} />
                 <Input title="Alternative Number" name="alternativeNumber" value={formData.alternativeNumber} onChange={handleChange} />
                 <DateField title="Birthday Date" value={formData.dob} onChange={handleDateChange} />
             </Section>
 
-            {/* Parent Information (only for students) */}
-            <Section title="Parent Information">
-                <Input title="Father Name" name="fatherName" value={formData.fatherName} onChange={handleChange} error={errors.fatherName}/>
-                <Input title="Mother Name" name="motherName" value={formData.motherName} onChange={handleChange} error={errors.motherName}/>
-            </Section>
+            {/* Parent Information */}
+            {formData.role === Role.STUDENT && (
+                <Section title="Parent Information">
+                    <Input title="Father Name" name="fatherName" value={formData.fatherName} onChange={handleChange} error={errors.fatherName} />
+                    <Input title="Mother Name" name="motherName" value={formData.motherName} onChange={handleChange} error={errors.motherName} />
+                </Section>
+            )}
 
             {/* Course Selection */}
             <Section title="Course Selection">
@@ -161,11 +185,11 @@ export default function AddPerson() {
 
             {/* Identification */}
             <Section title="Identification">
-                <Input title="Aadhaar Number" name="aadhaarNumber" value={formData.aadhaarNumber} onChange={handleChange} error={errors.aadhaarNumber}/>
+                <Input title="Aadhaar Number" name="aadhaarNumber" value={formData.aadhaarNumber} onChange={handleChange} error={errors.aadhaarNumber} />
                 <Input title="Address" name="address" value={formData.address} onChange={handleChange} error={errors.address} />
             </Section>
 
-            {/* Teacher-Specific Fields (Only shown if role is TEACHER) */}
+            {/* Teacher-Specific Fields */}
             {formData.role === Role.TEACHER && (
                 <Section title="Teacher Information">
                     <TextArea title="Details" name="details" value={formData.details} onChange={handleChange} />
@@ -181,7 +205,7 @@ export default function AddPerson() {
             {/* Password Section */}
             <Section title="Account Security">
                 <Password title="Password" name="password" value={formData.password} onChange={handleChange} error={errors.password} />
-                <Password title="Confirm Password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} error={errors.confirmPassword}/>
+                <Password title="Confirm Password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} error={errors.confirmPassword} />
             </Section>
 
             {/* Submit Button */}
