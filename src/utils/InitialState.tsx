@@ -20,7 +20,15 @@ export interface Users {
     dob: Date;
     address: string;
     password: string;
+    confirmPassword: string;
     role: string;
+    details: string;
+    brief: string;
+    facebook: string;
+    instagram: string;
+    linkdin: string;
+    youtube: string;
+    x: string;
     updateAt: Date;
     createdAt: Date;
     // Add other fields as required
@@ -54,7 +62,7 @@ export const authUserInitialState: UsersAuthState = {
     loading: false,
 };
 
-export interface Student {
+export interface AddPersons {
     name: string;
     email: string;
     course: string[];
@@ -63,11 +71,20 @@ export interface Student {
     motherName: string;
     alternativeNumber: string;
     aadhaarNumber: string;
-    dob: Date | null;
-    role: 'STUDENT',
+    dob: Date;
     address: string;
     password: string;
     confirmPassword: string;
+    role: string;
+    details: string;
+    brief: string;
+    facebook: string;
+    instagram: string;
+    linkdin: string;
+    youtube: string;
+    x: string;
+    updateAt: Date;
+    createdAt: Date;
 }
 
 export interface Teachers {

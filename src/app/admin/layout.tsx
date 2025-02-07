@@ -49,7 +49,7 @@ export function Header({paths} : {paths: string[]}) {
         {/* Breadcrumb */}
         <Breadcrumb>
             <BreadcrumbList>
-                {paths.slice(1).map((path, index) => {
+                {paths.slice(0).map((path, index) => {
                     const formattedPath = path.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
                     return (
                         <React.Fragment key={path}>

@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { ChevronRight, Home, type LucideIcon } from "lucide-react"
+import { ChevronRight, Home, UserPlus, type LucideIcon } from "lucide-react"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem } from "@/components/ui/sidebar"
 
@@ -17,6 +17,16 @@ export function NavMain({ items }: { items: { title: string; url: string; icon?:
               <span className="flex items-center gap-2">
                 <Home />
                 <span>Home</span>
+              </span>
+            </SidebarMenuButton>
+          </Link>
+        </SidebarMenuItem>
+        <SidebarMenuItem>
+          <Link href="/admin/add-person" passHref>
+            <SidebarMenuButton tooltip="Add Person" asChild>
+              <span className="flex items-center gap-2">
+                <UserPlus />
+                <span>Add Person</span>
               </span>
             </SidebarMenuButton>
           </Link>

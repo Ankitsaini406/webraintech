@@ -1,12 +1,18 @@
 "use client";
 
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ButtonBlack } from "@/utils/Buttons";
-import { DateField, Input, MultipleSlection, Password, Section } from "@/utils/FormFields";
-import { Student } from "@/utils/InitialState";
+import { DateField, Input, MultipleSlection, Password, Section, TextArea } from "@/utils/FormFields";
+import { AddPersons } from "@/utils/InitialState";
 import { useState } from "react";
 
-export default function AddStudent() {
-    const [formData, setFormData] = useState<Student>({
+enum Role {
+    STUDENT = 'STUDENT',
+    TEACHER = 'TEACHER',
+}
+
+export default function AddPerson() {
+    const [formData, setFormData] = useState<AddPersons>({
         name: "",
         email: "",
         fatherName: "",
@@ -19,7 +25,16 @@ export default function AddStudent() {
         dob: new Date(),
         password: "",
         confirmPassword: "",
-        role: "STUDENT",
+        role: Role.STUDENT,
+        details: "",
+        brief: "",
+        facebook: "",
+        instagram: "",
+        linkdin: "",
+        youtube: "",
+        x: "",
+        updateAt: new Date(),
+        createdAt: new Date(),
     });
 
     const courseOptions = [
@@ -33,7 +48,7 @@ export default function AddStudent() {
     ];
 
     // Handle Input Change
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
@@ -65,7 +80,20 @@ export default function AddStudent() {
 
     return (
         <form className="p-4">
-            <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Add Student</h2>
+            <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Add Person</h2>
+
+            {/* Role Selection */}
+            <Section title="Select Role">
+                <Select onValueChange={(value) => setFormData((prev) => ({ ...prev, role: value }))}>
+                    <SelectTrigger className="w-[200px]">
+                        <SelectValue placeholder="Select Role" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="STUDENT">Student</SelectItem>
+                        <SelectItem value="TEACHER">Teacher</SelectItem>
+                    </SelectContent>
+                </Select>
+            </Section>
 
             {/* Personal Information */}
             <Section title="Personal Information">
@@ -76,11 +104,11 @@ export default function AddStudent() {
                 <DateField title="Birthday Date" value={formData.dob} onChange={handleDateChange} />
             </Section>
 
-            {/* Parent Information */}
-            <Section title="Parent Information">
-                <Input title="Father Name" name="fatherName" value={formData.fatherName} onChange={handleChange} />
-                <Input title="Mother Name" name="motherName" value={formData.motherName} onChange={handleChange} />
-            </Section>
+            {/* Parent Information (only for students) */}
+                <Section title="Parent Information">
+                    <Input title="Father Name" name="fatherName" value={formData.fatherName} onChange={handleChange} />
+                    <Input title="Mother Name" name="motherName" value={formData.motherName} onChange={handleChange} />
+                </Section>
 
             {/* Course Selection */}
             <Section title="Course Selection">
@@ -92,6 +120,19 @@ export default function AddStudent() {
                 <Input title="Aadhaar Number" name="aadhaarNumber" value={formData.aadhaarNumber} onChange={handleChange} />
                 <Input title="Address" name="address" value={formData.address} onChange={handleChange} />
             </Section>
+
+            {/* Teacher-Specific Fields (Only shown if role is TEACHER) */}
+            {formData.role === Role.TEACHER && (
+                <Section title="Teacher Information">
+                    <TextArea title="Details" name="details" value={formData.details} onChange={handleChange} />
+                    <TextArea title="Brief" name="brief" value={formData.brief} onChange={handleChange} />
+                    <Input title="Facebook" name="facebook" value={formData.facebook} onChange={handleChange} />
+                    <Input title="Instagram" name="instagram" value={formData.instagram} onChange={handleChange} />
+                    <Input title="LinkedIn" name="linkdin" value={formData.linkdin} onChange={handleChange} />
+                    <Input title="YouTube" name="youtube" value={formData.youtube} onChange={handleChange} />
+                    <Input title="X (Twitter)" name="x" value={formData.x} onChange={handleChange} />
+                </Section>
+            )}
 
             {/* Password Section */}
             <Section title="Account Security">

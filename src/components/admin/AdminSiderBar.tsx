@@ -4,7 +4,7 @@ import * as React from "react"
 import { BookOpen, PieChart, Settings2, Users, Users2 } from "lucide-react"
 import { NavMain } from "@/components/admin/nav-main"
 import { NavUser } from "@/components/admin/nav-user"
-import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from "@/components/ui/sidebar"
+import { Sidebar, SidebarContent, SidebarFooter, SidebarRail } from "@/components/ui/sidebar"
 import { NavProjects } from "./nav-projects"
 
 const data = {
@@ -78,8 +78,6 @@ const data = {
 export function AdminSiderBar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader>
-      </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
         <NavProjects projects={data.projects} />

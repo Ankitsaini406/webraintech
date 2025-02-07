@@ -21,6 +21,7 @@ model Enquery {
 enum Role {
   STUDENT
   TEACHER
+  ADMIN
 }
 
 model User {
