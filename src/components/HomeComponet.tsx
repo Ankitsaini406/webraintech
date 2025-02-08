@@ -51,7 +51,7 @@ export function Enroll() {
                 <h2 className="w-full sm:w-3/4 xl:w-1/2 pb-8">Enrolling in our courses is hassle-free & choose your course, sign up, and start learning today!</h2>
 
                 {/* Card Items */}
-                <div className="flex gap-4 sm:gap-8 pb-10 overflow-x-auto w-full">
+                <div className="flex gap-4 sm:gap-8 overflow-x-auto w-full">
                     {
                         enrollData.map((item) => (
                             <div key={item.title} className="w-60 sm:w-60 lg:w-96 flex-shrink-0 flex flex-col items-start cursor-pointer hover:bg-red-500 hover:text-white transition-all duration-300 p-4">
@@ -66,7 +66,7 @@ export function Enroll() {
                     }
                 </div>
 
-                <div className="flex gap-8 items-center">
+                <div className="flex gap-8 items-center mt-4 sm:mt-8">
                     <ButtonWhite title="Learn More" />
                     <StudentEnquery />
                 </div>
@@ -244,7 +244,7 @@ export function Events() {
                 <h2 className="w-full sm:text-xl pb-8">Join our carefully curated events to gain hands-on experience and expand your knowledge.</h2>
 
                 {/* Card Items */}
-                <div className="flex gap-4 sm:gap-8 pb-10 overflow-x-auto w-full">
+                <div className="flex gap-4 sm:gap-8 overflow-x-auto w-full">
                     {
                         eventData.map((item, index) => (
                             <Link key={item.title} href='/'>
