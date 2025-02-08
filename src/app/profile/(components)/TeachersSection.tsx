@@ -1,7 +1,7 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { fetchTeachersByCourses } from "@/store/actions/FindTeacherByCourseAction";
 import { AppDispatch, RootState } from "@/store/store";
-import { Teachers } from "@/utils/InitialState";
+import { Users } from "@/utils/InitialState";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -49,7 +49,7 @@ export default function TeachersSection({ studentId }: { studentId: string }) {
             )}
             {status === "failed" && <p className="text-red-500">Error: {error}</p>}
             {status === "succeeded" && (
-                teachers.map((teacher: Teachers) => {
+                teachers.map((teacher: Users) => {
                     return (
                         <div key={teacher.id} className="w-full shadow-md p-4 flex flex-col md:flex-row gap-4 border items-center">
                             <div className="bg-gradient-to-b from-transparent to-black-opacity-30 w-[150px] h-[150px] rounded-full shrink-0">
