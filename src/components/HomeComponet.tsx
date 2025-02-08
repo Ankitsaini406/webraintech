@@ -244,7 +244,7 @@ export function Events() {
                 <h2 className="w-full sm:text-xl pb-8">Join our carefully curated events to gain hands-on experience and expand your knowledge.</h2>
 
                 {/* Card Items */}
-                <div className="flex gap-4 sm:gap-8 pb-10 overflow-scroll w-full">
+                <div className="flex gap-4 sm:gap-8 pb-10 overflow-x-auto w-full">
                     {
                         eventData.map((item, index) => (
                             <Link key={item.title} href='/'>
