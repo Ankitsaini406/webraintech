@@ -131,7 +131,7 @@ function Footer() {
                     <p className="sm:text-sm text-center text-xs">© 2024 WeBrainTech. All rights reserved.</p>
                     <div className="flex flex-row flex-wrap gap-2 sm:gap-6">
                         <Link className="underline underline-offset-2 hover:text-red-500 hover:underline hover:underline-offset-4 transition-all duration-300" href='/privacy-policy' >Privacy Policy</Link>
-                        <Link className="underline underline-offset-2 hover:text-red-500 hover:underline hover:underline-offset-4 transition-all duration-300" href='/' >Terms of Service</Link>
+                        <Link className="underline underline-offset-2 hover:text-red-500 hover:underline hover:underline-offset-4 transition-all duration-300" href='/terms-and-conditaions' >Terms of Service</Link>
                         <Link className="underline underline-offset-2 hover:text-red-500 hover:underline hover:underline-offset-4 transition-all duration-300" href='/'>Cookies Settings</Link>
                     </div>
                 </div>

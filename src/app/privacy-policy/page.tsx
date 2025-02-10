@@ -41,23 +41,23 @@ export default function PrivacyPolicy() {
 
             <h3 className="pl-4 text-xl">A. Personal Information</h3>
             <p className="py-4 pl-6">We may collect personally identifiable information, including but not limited to:</p>
-            <ul className="pb-4">
-                <li className="pl-6 text-sm">- Name</li>
-                <li className="pl-6 text-sm">- Email address</li>
-                <li className="pl-6 text-sm">- Phone number</li>
-                <li className="pl-6 text-sm">- Postal address</li>
-                <li className="pl-6 text-sm">- Payment inforamtion</li>
-                <li className="pl-6 text-sm">- Account login credentials</li>
+            <ul className="pb-4 pl-6">
+                <li className="text-sm">- Name</li>
+                <li className="text-sm">- Email address</li>
+                <li className="text-sm">- Phone number</li>
+                <li className="text-sm">- Postal address</li>
+                <li className="text-sm">- Payment inforamtion</li>
+                <li className="text-sm">- Account login credentials</li>
             </ul>
 
             <h3 className="pl-4 text-xl">B. Non-Personal Information</h3>
             <p className="py-4 pl-6">We collect non-identifiable data such as:</p>
-            <ul className="pb-4">
-                <li className="pl-6 text-sm">- Browser type and version</li>
-                <li className="pl-6 text-sm">- Operating system</li>
-                <li className="pl-6 text-sm">- IP address</li>
-                <li className="pl-6 text-sm">- Device inforamtion</li>
-                <li className="pl-6 text-sm">- Usage data (pages visited, time spent, etc.)</li>
+            <ul className="pb-4 pl-6">
+                <li className="text-sm">- Browser type and version</li>
+                <li className="text-sm">- Operating system</li>
+                <li className="text-sm">- IP address</li>
+                <li className="text-sm">- Device inforamtion</li>
+                <li className="text-sm">- Usage data (pages visited, time spent, etc.)</li>
             </ul>
 
             <h3 className="pl-4 text-xl">C. Cookies and Tracking Technologies</h3>
@@ -65,13 +65,13 @@ export default function PrivacyPolicy() {
 
             <h2 className="font-bold text-xl sm:text-3xl">2. How We Use Your Information</h2>
             <p className="py-4 pl-6">We use the collected information for the following purposes:</p>
-            <ul className="pb-4">
-                <li className="pl-6 text-sm">- To provide, maintain, and improve our services</li>
-                <li className="pl-6 text-sm">- To process payments and transactions</li>
-                <li className="pl-6 text-sm">- To communicate updates, promotions, and relevant information</li>
-                <li className="pl-6 text-sm">- To personalize user experience</li>
-                <li className="pl-6 text-sm">- To comply with legal obligations</li>
-                <li className="pl-6 text-sm">- To enhance security and prevent fraud</li>
+            <ul className="pb-4 pl-6">
+                <li className="text-sm">- To provide, maintain, and improve our services</li>
+                <li className="text-sm">- To process payments and transactions</li>
+                <li className="text-sm">- To communicate updates, promotions, and relevant information</li>
+                <li className="text-sm">- To personalize user experience</li>
+                <li className="text-sm">- To comply with legal obligations</li>
+                <li className="text-sm">- To enhance security and prevent fraud</li>
             </ul>
 
             <h2 className="font-bold text-xl sm:text-3xl">3. How We Share Your Information</h2>
@@ -85,12 +85,12 @@ export default function PrivacyPolicy() {
 
             <h2 className="font-bold text-xl sm:text-3xl">5. Your Rights and Choices</h2>
             <p className="py-4 pl-6">Depending on your location, you may have the right to:</p>
-            <ul className="pb-4">
-                <li className="pl-6 text-sm">- Access, update, or delete your personal data</li>
-                <li className="pl-6 text-sm">- Opt-out of marketing communications</li>
-                <li className="pl-6 text-sm">- Restrict processing of your data</li>
-                <li className="pl-6 text-sm">- Request a copy of your data</li>
-                <li className="pl-6 text-sm">- Withdraw consent at any time</li>
+            <ul className="pb-4 pl-6">
+                <li className="text-sm">- Access, update, or delete your personal data</li>
+                <li className="text-sm">- Opt-out of marketing communications</li>
+                <li className="text-sm">- Restrict processing of your data</li>
+                <li className="text-sm">- Request a copy of your data</li>
+                <li className="text-sm">- Withdraw consent at any time</li>
             </ul>
             <p className="py-4 pl-6">For any such requests, please contact us at *[Insert Contact Email]</p>
 
@@ -107,9 +107,9 @@ export default function PrivacyPolicy() {
             <p className="py-4 pl-6">For any questions regarding this Privacy Policy, please contact us at:</p>
 
             <h4 className="font-bold pb-4">Webraintech Academy</h4>
-            <p>Email: info@webraintech.in</p>
-            <p>Phone: 8233101033</p>
-            <p>Address: Webraintech academy, near chandpool gate, Sikar, 332001</p>
+            <p><strong>Email:</strong> <a href="mailto:info@webraintech.in">info@webraintech.in</a></p>
+            <p><strong>Phone:</strong> +91 8233101033</p>
+            <p><strong>Address:</strong> Webraintech academy, near chandpool gate, Sikar, 332001</p>
 
             <p className="py-4">Thank you for trusting Webraintech Academy with your personal information.</p>
         </div>
