@@ -14,7 +14,7 @@ export function ButtonWhite({ title }: { title: string }) {
 // Black Button component
 export function ButtonBlack({ title }: { title: string }) {
     return (
-        <button className="p-2 px-8 border border-transparent bg-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:border-white dark:hover:text-white hover:bg-white hover:text-black hover:border-black text-white transition-all duration-300 transform hover:scale-105">
+        <button className="p-2 px-8 border border-transparent bg-black dark:bg-[ghostwhite] dark:text-black dark:hover:bg-black dark:hover:border-white dark:hover:text-white hover:bg-[ghostwhite] hover:text-black hover:border-black text-white transition-all duration-300 transform hover:scale-105">
             {title}
         </button>
     );

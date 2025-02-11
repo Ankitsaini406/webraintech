@@ -151,7 +151,7 @@ export default function AddPerson() {
                     onValueChange={(value) => dispatch({ type: "SET_FIELD", field: "role", value: value as Role })}
                     value={formData.role}
                 >
-                    <SelectTrigger className="w-[200px]">
+                    <SelectTrigger className="w-[200px] dark:bg-gray-700 dark:text-white">
                         <SelectValue placeholder="Select Role" />
                     </SelectTrigger>
                     <SelectContent>
