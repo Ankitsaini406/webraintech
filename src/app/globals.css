@@ -103,20 +103,6 @@ body {
   background: #6c6d6f;
 }
 
-@media (prefers-color-scheme: dark) {
-  ::-webkit-scrollbar-track {
-    background: #222;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #555;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: #777;
-  }
-}
-
 @layer base {
   * {
     @apply border-border;
