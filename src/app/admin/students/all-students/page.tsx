@@ -5,39 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllUsers } from "@/store/actions/UserActions";
 import { AppDispatch, RootState } from "@/store/store";
 import { Users } from "@/utils/InitialState";
-import {
-    ColumnDef,
-    ColumnFiltersState,
-    SortingState,
-    VisibilityState,
-    flexRender,
-    getCoreRowModel,
-    getFilteredRowModel,
-    getPaginationRowModel,
-    getSortedRowModel,
-    useReactTable,
-} from "@tanstack/react-table";
+import { ColumnDef, ColumnFiltersState, SortingState, VisibilityState, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table";
 import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
-import {
-    DropdownMenu,
-    DropdownMenuCheckboxItem,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const AllStudents = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -45,15 +19,17 @@ const AllStudents = () => {
         (state: RootState) => state.user
     );
 
+    const [roleFilter, setRoleFilter] = useState("STUDENT");
+
     useEffect(() => {
-            dispatch(fetchAllUsers());
+        dispatch(fetchAllUsers());
     }, [dispatch]);
 
     const students = useMemo(() =>
         Array.isArray(user)
-            ? user.filter((user: Users) => user.role === "STUDENT")
+            ? user.filter((user: Users) => user.role === roleFilter)
             : [],
-        [user]
+        [user, roleFilter]
     );
 
     const columns: ColumnDef<Users>[] = [
@@ -100,7 +76,7 @@ const AllStudents = () => {
         },
         {
             accessorKey: "address",
-            header: () => <div >Address</div>,
+            header: () => <div>Address</div>,
             cell: ({ row }) => (
                 <div className="font-medium">{row.getValue("address")}</div>
             ),
@@ -142,7 +118,7 @@ const AllStudents = () => {
     const [rowSelection, setRowSelection] = useState({});
 
     const table = useReactTable({
-        data: useMemo(() => students, [students]),
+        data: students,
         columns,
         onSortingChange: setSorting,
         onColumnFiltersChange: setColumnFilters,
@@ -171,6 +147,18 @@ const AllStudents = () => {
                     }
                     className="max-w-sm"
                 />
+                <Select
+                    onValueChange={(value) => setRoleFilter(value)}
+                    value={roleFilter}
+                >
+                    <SelectTrigger className="w-[200px] dark:bg-gray-700 dark:text-white">
+                        <SelectValue placeholder="Select Role" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="STUDENT">Student</SelectItem>
+                        <SelectItem value="TEACHER">Teacher</SelectItem>
+                    </SelectContent>
+                </Select>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="outline" className="ml-auto">
