@@ -43,6 +43,23 @@ export const registerUser = createAsyncThunk(
     }
 );
 
+// Fetch All Users
+export const fetchAllUsers = createAsyncThunk(
+    "users/fetch",
+    async (_, { rejectWithValue }) => {
+        try {
+            const endpoint = "/api/users/get";
+            const response = await axios.get(endpoint);
+            return response.data;
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                return rejectWithValue(error.response?.data?.message || "Fetch Users failed");
+            }
+            return rejectWithValue("An unexpected error occurred");
+        }
+    }
+)
+
 // Update User
 export const updateUser = createAsyncThunk(
     "users/update",
@@ -60,7 +77,7 @@ export const updateUser = createAsyncThunk(
     }
 );
 
-// Update User
+// Update User Password
 export const updatePassword = createAsyncThunk(
     "users/updatePassword",
     async ({ id, passwordData }: { id: string, passwordData: UpdatePassword }, { rejectWithValue }) => {
@@ -70,7 +87,7 @@ export const updatePassword = createAsyncThunk(
             return response.data;
         } catch (error) {
             if (axios.isAxiosError(error)) {
-                return rejectWithValue(error.response?.data?.message || "Update passowrd failed");
+                return rejectWithValue(error.response?.data?.message || "Update password failed");
             }
             return rejectWithValue("An unexpected error occurred");
         }
@@ -115,7 +132,6 @@ export const logOutUser = createAsyncThunk(
     }
 );
 
-
 const userSlice = createSlice({
     name: "user",
     initialState: authUserInitialState,
@@ -133,7 +149,7 @@ const userSlice = createSlice({
     extraReducers: (builder) => {
         builder
 
-            // Login Student
+            // Login User
             .addCase(loginUser.pending, (state) => {
                 state.loading = true;
                 state.error = null;
@@ -150,7 +166,7 @@ const userSlice = createSlice({
                 state.error = action.payload as string;
             })
 
-            // Register Student
+            // Register User
             .addCase(registerUser.pending, (state) => {
                 state.loading = true;
                 state.error = null;
@@ -165,7 +181,21 @@ const userSlice = createSlice({
                 state.error = action.payload as string;
             })
 
-            // Update Student
+            // Fetch Users
+            .addCase(fetchAllUsers.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(fetchAllUsers.fulfilled, (state, action) => {
+                state.loading = false;
+                state.user = action.payload;
+            })
+            .addCase(fetchAllUsers.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload as string;
+            })
+
+            // Update User
             .addCase(updateUser.pending, (state) => {
                 state.loading = true;
                 state.error = null;

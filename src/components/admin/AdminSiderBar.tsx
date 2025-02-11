@@ -21,12 +21,12 @@ const data = {
       isActive: true,
       items: [
         {
-          title: "Add Students",
-          url: "/admin/students/add-student",
+          title: "All Students",
+          url: "/admin/students/all-students",
         },
         {
           title: "Fees",
-          url: "/admin/students/all-students",
+          url: "/admin/students/fees",
         },
       ],
     },
