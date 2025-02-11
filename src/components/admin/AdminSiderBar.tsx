@@ -21,10 +21,6 @@ const data = {
       isActive: true,
       items: [
         {
-          title: "All Students",
-          url: "/admin/students/all-students",
-        },
-        {
           title: "Fees",
           url: "/admin/students/fees",
         },
