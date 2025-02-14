@@ -63,11 +63,13 @@ model Course {
   id             String      @id @default(cuid())
   title          String
   slug           String
+  image          String
+  bannerImage    String
   intro          String
   description    String
   introVideo     String   // URL for introduction video
   price          Float
-  certification  Boolean  @default(false) // Whether certification is available
+  certification  String
   
   // Relations
   teacherId      String
