@@ -67,7 +67,9 @@ export function Enroll() {
                 </div>
 
                 <div className="flex gap-8 items-center mt-4 sm:mt-8">
-                    <ButtonWhite title="Learn More" />
+                    <Link href='/courses'>
+                        <ButtonWhite title="Learn More" />
+                    </Link>
                     <StudentEnquery />
                 </div>
             </div>
@@ -248,21 +250,21 @@ export function Events() {
                     {
                         eventData.map((item, index) => (
                             <Link key={item.title} href='/'>
-                            <div
-                                className={`w-60 sm:w-60 lg:w-96 flex-shrink-0 flex flex-col items-start cursor-pointer transition-all duration-300 p-4 
+                                <div
+                                    className={`w-60 sm:w-60 lg:w-96 flex-shrink-0 flex flex-col items-start cursor-pointer transition-all duration-300 p-4 
                                     ${index === 0 ? "hover:bg-custom-purple hover:text-white" : ""}
                                     ${index === 1 ? "hover:bg-custom-blue hover:text-white" : ""}
                                     ${index === 2 ? "hover:bg-custom-gold hover:text-white" : ""}
                                     ${index === 3 ? "hover:bg-custom-mahroon hover:text-white" : ""}
                                     ${index === 4 ? "hover:bg-black hover:text-white" : ""}
                                 `}
-                            >
-                                <div className="bg-gradient-to-b from-transparent to-black/30 aspect-square w-full overflow-hidden relative z-10">
-                                    <Image className="object-cover h-full hover:scale-105 transition-transform duration-300" src={item.image} alt={item.image} width={720} height={300} />
+                                >
+                                    <div className="bg-gradient-to-b from-transparent to-black/30 aspect-square w-full overflow-hidden relative z-10">
+                                        <Image className="object-cover h-full hover:scale-105 transition-transform duration-300" src={item.image} alt={item.image} width={720} height={300} />
+                                    </div>
+                                    <h3 className="py-2 sm:py-4 text-base sm:text-xl font-bold">{item.title}</h3>
+                                    <h4>{item.description}</h4>
                                 </div>
-                                <h3 className="py-2 sm:py-4 text-base sm:text-xl font-bold">{item.title}</h3>
-                                <h4>{item.description}</h4>
-                            </div>
                             </Link>
                         ))
                     }
