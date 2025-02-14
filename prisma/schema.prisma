@@ -47,7 +47,7 @@ model User {
   brief            String?   @default("")
   facebook         String?    @default("")
   instagram        String?    @default("")
-  linkdin         String?    @default("")
+  linkdin          String?    @default("")
   youtube          String?    @default("")
   x                String?    @default("")
 
