@@ -8,6 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 interface Course {
     title: string;
     image: string;
+    bannerImage: string;
     intro: string;
 }
 
@@ -46,7 +47,7 @@ export default function CoursePage() {
                 ) : (
                     <>
                         <div className="bg-gradient-to-b from-transparent to-black/30 aspect-square w-full h-[500px] overflow-hidden relative z-10">
-                            <Image className="object-cover h-full hover:scale-105 transition-transform duration-300" src={course.image} alt={course.image} fill />
+                            <Image className="object-cover h-full hover:scale-105 transition-transform duration-300" src={course.bannerImage} alt={course.bannerImage} fill />
                         </div>
                         <div className="container p-4 sm:p-8">
                             <div className="flex justify-between">
