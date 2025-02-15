@@ -2,11 +2,8 @@ import prisma from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 import { Prisma } from "@prisma/client";
 
-interface Context {
-    params: { slug: string };
-}
-
-export async function GET(req: NextRequest, { params }: Context) {
+// Next.js automatically passes `params` inside an object
+export async function GET(req: NextRequest, { params }: { params: { slug: string } }) {
     try {
         const { slug } = params;
 
