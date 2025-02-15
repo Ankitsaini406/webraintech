@@ -2,10 +2,9 @@ import prisma from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 import { Prisma } from "@prisma/client";
 
-// Next.js automatically passes `params` inside an object
-export async function GET(req: NextRequest, { params }: { params: { slug: string } }) {
+export async function GET(req: NextRequest, context: { params: Record<string, string> }) {
     try {
-        const { slug } = params;
+        const { slug } = context.params;
 
         const course = await prisma.course.findUnique({
             where: { slug },
