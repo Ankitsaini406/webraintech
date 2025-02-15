@@ -2,13 +2,13 @@ import prisma from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 import { Prisma } from "@prisma/client";
 
-type Context = {
-    params : { slug: string };
+interface Context {
+    params: { slug: string };
 }
 
-export async function GET(req: NextRequest, context: Context) {
+export async function GET(req: NextRequest, { params }: Context) {
     try {
-        const { slug } = context.params;
+        const { slug } = params;
 
         const course = await prisma.course.findUnique({
             where: { slug },
@@ -20,7 +20,10 @@ export async function GET(req: NextRequest, context: Context) {
         });
 
         if (!course) {
-            return NextResponse.json({ success: false, message: "Course not found" }, { status: 404 });
+            return NextResponse.json(
+                { success: false, message: "Course not found" },
+                { status: 404 }
+            );
         }
 
         return NextResponse.json({ success: true, data: course }, { status: 200 });
