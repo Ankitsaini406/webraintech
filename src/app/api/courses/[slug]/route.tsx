@@ -2,7 +2,11 @@ import prisma from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 import { Prisma } from "@prisma/client";
 
-export async function GET(req: NextRequest, context: { params: { slug: string } }) {
+type Context = {
+    params : { slug: string };
+}
+
+export async function GET(req: NextRequest, context: Context) {
     try {
         const { slug } = context.params;
 
