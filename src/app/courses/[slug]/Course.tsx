@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
+import { getCourse } from "@/actions/GetCourse";
 
 interface Course {
     title: string;
@@ -20,17 +21,9 @@ export default function CoursePage() {
         if (!slug) return;
 
         const fetchCourse = async () => {
-            try {
-                const response = await fetch(`/api/courses/${slug}`);
-                const data = await response.json();
-
-                if (data.success) {
-                    setCourse(data.data);
-                } else {
-                    console.error("Course not found");
-                }
-            } catch (error) {
-                console.error("Error fetching course:", error);
+            const data = await getCourse(slug as string);
+            if (data) {
+                setCourse(data);
             }
         };
 
