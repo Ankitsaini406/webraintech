@@ -67,6 +67,7 @@ model Course {
   bannerImage    String
   intro          String
   description    String
+  thumbnail      String
   introVideo     String   // URL for introduction video
   price          Float
   certification  String

@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest, { params }: { params: { slug: string } }) {
     try {
-        const { slug } = params;
+        const { slug } = await params;
         const course = await prisma.course.findUnique({
             where: { slug },
             include: {
