@@ -11,6 +11,7 @@ interface Course {
     image: string;
     bannerImage: string;
     intro: string;
+    description: string;
 }
 
 export default function CoursePage() {
@@ -43,10 +44,13 @@ export default function CoursePage() {
                             <Image className="object-cover h-full hover:scale-105 transition-transform duration-300" src={course.bannerImage} alt={course.bannerImage} fill />
                         </div>
                         <div className="container p-4 sm:p-8">
-                            <div className="flex justify-between">
-                                <h1>{course.intro}</h1>
-                                <div className="border w-[300px] sm:w-[500px] aspect-video">Video</div>
+                            <div className="flex justify-between gap-8 flex-col md:flex-row">
+                                <p className="">{course.intro}</p>
+                                <div className="border w-full max-w-[500px] aspect-video">Video</div>
                             </div>
+                            <p className="my-8 text-xl first-letter:text-5xl first-letter:font-bold first-letter:text-red-500 leading-8">
+                                {course.description}
+                            </p>
                         </div>
                     </>
                 )
