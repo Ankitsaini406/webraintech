@@ -12,9 +12,9 @@ export function ButtonWhite({ title }: { title: string }) {
 }
 
 // Black Button component
-export function ButtonBlack({ title }: { title: string }) {
+export function ButtonBlack({ title, className }: { title: string; className?: string; }) {
     return (
-        <button className="p-2 px-8 border border-transparent bg-black dark:bg-[ghostwhite] dark:text-black dark:hover:bg-black dark:hover:border-white dark:hover:text-white hover:bg-[ghostwhite] hover:text-black hover:border-black text-white transition-all duration-300 transform hover:scale-105">
+        <button className={`${className} p-2 px-8 border border-transparent bg-black dark:bg-[ghostwhite] dark:text-black dark:hover:bg-black dark:hover:border-white dark:hover:text-white hover:bg-[ghostwhite] hover:text-black hover:border-black text-white transition-all duration-300 transform hover:scale-105`}>
             {title}
         </button>
     );
@@ -48,7 +48,7 @@ export const ButtonLink = React.forwardRef<HTMLButtonElement | HTMLAnchorElement
 
 ButtonLink.displayName = "ButtonLink";
 
-export function FormButton({ title, disabled, className }: { title: string; disabled: boolean; className?: string }) {
+export function FormButton({ title, disabled, className }: { title: string; disabled?: boolean; className?: string }) {
     return (
         <button
             disabled={disabled}
@@ -58,5 +58,16 @@ export function FormButton({ title, disabled, className }: { title: string; disa
             {disabled ? "Loading..." : title}
         </button>
     );
+}
+
+export function BuyButton({ title, disabled, className }: { title: string; disabled?: boolean; className?: string; }) {
+    return (
+        <div className="my-8 text-center">
+            <button disabled={disabled}
+                className={`${disabled ? 'bg-zinc-500' : 'bg-blue-500'} ${disabled ? '' : 'hover:bg-blue-600'} text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 ${className}`}>
+                {disabled ? "Please Wait..." : title}
+            </button>
+        </div>
+    )
 }
 
