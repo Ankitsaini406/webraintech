@@ -10,16 +10,18 @@ export async function getCourse(slug: string) {
                 teacher: true,
                 enrollments: { include: { student: true } },
                 chapters: true,
+                faqs: true,
             },
         });
 
         if (!course) {
+            console.error("Course not found for slug:", slug);
             throw new Error("Course not found");
         }
 
-        return course;
+        return course || {};
     } catch (error) {
         console.error("Error fetching course:", error);
-        return null;
+        throw error;
     }
 }

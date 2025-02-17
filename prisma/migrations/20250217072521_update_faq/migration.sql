@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "FAQ" ADD COLUMN     "category" TEXT,
+ADD COLUMN     "isVisible" BOOLEAN NOT NULL DEFAULT true,
+ADD COLUMN     "order" INTEGER NOT NULL DEFAULT 0;

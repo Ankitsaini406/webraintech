@@ -48,14 +48,6 @@ export default function CoursesSection() {
                                     <Skeleton className="h-[300px] w-full rounded-none" />
                                     <Skeleton className="h-[200px] w-full rounded-none" />
                                 </div>
-                                <div className="flex gap-2 flex-col border p-4">
-                                    <Skeleton className="h-[300px] w-full rounded-none" />
-                                    <Skeleton className="h-[200px] w-full rounded-none" />
-                                </div>
-                                <div className="flex gap-2 flex-col border p-4">
-                                    <Skeleton className="h-[300px] w-full rounded-none" />
-                                    <Skeleton className="h-[200px] w-full rounded-none" />
-                                </div>
                                 </>
                             )
                             : (courses.map((item) => (

@@ -37,23 +37,23 @@ model User {
   dob               DateTime
   address           String
   password          String
-  isDeleted         Boolean @default(false)
-  role              Role   @default(STUDENT)
+  isDeleted         Boolean  @default(false)
+  role              Role     @default(STUDENT)
   session           Session[]
   accounts          Account[]
 
   // Teacher-specific fields
-  details          String?   @default("")
-  brief            String?   @default("")
-  facebook         String?    @default("")
-  instagram        String?    @default("")
-  linkdin          String?    @default("")
-  youtube          String?    @default("")
-  x                String?    @default("")
+  details          String?  @default("")
+  brief            String?  @default("")
+  facebook         String?  @default("")
+  instagram        String?  @default("")
+  linkdin          String?  @default("")
+  youtube          String?  @default("")
+  x                String?  @default("")
 
   // Relations
-  coursesCreated   Course[]   @relation("TeacherCourses") // Courses created by a teacher
-  enrollments      Enrollment[] // Courses a student is enrolled in
+  coursesCreated   Course[]  @relation("TeacherCourses")
+  enrollments      Enrollment[]
 
   updatedAt        DateTime @updatedAt
   createdAt        DateTime @default(now())
@@ -68,19 +68,20 @@ model Course {
   intro          String
   description    String
   thumbnail      String
-  introVideo     String   // URL for introduction video
+  introVideo     String     // URL for introduction video
   price          Float
   certification  String
   
   // Relations
   teacherId      String
-  teacher        User      @relation("TeacherCourses", fields: [teacherId], references: [id], onDelete: Cascade)
+  teacher        User       @relation("TeacherCourses", fields: [teacherId], references: [id], onDelete: Cascade)
   chapters       Chapter[]  // One-to-Many relation with chapters
   courseVideos   CourseVideo[] // Course videos
-  enrollments    Enrollment[] // Students enrolled in this course
+  enrollments    Enrollment[]  // Students enrolled in this course
+  faqs           FAQ[]         // FAQs related to this course
   
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
 }
 
 model Chapter {
@@ -91,7 +92,7 @@ model Chapter {
   courseId    String
   course      Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
   videos      CourseVideo[]
-  
+
   updatedAt        DateTime @updatedAt
   createdAt        DateTime @default(now())
 }
@@ -100,8 +101,8 @@ model CourseVideo {
   id          String    @id @default(cuid())
   title       String
   slug        String    @unique
-  videoUrl    String   // Video link
-  duration    Int      // Duration in minutes
+  videoUrl    String    // Video link
+  duration    Int       // Duration in minutes
   chapterId   String?
   chapter     Chapter?  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
   courseId    String
@@ -111,22 +112,36 @@ model CourseVideo {
   createdAt        DateTime @default(now())
 }
 
+model FAQ {
+  id          String   @id @default(cuid())
+  question    String
+  answer      String
+  category    String?
+  order       Int      @default(0)
+  isVisible   Boolean  @default(true)
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
 model Enrollment {
-  id         String  @id @default(cuid())
+  id         String   @id @default(cuid())
   studentId  String
   courseId   String
-  student    User    @relation(fields: [studentId], references: [id], onDelete: Cascade)
-  course     Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  student    User     @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  course     Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
   
   enrolledAt DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  updatedAt  DateTime @updatedAt
 }
 
 model Session {
-  id           String  @id @default(uuid())
-  sessionToken String  @unique
+  id           String   @id @default(uuid())
+  sessionToken String   @unique
   userId       String
-  user         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   expires      DateTime
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
