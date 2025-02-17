@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
@@ -60,14 +60,26 @@ export function FormButton({ title, disabled, className }: { title: string; disa
     );
 }
 
-export function BuyButton({ title, disabled, className }: { title: string; disabled?: boolean; className?: string; }) {
+export const BuyButton = forwardRef<
+    HTMLButtonElement, 
+    { 
+        title: string; 
+        disabled?: boolean; 
+        className?: string; 
+    }
+>(({ title, disabled, className }, ref) => {
     return (
         <div className="my-8 text-center">
-            <button disabled={disabled}
-                className={`${disabled ? 'bg-zinc-500' : 'bg-blue-500'} ${disabled ? '' : 'hover:bg-blue-600'} text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 ${className}`}>
+            <button
+                ref={ref}  // Pass ref here to forward it to the button element
+                disabled={disabled}
+                className={`${disabled ? 'bg-zinc-500' : 'bg-red-500'} ${disabled ? '' : 'hover:bg-red-600'} text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 ${className}`}
+            >
                 {disabled ? "Please Wait..." : title}
             </button>
         </div>
-    )
-}
+    );
+});
+
+BuyButton.displayName = "BuyButton";
 

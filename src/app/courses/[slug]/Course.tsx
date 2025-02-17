@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getCourse } from "@/actions/GetCourse";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { BuyButton } from "@/utils/Buttons";
+import { Button } from "@/components/ui/button";
 
 interface Course {
     id: string;
@@ -48,6 +49,7 @@ interface Course {
 export default function CoursePage() {
     const { slug } = useParams();
     const [course, setCourse] = useState<Course | null>(null);
+    const enrollButtonRef = useRef<HTMLButtonElement | null>(null);
 
     useEffect(() => {
         if (!slug) return;
@@ -63,6 +65,16 @@ export default function CoursePage() {
     }, [slug]);
 
     console.log(`This is course data : `, course);
+
+    const scrollToEnroll = () => {
+        if (enrollButtonRef.current) {
+            enrollButtonRef.current.scrollIntoView({
+                behavior: "smooth",
+                block: "center",
+                inline: "nearest"
+            });
+        }
+    };
 
     return (
         <div>
@@ -82,9 +94,25 @@ export default function CoursePage() {
                     </>
                 ) : (
                     <>
-                        <div className="bg-gradient-to-b from-transparent to-black/30 aspect-square w-full h-[500px] overflow-hidden relative z-10">
-                            <Image className="object-cover h-full hover:scale-105 transition-transform duration-300" src={course.bannerImage} alt={course.title} title={course.title} fill />
+
+                        {/* Courses Banner */}
+                        <div className="relative bg-gradient-to-b from-transparent to-black/30 aspect-square w-full h-[500px] overflow-hidden">
+                            {/* Image */}
+                            <Image
+                                className="object-cover h-full hover:scale-105 transition-transform duration-300"
+                                src={course.bannerImage}
+                                alt={course.title}
+                                title={course.title}
+                                fill
+                            />
+
+                            {/* Overlay with course name and button */}
+                            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white w-full">
+                                <h2 className="text-4xl font-bold mb-4">{course.title}</h2>
+                                <Button className="bg-red-500 hover:bg-red-600 text-xl font-bold px-10 py-6" onClick={scrollToEnroll}>Enroll Now</Button>
+                            </div>
                         </div>
+
                         <div className="container p-4 sm:p-8">
 
                             {/* Course Introduction */}
@@ -108,7 +136,7 @@ export default function CoursePage() {
                                 </Accordion>
                             </div>
 
-                            <BuyButton title="Enroll Now" />
+                            <BuyButton ref={enrollButtonRef} title="Enroll Now" />
 
                             {/* Course Teacher */}
                             <div className="mt-20 mb-10 w-full lg:w-11/12 xl:w-3/4 mx-auto flex flex-col md:flex-row justify-between gap-8">
