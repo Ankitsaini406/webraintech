@@ -28,13 +28,13 @@ model User {
   id                String   @id @default(cuid())
   name              String
   email             String   @unique
-  course            String[] // General courses user might be interested in
+  course            String[] 
   phoneNumber       String   @unique
-  fatherName        String
-  motherName        String
-  alternativeNumber String
-  aadhaarNumber     String   @unique
-  dob               DateTime
+  fatherName        String?  @default("")
+  motherName        String?  @default("")
+  alternativeNumber String?  @default("")
+  aadhaarNumber     String?  @unique
+  dob               DateTime?
   address           String
   password          String
   isDeleted         Boolean  @default(false)

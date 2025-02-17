@@ -1,0 +1,9 @@
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "fatherName" DROP NOT NULL,
+ALTER COLUMN "fatherName" SET DEFAULT '',
+ALTER COLUMN "motherName" DROP NOT NULL,
+ALTER COLUMN "motherName" SET DEFAULT '',
+ALTER COLUMN "alternativeNumber" DROP NOT NULL,
+ALTER COLUMN "alternativeNumber" SET DEFAULT '',
+ALTER COLUMN "aadhaarNumber" DROP NOT NULL,
+ALTER COLUMN "dob" DROP NOT NULL;
