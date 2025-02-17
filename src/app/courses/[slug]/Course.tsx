@@ -84,9 +84,15 @@ export default function CoursePage() {
                         <Skeleton className="w-full h-[500px]" />
                         <div className="container p-4 sm:p-8">
                             <div className="flex justify-between gap-8 flex-col md:flex-row">
-                                <Skeleton className=" w-full h-" />
+                                <Skeleton className="w-full" />
                                 <Skeleton className="border w-full max-w-[500px] aspect-video" />
                             </div>
+                            <Skeleton className="mt-4 h-[50px] w-full md:w-1/2 mx-auto" />
+                            <Skeleton className="mt-4 h-[50px] w-full md:w-1/2 mx-auto" />
+                            <Skeleton className="mt-4 h-[50px] w-full md:w-1/2 mx-auto" />
+
+                            <Skeleton className="w-3/4 h-[300px] my-6 mx-auto" />
+
                             <Skeleton className="mt-4 h-[50px] w-full md:w-1/2 mx-auto" />
                             <Skeleton className="mt-4 h-[50px] w-full md:w-1/2 mx-auto" />
                             <Skeleton className="mt-4 h-[50px] w-full md:w-1/2 mx-auto" />
@@ -109,7 +115,7 @@ export default function CoursePage() {
                             {/* Overlay with course name and button */}
                             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white w-full">
                                 <h2 className="text-4xl font-bold mb-4">{course.title}</h2>
-                                <Button className="bg-red-500 hover:bg-red-600 text-xl font-bold px-10 py-6" onClick={scrollToEnroll}>Enroll Now</Button>
+                                <Button className="bg-red-500 hover:bg-red-600 text-xl font-bold px-10 py-6 dark:text-white" onClick={scrollToEnroll}>Enroll Now</Button>
                             </div>
                         </div>
 
