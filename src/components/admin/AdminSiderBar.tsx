@@ -48,7 +48,7 @@ const data = {
       items: [
         {
           title: "Add Courses",
-          url: "#",
+          url: "/admin/courses/add-courses",
         },
         {
           title: "All Course",

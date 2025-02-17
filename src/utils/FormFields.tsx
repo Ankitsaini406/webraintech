@@ -15,7 +15,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 export function Input({ title, placeholder, value, name, onChange, type = 'text', error, className }: {
     title: string;
     placeholder?: string;
-    value: string;
+    value: string | number;
     name: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     type?: string;
@@ -23,7 +23,7 @@ export function Input({ title, placeholder, value, name, onChange, type = 'text'
     className?: string;
 }) {
     return (
-        <div className="mb-4">
+        <div className="mb-4 w-full">
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">{title}</label>
             <input
                 type={type === 'phone' ? 'tel' : type}
@@ -31,7 +31,7 @@ export function Input({ title, placeholder, value, name, onChange, type = 'text'
                 name={name}
                 onChange={onChange}
                 placeholder={placeholder || title}
-                className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-1 sm:text-sm 
+                className={`w-full mt-1 block px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-1 sm:text-sm 
                     ${error ? 'border-red-500 focus:ring-red-500 dark:border-red-500 dark:focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400'} 
                     dark:bg-gray-700 dark:text-white ${className}`}
             />
@@ -49,7 +49,7 @@ export function TextArea({ title, value, name, onChange, error, className }: {
     className?: string;
 }) {
     return (
-        <div className="mb-4">
+        <div className="mb-4 w-full">
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">{title}</label>
             <textarea
                 value={value}

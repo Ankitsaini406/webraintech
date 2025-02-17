@@ -37,6 +37,13 @@ interface Course {
         description: string;
         slug: string
     }[];
+    courseVideos: {
+        id: string;
+        title: string;
+        slug: string;
+        videoUrl: string;
+        duration: number;
+    }[];
     faqs: {
         id: string;
         question: string;
