@@ -75,7 +75,6 @@ model Course {
   teacherId      String?
   teacher        User?       @relation("TeacherCourses", fields: [teacherId], references: [id], onDelete: Cascade)
   chapters       Chapter[]  // One-to-Many relation with chapters
-  courseVideos   CourseVideo[] // Course videos
   enrollments    Enrollment[]  // Students enrolled in this course
   faqs           FAQ[]         // FAQs related to this course
   
@@ -88,25 +87,13 @@ model Chapter {
   title       String
   slug        String    @unique
   description String
+  videoUrl    String    @default("")
+  duration    Int       @default(0)
   courseId    String
-  course      Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  videos      CourseVideo[]
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  order       Int      @default(0)
+  isVisible   Boolean  @default(true)
 
-  updatedAt        DateTime @updatedAt
-  createdAt        DateTime @default(now())
-}
-
-model CourseVideo {
-  id          String    @id @default(cuid())
-  title       String
-  slug        String    @unique
-  videoUrl    String    // Video link
-  duration    Int       // Duration in minutes
-  chapterId   String?
-  chapter     Chapter?  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
-  courseId    String
-  course      Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  
   updatedAt        DateTime @updatedAt
   createdAt        DateTime @default(now())
 }
@@ -169,7 +156,7 @@ model VerificationToken {
 }
 
 model NewsLetter {
-  id          Int      @id @default(autoincrement())
+  id          String   @id @default(cuid())
   email       String   @unique
   subscribed  Boolean
   updatedAt   DateTime @updatedAt

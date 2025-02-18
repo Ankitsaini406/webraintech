@@ -13,9 +13,8 @@ const initialState = {
     thumbnail: "",
     introVideo: "",
     price: 0,
-    certification: "Yes",
+    certification: "",
     chapters: [],
-    courseVideos: [],
     faqs: [],
 };
 
@@ -30,17 +29,12 @@ interface CourseState {
     price: number;
     certification: string;
     chapters: Chapter[];
-    courseVideos: CourseVideo[];
     faqs: FAQ[];
 }
 
 interface Chapter {
     title: string;
     description: string;
-}
-
-interface CourseVideo {
-    title: string;
     videoUrl: string;
     duration: number;
 }
@@ -53,7 +47,7 @@ interface FAQ {
 type Action =
     | { type: "UPDATE_FIELD"; field: string; value: string | number }
     | { type: "UPDATE_ARRAY_FIELD"; field: keyof CourseState; index: number; subField: string; value: string | number }
-    | { type: "ADD_ITEM"; field: keyof CourseState; newItem: Chapter | CourseVideo | FAQ }
+    | { type: "ADD_ITEM"; field: keyof CourseState; newItem: Chapter | FAQ }
     | { type: "REMOVE_ITEM"; field: keyof CourseState; index: number }
     | { type: "RESET" };
 
@@ -64,14 +58,14 @@ const reducer = (state: CourseState, action: Action): CourseState => {
         case "UPDATE_ARRAY_FIELD":
             return {
                 ...state,
-                [action.field]: (state[action.field] as (Chapter | CourseVideo | FAQ)[]).map((item, idx) =>
+                [action.field]: (state[action.field] as (Chapter | FAQ)[]).map((item, idx) =>
                     idx === action.index ? { ...item, [action.subField]: action.value } : item
                 ),
             };
         case "ADD_ITEM":
-            return { ...state, [action.field]: [...(state[action.field] as (Chapter[] | CourseVideo[] | FAQ[])), action.newItem] };
+            return { ...state, [action.field]: [...(state[action.field] as (Chapter[] | FAQ[])), action.newItem] };
         case "REMOVE_ITEM":
-            return { ...state, [action.field]: (state[action.field] as (Chapter | CourseVideo | FAQ)[]).filter((_, idx) => idx !== action.index) };
+            return { ...state, [action.field]: (state[action.field] as (Chapter | FAQ)[]).filter((_, idx) => idx !== action.index) };
         case "RESET":
             return initialState;
         default:
@@ -90,7 +84,7 @@ const AddCourse = () => {
         dispatch({ type: "UPDATE_ARRAY_FIELD", field, index, subField, value });
     };
 
-    const addMore = (field: keyof CourseState, newItem: Chapter | CourseVideo | FAQ) => {
+    const addMore = (field: keyof CourseState, newItem: Chapter | FAQ) => {
         dispatch({ type: "ADD_ITEM", field, newItem });
     };
 
@@ -103,7 +97,6 @@ const AddCourse = () => {
         try {
             const form = new FormData();
 
-            // Append simple fields from state
             form.append("title", course.title);
             form.append("price", course.price.toString());
             form.append("intro", course.intro);
@@ -111,19 +104,13 @@ const AddCourse = () => {
             form.append("thumbnail", course.thumbnail);
             form.append("introVideo", course.introVideo);
             form.append("certification", course.certification);
-    
-            // Append chapters, courseVideos, and faqs (arrays)
             form.append("chapters", JSON.stringify(course.chapters));
-            form.append("courseVideos", JSON.stringify(course.courseVideos));
             form.append("faqs", JSON.stringify(course.faqs));
-    
-            // Append additional fields like image, bannerImage, etc.
             form.append("image", course.image);
             form.append("bannerImage", course.bannerImage);
-    
+
             console.log("FormData before calling addCourse:", Object.fromEntries(form.entries()));
-    
-            // Call the action to add the course
+
             await addCourse(form);
             // dispatch({ type: "RESET" });
         } catch (error: unknown) {
@@ -149,19 +136,17 @@ const AddCourse = () => {
                     <TextArea title="Description" name="description" value={course.description} onChange={handleChange} className="h-[100px]" />
                 </div>
 
-                {(["chapters", "courseVideos", "faqs"] as (keyof CourseState)[]).map((field) => {
+                {(["chapters", "faqs"] as (keyof CourseState)[]).map((field) => {
                     const label = field.charAt(0).toUpperCase() + field.slice(1);
                     const template =
                         field === "chapters"
-                            ? { title: "", description: "" }
-                            : field === "courseVideos"
-                                ? { title: "", videoUrl: "", duration: 0 }
-                                : { question: "", answer: "" };
+                            ? { title: "", description: "", videoUrl: "", duration: 0 }
+                            : { question: "", answer: "" };
 
                     return (
                         <div key={field}>
                             <h3 className="font-bold">{label}</h3>
-                            {(course[field] as (Chapter[] | CourseVideo[] | FAQ[])).map((item, index) => (
+                            {(course[field] as (Chapter[] | FAQ[])).map((item, index) => (
                                 <div key={index} className="flex flex-col lg:flex-row gap-4">
                                     {Object.keys(template).map((key) => {
                                         const isTextArea = (field === "chapters" && key === "description") || (field === "faqs" && key === "answer");

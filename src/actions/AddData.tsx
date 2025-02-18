@@ -2,7 +2,7 @@
 
 import prisma from "@/lib/db";
 import { createSlug } from "@/utils/UnitConvert";
-import { FAQ, Role, CourseVideo, Chapter } from "@prisma/client";
+import { FAQ, Role, Chapter } from "@prisma/client";
 
 type RoleType = keyof typeof Role;
 export async function createStudent(formData: FormData) {
@@ -97,29 +97,18 @@ export async function addCourse(formData: FormData) {
         const price = parseFloat(formData.get("price") as string) || 0;
         const certification = formData.get("certification") as string || "Yes";
         const chaptersString = formData.get("chapters") as string || '[]';
-        const courseVideosString = formData.get("courseVideos") as string || '[]';
         const faqsString = formData.get("faqs") as string || '[]';
         const chapters = chaptersString ? JSON.parse(chaptersString) : [];
-        const courseVideos = courseVideosString ? JSON.parse(courseVideosString) : [];
         const faqs = faqsString ? JSON.parse(faqsString) : [];
         const chaptersWithSlugs = chapters.map((chapter: Chapter) => ({
             ...chapter,
+            duration: parseInt(chapter.duration as unknown as string, 10) || 0,
             slug: createSlug(chapter.title),
+            videoUrl: chapter.videoUrl,
         }));
 
-        const courseVideosWithSlugs = courseVideos.map((video: CourseVideo) => {
-            const chapterSlug = createSlug(video.title);
-            const chapter = chaptersWithSlugs.find((ch: { title: string; }) => createSlug(ch.title) === chapterSlug);
-            return {
-                ...video,
-                slug: createSlug(video.title),
-                duration: parseInt(video.duration as unknown as string, 10) || 0,
-                chapterId: chapter ? chapter.id : null,
-            };
-        });
-
-        if (!Array.isArray(chaptersWithSlugs) || !Array.isArray(courseVideosWithSlugs) || !Array.isArray(faqs)) {
-            throw new Error("Invalid data format in one of the arrays (chapters, videos, faqs).");
+        if (!Array.isArray(chaptersWithSlugs) || !Array.isArray(faqs)) {
+            throw new Error("Invalid data format in one of the arrays (chapters, faqs).");
         }
 
         const payload = {
@@ -137,16 +126,9 @@ export async function addCourse(formData: FormData) {
                 create: chaptersWithSlugs.map((chapter: Chapter) => ({
                     title: chapter.title,
                     description: chapter.description,
+                    videoUrl: chapter.videoUrl,
+                    duration: chapter.duration,
                     slug: chapter.slug,
-                })),
-            },
-            courseVideos: {
-                create: courseVideosWithSlugs.map((video: CourseVideo) => ({
-                    title: video.title,
-                    slug: video.slug,
-                    videoUrl: video.videoUrl,
-                    duration: video.duration,
-                    chapterId: video.chapterId,
                 })),
             },
             faqs: {
@@ -165,7 +147,6 @@ export async function addCourse(formData: FormData) {
             data: payload,
             include: {
                 chapters: true,
-                courseVideos: true,
                 faqs: true,
             },
         });
