@@ -1,7 +1,8 @@
 'use server';
 
 import prisma from "@/lib/db";
-import { Role } from "@prisma/client";
+import { createSlug } from "@/utils/UnitConvert";
+import { FAQ, Role, CourseVideo, Chapter } from "@prisma/client";
 
 type RoleType = keyof typeof Role;
 export async function createStudent(formData: FormData) {
@@ -85,28 +86,83 @@ export async function createTeacher(formData: FormData) {
 
 export async function addCourse(formData: FormData) {
     try {
-        const newCourse = await prisma.course.create({
-            data: {
-                title: formData.get("title") as string,
-                slug: formData.get("slug") as string,
-                image: formData.get("image") as string,
-                bannerImage: formData.get("bannerImage") as string,
-                intro: formData.get("intro") as string,
-                description: formData.get("description") as string,
-                thumbnail: formData.get("thumbnail") as string,
-                introVideo: formData.get("introVideo") as string,
-                price: parseFloat(formData.get("price") as string),
-                certification: formData.get("certification") as string,
-                chapters: {
-                    create: JSON.parse(formData.get("chapters") as string || "[]"),
-                },
-                courseVideos: {
-                    create: JSON.parse(formData.get("courseVideos") as string || "[]"),
-                },
-                faqs: {
-                    create: JSON.parse(formData.get("faqs") as string || "[]"),
-                },
+        const title = formData.get("title") as string;
+        const slug = createSlug(title);
+        const image = formData.get("image") as string || "";
+        const bannerImage = formData.get("bannerImage") as string || "";
+        const intro = formData.get("intro") as string || "";
+        const description = formData.get("description") as string || "";
+        const thumbnail = formData.get("thumbnail") as string || "";
+        const introVideo = formData.get("introVideo") as string || "";
+        const price = parseFloat(formData.get("price") as string) || 0;
+        const certification = formData.get("certification") as string || "Yes";
+        const chaptersString = formData.get("chapters") as string || '[]';
+        const courseVideosString = formData.get("courseVideos") as string || '[]';
+        const faqsString = formData.get("faqs") as string || '[]';
+        const chapters = chaptersString ? JSON.parse(chaptersString) : [];
+        const courseVideos = courseVideosString ? JSON.parse(courseVideosString) : [];
+        const faqs = faqsString ? JSON.parse(faqsString) : [];
+        const chaptersWithSlugs = chapters.map((chapter: Chapter) => ({
+            ...chapter,
+            slug: createSlug(chapter.title),
+        }));
+
+        const courseVideosWithSlugs = courseVideos.map((video: CourseVideo) => {
+            const chapterSlug = createSlug(video.title);
+            const chapter = chaptersWithSlugs.find((ch: { title: string; }) => createSlug(ch.title) === chapterSlug);
+            return {
+                ...video,
+                slug: createSlug(video.title),
+                duration: parseInt(video.duration as unknown as string, 10) || 0,
+                chapterId: chapter ? chapter.id : null,
+            };
+        });
+
+        if (!Array.isArray(chaptersWithSlugs) || !Array.isArray(courseVideosWithSlugs) || !Array.isArray(faqs)) {
+            throw new Error("Invalid data format in one of the arrays (chapters, videos, faqs).");
+        }
+
+        const payload = {
+            title,
+            slug,
+            image,
+            bannerImage,
+            intro,
+            description,
+            thumbnail,
+            introVideo,
+            price,
+            certification,
+            chapters: {
+                create: chaptersWithSlugs.map((chapter: Chapter) => ({
+                    title: chapter.title,
+                    description: chapter.description,
+                    slug: chapter.slug,
+                })),
             },
+            courseVideos: {
+                create: courseVideosWithSlugs.map((video: CourseVideo) => ({
+                    title: video.title,
+                    slug: video.slug,
+                    videoUrl: video.videoUrl,
+                    duration: video.duration,
+                    chapterId: video.chapterId,
+                })),
+            },
+            faqs: {
+                create: faqs.map((faq: FAQ) => ({
+                    question: faq.question,
+                    answer: faq.answer,
+                })),
+            },
+        };
+
+        if (!payload || Object.keys(payload).length === 0) {
+            throw new Error("Invalid payload data.");
+        }
+
+        const newCourse = await prisma.course.create({
+            data: payload,
             include: {
                 chapters: true,
                 courseVideos: true,
@@ -116,7 +172,11 @@ export async function addCourse(formData: FormData) {
 
         return { success: true, course: newCourse };
     } catch (error) {
-        console.error("Error adding course:", error);
-        return { success: false, error: "Failed to add course" };
+        if (error instanceof Error) {
+            console.error("Error adding course:", error.message);
+        } else {
+            console.error("Error adding course:", error);
+        }
+        return { success: false, error: error instanceof Error ? error.message : "Failed to add course" };
     }
 }

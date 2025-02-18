@@ -11,3 +11,16 @@ export function hashPassword(password: string, salt: string) {
     hash.update(password);
     return hash.digest('hex');  // Return the hash as a hexadecimal string
 }
+
+export function createSlug(title: string): string {
+    if (!title) {
+        throw new Error("Title is required to create a slug");
+    }
+
+    return title
+        .toLowerCase() // Convert to lowercase
+        .trim() // Remove leading/trailing whitespace
+        .replace(/\s+/g, '-') // Replace spaces with hyphens
+        .replace(/[^\w-]+/g, ''); // Remove non-alphanumeric characters except hyphens
+}
+

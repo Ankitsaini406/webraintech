@@ -6,7 +6,6 @@ import { addCourse } from "@/actions/AddData";
 
 const initialState = {
     title: "",
-    slug: "",
     image: "",
     bannerImage: "",
     intro: "",
@@ -22,7 +21,6 @@ const initialState = {
 
 interface CourseState {
     title: string;
-    slug: string;
     image: string;
     bannerImage: string;
     intro: string;
@@ -39,12 +37,10 @@ interface CourseState {
 interface Chapter {
     title: string;
     description: string;
-    slug: string;
 }
 
 interface CourseVideo {
     title: string;
-    slug: string;
     videoUrl: string;
     duration: number;
 }
@@ -106,8 +102,30 @@ const AddCourse = () => {
         e.preventDefault();
         try {
             const form = new FormData();
+
+            // Append simple fields from state
+            form.append("title", course.title);
+            form.append("price", course.price.toString());
+            form.append("intro", course.intro);
+            form.append("description", course.description);
+            form.append("thumbnail", course.thumbnail);
+            form.append("introVideo", course.introVideo);
+            form.append("certification", course.certification);
+    
+            // Append chapters, courseVideos, and faqs (arrays)
+            form.append("chapters", JSON.stringify(course.chapters));
+            form.append("courseVideos", JSON.stringify(course.courseVideos));
+            form.append("faqs", JSON.stringify(course.faqs));
+    
+            // Append additional fields like image, bannerImage, etc.
+            form.append("image", course.image);
+            form.append("bannerImage", course.bannerImage);
+    
+            console.log("FormData before calling addCourse:", Object.fromEntries(form.entries()));
+    
+            // Call the action to add the course
             await addCourse(form);
-            dispatch({ type: "RESET" });
+            // dispatch({ type: "RESET" });
         } catch (error: unknown) {
             console.error("Error adding course:", error);
             if (error instanceof Error) {
@@ -135,9 +153,9 @@ const AddCourse = () => {
                     const label = field.charAt(0).toUpperCase() + field.slice(1);
                     const template =
                         field === "chapters"
-                            ? { title: "", description: "", slug: "" }
+                            ? { title: "", description: "" }
                             : field === "courseVideos"
-                                ? { title: "", videoUrl: "", duration: 0, slug: "" }
+                                ? { title: "", videoUrl: "", duration: 0 }
                                 : { question: "", answer: "" };
 
                     return (
