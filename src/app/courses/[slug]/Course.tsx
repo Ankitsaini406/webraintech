@@ -35,14 +35,10 @@ interface Course {
         id: string;
         title: string;
         description: string;
-        slug: string
-    }[];
-    courseVideos: {
-        id: string;
-        title: string;
-        slug: string;
         videoUrl: string;
         duration: number;
+        slug: string;
+        order: number;
     }[];
     faqs: {
         id: string;
