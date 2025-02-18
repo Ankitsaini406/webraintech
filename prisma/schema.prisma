@@ -28,7 +28,6 @@ model User {
   id                String   @id @default(cuid())
   name              String
   email             String   @unique
-  course            String[] 
   phoneNumber       String   @unique
   fatherName        String?  @default("")
   motherName        String?  @default("")
@@ -38,6 +37,10 @@ model User {
   address           String
   password          String
   isDeleted         Boolean  @default(false)
+  
+  // Relations
+  coursesAsign      Course[]  @relation("TeacherCourses")
+  enrollments       Enrollment[]
   role              Role     @default(STUDENT)
   session           Session[]
   accounts          Account[]
@@ -50,10 +53,6 @@ model User {
   linkdin          String?  @default("")
   youtube          String?  @default("")
   x                String?  @default("")
-
-  // Relations
-  coursesCreated   Course[]  @relation("TeacherCourses")
-  enrollments      Enrollment[]
 
   updatedAt        DateTime @updatedAt
   createdAt        DateTime @default(now())
@@ -73,8 +72,8 @@ model Course {
   certification  String
   
   // Relations
-  teacherId      String
-  teacher        User       @relation("TeacherCourses", fields: [teacherId], references: [id], onDelete: Cascade)
+  teacherId      String?
+  teacher        User?       @relation("TeacherCourses", fields: [teacherId], references: [id], onDelete: Cascade)
   chapters       Chapter[]  // One-to-Many relation with chapters
   courseVideos   CourseVideo[] // Course videos
   enrollments    Enrollment[]  // Students enrolled in this course

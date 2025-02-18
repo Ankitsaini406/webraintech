@@ -2,6 +2,7 @@
 
 import { useReducer } from "react";
 import { Input, TextArea } from "@/utils/FormFields";
+import { addCourse } from "@/actions/AddData";
 
 const initialState = {
     title: "",
@@ -14,7 +15,6 @@ const initialState = {
     introVideo: "",
     price: 0,
     certification: "Yes",
-    teacherId: "",
     chapters: [],
     courseVideos: [],
     faqs: [],
@@ -31,7 +31,6 @@ interface CourseState {
     introVideo: string;
     price: number;
     certification: string;
-    teacherId: string;
     chapters: Chapter[];
     courseVideos: CourseVideo[];
     faqs: FAQ[];
@@ -106,14 +105,8 @@ const AddCourse = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
         try {
-            const response = await fetch("/api/course/add", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(course),
-            });
-            const data: { error?: string } = await response.json();
-            if (!response.ok) throw new Error(data.error || "Failed to add course");
-            alert("Course added successfully!");
+            const form = new FormData();
+            await addCourse(form);
             dispatch({ type: "RESET" });
         } catch (error: unknown) {
             console.error("Error adding course:", error);
@@ -132,7 +125,6 @@ const AddCourse = () => {
                 <div className="flex flex-col md:flex-row justify-between gap-4">
                     <Input title="Title" name="title" value={course.title} onChange={handleChange} placeholder="Course Title" />
                     <Input title="Price" type="number" name="price" value={course.price} onChange={handleChange} placeholder="Price" />
-                    <Input title="Teacher ID" name="teacherId" value={course.teacherId} onChange={handleChange} placeholder="Teacher ID" />
                 </div>
                 <div className="flex flex-col md:flex-row justify-between gap-4">
                     <TextArea title="Intro" name="intro" value={course.intro} onChange={handleChange} />

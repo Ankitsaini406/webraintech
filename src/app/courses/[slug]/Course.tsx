@@ -27,7 +27,7 @@ interface Course {
         email: string;
         brief: string | null;
         phoneNumber: string;
-    };
+    } | null;
     enrollments: {
         studentId: string
     }[];
@@ -155,8 +155,12 @@ export default function CoursePage() {
                             <div className="mt-20 mb-10 w-full lg:w-11/12 xl:w-3/4 mx-auto flex flex-col md:flex-row justify-between gap-8">
                                 <div className="border w-full max-w-[500px] aspect-video">Photo</div>
                                 <div>
-                                    <h4 className="text-2xl font-bold mb-4">{course.teacher.name}</h4>
-                                    <p className="leading-6">{course.teacher.brief}</p>
+                                    {course.teacher && (
+                                        <>
+                                            <h4 className="text-2xl font-bold mb-4">{course.teacher.name}</h4>
+                                            <p className="leading-6">{course.teacher.brief}</p>
+                                        </>
+                                    )}
                                 </div>
                             </div>
 

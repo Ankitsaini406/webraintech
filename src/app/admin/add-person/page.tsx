@@ -1,6 +1,6 @@
 "use client";
 
-import { createStudent, createTeacher } from "@/actions/AddPerson";
+import { createStudent, createTeacher } from "@/actions/AddData";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ButtonBlack } from "@/utils/Buttons";
 import { DateField, Input, MultipleSlection, Password, Section, TextArea } from "@/utils/FormFields";
