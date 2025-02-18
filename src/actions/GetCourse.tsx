@@ -10,7 +10,6 @@ export async function getCourse(slug: string) {
                 teacher: true,
                 enrollments: { include: { student: true } },
                 chapters: true,
-                courseVideos: true,
                 faqs: true,
             },
         });

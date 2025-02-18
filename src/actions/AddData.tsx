@@ -86,6 +86,10 @@ export async function createTeacher(formData: FormData) {
 
 export async function addCourse(formData: FormData) {
     try {
+
+        // Debugging log for the FormData before processing
+        console.log("FormData before calling addCourse:", Object.fromEntries(formData.entries()));
+
         const title = formData.get("title") as string;
         const slug = createSlug(title);
         const image = formData.get("image") as string || "";
