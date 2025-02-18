@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
     try {
-        const { name, email, password, phoneNumber, fatherName, motherName, alternativeNumber, address, dob, aadhaarNumber, course, role } = await req.json();
+        const { name, email, password, phoneNumber, fatherName, motherName, alternativeNumber, address, dob, aadhaarNumber, role } = await req.json();
 
         if (!name || !email || !password) {
             return NextResponse.json({message: "All field are required"}, {status: 400});
@@ -26,7 +26,6 @@ export async function POST(req: Request) {
                 address,
                 dob,
                 aadhaarNumber,
-                course,
                 role,
             }
         });
