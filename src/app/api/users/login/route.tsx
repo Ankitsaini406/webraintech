@@ -26,7 +26,6 @@ export async function POST(req: Request) {
             name: user.name,
             email: user.email,
             role: user.role,
-            course: user.course,
         });
 
         setCookie("authToken", token, { maxAge: 60 * 60 * 24 * 7 });
