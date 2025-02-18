@@ -2,28 +2,34 @@ import prisma from "./db";
 
 export async function getTeachersForStudent(studentId: string) {
     try {
-        // Fetch student and their enrolled courses
-        const student = await prisma.user.findUnique({
-            where: {
-                id: studentId,
-                role: "STUDENT",
-            },
-            select: {
-                course: true, // Fetch only the courses
-            },
+        // Fetch student's enrolled courses
+        const enrollments = await prisma.enrollment.findMany({
+            where: { studentId },
+            select: { courseId: true },
         });
 
-        if (!student) {
-            throw new Error("Student not found.");
+        if (!enrollments.length) {
+            throw new Error("Student is not enrolled in any courses.");
         }
 
-        // Find teachers who teach at least one of the student's courses
+        // Extract course IDs
+        const courseIds = enrollments.map((enrollment) => enrollment.courseId);
+
+        // Find teachers who are assigned to these courses
         const teachers = await prisma.user.findMany({
             where: {
                 role: "TEACHER",
-                course: {
-                    hasSome: student.course, // Match teachers who teach any of the student's courses
+                coursesAsign: {
+                    some: {
+                        id: { in: courseIds }, // Match courses assigned to the teacher
+                    },
                 },
+            },
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                phoneNumber: true,
             },
         });
 
