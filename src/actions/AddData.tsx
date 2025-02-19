@@ -97,20 +97,33 @@ export async function addCourse(formData: FormData) {
         const price = parseFloat(formData.get("price") as string) || 0;
         const discount = parseFloat(formData.get("discount") as string) || 0;
         const certification = formData.get("certification") as string || "";
-        const chaptersString = formData.get("chapters") as string || '[]';
-        const faqsString = formData.get("faqs") as string || '[]';
-        const chapters = chaptersString ? JSON.parse(chaptersString) : [];
-        const faqs = faqsString ? JSON.parse(faqsString) : [];
+
+        const chaptersString = formData.get("chapters") as string;
+        const faqsString = formData.get("faqs") as string;
+
+        let chapters: Chapter[] = [];
+        let faqs: FAQ[] = [];
+
+        try {
+            chapters = JSON.parse(chaptersString);
+            faqs = JSON.parse(faqsString);
+
+            if (!Array.isArray(chapters)) {
+                chapters = [chapters];
+            }
+            if (!Array.isArray(faqs)) {
+                faqs = [faqs];
+            }
+
+        } catch (error) {
+            throw new Error(`Invalid JSON format for chapters or FAQs : ${error}`);
+        }
+
         const chaptersWithSlugs = chapters.map((chapter: Chapter) => ({
             ...chapter,
             duration: parseInt(chapter.duration as unknown as string, 10) || 0,
             slug: createSlug(chapter.title),
-            videoUrl: chapter.videoUrl,
         }));
-
-        if (!Array.isArray(chaptersWithSlugs) || !Array.isArray(faqs)) {
-            throw new Error("Invalid data format in one of the arrays (chapters, faqs).");
-        }
 
         const payload = {
             title,
@@ -141,10 +154,6 @@ export async function addCourse(formData: FormData) {
             },
         };
 
-        if (!payload || Object.keys(payload).length === 0) {
-            throw new Error("Invalid payload data.");
-        }
-
         const newCourse = await prisma.course.create({
             data: payload,
             include: {
@@ -155,11 +164,6 @@ export async function addCourse(formData: FormData) {
 
         return { success: true, course: newCourse };
     } catch (error) {
-        if (error instanceof Error) {
-            console.error("Error adding course:", error.message);
-        } else {
-            console.error("Error adding course:", error);
-        }
         return { success: false, error: error instanceof Error ? error.message : "Failed to add course" };
     }
 }

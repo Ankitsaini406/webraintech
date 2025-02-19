@@ -21,14 +21,14 @@ export const studentSchema = z.object({
 
 export const courseSchema = z.object({
     title: z.string().min(1, "Title is required").max(100, "Title should be less than 100 characters"),
-    image: z.string().url("Invalid URL format for Image"),
-    bannerImage: z.string().url("Invalid URL format for Banner Image"),
+    image: z.string().min(1,"Invalid URL format for Image"),
+    bannerImage: z.string().min(1,"Invalid URL format for Banner Image"),
     intro: z.string().min(1, "Intro is required"),
     description: z.string().min(1, "Description is required"),
-    price: z.number().positive("Price must be a positive number"),
+    price: z.string().min(1,"Price must be a positive number").optional(),
     certification: z.string().min(1, "Certification is required"),
-    introVideo: z.string().url("Invalid URL format for Intro Video").optional(),
-    thumbnail: z.string().url("Invalid URL format for Thumbnail"),
+    introVideo: z.string().min(1,"Invalid URL format for Intro Video"),
+    thumbnail: z.string().min(1,"Invalid URL format for Thumbnail"),
     chapters: z.array(
         z.object({
             title: z.string().min(1, "Chapter title is required"),

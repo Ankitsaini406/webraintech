@@ -52,7 +52,7 @@ const data = {
         },
         {
           title: "All Course",
-          url: "#",
+          url: "/admin/courses/all-courses",
         },
       ],
     },

@@ -6,9 +6,9 @@ export async function GET() {
 
         const courses = await prisma.course.findMany({});
         
-        if (!courses || courses.length === 0) {
-            throw new Error("No courses found in the database.");
-        }
+        // if (!courses || courses.length === 0) {
+        //     throw new Error("No courses found in the database.");
+        // }
 
         return NextResponse.json({ success: true, data: courses }, { status: 200 });
 
