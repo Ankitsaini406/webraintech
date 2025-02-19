@@ -129,7 +129,7 @@ const AddCourse = () => {
                     <Input title="Price" type="number" name="price" value={course.price} onChange={handleChange} placeholder="Price" />
                 </div>
                 <div className="flex flex-col md:flex-row justify-between gap-4">
-                    <TextArea title="Intro" name="intro" value={course.intro} onChange={handleChange} />
+                    <TextArea title="Intro" name="intro" value={course.intro} onChange={handleChange} className="h-[100px]" />
                     <TextArea title="Description" name="description" value={course.description} onChange={handleChange} className="h-[100px]" />
                 </div>
 
@@ -147,7 +147,7 @@ const AddCourse = () => {
                                 <div key={index} className="text-center">
                                     <div className="flex flex-col lg:flex-row gap-4 text-left">
                                         {Object.keys(template).map((key) => {
-                                            const isTextArea = (field === "chapters" && key === "description") || (field === "faqs" && key === "answer");
+                                            const isTextArea = (field === "chapters" && key === "description") || (field === "faqs");
 
                                             return isTextArea ? (
                                                 <TextArea
@@ -183,7 +183,7 @@ const AddCourse = () => {
                         </div>
                     );
                 })}
-                <Button type="submit" className="rounded px-8 py-2 bg-green-500 hover:bg-green-600 text-white my-4 font-bold uppercase">Submit Course</Button>
+                <Button type="submit" className="rounded px-8 py-5 bg-green-500 hover:bg-green-600 text-white my-4 font-bold uppercase">Submit Course</Button>
             </form>
         </div>
     );
