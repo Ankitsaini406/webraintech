@@ -126,7 +126,14 @@ const AddCourse = () => {
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="flex flex-col md:flex-row justify-between gap-4">
                     <Input title="Title" name="title" value={course.title} onChange={handleChange} placeholder="Course Title" />
+                    <Input title="Thumbnail" name="thumbnail" value={course.thumbnail} onChange={handleChange} placeholder="Thumbnail" />
+                    <Input title="Intro Video" name="introVideo" value={course.introVideo} onChange={handleChange} placeholder="Intro Video" />
                     <Input title="Price" type="number" name="price" value={course.price} onChange={handleChange} placeholder="Price" />
+                </div>
+                <div className="flex flex-col md:flex-row justify-between gap-4">
+                    <Input title="Image" name="image" value={course.image} onChange={handleChange} placeholder="Image" />
+                    <Input title="Banner Image" name="bannerImage" value={course.bannerImage} onChange={handleChange} placeholder="Banner Image" />
+                    <Input title="Certification" name="certification" value={course.certification} onChange={handleChange} placeholder="Certification" />
                 </div>
                 <div className="flex flex-col md:flex-row justify-between gap-4">
                     <TextArea title="Intro" name="intro" value={course.intro} onChange={handleChange} className="h-[100px]" />
