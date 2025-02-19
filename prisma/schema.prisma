@@ -69,6 +69,7 @@ model Course {
   thumbnail      String
   introVideo     String     // URL for introduction video
   price          Float
+  discount       Float
   certification  String
   
   // Relations

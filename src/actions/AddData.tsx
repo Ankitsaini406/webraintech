@@ -95,7 +95,8 @@ export async function addCourse(formData: FormData) {
         const thumbnail = formData.get("thumbnail") as string || "";
         const introVideo = formData.get("introVideo") as string || "";
         const price = parseFloat(formData.get("price") as string) || 0;
-        const certification = formData.get("certification") as string || "Yes";
+        const discount = parseFloat(formData.get("discount") as string) || 0;
+        const certification = formData.get("certification") as string || "";
         const chaptersString = formData.get("chapters") as string || '[]';
         const faqsString = formData.get("faqs") as string || '[]';
         const chapters = chaptersString ? JSON.parse(chaptersString) : [];
@@ -121,6 +122,7 @@ export async function addCourse(formData: FormData) {
             thumbnail,
             introVideo,
             price,
+            discount,
             certification,
             chapters: {
                 create: chaptersWithSlugs.map((chapter: Chapter) => ({
