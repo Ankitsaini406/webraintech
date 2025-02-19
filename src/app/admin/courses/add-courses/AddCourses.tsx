@@ -202,7 +202,7 @@ const AddCourse = () => {
         <div className="container p-4">
             <h2 className="text-2xl font-bold mb-4">Add New Course</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {["title", "thumbnail", "introVideo", "price", "discount", "image", "bannerImage", "certification"].map((field) => (
                         <Input
                             key={field}
@@ -211,27 +211,22 @@ const AddCourse = () => {
                             value={String(course[field as keyof CourseState])}
                             onChange={handleChange}
                             placeholder={field}
-                            // error={errors[field]}
+                            error={errors[field]?.[0]?.[""]}
                         />
                     ))}
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <TextArea
-                        title="Intro"
-                        name="intro"
-                        value={course.intro}
-                        onChange={handleChange}
-                        className="h-[100px]"
-                        error={errors.intro?.[0]?.[""]}
-                    />
-                    <TextArea
-                        title="Description"
-                        name="description"
-                        value={course.description}
-                        onChange={handleChange}
-                        className="h-[100px]"
-                        error={errors.description?.[0]?.[""]}
-                    />
+                    {["intro", "description"].map((field) => (
+                        <TextArea
+                            key={field}
+                            title={field.charAt(0).toUpperCase() + field.slice(1)}
+                            name={field}
+                            value={String(course[field as keyof CourseState])}
+                            onChange={handleChange}
+                            className="h-[100px]"
+                            error={errors[field]?.[0]?.[""]}
+                        />
+                    ))}
                 </div>
 
                 {(["chapters", "faqs"] as (keyof CourseState)[]).map((field) => {
