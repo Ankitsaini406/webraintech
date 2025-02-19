@@ -148,43 +148,57 @@ const AddCourse = () => {
                             : { question: "", answer: "" };
 
                     return (
-                        <div key={field}>
-                            <h3 className="font-bold">{label}</h3>
+                        <div key={field} className="mb-6">
+                            <h3 className="font-bold text-lg mb-2">{label}</h3>
                             {(course[field] as (Chapter[] | FAQ[])).map((item, index) => (
                                 <div key={index} className="text-center">
-                                    <div className="flex flex-col lg:flex-row gap-4 text-left">
+                                    <div className="flex flex-wrap gap-4 text-left">
                                         {Object.keys(template).map((key) => {
-                                            const isTextArea = (field === "chapters" && key === "description") || (field === "faqs");
+                                            const isTextArea =
+                                                (field === "chapters" && key === "description") ||
+                                                (field === "faqs" && key === "answer");
 
-                                            return isTextArea ? (
-                                                <TextArea
-                                                    key={key}
-                                                    title={key.charAt(0).toUpperCase() + key.slice(1)}
-                                                    name={key}
-                                                    value={String(item[key as keyof typeof item])}
-                                                    onChange={(e) =>
-                                                        handleArrayChange(field, index, key as keyof typeof item, e.target.value)
-                                                    }
-                                                />
-                                            ) : (
-                                                <Input
-                                                    key={key}
-                                                    title={key.charAt(0).toUpperCase() + key.slice(1)}
-                                                    name={key}
-                                                    value={String(item[key as keyof typeof item])}
-                                                    onChange={(e) =>
-                                                        handleArrayChange(field, index, key as keyof typeof item, e.target.value)
-                                                    }
-                                                />
+                                            return (
+                                                <div key={key} className="w-full">
+                                                    {isTextArea ? (
+                                                        <TextArea
+                                                            title={key.charAt(0).toUpperCase() + key.slice(1)}
+                                                            name={key}
+                                                            value={String(item[key as keyof typeof item])}
+                                                            onChange={(e) =>
+                                                                handleArrayChange(field, index, key as keyof typeof item, e.target.value)
+                                                            }
+                                                            className="w-full h-[100px]"
+                                                        />
+                                                    ) : (
+                                                        <Input
+                                                            title={key.charAt(0).toUpperCase() + key.slice(1)}
+                                                            name={key}
+                                                            value={String(item[key as keyof typeof item])}
+                                                            onChange={(e) =>
+                                                                handleArrayChange(field, index, key as keyof typeof item, e.target.value)
+                                                            }
+                                                            className="w-full"
+                                                        />
+                                                    )}
+                                                </div>
                                             );
                                         })}
                                     </div>
-                                    <button type="button" onClick={() => removeItem(field, index)} className="rounded px-8 py-2 bg-red-500 hover:bg-red-600 text-white my-4">
-                                        ✖
+                                    <button
+                                        type="button"
+                                        onClick={() => removeItem(field, index)}
+                                        className="rounded px-6 py-2 bg-red-500 hover:bg-red-600 text-white my-4"
+                                    >
+                                        ✖ Remove {label}
                                     </button>
                                 </div>
                             ))}
-                            <button type="button" onClick={() => addMore(field, template)} className="rounded px-8 py-2 bg-blue-500 hover:bg-blue-600 text-white my-4">
+                            <button
+                                type="button"
+                                onClick={() => addMore(field, template)}
+                                className="rounded px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white my-4"
+                            >
                                 + Add {label}
                             </button>
                         </div>
