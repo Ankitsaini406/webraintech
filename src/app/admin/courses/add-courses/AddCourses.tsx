@@ -3,6 +3,8 @@
 import { useReducer } from "react";
 import { Input, TextArea } from "@/utils/FormFields";
 import { addCourse } from "@/actions/AddData";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 const initialState = {
     title: "",
@@ -109,17 +111,12 @@ const AddCourse = () => {
             form.append("image", course.image);
             form.append("bannerImage", course.bannerImage);
 
-            console.log("FormData before calling addCourse:", Object.fromEntries(form.entries()));
-
             await addCourse(form);
-            // dispatch({ type: "RESET" });
+            toast.success("🎉 Course added successfully!");
+            dispatch({ type: "RESET" });
         } catch (error: unknown) {
             console.error("Error adding course:", error);
-            if (error instanceof Error) {
-                alert(error.message);
-            } else {
-                alert("An unknown error occurred");
-            }
+            toast.error(`An unknown error occurred : ${error}`);
         }
     };
 
@@ -147,44 +144,46 @@ const AddCourse = () => {
                         <div key={field}>
                             <h3 className="font-bold">{label}</h3>
                             {(course[field] as (Chapter[] | FAQ[])).map((item, index) => (
-                                <div key={index} className="flex flex-col lg:flex-row gap-4">
-                                    {Object.keys(template).map((key) => {
-                                        const isTextArea = (field === "chapters" && key === "description") || (field === "faqs" && key === "answer");
+                                <div key={index} className="text-center">
+                                    <div className="flex flex-col lg:flex-row gap-4 text-left">
+                                        {Object.keys(template).map((key) => {
+                                            const isTextArea = (field === "chapters" && key === "description") || (field === "faqs" && key === "answer");
 
-                                        return isTextArea ? (
-                                            <TextArea
-                                                key={key}
-                                                title={key.charAt(0).toUpperCase() + key.slice(1)}
-                                                name={key}
-                                                value={String(item[key as keyof typeof item])}
-                                                onChange={(e) =>
-                                                    handleArrayChange(field, index, key as keyof typeof item, e.target.value)
-                                                }
-                                            />
-                                        ) : (
-                                            <Input
-                                                key={key}
-                                                title={key.charAt(0).toUpperCase() + key.slice(1)}
-                                                name={key}
-                                                value={String(item[key as keyof typeof item])}
-                                                onChange={(e) =>
-                                                    handleArrayChange(field, index, key as keyof typeof item, e.target.value)
-                                                }
-                                            />
-                                        );
-                                    })}
-                                    <button type="button" onClick={() => removeItem(field, index)} className="btn-delete">
+                                            return isTextArea ? (
+                                                <TextArea
+                                                    key={key}
+                                                    title={key.charAt(0).toUpperCase() + key.slice(1)}
+                                                    name={key}
+                                                    value={String(item[key as keyof typeof item])}
+                                                    onChange={(e) =>
+                                                        handleArrayChange(field, index, key as keyof typeof item, e.target.value)
+                                                    }
+                                                />
+                                            ) : (
+                                                <Input
+                                                    key={key}
+                                                    title={key.charAt(0).toUpperCase() + key.slice(1)}
+                                                    name={key}
+                                                    value={String(item[key as keyof typeof item])}
+                                                    onChange={(e) =>
+                                                        handleArrayChange(field, index, key as keyof typeof item, e.target.value)
+                                                    }
+                                                />
+                                            );
+                                        })}
+                                    </div>
+                                    <button type="button" onClick={() => removeItem(field, index)} className="rounded px-8 py-2 bg-red-500 hover:bg-red-600 text-white my-4">
                                         ✖
                                     </button>
                                 </div>
                             ))}
-                            <button type="button" onClick={() => addMore(field, template)} className="btn-add">
+                            <button type="button" onClick={() => addMore(field, template)} className="rounded px-8 py-2 bg-blue-500 hover:bg-blue-600 text-white my-4">
                                 + Add {label}
                             </button>
                         </div>
                     );
                 })}
-                <button type="submit" className="btn-submit">Submit Course</button>
+                <Button type="submit" className="rounded px-8 py-2 bg-green-500 hover:bg-green-600 text-white my-4 font-bold uppercase">Submit Course</Button>
             </form>
         </div>
     );
