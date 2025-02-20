@@ -68,6 +68,7 @@ model Course {
   description    String
   thumbnail      String
   introVideo     String     // URL for introduction video
+  pdf            String?
   price          Float
   discount       Float
   certification  String
@@ -90,6 +91,7 @@ model Chapter {
   description String
   videoUrl    String    @default("")
   duration    Int       @default(0)
+  pdf         String?
   courseId    String
   course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
   order       Int      @default(0)
