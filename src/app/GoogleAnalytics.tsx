@@ -2,7 +2,7 @@ import React from 'react';
 import Script from 'next/script';
 
 const GoogleTagManagerAndAnalytics = () => {
-    // const GA_ANALYTICS_ID = process.env.GA_ANALYTICS_ID;
+    const GA_ANALYTICS_ID = process.env.GA_ANALYTICS_ID;
     const GTM_TRACKING_ID = process.env.GTM_TRACKING_ID;
 
     // Check if the environment is production
@@ -35,7 +35,7 @@ const GoogleTagManagerAndAnalytics = () => {
             <Script
                 defer={true}
                 strategy="lazyOnload"
-                src={`https://www.googletagmanager.com/gtag/js?id=G-YQY1RZ50B4`}
+                src={`https://www.googletagmanager.com/gtag/js?id=${GA_ANALYTICS_ID}`}
             />
 
             <Script defer={true} id="google-analytics" strategy="lazyOnload">
@@ -43,7 +43,7 @@ const GoogleTagManagerAndAnalytics = () => {
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', 'G-YQY1RZ50B4', {
+                gtag('config', '${GA_ANALYTICS_ID}', {
                     page_path: window.location.pathname,
                 });
                 `}
