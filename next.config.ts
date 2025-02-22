@@ -17,6 +17,7 @@ const nextConfig: NextConfig = {
     AUTH_SECRET: process.env.NEXT_AUTH_SECRET,
     JWT_SECRET: process.env.NEXT_JWT_SECRET_KEY,
     FACEBOOK_ID: process.env.NEXT_APP_FACEBOOK_ID,
+    GA_ANALYTICS_ID: process.env.NEXT_APP_GA_ANALYTICS_ID,
   }
 };
 
