@@ -19,22 +19,22 @@ import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMe
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import axios from "axios"; // Import Axios
+import { formatterPrice, truncateText } from "@/utils/UnitConvert";
 
-// Define the course type based on your API response
 interface Course {
     id: string;
     name: string;
-    email: string;
-    phoneNumber: string;
-    fatherName: string;
-    motherName: string;
-    address: string;
+    teacher: {
+        name: string;
+    },
 }
 
 export default function AllCourses() {
     const [courses, setCourses] = useState<Course[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+
+    console.log(`This is course : `, courses);
 
     // Fetch course data from API
     useEffect(() => {
@@ -69,22 +69,32 @@ export default function AllCourses() {
         {
             accessorKey: "intro",
             header: () => <div>Intro</div>,
-            cell: ({ row }) => <div className="font-medium">{row.getValue("intro")}</div>,
+            cell: ({ row }) => <div className="font-medium max-w-80">{truncateText(row.getValue("intro"))}</div>,
         },
         {
-            accessorKey: "description",
-            header: () => <div>Description</div>,
-            cell: ({ row }) => <div className="font-medium">{row.getValue("description")}</div>,
+            id: "teacher",
+            header: () => <div>Teacher</div>,
+            cell: ({ row }) => {
+                const teachers = row.original.teacher;
+                const teacherNames = teachers.name !== null
+                    ? teachers.name
+                    : "No teacher assigned";
+                return <div className="font-medium">{teacherNames}</div>;
+            },
         },
         {
             accessorKey: "price",
-            header: () => <div>Price</div>,
-            cell: ({ row }) => <div className="font-medium">{row.getValue("price")}</div>,
+            header: ({ column }) => (
+                <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+                    Price <ArrowUpDown />
+                </Button>
+            ),
+            cell: ({ row }) => <div className="font-medium">₹{formatterPrice(row.getValue("price"))}</div>,
         },
         {
             accessorKey: "discount",
             header: () => <div>Discount</div>,
-            cell: ({ row }) => <div className="font-medium">{row.getValue("discount")}</div>,
+            cell: ({ row }) => <div className="font-medium">{row.getValue("discount")}%</div>,
         },
         {
             id: "actions",

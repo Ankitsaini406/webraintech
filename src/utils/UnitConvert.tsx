@@ -24,3 +24,19 @@ export function createSlug(title: string): string {
         .replace(/[^\w-]+/g, ''); // Remove non-alphanumeric characters except hyphens
 }
 
+export function truncateText(description: string, maxLength = 100) {
+    if (!description) return "";
+    return description.length > maxLength
+        ? `${description.slice(0, maxLength)}...`
+        : description;
+};
+
+export function formatterPrice(amount: number): string {
+    const formatter = new Intl.NumberFormat('en-IN', {
+        style: 'decimal',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+    });
+
+    return formatter.format(amount);
+}

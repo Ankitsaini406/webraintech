@@ -4,13 +4,18 @@ import { NextResponse } from "next/server";
 export async function GET() {
     try {
 
-        const courses = await prisma.course.findMany({});
+        const courses = await prisma.course.findMany({
+            include: {
+                teacher: true,
+            }
+        });
         
-        // if (!courses || courses.length === 0) {
-        //     throw new Error("No courses found in the database.");
-        // }
+        const normalizedCourses = courses.map(course => ({
+            ...course,
+            teacher: course.teacher || [],
+        }));
 
-        return NextResponse.json({ success: true, data: courses }, { status: 200 });
+        return NextResponse.json({ success: true, data: normalizedCourses }, { status: 200 });
 
     } catch (error) {
         if (error instanceof Error) {
