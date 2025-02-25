@@ -1,24 +1,14 @@
 "use client";
 
 import React, { useEffect, useState, useMemo } from "react";
-import {
-    ColumnDef,
-    ColumnFiltersState,
-    SortingState,
-    VisibilityState,
-    flexRender,
-    getCoreRowModel,
-    getFilteredRowModel,
-    getPaginationRowModel,
-    getSortedRowModel,
-    useReactTable,
-} from "@tanstack/react-table";
+import { ColumnDef, ColumnFiltersState, SortingState, VisibilityState, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import axios from "axios"; // Import Axios
+import axios from "axios";
 import { formatterPrice, truncateText } from "@/utils/UnitConvert";
 
 interface Course {
@@ -64,22 +54,59 @@ export default function AllCourses() {
                     Title <ArrowUpDown />
                 </Button>
             ),
-            cell: ({ row }) => <div>{row.getValue("title")}</div>,
+            cell: ({ row }) => {
+                const title = row.getValue("title") as string;
+                return (
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <div className="font-medium max-w-80">{truncateText(title)}</div>
+                            </TooltipTrigger>
+                            <TooltipContent className="max-w-80">
+                                <p>{title}</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+                );
+            },
         },
         {
             accessorKey: "intro",
             header: () => <div>Intro</div>,
-            cell: ({ row }) => <div className="font-medium max-w-80">{truncateText(row.getValue("intro"))}</div>,
+            cell: ({ row }) => {
+                const intro = row.getValue("intro") as string;
+                return (
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <div className="font-medium max-w-80">{truncateText(intro)}</div>
+                            </TooltipTrigger>
+                            <TooltipContent className="max-w-80">
+                                <p>{intro}</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+                );
+            },
         },
         {
             id: "teacher",
             header: () => <div>Teacher</div>,
             cell: ({ row }) => {
-                const teachers = row.original.teacher;
-                const teacherNames = teachers.name !== null
-                    ? teachers.name
+                const teacher = row.original.teacher;
+                const teacherName = teacher && teacher.name && teacher.name !== ''
+                    ? teacher.name
                     : "No teacher assigned";
-                return <div className="font-medium">{teacherNames}</div>;
+                return (
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <div className="font-medium">{teacherName}</div>
+                        </TooltipTrigger>
+                        <TooltipContent className="max-w-80">
+                            <p>{teacherName}</p>
+                        </TooltipContent>
+                    </Tooltip>
+                );
             },
         },
         {
@@ -89,12 +116,40 @@ export default function AllCourses() {
                     Price <ArrowUpDown />
                 </Button>
             ),
-            cell: ({ row }) => <div className="font-medium">₹{formatterPrice(row.getValue("price"))}</div>,
+            cell: ({ row }) => {
+                const price = formatterPrice(row.getValue("price")) as string;
+                return (
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <div className="font-medium">₹{formatterPrice(row.getValue("price"))}</div>
+                            </TooltipTrigger>
+                            <TooltipContent className="max-w-80">
+                                <p>{price}</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+                );
+            },
         },
         {
             accessorKey: "discount",
             header: () => <div>Discount</div>,
-            cell: ({ row }) => <div className="font-medium">{row.getValue("discount")}%</div>,
+            cell: ({ row }) =>{
+                const discount = row.getValue("discount") as string;
+                return (
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                            <div className="font-medium">{row.getValue("discount")}%</div>
+                            </TooltipTrigger>
+                            <TooltipContent className="max-w-80">
+                                <p>{discount}</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+                );
+            },
         },
         {
             id: "actions",
