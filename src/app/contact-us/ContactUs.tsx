@@ -4,6 +4,7 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import { Input, TextArea } from "@/utils/FormFields";
 import { createContactUs } from "@/actions/StudentEnquery";
 import { toast } from "sonner";
+import Image from "next/image";
 
 interface FormData {
     name: string;
@@ -70,21 +71,30 @@ function ContactUs() {
 
     return (
         <div className="flex flex-col gap-4 md:gap-8 mb-8">
-            <div className="relative bg-gradient-to-b from-transparent to-black-opacity-30 h-[300px] w-full">
-                <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-bold text-4xl z-10">Contact Us</h1>
+            <div className="relative bg-gradient-to-b from-transparent to-black-opacity-30 h-[500px] w-full">
+                <div className="absolute inset-0 bg-gradient-to-t from-transparent to-black/40 z-[2]" />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/40 z-[2]" />
+                <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-bold text-6xl z-10 text-white">Contact Us</h1>
+                <Image src='/contactus.webp' alt="Contact Us" title="Contact Us" className="object-cover" fill />
             </div>
             <div className="container px-4">
 
-                <h2 className="font-bold text-3xl text-center mb-4 md:mb-10">Let&apos;s Start a Conversation</h2>
+                <h2 className="font-bold text-xl md:text-3xl text-center mb-4 md:mb-10">Let&apos;s Start a Conversation</h2>
 
-                <div className="flex flex-col md:flex-row mb-4 md:mb-10 gap-5 md:gap-10">
-                    <div className="flex flex-col">
-                        <h3 className="text-2xl font-medium mb-5 md:mb-10">Ask how we can help you:</h3>
-                        <h4 className="text-xl font-semibold mb-2">Address</h4>
-                        <p className="font-light md-4 mb:mb-8 text-gray-600">Opp. Magal Trasport Lines, Near Chandpool gate, Sikar, Rajsthan</p>
+                <div className="flex flex-col md:flex-row mb-4 md:mb-10 gap-5 md:gap-10 md:justify-center">
+                    <div className="flex flex-col md:flex-[0.75]">
+                        <h3 className="text-lg md:text-2xl font-medium mb-5 md:mb-10">Ask how we can help you:</h3>
+                        <h4 className="text-base md:text-xl font-semibold mb-2">Address</h4>
+                        <p className="font-light mb-6 md:mb-10 text-gray-600">Opp. Magal Trasport Lines, Near Chandpool gate, Sikar, Rajsthan</p>
+
+                        <h4 className="text-base md:text-xl font-semibold mb-2">Phone Number</h4>
+                        <p className="font-light mb-6 md:mb-10 text-gray-600">+91 8233101033</p>
+
+                        <h4 className="text-base md:text-xl font-semibold mb-2">Email</h4>
+                        <a href="mailto:info@webraintech.in" className="font-light mb-6 md:mb-10 text-gray-600">info@webraintech.in</a>
                     </div>
 
-                    <div className="flex-1">
+                    <div className="flex-1 lg:flex-[0.75]">
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <Input
                                 name="name"
