@@ -35,7 +35,7 @@ const GoogleTagManagerAndAnalytics = () => {
             <Script
                 defer={true}
                 strategy="lazyOnload"
-                src={`https://www.googletagmanager.com/gtag/js?id=G-YQY1RZ50B4`}
+                src={`https://www.googletagmanager.com/gtag/js?id=G-PHCR44PB4E`}
             />
 
             <Script defer={true} id="google-analytics" strategy="lazyOnload">
@@ -43,7 +43,7 @@ const GoogleTagManagerAndAnalytics = () => {
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', 'G-YQY1RZ50B4', {
+                gtag('config', 'G-PHCR44PB4E', {
                     page_path: window.location.pathname,
                 });
                 `}

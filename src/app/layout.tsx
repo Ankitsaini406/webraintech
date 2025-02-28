@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import ChildLayout from "./childlayout";
 import "./globals.css";
 import FacebookAnalytics from "./FacebookAnalytics";
+import GoogleTagManagerAndAnalytics from "./GoogleAnalytics";
 
 const apiPoint = process.env.NODE_ENV === "development" ? process.env.API_URL : process.env.HOST_URL;
 
@@ -81,6 +82,7 @@ export default function RootLayout({
         <meta name="twitter:image" content="/favicon-192.png" />
         <meta name="twitter:url" content={apiPoint || "https://webraintech.in/"} />
 
+        <GoogleTagManagerAndAnalytics />
         <FacebookAnalytics />
       </head>
       <body className="antialiased flex flex-col min-h-screen bg-background text-foreground selection:bg-blue-600 selection:text-white dark:selection:text-blue-600 dark:selection:bg-white">
