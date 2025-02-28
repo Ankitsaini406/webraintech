@@ -14,10 +14,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 export function Input({ title, placeholder, value, name, onChange, type = 'text', error, className }: {
     title: string;
-    placeholder?: string;
     value: string | number;
     name: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    placeholder?: string;
     type?: string;
     error?: string;
     className?: string;
@@ -56,6 +56,7 @@ export function TextArea({ title, value, name, onChange, error, className }: {
                 name={name}
                 onChange={onChange}
                 placeholder={title}
+                rows={4}
                 className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-1 sm:text-sm 
                     ${error ? 'border-red-500 focus:ring-red-500 dark:border-red-500 dark:focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400'} 
                     dark:bg-gray-700 dark:text-white ${className}`}

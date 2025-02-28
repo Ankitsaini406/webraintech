@@ -1,13 +1,135 @@
+'use client';
+
+import { useState, ChangeEvent, FormEvent } from "react";
+import { Input, TextArea } from "@/utils/FormFields";
+import { createContactUs } from "@/actions/StudentEnquery";
+import { toast } from "sonner";
+
+interface FormData {
+    name: string;
+    email: string;
+    phoneNumber: string;
+    message: string;
+}
 function ContactUs() {
+
+    const [formData, setFormData] = useState<FormData>({
+        name: "",
+        email: "",
+        phoneNumber: "",
+        message: "",
+    });
+    const [isLoading, setIsLoading] = useState(false);
+    const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
+
+    const validateForm = () => {
+        const newErrors: { [key: string]: string } = {};
+        if (!formData.name) newErrors.name = "Name is required";
+        if (!formData.message) newErrors.message = "Enter your message";
+        if (!formData.email) newErrors.email = "Email is required";
+        if (formData.phoneNumber === "+91" || formData.phoneNumber.length < 13) {
+            newErrors.phoneNumber = "Valid phone number is required";
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (!validateForm()) {
+            return;
+        }
+
+        setIsLoading(true);
+
+        try {
+            await createContactUs(new FormData(e.target as HTMLFormElement));
+            setFormData({
+                name: "",
+                email: "",
+                phoneNumber: "",
+                message: "",
+            });
+            toast.success("Enquery submitted successfully");
+        } catch (error) {
+            toast.error("Error submitting form");
+            console.error("Error submitting form:", error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return (
         <div className="flex flex-col gap-4 md:gap-8 mb-8">
             <div className="relative bg-gradient-to-b from-transparent to-black-opacity-30 h-[300px] w-full">
                 <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-bold text-4xl z-10">Contact Us</h1>
             </div>
-            <div className="container">
+            <div className="container px-4">
 
-                <div>
-                    
+                <h2 className="font-bold text-3xl text-center mb-4 md:mb-10">Let&apos;s Start a Conversation</h2>
+
+                <div className="flex flex-col md:flex-row mb-4 md:mb-10 gap-5 md:gap-10">
+                    <div className="flex flex-col">
+                        <h3 className="text-2xl font-medium mb-5 md:mb-10">Ask how we can help you:</h3>
+                        <h4 className="text-xl font-semibold mb-2">Address</h4>
+                        <p className="font-light md-4 mb:mb-8 text-gray-600">Opp. Magal Trasport Lines, Near Chandpool gate, Sikar, Rajsthan</p>
+                    </div>
+
+                    <div className="flex-1">
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                            <Input
+                                name="name"
+                                title="Name"
+                                type="text"
+                                placeholder="Full Name"
+                                onChange={handleChange}
+                                value={formData.name}
+                                error={errors.name}
+                            />
+                            <Input
+                                name="email"
+                                title="Email"
+                                type="email"
+                                placeholder="Your Email"
+                                onChange={handleChange}
+                                value={formData.email}
+                                error={errors.email}
+                            />
+                            <Input
+                                name="phoneNumber"
+                                title="Phone Number"
+                                type="tel"
+                                placeholder="+91 Enter Your Number"
+                                onChange={handleChange}
+                                value={formData.phoneNumber}
+                                error={errors.phoneNumber}
+                            />
+                            <TextArea
+                                name="message"
+                                title="Message"
+                                onChange={handleChange}
+                                value={formData.message}
+                                className="w-full p-2 border rounded-md"
+                                error={errors.message}
+                            />
+                            <button
+                                type="submit"
+                                className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+                                disabled={isLoading}
+                            >
+                                {isLoading ? "Submitting..." : "Submit"}
+                            </button>
+                        </form>
+                    </div>
                 </div>
 
                 <div className="w-full h-[400px] m-auto">

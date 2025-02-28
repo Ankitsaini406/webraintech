@@ -14,3 +14,14 @@ export async function createEnquery(formData: FormData) {
         }
     });
 }
+
+export async function createContactUs(formData: FormData) {
+    await prisma.contactUs.create({
+        data: {
+            name: formData.get("name") as string,
+            email: formData.get("email") as string,
+            phoneNumber: formData.get("phoneNumber") as string,
+            message: formData.get("message") as string,
+        }
+    });
+}

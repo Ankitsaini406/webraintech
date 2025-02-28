@@ -18,6 +18,15 @@ model Enquery {
   createdAt   DateTime @default(now())
 }
 
+model ContactUs {
+  id          Int      @id @default(autoincrement())
+  name        String
+  email       String
+  message     String
+  phoneNumber String
+  createdAt   DateTime @default(now())
+}
+
 enum Role {
   STUDENT
   TEACHER
