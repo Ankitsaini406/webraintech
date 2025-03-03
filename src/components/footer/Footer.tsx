@@ -70,8 +70,8 @@ function Footer() {
 
                         <div className="hidden md:flex flex-col gap-2 sm:gap-4 items-start">
                             <h5 className="font-bold text-xl sm:text-2xl">Ouick Links</h5>
-                            <Link className="hover:text-red-500 transition-all duration-300" href='/' >Abouts Us</Link>
-                            <Link className="hover:text-red-500 transition-all duration-300" href='/' >Contact Us</Link>
+                            <Link className="hover:text-red-500 transition-all duration-300" href='/about-us' >Abouts Us</Link>
+                            <Link className="hover:text-red-500 transition-all duration-300" href='/contact-us' >Contact Us</Link>
                             <Link className="hover:text-red-500 transition-all duration-300" href='/' >Support Center</Link>
                             <Link className="hover:text-red-500 transition-all duration-300" href='/' >Blog Post</Link>
                             <Link className="hover:text-red-500 transition-all duration-300" href='/' >Careers</Link>
@@ -92,8 +92,8 @@ function Footer() {
                             <AccordionItem value="item-1">
                                 <AccordionTrigger className="text-base py-4">Courses</AccordionTrigger>
                                 <AccordionContent className="pl-8 pt-4 text-lg">
-                                    <Link className="hover:text-red-500 transition-all duration-300" href="/about-us"><AccordionContent>Web Technlogy</AccordionContent></Link>
-                                    <Link className="hover:text-red-500 transition-all duration-300" href="/contact-us"><AccordionContent>AI Python</AccordionContent></Link>
+                                    <Link className="hover:text-red-500 transition-all duration-300" href="/"><AccordionContent>Web Technlogy</AccordionContent></Link>
+                                    <Link className="hover:text-red-500 transition-all duration-300" href="/"><AccordionContent>AI Python</AccordionContent></Link>
                                     <Link className="hover:text-red-500 transition-all duration-300" href="/"><AccordionContent>Ethical Hacking</AccordionContent></Link>
                                     <Link className="hover:text-red-500 transition-all duration-300" href="/"><AccordionContent>Digital Marketing</AccordionContent></Link>
                                     <Link className="hover:text-red-500 transition-all duration-300 pb-4" href="/"><AccordionContent>Graphic Animation</AccordionContent></Link>
