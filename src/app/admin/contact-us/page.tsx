@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllUsers } from "@/store/actions/UserActions";
+import { fetchContactUs } from "@/store/actions/ContactUsAction";
 import { AppDispatch, RootState } from "@/store/store";
-import { Users } from "@/utils/InitialState";
 import {
     ColumnDef,
     ColumnFiltersState,
@@ -38,28 +37,26 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-const AllStudents = () => {
+interface ContactUs {
+    id: number;
+    name: string;
+    email: string;
+    message: string;
+    phoneNumber: string;
+}
+
+export default function ContactUsPage() {
     const dispatch = useDispatch<AppDispatch>();
-    const { user, loading, error } = useSelector(
-        (state: RootState) => state.user
+    const { contactUs, loading, error } = useSelector(
+        (state: RootState) => state.contactus
     );
-
-    const [roleFilter, setRoleFilter] = useState("STUDENT");
 
     useEffect(() => {
-        dispatch(fetchAllUsers());
+        dispatch(fetchContactUs());
     }, [dispatch]);
 
-    const persons = useMemo(() =>
-        Array.isArray(user)
-            ? user.filter((user: Users) => user.role === roleFilter)
-            : [],
-        [user, roleFilter]
-    );
-
-    const columns: ColumnDef<Users>[] = [
+    const columns: ColumnDef<ContactUs>[] = [
         {
             accessorKey: "name",
             header: ({ column }) => (
@@ -84,35 +81,21 @@ const AllStudents = () => {
             accessorKey: "phoneNumber",
             header: () => <div>Phone Number</div>,
             cell: ({ row }) => (
-                <div className="font-medium">{row.getValue("phoneNumber")}</div>
+                <div className="font-medium">{row.getValue("phoneNumber") || "N/A"}</div>
             ),
         },
         {
-            accessorKey: "fatherName",
-            header: () => <div>Father Name</div>,
+            accessorKey: "message",
+            header: () => <div>Message</div>,
             cell: ({ row }) => (
-                <div className="font-medium">{row.getValue("fatherName")}</div>
-            ),
-        },
-        {
-            accessorKey: "motherName",
-            header: () => <div>Mother Name</div>,
-            cell: ({ row }) => (
-                <div className="font-medium">{row.getValue("motherName")}</div>
-            ),
-        },
-        {
-            accessorKey: "address",
-            header: () => <div>Address</div>,
-            cell: ({ row }) => (
-                <div className="font-medium">{row.getValue("address")}</div>
+                <div className="font-medium">{row.getValue("message") || "N/A"}</div>
             ),
         },
         {
             id: "actions",
             enableHiding: false,
             cell: ({ row }) => {
-                const student = row.original;
+                const contact = row.original;
 
                 return (
                     <DropdownMenu>
@@ -125,12 +108,11 @@ const AllStudents = () => {
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
                             <DropdownMenuItem
-                                onClick={() => navigator.clipboard.writeText(student.id)}
+                                onClick={() => navigator.clipboard.writeText(String(contact.id))}
                             >
-                                Copy student ID
+                                Copy Contact ID
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
-                            <DropdownMenuItem>View student</DropdownMenuItem>
                             <DropdownMenuItem>View details</DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
@@ -145,7 +127,7 @@ const AllStudents = () => {
     const [rowSelection, setRowSelection] = useState({});
 
     const table = useReactTable({
-        data: persons,
+        data: contactUs,
         columns,
         onSortingChange: setSorting,
         onColumnFiltersChange: setColumnFilters,
@@ -174,18 +156,6 @@ const AllStudents = () => {
                     }
                     className="max-w-sm"
                 />
-                <Select
-                    onValueChange={(value) => setRoleFilter(value)}
-                    value={roleFilter}
-                >
-                    <SelectTrigger className="w-[200px] dark:bg-gray-700 dark:text-white">
-                        <SelectValue placeholder="Select Role" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value="STUDENT">Student</SelectItem>
-                        <SelectItem value="TEACHER">Teacher</SelectItem>
-                    </SelectContent>
-                </Select>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="outline" className="ml-auto">
@@ -209,7 +179,7 @@ const AllStudents = () => {
                     </DropdownMenuContent>
                 </DropdownMenu>
             </div>
-            {error }
+            {error && <p className="text-red-500">{error}</p>}
             {loading ? (
                 <div className="space-y-4">
                     {[...Array(5)].map((_, index) => (
@@ -297,6 +267,4 @@ const AllStudents = () => {
             </div>
         </div>
     );
-};
-
-export default AllStudents;
+}

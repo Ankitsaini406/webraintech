@@ -3,7 +3,7 @@
 import clsx from "clsx"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ChevronRight, Home, UserPlus, UsersIcon, type LucideIcon } from "lucide-react"
+import { ChevronRight, Contact, Home, UserPlus, UsersIcon, type LucideIcon } from "lucide-react"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem } from "@/components/ui/sidebar"
 
@@ -26,6 +26,7 @@ export function NavMain({ items }: { items: NavItem[] }) {
         <SidebarLink title="Home" url="/admin" icon={Home} />
         <SidebarLink title="Add Person" url="/admin/add-person" icon={UserPlus} />
         <SidebarLink title="All Persons" url="/admin/all-persons" icon={UsersIcon} />
+        <SidebarLink title="Contact Us" url="/admin/contact-us" icon={Contact} />
 
         {/* Dynamic Menu Items */}
         {items.map((item) => {
