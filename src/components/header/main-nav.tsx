@@ -17,7 +17,7 @@ function MainNav() {
 
     const services = [
         { title: "Career Counselling", href: "/" },
-        { title: "Placement", href: "/" },
+        { title: "Placement", href: "/placement" },
     ];
 
     return (

@@ -47,7 +47,7 @@ function MobileNav() {
         },
         {
             title: "Placement",
-            href: "/",
+            href: "/placement" ,
         },
     ]
 
