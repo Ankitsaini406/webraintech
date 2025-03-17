@@ -249,7 +249,7 @@ export function Events() {
                 <div className="flex gap-4 sm:gap-8 overflow-x-auto w-full">
                     {
                         eventData.map((item, index) => (
-                            <Link key={item.title} href='/'>
+                            <div key={item.title} >
                                 <div
                                     className={`w-60 sm:w-60 lg:w-96 flex-shrink-0 flex flex-col items-start cursor-pointer transition-all duration-300 p-4 
                                     ${index === 0 ? "hover:bg-custom-purple hover:text-white" : ""}
@@ -265,7 +265,7 @@ export function Events() {
                                     <h3 className="py-2 sm:py-4 text-base sm:text-xl font-bold">{item.title}</h3>
                                     <h4>{item.description}</h4>
                                 </div>
-                            </Link>
+                            </div>
                         ))
                     }
                 </div>
