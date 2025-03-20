@@ -1,5 +1,3 @@
-"use client";
-
 import { ButtonBlack, ButtonLink, ButtonWhite } from "@/utils/Buttons";
 import Image from "next/image";
 import Link from "next/link";
