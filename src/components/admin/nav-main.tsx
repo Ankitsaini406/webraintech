@@ -5,7 +5,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { ChevronRight, Contact, Home, UserPlus, UsersIcon, type LucideIcon } from "lucide-react"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
-import { SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem } from "@/components/ui/sidebar"
+import { SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem } from "@/components/ui/sidebar"
 
 interface NavItem {
   title: string;
@@ -81,6 +81,7 @@ const SidebarLink = ({ title, url, icon: Icon }: { title: string; url: string; i
           <span className="flex items-center gap-2">
             {Icon && <Icon />}
             <span>{title}</span>
+            <SidebarMenuBadge>10</SidebarMenuBadge>
           </span>
         </SidebarMenuButton>
       </Link>

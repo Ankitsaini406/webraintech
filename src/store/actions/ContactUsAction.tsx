@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const fetchContactUs = createAsyncThunk(
     'contactUs/fetchContactUs',
-    async (_, { rejectWithValue }) => { 
+    async (_, { rejectWithValue }) => {
         try {
             const response = await axios.get('/api/contact-us');
             if (!response.data.success) {
@@ -19,12 +19,31 @@ export const fetchContactUs = createAsyncThunk(
     }
 );
 
+export const markContactAsRead = createAsyncThunk(
+    'contactUs/markAsRead',
+    async (id: number, { rejectWithValue }) => {
+        try {
+            const response = await axios.put(`/api/contact-us/${id}/update`);
+            if (!response.data.success) {
+                throw new Error(response.data.message || 'Failed to mark contact as read');
+            }
+            return id;
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                return rejectWithValue(error.response?.data?.message || 'Failed to mark contact as read');
+            }
+            return rejectWithValue('An unexpected error occurred');
+        }
+    }
+)
+
 interface ContactUs {
     id: number;
     name: string;
     email: string;
     message: string;
     phoneNumber: string;
+    read: boolean;
 }
 
 interface ContactUsState {
@@ -56,6 +75,12 @@ const contactUsSlice = createSlice({
             .addCase(fetchContactUs.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload as string;
+            })
+            .addCase(markContactAsRead.fulfilled, (state, action) => {
+                const index = state.contactUs.findIndex((c) => c.id === action.payload);
+                if (index !== -1) {
+                    state.contactUs[index].read = true;
+                }
             });
     },
 });

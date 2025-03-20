@@ -15,6 +15,7 @@ model Enquery {
   message     String
   fatherName  String
   phoneNumber String
+  read        Boolean @default(false)
   createdAt   DateTime @default(now())
 }
 
@@ -24,6 +25,7 @@ model ContactUs {
   email       String
   message     String
   phoneNumber String
+  read        Boolean @default(false)
   createdAt   DateTime @default(now())
 }
 
@@ -171,6 +173,7 @@ model NewsLetter {
   id          String   @id @default(cuid())
   email       String   @unique
   subscribed  Boolean
+  read        Boolean @default(false)
   updatedAt   DateTime @updatedAt
   createdAt   DateTime @default(now())
 }

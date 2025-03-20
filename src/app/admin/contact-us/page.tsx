@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchContactUs } from "@/store/actions/ContactUsAction";
+import { fetchContactUs, markContactAsRead } from "@/store/actions/ContactUsAction";
 import { AppDispatch, RootState } from "@/store/store";
 import {
     ColumnDef,
@@ -44,6 +44,7 @@ interface ContactUs {
     email: string;
     message: string;
     phoneNumber: string;
+    read: boolean;
 }
 
 export default function ContactUsPage() {
@@ -51,6 +52,10 @@ export default function ContactUsPage() {
     const { contactUs, loading, error } = useSelector(
         (state: RootState) => state.contactus
     );
+
+    const handleMarkAsRead = (id: number) => {
+        dispatch(markContactAsRead(id));
+    };
 
     useEffect(() => {
         dispatch(fetchContactUs());
@@ -113,7 +118,7 @@ export default function ContactUsPage() {
                                 Copy Contact ID
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
-                            <DropdownMenuItem>View details</DropdownMenuItem>
+                            {contact.read ? <DropdownMenuItem>Readed</DropdownMenuItem> : <DropdownMenuItem onClick={() => handleMarkAsRead(contact.id)}>Mark as Read</DropdownMenuItem>}
                         </DropdownMenuContent>
                     </DropdownMenu>
                 );
@@ -215,21 +220,26 @@ export default function ContactUsPage() {
                         </TableHeader>
                         <TableBody>
                             {table.getRowModel().rows?.length ? (
-                                table.getRowModel().rows.map((row) => (
-                                    <TableRow
-                                        key={row.id}
-                                        data-state={row.getIsSelected() && "selected"}
-                                    >
-                                        {row.getVisibleCells().map((cell) => (
-                                            <TableCell key={cell.id}>
-                                                {flexRender(
-                                                    cell.column.columnDef.cell,
-                                                    cell.getContext()
-                                                )}
-                                            </TableCell>
-                                        ))}
-                                    </TableRow>
-                                ))
+                                table.getRowModel().rows.map((row) => {
+                                    const contact = row.original as ContactUs;
+
+                                    return (
+                                        <TableRow
+                                            key={row.id}
+                                            data-state={row.getIsSelected() && "selected"}
+                                            className={contact.read ? "bg-gray-100 dark:bg-gray-800" : ""}
+                                        >
+                                            {row.getVisibleCells().map((cell) => (
+                                                <TableCell key={cell.id}>
+                                                    {flexRender(
+                                                        cell.column.columnDef.cell,
+                                                        cell.getContext()
+                                                    )}
+                                                </TableCell>
+                                            ))}
+                                        </TableRow>
+                                    );
+                                })
                             ) : (
                                 <TableRow>
                                     <TableCell colSpan={columns.length} className="h-24 text-center">
