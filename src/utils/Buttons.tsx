@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { RefreshCcw } from "lucide-react";
 import { motion } from "framer-motion";
-import { useState } from "react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 // White Button component
@@ -88,28 +87,21 @@ export const BuyButton = forwardRef<
 BuyButton.displayName = "BuyButton";
 
 export default function RefreshButton({ handleRefresh }: { handleRefresh: () => void }) {
-    const [isRotating, setIsRotating] = useState(false);
-
-    const handleClick = () => {
-        setIsRotating(true);
-        handleRefresh();
-
-        setTimeout(() => setIsRotating(false), 1000);
-    };
-
     return (
         <TooltipProvider>
             <Tooltip>
-                <TooltipTrigger><motion.button
-                    onClick={handleClick}
-                    animate={{ rotate: isRotating ? 360 : 0 }}
-                    transition={{ duration: 1, ease: "linear" }}
-                    className="p-2 rounded-full hover:bg-gray-200 transition"
-                >
-                    <RefreshCcw />
-                </motion.button></TooltipTrigger>
+                <TooltipTrigger asChild>
+                    <motion.button
+                        onClick={handleRefresh}
+                        whileTap={{ rotate: 360 }}
+                        transition={{ duration: 1, ease: "linear" }}
+                        className="p-2 rounded-full hover:bg-gray-200 transition"
+                    >
+                        <RefreshCcw />
+                    </motion.button>
+                </TooltipTrigger>
                 <TooltipContent>
-                    <p>Refersh</p>
+                    <p>Refresh</p>
                 </TooltipContent>
             </Tooltip>
         </TooltipProvider>

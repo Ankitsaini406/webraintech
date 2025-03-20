@@ -3,9 +3,11 @@
 import clsx from "clsx"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ChevronRight, Contact, Home, UserPlus, UsersIcon, type LucideIcon } from "lucide-react"
+import { ChevronRight, Contact, Home, UserPlus, UsersIcon, Rss, MessageSquareDot, type LucideIcon } from "lucide-react"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem } from "@/components/ui/sidebar"
+import { useEffect, useState } from "react"
+import axios from "axios"
 
 interface NavItem {
   title: string;
@@ -17,6 +19,35 @@ interface NavItem {
 export function NavMain({ items }: { items: NavItem[] }) {
 
   const pathname = usePathname();
+  const [unreadCounts, setUnreadCounts] = useState({
+    // enquery: 0,
+    contactus: 0,
+    newsletter: 0,
+  })
+
+  useEffect(() => {
+    async function fetchUnReadCounts() {
+      try {
+        const [contactusRes, newsletterRes ] = await Promise.all([
+          axios.get('/api/contact-us/unread-count'),
+          axios.get('/api/newsletter/unread-count'),
+        ]);
+
+        setUnreadCounts({
+          // enquery: enqueryRes.data.count,
+          contactus: contactusRes.data.count,
+          newsletter: newsletterRes.data.count,
+        });
+      } catch (error) {
+        console.error("Error fetching unread counts:", error);
+      }
+    }
+
+    fetchUnReadCounts();
+    const interval = setInterval(fetchUnReadCounts, 100000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <SidebarGroup>
@@ -26,7 +57,11 @@ export function NavMain({ items }: { items: NavItem[] }) {
         <SidebarLink title="Home" url="/admin" icon={Home} />
         <SidebarLink title="Add Person" url="/admin/add-person" icon={UserPlus} />
         <SidebarLink title="All Persons" url="/admin/all-persons" icon={UsersIcon} />
-        <SidebarLink title="Contact Us" url="/admin/contact-us" icon={Contact} />
+
+        {/* Dynamic Unread Data */}        
+        <SidebarLink title="Enquery" url="/admin/enquery" icon={MessageSquareDot} />
+        <SidebarLink title="Contact Us" url="/admin/contact-us" icon={Contact} unreadCount={unreadCounts.contactus} />
+        <SidebarLink title="News Letter" url="/admin/news-letter" icon={Rss} unreadCount={unreadCounts.newsletter} />
 
         {/* Dynamic Menu Items */}
         {items.map((item) => {
@@ -63,7 +98,7 @@ export function NavMain({ items }: { items: NavItem[] }) {
   );
 }
 
-const SidebarLink = ({ title, url, icon: Icon }: { title: string; url: string; icon?: LucideIcon }) => {
+const SidebarLink = ({ title, url, icon: Icon, unreadCount = 0 }: { title: string; url: string; icon?: LucideIcon; unreadCount?: number }) => {
   const pathname = usePathname();
   const isActive = pathname === url;
 
@@ -81,7 +116,7 @@ const SidebarLink = ({ title, url, icon: Icon }: { title: string; url: string; i
           <span className="flex items-center gap-2">
             {Icon && <Icon />}
             <span>{title}</span>
-            <SidebarMenuBadge>10</SidebarMenuBadge>
+            {unreadCount > 0 && <SidebarMenuBadge>{unreadCount}</SidebarMenuBadge>}
           </span>
         </SidebarMenuButton>
       </Link>
