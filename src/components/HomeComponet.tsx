@@ -1,7 +1,10 @@
+"use client";
+
 import { ButtonBlack, ButtonLink, ButtonWhite } from "@/utils/Buttons";
 import Image from "next/image";
 import Link from "next/link";
 import StudentEnquery from "./dialogs/StudentEnquery";
+import { HorizontalScroll } from "@/utils/Slider";
 
 export function Enroll() {
 
@@ -9,72 +12,69 @@ export function Enroll() {
         {
             title: "Web Technology",
             description: "Our Web Technology course teaches front-end and back-end development with frameworks and databases, preparing students for careers as developers or designers.",
-            images: '/courses/web-tech.webp',
+            image: '/courses/web-tech.webp',
+            href: '/',
         },
         {
             title: "AI Python",
             description: "The AI Python course covers Python programming, machine learning, deep learning, and data science, preparing students for careers in AI, data analysis, and development.",
-            images: '/courses/ai-python.webp',
+            image: '/courses/ai-python.webp',
+            href: '/',
         },
         {
             title: "Ethical Hacking",
             description: "Our Ethical Hacking course covers penetration testing, network security, and tools, preparing students for certifications like CEH and careers in cybersecurity.",
-            images: '/courses/ethical-hacking.webp',
+            image: '/courses/ethical-hacking.webp',
+            href: '/',
         },
         {
             title: "Digital Marketing",
             description: "The Digital Marketing course covers SEO, social media, PPC, content marketing, and analytics, preparing students for careers in digital marketing and campaign management.",
-            images: '/courses/digital-marketing.webp',
+            image: '/courses/digital-marketing.webp',
+            href: '/',
         },
         {
             title: "Graphic Animation",
             description: "This course covers animation and VFX using Adobe Animate, After Effects, and Blender, preparing students for careers in animation, design, and multimedia.",
-            images: '/courses/graphic-design.webp',
+            image: '/courses/graphic-design.webp',
+            href: '/',
         },
         {
             title: "German Language",
             description: "Our German Language course improves speaking, listening, reading, and writing skills, building grammar and vocabulary for careers in translation, teaching, and international business.",
-            images: '/courses/german.webp',
+            image: '/courses/german.webp',
+            href: '/',
         },
         {
             title: "Spoken English",
             description: "This course improves speaking, listening, and conversational skills, enhancing pronunciation, vocabulary, and grammar for careers in teaching, customer service, and business.",
-            images: '/courses/spoken-english.webp',
+            image: '/courses/spoken-english.webp',
+            href: '/',
         },
-    ]
+    ];
 
     return (
         <div className="mb-7 p-4 sm:p-8 bg-gray-100 dark:bg-zinc-800">
             <div className="container">
-                {/* <p className="pb-6 text-red-500">Enroll</p> */}
-                <h1 className="text-4xl sm:text-5xl font-bold mb-6 sm:w-full">Start Your Future IT Journey With Us.</h1>
-                <h2 className="w-full sm:w-3/4 xl:w-1/2 pb-8">Enrolling in our courses is hassle-free & choose your course, sign up, and start learning today!</h2>
+                <h1 className="text-4xl sm:text-5xl font-bold mb-6 sm:w-full">
+                    Start Your Future IT Journey With Us.
+                </h1>
+                <h2 className="w-full sm:w-3/4 xl:w-1/2 pb-8">
+                    Enrolling in our courses is hassle-free & choose your course, sign up, and start learning today!
+                </h2>
 
-                {/* Card Items */}
-                <div className="flex gap-4 sm:gap-8 overflow-x-auto w-full">
-                    {
-                        enrollData.map((item) => (
-                            <div key={item.title} className="w-60 sm:w-60 lg:w-96 flex-shrink-0 flex flex-col items-start cursor-pointer hover:bg-red-500 hover:text-white transition-all duration-300 p-4">
-
-                                <div className="bg-gradient-to-b from-transparent to-black/30 aspect-square w-full overflow-hidden relative z-10">
-                                    <Image className="object-cover h-full hover:scale-105 transition-transform duration-300" src={item.images} alt={item.images} width={720} height={300} />
-                                </div>
-                                <h3 className="py-2 sm:py-4 text-base sm:text-xl font-bold">{item.title}</h3>
-                                <h4>{item.description}</h4>
-                            </div>
-                        ))
-                    }
-                </div>
+                {/* Scroll Buttons */}
+                <HorizontalScroll data={enrollData} />
 
                 <div className="flex gap-8 items-center mt-4 sm:mt-8">
-                    <Link href='/courses'>
+                    <Link href="/courses">
                         <ButtonWhite title="Learn More" />
                     </Link>
                     <StudentEnquery />
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export function FeatureSection() {
@@ -215,26 +215,31 @@ export function Events() {
             image: "/events/ai-pyhon.webp",
             title: "AI Python – Join Our Exclusive Workshop!",
             description: "Are you ready to dive into the world of Artificial Intelligence and Python? Join our exclusive AI & Python Seminar and equip yourself with the knowledge to stay ahead in the tech industry!",
+            href: '/contact-us',
         },
         {
             image: "/events/web-technology.webp",
             title: "Join Our Web Technology Workshop – Learn Fast!",
             description: "Want to build stunning websites and web apps? Join our Web Technology Workshop and kickstart your journey in web development!",
+            href: '/contact-us',
         },
         {
             image: "/events/digital-marketing.webp",
             title: "🚀 Join Our Free Digital Marketing Workshop! 🎯",
             description: "Take your digital marketing skills to the next level! 🌟 Whether you're a beginner or want to sharpen your expertise, this 3-day workshop is perfect for you.",
+            href: '/contact-us',
         },
         {
             image: "/events/gaphic-design.webp",
             title: "🚀 3-Day Graphic Design Workshop",
             description: "Want to master the art of graphic design? Join us for a FREE 3-Day Workshop and take your design skills to the next level!",
+            href: '/contact-us',
         },
         {
             image: "/events/cyber-security.webp",
             title: "🚨 FREE Cyber Security Workshop – Limited Seats! 🚨",
             description: "Cyber threats are everywhere, but you can protect yourself! Join our FREE Cyber Security Workshop and learn how to safeguard your personal and professional data from cybercriminals.",
+            href: '/contact-us',
         },
     ];
 
@@ -245,30 +250,7 @@ export function Events() {
                 <h1 className="text-2xl sm:text-5xl font-bold mb-6">Explore Our Exciting Events</h1>
                 <h2 className="w-full sm:text-xl pb-8">Join our carefully curated events to gain hands-on experience and expand your knowledge.</h2>
 
-                {/* Card Items */}
-                <div className="flex gap-4 sm:gap-8 overflow-x-auto w-full">
-                    {
-                        eventData.map((item, index) => (
-                            <Link key={item.title} href='/contact-us'>
-                                <div
-                                    className={`w-60 sm:w-60 lg:w-96 flex-shrink-0 flex flex-col items-start cursor-pointer transition-all duration-300 p-4 
-                                    ${index === 0 ? "hover:bg-custom-purple hover:text-white" : ""}
-                                    ${index === 1 ? "hover:bg-custom-blue hover:text-white" : ""}
-                                    ${index === 2 ? "hover:bg-custom-gold hover:text-white" : ""}
-                                    ${index === 3 ? "hover:bg-custom-mahroon hover:text-white" : ""}
-                                    ${index === 4 ? "hover:bg-black hover:text-white" : ""}
-                                `}
-                                >
-                                    <div className="bg-gradient-to-b from-transparent to-black/30 aspect-square w-full overflow-hidden relative z-10">
-                                        <Image className="object-cover h-full hover:scale-105 transition-transform duration-300" src={item.image} alt={item.image} width={720} height={300} />
-                                    </div>
-                                    <h3 className="py-2 sm:py-4 text-base sm:text-xl font-bold">{item.title}</h3>
-                                    <h4>{item.description}</h4>
-                                </div>
-                            </Link>
-                        ))
-                    }
-                </div>
+                <HorizontalScroll data={eventData} />
             </div>
         </div>
     )
