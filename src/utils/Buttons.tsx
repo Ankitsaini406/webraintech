@@ -1,6 +1,9 @@
 import React, { forwardRef } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { RefreshCcw } from "lucide-react";
+import { motion } from "framer-motion";
+import { useState } from "react";
 
 // White Button component
 export function ButtonWhite({ title }: { title: string }) {
@@ -83,3 +86,24 @@ export const BuyButton = forwardRef<
 
 BuyButton.displayName = "BuyButton";
 
+export default function RefreshButton({ handleRefresh }: { handleRefresh: () => void }) {
+    const [isRotating, setIsRotating] = useState(false);
+
+    const handleClick = () => {
+        setIsRotating(true);
+        handleRefresh();
+
+        setTimeout(() => setIsRotating(false), 1000);
+    };
+
+    return (
+        <motion.button
+            onClick={handleClick}
+            animate={{ rotate: isRotating ? 360 : 0 }}
+            transition={{ duration: 1, ease: "linear" }}
+            className="p-2 rounded-full hover:bg-gray-200 transition"
+        >
+            <RefreshCcw />
+        </motion.button>
+    );
+}

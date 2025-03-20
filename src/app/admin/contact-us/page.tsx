@@ -37,6 +37,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
+import RefreshButton from "@/utils/Buttons";
 
 interface ContactUs {
     id: number;
@@ -52,6 +53,10 @@ export default function ContactUsPage() {
     const { contactUs, loading, error } = useSelector(
         (state: RootState) => state.contactus
     );
+
+    const handleRefresh = () => {
+        dispatch(fetchContactUs());
+    }
 
     const handleMarkAsRead = (id: number) => {
         dispatch(markContactAsRead(id));
@@ -152,6 +157,7 @@ export default function ContactUsPage() {
 
     return (
         <div className="w-full px-8">
+            <RefreshButton handleRefresh={handleRefresh} />
             <div className="flex items-center py-4">
                 <Input
                     placeholder="Filter names..."
