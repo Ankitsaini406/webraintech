@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { RefreshCcw } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 // White Button component
 export function ButtonWhite({ title }: { title: string }) {
@@ -64,11 +65,11 @@ export function FormButton({ title, disabled, className }: { title: string; disa
 }
 
 export const BuyButton = forwardRef<
-    HTMLButtonElement, 
-    { 
-        title: string; 
-        disabled?: boolean; 
-        className?: string; 
+    HTMLButtonElement,
+    {
+        title: string;
+        disabled?: boolean;
+        className?: string;
     }
 >(({ title, disabled, className }, ref) => {
     return (
@@ -97,13 +98,20 @@ export default function RefreshButton({ handleRefresh }: { handleRefresh: () => 
     };
 
     return (
-        <motion.button
-            onClick={handleClick}
-            animate={{ rotate: isRotating ? 360 : 0 }}
-            transition={{ duration: 1, ease: "linear" }}
-            className="p-2 rounded-full hover:bg-gray-200 transition"
-        >
-            <RefreshCcw />
-        </motion.button>
+        <TooltipProvider>
+            <Tooltip>
+                <TooltipTrigger><motion.button
+                    onClick={handleClick}
+                    animate={{ rotate: isRotating ? 360 : 0 }}
+                    transition={{ duration: 1, ease: "linear" }}
+                    className="p-2 rounded-full hover:bg-gray-200 transition"
+                >
+                    <RefreshCcw />
+                </motion.button></TooltipTrigger>
+                <TooltipContent>
+                    <p>Refersh</p>
+                </TooltipContent>
+            </Tooltip>
+        </TooltipProvider>
     );
 }
