@@ -58,7 +58,7 @@ export function HorizontalScroll({ data }: HorizontalScrollProps) {
             {canScrollLeft && (
                 <button
                     onClick={scrollLeft}
-                    className="hidden absolute left-0 z-20 w-10 h-10 bg-white dark:bg-zinc-700 shadow-md rounded-full cursor-pointer lg:flex items-center justify-center hover:bg-gray-200 dark:hover:bg-zinc-600 transition-all"
+                    className="hidden absolute -left-5 z-20 w-10 h-10 bg-red-500 text-white shadow-md rounded-full cursor-pointer lg:flex items-center justify-center hover:bg-gray-200 dark:hover:bg-zinc-600 transition-all"
                 >
                     <ArrowLeft />
                 </button>
@@ -84,7 +84,7 @@ export function HorizontalScroll({ data }: HorizontalScrollProps) {
             {canScrollRight && (
                 <button
                     onClick={scrollRight}
-                    className="hidden absolute right-0 z-20 w-10 h-10 bg-white dark:bg-zinc-700 shadow-md rounded-full cursor-pointer lg:flex items-center justify-center hover:bg-gray-200 dark:hover:bg-zinc-600 transition-all"
+                    className="hidden absolute -right-5 z-20 w-10 h-10 bg-red-500 text-white shadow-md rounded-full cursor-pointer lg:flex items-center justify-center hover:bg-gray-200 dark:hover:bg-zinc-600 transition-all"
                 >
                     <ArrowRight />
                 </button>
