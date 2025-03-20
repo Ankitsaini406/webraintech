@@ -44,7 +44,7 @@ export function NavMain({ items }: { items: NavItem[] }) {
     }
 
     fetchUnReadCounts();
-    const interval = setInterval(fetchUnReadCounts, 100000);
+    const interval = setInterval(fetchUnReadCounts, 500000);
 
     return () => clearInterval(interval);
   }, []);
