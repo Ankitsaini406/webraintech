@@ -27,7 +27,7 @@ export default function Header() {
     }, [dispatch]);
 
     return (
-        <header className="sticky top-0 w-full z-20 bg-white dark:bg-black text-foreground p-4 shadow-lg dark:shadow-lg border-none border-gray-200 dark:border-gray-700">
+        <header className="sticky top-0 w-full z-30 bg-white dark:bg-black text-foreground p-4 shadow-lg dark:shadow-lg border-none border-gray-200 dark:border-gray-700">
             <div className="h-14 flex items-center justify-between">
                 <Link href="/">
                     <Image className="w-40 sm:w-56" loading="eager" alt="WeBrainTech" width={250} height={150} src="/weBrain.png" priority />
