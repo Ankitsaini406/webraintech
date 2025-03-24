@@ -1,22 +1,17 @@
 import prisma from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function PUT(req: NextRequest, context: { params: { id: string } }) {
-    const { params } = context; 
+export async function PUT(req: NextRequest) {
+    const url = new URL(req.nextUrl);
+    const id = url.pathname.split("/").at(-2);
 
-    if (!params?.id) {
-        return new NextResponse(JSON.stringify({ error: "Missing ID parameter" }), { status: 400 });
-    }
-
-    const id = parseInt(params.id, 10);
-
-    if (isNaN(id)) {
-        return new NextResponse(JSON.stringify({ error: "Invalid ID format" }), { status: 400 });
+    if (!id || isNaN(Number(id))) {
+        return new NextResponse(JSON.stringify({ error: "Invalid ID parameter" }), { status: 400 });
     }
 
     try {
         const updatedContact = await prisma.contactUs.update({
-            where: { id },
+            where: { id: Number(id) },
             data: { read: true },
         });
 
