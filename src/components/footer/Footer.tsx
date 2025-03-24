@@ -39,20 +39,34 @@ function Footer() {
             <footer className="mt-auto w-full bg-[ghostwhite] dark:bg-black p-4 sm:p-8">
                 <div className="flex flex-col gap-4 md:gap-8 justify-around items-center sm:items-start">
                     <div className="flex flex-col md:flex-row gap-8 md:gap-0 w-full items-start sm:justify-around">
-                        <div className="w-full md:w-auto flex items-center flex-row md:flex-col justify-around md:items-start gap-0 md:gap-4">
-                            <Image className="h-12 w-12 sm:h-full" src='/favicon.ico' alt="WeBrainTech" width={100} height={100} />
-                            <div className="flex flex-col gap-2 sm:gap-4 items-start">
-                                <h5 className="font-bold text-xl sm:text-2xl">Follow Us</h5>
-                                <div className="flex flex-row gap-4 sm:gap-8">
-                                    <Facebook className="cursor-pointer hover:text-red-500 transition-all duration-300" />
-                                    <Instagram className="cursor-pointer hover:text-red-500 transition-all duration-300" />
-                                    <X className="cursor-pointer hover:text-red-500 transition-all duration-300" />
-                                    <Linkedin className="cursor-pointer hover:text-red-500 transition-all duration-300" />
-                                    <Youtube className="cursor-pointer hover:text-red-500 transition-all duration-300" />
+                        <div className="w-full md:w-auto flex items-center flex-col justify-around md:items-start gap-4">
+                            <div className="flex flex-col gap-4 items-center md:items-start">
+                                <Image className="h-12 w-12 sm:h-full" src='/favicon.ico' alt="WeBrainTech" width={100} height={100} />
+                                <p>Acedmic vencher of <Link href={'https://eduengine.in/'} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-red-500 hover:underline hover:underline-offset-4 transition-all duration-300">Eduengine Technologies Pvt. Ltd.</Link></p>
+                            </div>
+                            {/* Social Media Section */}
+                            <div className="flex flex-col gap-4">
+                                <h5 className="font-semibold text-lg sm:text-xl">Follow Us</h5>
+                                <div className="flex flex-wrap gap-4 sm:gap-6">
+                                    <Facebook className="cursor-pointer hover:text-red-500 transition duration-300 text-xl sm:text-2xl" />
+                                    <Instagram className="cursor-pointer hover:text-red-500 transition duration-300 text-xl sm:text-2xl" />
+                                    <X className="cursor-pointer hover:text-red-500 transition duration-300 text-xl sm:text-2xl" />
+                                    <Linkedin className="cursor-pointer hover:text-red-500 transition duration-300 text-xl sm:text-2xl" />
+                                    <Youtube className="cursor-pointer hover:text-red-500 transition duration-300 text-xl sm:text-2xl" />
                                 </div>
                             </div>
                         </div>
-                        <NewsLetter email={email} setEmail={setEmail} loading={loading} error={error as string} onSubmit={handleSubmit} />
+
+                        {/* Newsletter Subscription */}
+                        <div className="w-full md:w-auto flex justify-center">
+                            <NewsLetter
+                                email={email}
+                                setEmail={setEmail}
+                                loading={loading}
+                                error={error as string}
+                                onSubmit={handleSubmit}
+                            />
+                        </div>
                     </div>
 
                     {/* Desktop and other large screens */}
@@ -132,7 +146,7 @@ function Footer() {
                     <div className="flex flex-row flex-wrap gap-2 sm:gap-6">
                         <Link className="underline underline-offset-2 hover:text-red-500 hover:underline hover:underline-offset-4 transition-all duration-300" href='/privacy-policy' >Privacy Policy</Link>
                         <Link className="underline underline-offset-2 hover:text-red-500 hover:underline hover:underline-offset-4 transition-all duration-300" href='/terms-and-conditions' >Terms of Service</Link>
-                        <Link className="underline underline-offset-2 hover:text-red-500 hover:underline hover:underline-offset-4 transition-all duration-300" href='/'>Cookies Settings</Link>
+                        {/* <Link className="underline underline-offset-2 hover:text-red-500 hover:underline hover:underline-offset-4 transition-all duration-300" href='/'>Cookies Settings</Link> */}
                     </div>
                 </div>
             </footer>
