@@ -48,11 +48,21 @@ function Footer() {
                             <div className="flex flex-col gap-4">
                                 <h5 className="font-semibold text-lg sm:text-xl">Follow Us</h5>
                                 <div className="flex flex-wrap gap-4 sm:gap-6">
-                                    <Facebook className="cursor-pointer hover:text-red-500 transition duration-300 text-xl sm:text-2xl" />
-                                    <Instagram className="cursor-pointer hover:text-red-500 transition duration-300 text-xl sm:text-2xl" />
-                                    <X className="cursor-pointer hover:text-red-500 transition duration-300 text-xl sm:text-2xl" />
-                                    <Linkedin className="cursor-pointer hover:text-red-500 transition duration-300 text-xl sm:text-2xl" />
-                                    <Youtube className="cursor-pointer hover:text-red-500 transition duration-300 text-xl sm:text-2xl" />
+                                    <Link href='https://www.facebook.com/webraintech.in'>
+                                        <Facebook className="cursor-pointer hover:text-red-500 transition duration-300 text-xl sm:text-2xl" />
+                                    </Link>
+                                    <Link href='https://www.instagram.com/webraintech.in/'>
+                                        <Instagram className="cursor-pointer hover:text-red-500 transition duration-300 text-xl sm:text-2xl" />
+                                    </Link>
+                                    <Link href='https://x.com/Webraintechin'>
+                                        <X className="cursor-pointer hover:text-red-500 transition duration-300 text-xl sm:text-2xl" />
+                                    </Link>
+                                    <Link href='https://www.linkedin.com/company/webraintech/'>
+                                        <Linkedin className="cursor-pointer hover:text-red-500 transition duration-300 text-xl sm:text-2xl" />
+                                    </Link>
+                                    <Link href='https://www.youtube.com/@webraintech'>
+                                        <Youtube className="cursor-pointer hover:text-red-500 transition duration-300 text-xl sm:text-2xl" />
+                                    </Link>
                                 </div>
                             </div>
                         </div>
