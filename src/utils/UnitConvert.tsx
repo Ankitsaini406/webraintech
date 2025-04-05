@@ -40,3 +40,10 @@ export function formatterPrice(amount: number): string {
 
     return formatter.format(amount);
 }
+
+export function getInitials(name: string) {
+    return name
+        .split(" ")
+        .map((word) => word.charAt(0).toUpperCase())
+        .join("");
+};
