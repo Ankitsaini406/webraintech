@@ -14,11 +14,6 @@ import { Users } from "@/utils/InitialState";
 import { setUser } from "@/store/actions/UserActions"
 
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
   navMain: [
     {
       title: "Students",
@@ -99,7 +94,7 @@ export function AdminSiderBar({ ...props }: React.ComponentProps<typeof Sidebar>
         <NavProjects projects={data.projects} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={user || { name: "", email: "",}} />
+        <NavUser user={user || { name: "", email: "" }} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
