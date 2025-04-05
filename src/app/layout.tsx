@@ -3,6 +3,7 @@ import ChildLayout from "./childlayout";
 import "./globals.css";
 import FacebookAnalytics from "./FacebookAnalytics";
 import GoogleTagManagerAndAnalytics from "./GoogleAnalytics";
+import StoreProvider from "@/store/storeprovider";
 
 const apiPoint = process.env.NODE_ENV === "development" ? process.env.API_URL : process.env.HOST_URL;
 
@@ -86,9 +87,11 @@ export default function RootLayout({
         <FacebookAnalytics />
       </head>
       <body className="antialiased flex flex-col min-h-screen bg-background text-foreground selection:bg-blue-600 selection:text-white dark:selection:text-blue-600 dark:selection:bg-white">
-        <ChildLayout>
-          {children}
-        </ChildLayout>
+        <StoreProvider>
+          <ChildLayout>
+            {children}
+          </ChildLayout>
+        </StoreProvider>
       </body>
     </html>
   );

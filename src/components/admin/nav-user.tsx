@@ -4,10 +4,20 @@ import { BadgeCheck, Bell, ChevronsUpDown, CreditCard, LogOut, Sparkles } from "
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@/components/ui/sidebar"
-import { getInitials } from "@/utils/UnitConvert"
+import { getInitials } from "@/utils/Utils"
+import { useAppDispatch } from "@/hooks/useReduxhook"
+import { logOutUser } from "@/store/actions/UserActions"
+import { redirect } from "next/navigation"
 
 export function NavUser({ user }: { user: { name: string; email: string; } }) {
   const { isMobile } = useSidebar();
+
+  const dispatch = useAppDispatch();
+
+  const handleSignout = async () => {
+    await dispatch(logOutUser());
+    redirect("/auth/login");
+  }
 
   return (
     <SidebarMenu>
@@ -70,7 +80,7 @@ export function NavUser({ user }: { user: { name: string; email: string; } }) {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={handleSignout}>
               <LogOut />
               Log out
             </DropdownMenuItem>

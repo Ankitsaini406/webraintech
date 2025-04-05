@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import store from "@/store/store";
-import { Provider, useDispatch } from "react-redux";
+import StoreProvider from "@/store/storeprovider";
 import { useRouter, usePathname } from "next/navigation";
 import { Toaster } from "@/components/ui/sonner";
 import ThemeSwitcher from "@/utils/ThemeSwitcher";
@@ -14,15 +13,15 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage, BreadcrumbS
 import { getCookie } from "cookies-next";
 import { decodeToken } from "@/utils/jwt";
 import { setUser } from "@/store/actions/UserActions";
-import { AppDispatch } from "@/store/store";
 import { Users } from "@/utils/InitialState";
 import Loading from "./loading";
+import { useAppDispatch } from "@/hooks/useReduxhook";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
     const router = useRouter();
     const pathname = usePathname();
     const paths = pathname.split("/").filter(Boolean);
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
 
     const [isAuthorized, setIsAuthorized] = useState<boolean | null>(null);
 
@@ -58,7 +57,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     }
 
     return (
-        <Provider store={store}>
+        <StoreProvider>
             <SidebarProvider>
                 {/* Sidebar */}
                 <AdminSiderBar />
@@ -76,7 +75,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 <TailwindIndicator />
                 <Toaster position="top-right" richColors />
             </SidebarProvider>
-        </Provider>
+        </StoreProvider>
     );
 }
 

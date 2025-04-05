@@ -1,7 +1,7 @@
 'use server';
 
 import prisma from "@/lib/db";
-import { createSlug } from "@/utils/UnitConvert";
+import { createSlug } from "@/utils/Utils";
 import { FAQ, Role, Chapter } from "@prisma/client";
 
 type RoleType = keyof typeof Role;

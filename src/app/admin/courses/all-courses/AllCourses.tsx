@@ -9,7 +9,7 @@ import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMe
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import axios from "axios";
-import { formatterPrice, truncateText } from "@/utils/UnitConvert";
+import { formatterPrice, truncateText } from "@/utils/Utils";
 
 interface Course {
     id: string;
