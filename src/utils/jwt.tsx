@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { DecodeToken } from "./InitialState";
 
 const SECRET_KEY = process.env.JWT_SECRET as string;
 
@@ -19,9 +20,15 @@ export const verifyToken = (token: string): object | string => {
     }
 };
 
-export const decodeToken = (token: string): object | string | null => {
+export const decodeToken = (token: string): DecodeToken | null => {
     try {
-        return jwt.decode(token); 
+        const decoded =  jwt.decode(token);
+
+        if (typeof decoded === "string") {
+            return null;
+        }
+
+        return decoded as DecodeToken;
     } catch (error) {
         console.error("Token decoding failed:", error);
         return null;

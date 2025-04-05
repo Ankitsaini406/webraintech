@@ -1,3 +1,4 @@
+import { JwtPayload } from "jsonwebtoken";
 
 export const enqueryInitialState = {
     name: "",
@@ -91,4 +92,11 @@ export interface Role {
     STUDENT: "STUDENT",
     TEACHER: "TEACHER",
     ADMIN: "ADMIN",
+}
+
+export interface DecodeToken extends JwtPayload {
+    id?: string;
+    name?: string;
+    email?: string;
+    role?: string;
 }
