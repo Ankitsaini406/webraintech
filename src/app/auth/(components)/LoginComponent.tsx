@@ -3,20 +3,19 @@
 import { toast } from "sonner";
 import React, { useState, useEffect } from "react";
 import { Input, Password } from "@/utils/FormFields";
-import { AppDispatch } from "@/store/store";
 import { FormButton } from "@/utils/Buttons";
-import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "@/store/actions/UserActions";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { useAppDispatch, useAppSelector } from "@/hooks/useReduxhook";
 
 const LoginComponent = () => {
     const [formData, setFormData] = useState({ email: "", password: "" });
     const [currentSlide, setCurrentSlide] = useState(0);
     const router = useRouter();
-    const dispatch = useDispatch<AppDispatch>();
-    const { loading, error } = useSelector((state: { user: { loading: boolean; error: string | null } }) => state.user);
+    const dispatch = useAppDispatch();
+    const { loading, error } = useAppSelector((state) => state.user);
 
     const images = [
         { image: '/events/web-technology.webp', alt: 'Web Technology' },

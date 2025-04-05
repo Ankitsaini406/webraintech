@@ -1,9 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { fetchAllUsers } from "@/store/actions/UserActions";
-import { AppDispatch, RootState } from "@/store/store";
 import { Users } from "@/utils/InitialState";
 import {
     ColumnDef,
@@ -39,11 +37,12 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useAppDispatch, useAppSelector } from "@/hooks/useReduxhook";
 
 const AllStudents = () => {
-    const dispatch = useDispatch<AppDispatch>();
-    const { user, loading, error } = useSelector(
-        (state: RootState) => state.user
+    const dispatch = useAppDispatch();
+    const { user, loading, error } = useAppSelector(
+        (state) => state.user
     );
 
     const [roleFilter, setRoleFilter] = useState("STUDENT");

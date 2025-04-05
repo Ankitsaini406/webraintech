@@ -2,14 +2,13 @@
 
 import React, { useState } from "react";
 import { LayoutDashboard, LogIn, Settings, User } from "lucide-react";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/store/store";
 import { Skeleton } from "@/components/ui/skeleton";
 import { logOutUser } from "@/store//actions/UserActions";
 import { useRouter } from "next/navigation";
 import { Users } from "@/utils/InitialState";
 import Dashboard from "./(components)/Dashboard";
 import TeachersSection from "./(components)/TeachersSection";
+import { useAppDispatch } from "@/hooks/useReduxhook";
 
 interface ProfileComponentProps {
     user: Users | null;
@@ -17,7 +16,7 @@ interface ProfileComponentProps {
 
 export function ProfileComponent({ user }: ProfileComponentProps) {
     const [activeTab, setActiveTab] = useState("dashboard");
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
     const router = useRouter();
 
     const firstLetter = user?.name?.charAt(0).toUpperCase();

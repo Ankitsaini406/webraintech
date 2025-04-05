@@ -1,9 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { fetchContactUs, markContactAsRead } from "@/store/actions/ContactUsAction";
-import { AppDispatch, RootState } from "@/store/store";
 import {
     ColumnDef,
     ColumnFiltersState,
@@ -38,6 +36,7 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import RefreshButton from "@/utils/Buttons";
+import { useAppDispatch, useAppSelector } from "@/hooks/useReduxhook";
 
 interface ContactUs {
     id: number;
@@ -49,9 +48,9 @@ interface ContactUs {
 }
 
 export default function ContactUsPage() {
-    const dispatch = useDispatch<AppDispatch>();
-    const { contactUs, loading, error } = useSelector(
-        (state: RootState) => state.contactus
+    const dispatch = useAppDispatch();
+    const { contactUs, loading, error } = useAppSelector(
+        (state) => state.contactus
     );
 
     const handleRefresh = () => {

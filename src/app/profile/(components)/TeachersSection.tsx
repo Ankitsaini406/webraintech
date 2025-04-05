@@ -1,13 +1,12 @@
 import { Skeleton } from "@/components/ui/skeleton";
+import { useAppDispatch, useAppSelector } from "@/hooks/useReduxhook";
 import { fetchTeachersByCourses } from "@/store/actions/FindTeacherByCourseAction";
-import { AppDispatch, RootState } from "@/store/store";
 import { Users } from "@/utils/InitialState";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 export default function TeachersSection({ studentId }: { studentId: string }) {
-    const dispatch = useDispatch<AppDispatch>();
-    const { teachers, status, error } = useSelector((state: RootState) => state.findTeacherByCourse);
+    const dispatch = useAppDispatch();
+    const { teachers, status, error } = useAppSelector((state) => state.findTeacherByCourse);
 
     useEffect(() => {
         if (studentId) {
