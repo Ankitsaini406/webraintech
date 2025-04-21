@@ -3,7 +3,7 @@ import Image from "next/image";
 export const metadata = {
     title: "About Us",
     description:
-        "Webraintech Academy specializes in career-focused training in Digital Marketing, Web Technology, AI, and more. Read our story to see how we help students turn their aspirations into achievements.",
+        "Discover WeBrainTech Mission, Values, and Expert Team. Based in Sikar, we specialize in Web Development, Digital marketing, and IT training to empower businesses and individuals.",
     keywords: [
         "About Webraintech Academy",
         "Webraintech Academy Overview",
@@ -15,6 +15,11 @@ export const metadata = {
         "Why Choose Webraintech Academy",
         "Webraintech Academy Values",
         "Webraintech Academy Team",
+        "about WeBrainTech",
+        "WeBrainTech Sikar",
+        "WeBrainTech team",
+        "WeBrainTech company profile",
+        "WeBrainTech story",
     ],
     openGraph: {
         title: "About Webraintech Academy",
