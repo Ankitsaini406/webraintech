@@ -6,6 +6,7 @@ import { addCourse } from "@/actions/AddData";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { courseSchema } from "@/utils/ValidationSchema";
+import { ButtonBlack } from "@/utils/Buttons";
 import { z } from "zod";
 
 const initialState = {
@@ -41,8 +42,8 @@ interface CourseState {
 interface Chapter {
     title: string;
     description: string;
-    videoUrl: string;
-    duration: number;
+    videoUrl?: string;
+    duration?: number;
 }
 
 interface FAQ {
@@ -223,7 +224,9 @@ const AddCourse = () => {
                     const label = field.charAt(0).toUpperCase() + field.slice(1);
                     const template =
                         field === "chapters"
-                            ? { title: "", description: "", videoUrl: "", duration: 0 }
+                            ? { title: "", description: "", 
+                                // videoUrl: "", duration: 0 
+                            }
                             : { question: "", answer: "" };
 
                     return (
@@ -291,13 +294,8 @@ const AddCourse = () => {
                 })}
 
                 <div className="flex justify-center">
-                <Button
-                    type="submit"
-                    className="mt-4"
-                    disabled={isLoading}
-                >
-                    {isLoading ? "Submitting..." : "Add Course"}
-                </Button>
+                <ButtonBlack className="mt-4" title={isLoading ? "Submitting..." : "Add Course"} isLoading={isLoading}
+                />
                 </div>
             </form>
         </div>

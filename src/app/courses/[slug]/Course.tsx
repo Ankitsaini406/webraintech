@@ -67,8 +67,6 @@ export default function CoursePage() {
         fetchCourse();
     }, [slug]);
 
-    console.log(`This is course data : `, course);
-
     const scrollToEnroll = () => {
         if (enrollButtonRef.current) {
             enrollButtonRef.current.scrollIntoView({
@@ -129,7 +127,7 @@ export default function CoursePage() {
                                 <p className="text-xl first-letter:text-5xl first-letter:font-bold first-letter:text-red-500 leading-8">
                                     {course.description}
                                 </p>
-                                <div className="relative bg-gradient-to-b from-transparent to-black/30 border w-full lg:min-w-[500px] h-[300px] aspect-video">Video</div>
+                                {/* <div className="relative bg-gradient-to-b from-transparent to-black/30 border w-full lg:min-w-[500px] h-[300px] aspect-video">Video</div> */}
                             </div>
 
                             {/* Course Chapters */}
@@ -148,17 +146,15 @@ export default function CoursePage() {
                             <BuyButton ref={enrollButtonRef} title="Enroll Now" />
 
                             {/* Course Teacher */}
-                            <div className="mt-20 mb-10 w-full lg:w-11/12 xl:w-3/4 mx-auto flex flex-col md:flex-row justify-between gap-8">
-                                <div className="relative bg-gradient-to-b from-transparent to-black/30 border w-full max-w-[500px] aspect-video">Photo</div>
-                                <div>
-                                    {course.teacher && (
-                                        <>
-                                            <h4 className="text-2xl font-bold mb-4">{course.teacher.name}</h4>
-                                            <p className="leading-6">{course.teacher.brief}</p>
-                                        </>
-                                    )}
+                            {course.teacher && (
+                                <div className="mt-20 mb-10 w-full lg:w-11/12 xl:w-3/4 mx-auto flex flex-col md:flex-row justify-between gap-8">
+                                    <div className="relative bg-gradient-to-b from-transparent to-black/30 border w-full max-w-[500px] aspect-video">Photo</div>
+                                    <div>
+                                        <h4 className="text-2xl font-bold mb-4">{course.teacher.name}</h4>
+                                        <p className="leading-6">{course.teacher.brief}</p>
+                                    </div>
                                 </div>
-                            </div>
+                            )}
 
                             {/* Course FAQ'S */}
                             <div className="my-8">
