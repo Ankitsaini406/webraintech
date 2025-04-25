@@ -1,6 +1,6 @@
 "use client";
 
-import { useReducer, useTransition } from "react";
+import { useReducer, useState } from "react";
 import { Input, TextArea } from "@/utils/FormFields";
 import { addCourse } from "@/actions/AddData";
 import { Button } from "@/components/ui/button";
@@ -100,7 +100,7 @@ const AddCourse = () => {
         ) => ({ ...state, ...action }),
         {}
     );
-    const [isPending, startTransition] = useTransition();
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         dispatch({
@@ -130,7 +130,7 @@ const AddCourse = () => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
 
-        startTransition(async () => {
+        setIsLoading(true);
             try {
                 const validatedData = courseSchema.parse(course);
                 const form = new FormData();
@@ -156,15 +156,18 @@ const AddCourse = () => {
                 form.append("image", course.image);
                 form.append("bannerImage", course.bannerImage);
 
-                // Perform the course addition asynchronously
-                const response = await addCourse(form);
-
-                if (response.success) {
-                    toast.success("🎉 Course added successfully!");
-                    dispatch({ type: "RESET" });
-                } else {
-                    toast.error(`❌ Error: ${response.error}`);
-                }
+                addCourse(form).then((response) => {
+                    if (response.success) {
+                        toast.success("🎉 Course added successfully!");
+                        dispatch({ type: "RESET" });
+                    } else {
+                        toast.error(`❌ Error: ${response.error}`);
+                    }
+                    setIsLoading(false);
+                }).catch(() => {
+                    toast.error("❌ Something went wrong.");
+                    setIsLoading(false);
+                });
             } catch (error) {
                 if (error instanceof z.ZodError) {
                     const formattedErrors: Record<string, Record<number, Record<string, string>>> = {};
@@ -187,8 +190,7 @@ const AddCourse = () => {
                 }
                 toast.error("❌ Something went wrong.");
             }
-        });
-    };
+        };
 
     return (
         <div className="container p-4">
@@ -298,9 +300,9 @@ const AddCourse = () => {
                 <Button
                     type="submit"
                     className="mt-4"
-                    disabled={isPending}
+                    disabled={isLoading}
                 >
-                    {isPending ? "Submitting..." : "Add Course"}
+                    {isLoading ? "Submitting..." : "Add Course"}
                 </Button>
             </form>
         </div>
