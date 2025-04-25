@@ -127,70 +127,63 @@ const AddCourse = () => {
         dispatch({ type: "REMOVE_ITEM", field, index });
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) : void => {
         e.preventDefault();
-
+    
         setIsLoading(true);
-            try {
-                const validatedData = courseSchema.parse(course);
-                const form = new FormData();
+    
+        try {
+            const validatedData = courseSchema.parse(course);
+            const form = new FormData();
 
-                Object.entries(validatedData).forEach(([key, value]) => {
-                    if (Array.isArray(value)) {
-                        form.append(key, JSON.stringify(value));
-                    } else {
-                        form.append(key, String(value));
-                    }
-                });
-
-                form.append("title", course.title);
-                form.append("price", course.price.toString());
-                form.append("discount", course.discount.toString());
-                form.append("intro", course.intro);
-                form.append("description", course.description);
-                form.append("thumbnail", course.thumbnail);
-                form.append("introVideo", course.introVideo);
-                form.append("certification", course.certification);
-                form.append("chapters", JSON.stringify(course.chapters));
-                form.append("faqs", JSON.stringify(course.faqs));
-                form.append("image", course.image);
-                form.append("bannerImage", course.bannerImage);
-
-                addCourse(form).then((response) => {
-                    if (response.success) {
-                        toast.success("🎉 Course added successfully!");
-                        dispatch({ type: "RESET" });
-                    } else {
-                        toast.error(`❌ Error: ${response.error}`);
-                    }
-                    setIsLoading(false);
-                }).catch(() => {
-                    toast.error("❌ Something went wrong.");
-                    setIsLoading(false);
-                });
-            } catch (error) {
-                if (error instanceof z.ZodError) {
-                    const formattedErrors: Record<string, Record<number, Record<string, string>>> = {};
-
-                    error.errors.forEach((err) => {
-                        if (err.path.length === 1) {
-                            formattedErrors[err.path[0]] = { 0: { "": err.message } };
-                        } else if (err.path.length === 3) {
-                            const [field, index, subField] = err.path as [string, number, string];
-                            if (!formattedErrors[field]) {
-                                formattedErrors[field] = {};
-                            }
-                            if (!formattedErrors[field][index]) {
-                                formattedErrors[field][index] = {};
-                            }
-                            formattedErrors[field][index][subField] = err.message;
-                        }
-                    });
-                    setErrors(formattedErrors);
+            Object.entries(validatedData).forEach(([key, value]) => {
+                if (Array.isArray(value)) {
+                    form.append(key, JSON.stringify(value));
+                } else {
+                    form.append(key, String(value));
                 }
-                toast.error("❌ Something went wrong.");
+            });
+
+            form.append("title", course.title);
+            form.append("price", course.price.toString());
+            form.append("discount", course.discount.toString());
+            form.append("intro", course.intro);
+            form.append("description", course.description);
+            form.append("thumbnail", course.thumbnail);
+            form.append("introVideo", course.introVideo);
+            form.append("certification", course.certification);
+            form.append("chapters", JSON.stringify(course.chapters));
+            form.append("faqs", JSON.stringify(course.faqs));
+            form.append("image", course.image);
+            form.append("bannerImage", course.bannerImage);
+
+            addCourse(form);
+                toast.success("🎉 Course added successfully!");
+                dispatch({ type: "RESET" });
+        } catch (error) {
+            if (error instanceof z.ZodError) {
+                const formattedErrors: Record<string, Record<number, Record<string, string>>> = {};
+    
+                error.errors.forEach((err) => {
+                    if (err.path.length === 1) {
+                        formattedErrors[err.path[0]] = { 0: { "": err.message } };
+                    } else if (err.path.length === 3) {
+                        const [field, index, subField] = err.path as [string, number, string];
+                        if (!formattedErrors[field]) {
+                            formattedErrors[field] = {};
+                        }
+                        if (!formattedErrors[field][index]) {
+                            formattedErrors[field][index] = {};
+                        }
+                        formattedErrors[field][index][subField] = err.message;
+                    }
+                });
+                setErrors(formattedErrors);
             }
-        };
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     return (
         <div className="container p-4">
@@ -291,12 +284,13 @@ const AddCourse = () => {
                                 variant="outline"
                                 onClick={() => addMore(field, template)}
                             >
-                                Add {label.slice(0, -1)}
+                                Add More {label.slice(0, -1)}
                             </Button>
                         </div>
                     );
                 })}
 
+                <div className="flex justify-center">
                 <Button
                     type="submit"
                     className="mt-4"
@@ -304,6 +298,7 @@ const AddCourse = () => {
                 >
                     {isLoading ? "Submitting..." : "Add Course"}
                 </Button>
+                </div>
             </form>
         </div>
     );

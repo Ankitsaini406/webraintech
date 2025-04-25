@@ -1,18 +1,18 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
+import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
 
 function MainNav() {
     const pathname = usePathname();
 
     const courses = [
-        { title: "Web Technology", href: "/" },
-        { title: "AI Python", href: "/" },
-        { title: "Ethical Hacking", href: "/" },
-        { title: "Digital Marketing", href: "/" },
-        { title: "Graphic Animation", href: "/" },
-        { title: "German Language", href: "/" },
-        { title: "Spoken English", href: "/" },
+        { title: "Web Technology", href: "/courses" },
+        { title: "AI Python", href: "/courses" },
+        { title: "Ethical Hacking", href: "/courses" },
+        { title: "Digital Marketing", href: "/courses" },
+        { title: "Graphic Animation", href: "/courses" },
+        { title: "German Language", href: "/courses" },
+        { title: "Spoken English", href: "/courses" },
     ];
 
     const services = [
@@ -70,18 +70,14 @@ function MainNav() {
                             </NavigationMenuItem>
                             <NavigationMenuItem className={`p-2 border-2 transition duration-300 transform 
                                     ${pathname === '/about-us' ? 'text-red-500 border-red-500' : 'border-transparent hover:border-red-500'}`}>
-                                <Link href="/about-us" legacyBehavior passHref>
-                                    <NavigationMenuLink>
+                                <Link href="/about-us">
                                         About Us
-                                    </NavigationMenuLink>
                                 </Link>
                             </NavigationMenuItem>
                             <NavigationMenuItem className={`p-2 border-2 transition duration-300 transform 
                                     ${pathname === '/contact-us' ? 'text-red-500 border-red-500' : 'border-transparent hover:border-red-500'}`}>
-                                <Link href="/contact-us" legacyBehavior passHref>
-                                    <NavigationMenuLink>
+                                <Link href="/contact-us">
                                         Contact Us
-                                    </NavigationMenuLink>
                                 </Link>
                             </NavigationMenuItem>
                         </NavigationMenuList>
