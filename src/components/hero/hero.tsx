@@ -1,5 +1,6 @@
 import { ButtonBlack, ButtonWhite } from "@/utils/Buttons";
 import Image from "next/image";
+import Link from "next/link";
 
 
 function Hero() {
@@ -13,8 +14,12 @@ function Hero() {
                     <h1 className="leading-tight text-3xl sm:text-4xl lg:text-5xl xl:text-6xl sm:leading-snug lg:leading-tight font-bold">Transform Your <span className="text-red-500">Skills</span><br></br> Start Achieving <span className="text-red-500">Goals</span></h1>
                     {/* <p className="mt-4 sm:mt-8 lg:leading-loose">Step into the future with confidence—start learning today!</p> */}
                     <div className="flex gap-4 mt-8">
-                        <ButtonBlack title="Enroll" />
-                        <ButtonWhite title="Learn More" />
+                        <Link href='/'>
+                            <ButtonBlack title="Enroll" />
+                        </Link>
+                        <Link href='/'>
+                            <ButtonWhite title="Learn More" />
+                        </Link>
                     </div>
                 </div>
 

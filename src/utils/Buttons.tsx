@@ -7,20 +7,24 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-// White Button component
-export function ButtonWhite({ title }: { title: string }) {
-    return (
-        <button className="p-2 px-8 border border-black dark:border-white bg-white dark:bg-black dark:text-white dark:hover:bg-white dark:hover:border-black dark:hover:text-black hover:bg-black hover:text-white text-black transition-all duration-300 transform hover:scale-105">
-            {title}
-        </button>
-    );
-}
-
-// Black Button component
 interface ButtonBlackProps {
     title: string;
     className?: string;
     isLoading?: boolean;
+}
+
+export function ButtonWhite({ title, className, isLoading = false }: ButtonBlackProps) {
+    return (
+        <Button
+            disabled={isLoading}
+            className={cn(
+                "p-2 px-8 border border-black dark:border-white bg-white dark:bg-black dark:text-white dark:hover:bg-white dark:hover:border-black dark:hover:text-black hover:bg-black hover:text-white text-black transition-all duration-300 transform hover:scale-105",
+                className)}
+        >
+            {isLoading && <svg className="mr-3 size-5 animate-spin ..." viewBox="0 0 24 24"></svg>}
+            {title}
+        </Button>
+    );
 }
 
 export function ButtonBlack({ title, className, isLoading = false }: ButtonBlackProps) {
