@@ -133,18 +133,7 @@ export async function addCourse(formData: FormData) {
             slug: createSlug(chapter.title),
         }));
 
-        const payload = {
-            title,
-            slug,
-            image,
-            bannerImage,
-            intro,
-            description,
-            thumbnail,
-            introVideo,
-            price,
-            discount,
-            certification,
+        const payload = { title, slug, image, bannerImage, intro, description, thumbnail, introVideo, price, discount, certification,
             chapters: {
                 create: chaptersWithSlugs.map((chapter) => ({
                     title: chapter.title,

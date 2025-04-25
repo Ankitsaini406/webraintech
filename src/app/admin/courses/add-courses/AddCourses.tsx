@@ -1,6 +1,6 @@
 "use client";
 
-import { useReducer } from "react";
+import { useReducer, useTransition } from "react";
 import { Input, TextArea } from "@/utils/FormFields";
 import { addCourse } from "@/actions/AddData";
 import { Button } from "@/components/ui/button";
@@ -100,6 +100,7 @@ const AddCourse = () => {
         ) => ({ ...state, ...action }),
         {}
     );
+    const [isPending, startTransition] = useTransition();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         dispatch({
@@ -126,57 +127,67 @@ const AddCourse = () => {
         dispatch({ type: "REMOVE_ITEM", field, index });
     };
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
-        try {
-            const validatedData = courseSchema.parse(course);
-            const form = new FormData();
 
-            Object.entries(validatedData).forEach(([key, value]) => {
-                if (Array.isArray(value)) {
-                    form.append(key, JSON.stringify(value));
-                } else {
-                    form.append(key, String(value));
-                }
-            });
+        startTransition(async () => {
+            try {
+                const validatedData = courseSchema.parse(course);
+                const form = new FormData();
 
-            form.append("title", course.title);
-            form.append("price", course.price.toString());
-            form.append("discount", course.discount.toString());
-            form.append("intro", course.intro);
-            form.append("description", course.description);
-            form.append("thumbnail", course.thumbnail);
-            form.append("introVideo", course.introVideo);
-            form.append("certification", course.certification);
-            form.append("chapters", JSON.stringify(course.chapters));
-            form.append("faqs", JSON.stringify(course.faqs));
-            form.append("image", course.image);
-            form.append("bannerImage", course.bannerImage);
-
-            await addCourse(form);
-            toast.success("🎉 Course added successfully!");
-            dispatch({ type: "RESET" });
-        } catch (error) {
-            if (error instanceof z.ZodError) {
-                const formattedErrors: Record<string, Record<number, Record<string, string>>> = {};
-
-                error.errors.forEach((err) => {
-                    if (err.path.length === 1) {
-                        formattedErrors[err.path[0]] = { 0: { "": err.message } };
-                    } else if (err.path.length === 3) {
-                        const [field, index, subField] = err.path as [string, number, string];
-                        if (!formattedErrors[field]) {
-                            formattedErrors[field] = {};
-                        }
-                        if (!formattedErrors[field][index]) {
-                            formattedErrors[field][index] = {};
-                        }
-                        formattedErrors[field][index][subField] = err.message;
+                Object.entries(validatedData).forEach(([key, value]) => {
+                    if (Array.isArray(value)) {
+                        form.append(key, JSON.stringify(value));
+                    } else {
+                        form.append(key, String(value));
                     }
                 });
-                setErrors(formattedErrors);
+
+                form.append("title", course.title);
+                form.append("price", course.price.toString());
+                form.append("discount", course.discount.toString());
+                form.append("intro", course.intro);
+                form.append("description", course.description);
+                form.append("thumbnail", course.thumbnail);
+                form.append("introVideo", course.introVideo);
+                form.append("certification", course.certification);
+                form.append("chapters", JSON.stringify(course.chapters));
+                form.append("faqs", JSON.stringify(course.faqs));
+                form.append("image", course.image);
+                form.append("bannerImage", course.bannerImage);
+
+                // Perform the course addition asynchronously
+                const response = await addCourse(form);
+
+                if (response.success) {
+                    toast.success("🎉 Course added successfully!");
+                    dispatch({ type: "RESET" });
+                } else {
+                    toast.error(`❌ Error: ${response.error}`);
+                }
+            } catch (error) {
+                if (error instanceof z.ZodError) {
+                    const formattedErrors: Record<string, Record<number, Record<string, string>>> = {};
+
+                    error.errors.forEach((err) => {
+                        if (err.path.length === 1) {
+                            formattedErrors[err.path[0]] = { 0: { "": err.message } };
+                        } else if (err.path.length === 3) {
+                            const [field, index, subField] = err.path as [string, number, string];
+                            if (!formattedErrors[field]) {
+                                formattedErrors[field] = {};
+                            }
+                            if (!formattedErrors[field][index]) {
+                                formattedErrors[field][index] = {};
+                            }
+                            formattedErrors[field][index][subField] = err.message;
+                        }
+                    });
+                    setErrors(formattedErrors);
+                }
+                toast.error("❌ Something went wrong.");
             }
-        }
+        });
     };
 
     return (
@@ -262,31 +273,34 @@ const AddCourse = () => {
                                             );
                                         })}
                                     </div>
-                                    <button
-                                        type="button"
-                                        onClick={() => removeItem(field, index)}
-                                        className="rounded px-6 py-2 bg-red-500 hover:bg-red-600 text-white my-4"
-                                    >
-                                        ✖ Remove {label}
-                                    </button>
+                                    <div>
+                                        <Button
+                                            variant="outline"
+                                            className="mt-4"
+                                            onClick={() => removeItem(field, index)}
+                                        >
+                                            Remove {label.slice(0, -1)}
+                                        </Button>
+                                    </div>
                                 </div>
                             ))}
-                            <button
-                                type="button"
+                            <Button
+                                className="mt-6"
+                                variant="outline"
                                 onClick={() => addMore(field, template)}
-                                className="rounded px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white my-4"
                             >
-                                + Add {label}
-                            </button>
+                                Add {label.slice(0, -1)}
+                            </Button>
                         </div>
                     );
                 })}
 
                 <Button
                     type="submit"
-                    className="rounded px-8 py-5 bg-green-500 hover:bg-green-600 text-white my-4 font-bold uppercase"
+                    className="mt-4"
+                    disabled={isPending}
                 >
-                    Submit Course
+                    {isPending ? "Submitting..." : "Add Course"}
                 </Button>
             </form>
         </div>
