@@ -70,27 +70,19 @@ const reducer = (state: CourseState, action: Action): CourseState => {
         case "UPDATE_ARRAY_FIELD":
             return {
                 ...state,
-                [action.field]: (state[action.field] as (Chapter | FAQ)[]).map(
-                    (item, idx) =>
-                        idx === action.index
-                            ? { ...item, [action.subField]: action.value }
-                            : item
+                [action.field]: (state[action.field] as (Chapter | FAQ)[]).map((item, idx) =>
+                    idx === action.index ? { ...item, [action.subField]: action.value } : item
                 ),
             };
         case "ADD_ITEM":
             return {
                 ...state,
-                [action.field]: [
-                    ...(state[action.field] as Chapter[] | FAQ[]),
-                    action.newItem,
-                ],
+                [action.field]: [...(state[action.field] as Chapter[] | FAQ[]), action.newItem],
             };
         case "REMOVE_ITEM":
             return {
                 ...state,
-                [action.field]: (state[action.field] as (Chapter | FAQ)[]).filter(
-                    (_, idx) => idx !== action.index
-                ),
+                [action.field]: (state[action.field] as (Chapter | FAQ)[]).filter((_, idx) => idx !== action.index),
             };
         case "RESET":
             return initialState;
@@ -109,9 +101,7 @@ const AddCourse = () => {
         {}
     );
 
-    const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    ) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         dispatch({
             type: "UPDATE_FIELD",
             field: e.target.name,
@@ -136,9 +126,7 @@ const AddCourse = () => {
         dispatch({ type: "REMOVE_ITEM", field, index });
     };
 
-    const handleSubmit = async (
-        e: React.FormEvent<HTMLFormElement>
-    ): Promise<void> => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
         try {
             const validatedData = courseSchema.parse(course);
@@ -146,7 +134,7 @@ const AddCourse = () => {
 
             Object.entries(validatedData).forEach(([key, value]) => {
                 if (Array.isArray(value)) {
-                    value.forEach((val) => form.append(key, JSON.stringify(val)));
+                    form.append(key, JSON.stringify(value));
                 } else {
                     form.append(key, String(value));
                 }
@@ -170,20 +158,13 @@ const AddCourse = () => {
             dispatch({ type: "RESET" });
         } catch (error) {
             if (error instanceof z.ZodError) {
-                const formattedErrors: Record<
-                    string,
-                    Record<number, Record<string, string>>
-                > = {};
+                const formattedErrors: Record<string, Record<number, Record<string, string>>> = {};
 
                 error.errors.forEach((err) => {
                     if (err.path.length === 1) {
                         formattedErrors[err.path[0]] = { 0: { "": err.message } };
                     } else if (err.path.length === 3) {
-                        const [field, index, subField] = err.path as [
-                            string,
-                            number,
-                            string
-                        ];
+                        const [field, index, subField] = err.path as [string, number, string];
                         if (!formattedErrors[field]) {
                             formattedErrors[field] = {};
                         }
@@ -203,18 +184,21 @@ const AddCourse = () => {
             <h2 className="text-2xl font-bold mb-4">Add New Course</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {["title", "thumbnail", "introVideo", "price", "discount", "image", "bannerImage", "certification"].map((field) => (
-                        <Input
-                            key={field}
-                            title={field.charAt(0).toUpperCase() + field.slice(1)}
-                            name={field}
-                            value={String(course[field as keyof CourseState])}
-                            onChange={handleChange}
-                            placeholder={field}
-                            error={errors[field]?.[0]?.[""]}
-                        />
-                    ))}
+                    {["title", "thumbnail", "introVideo", "price", "discount", "image", "bannerImage", "certification"].map(
+                        (field) => (
+                            <Input
+                                key={field}
+                                title={field.charAt(0).toUpperCase() + field.slice(1)}
+                                name={field}
+                                value={String(course[field as keyof CourseState])}
+                                onChange={handleChange}
+                                placeholder={field}
+                                error={errors[field]?.[0]?.[""]}
+                            />
+                        )
+                    )}
                 </div>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {["intro", "description"].map((field) => (
                         <TextArea
@@ -257,12 +241,7 @@ const AddCourse = () => {
                                                             name={key}
                                                             value={String(item[key as keyof typeof item])}
                                                             onChange={(e) =>
-                                                                handleArrayChange(
-                                                                    field,
-                                                                    index,
-                                                                    key as keyof typeof item,
-                                                                    e.target.value
-                                                                )
+                                                                handleArrayChange(field, index, key as keyof typeof item, e.target.value)
                                                             }
                                                             className="w-full h-[100px]"
                                                             error={errorMessage}
@@ -273,12 +252,7 @@ const AddCourse = () => {
                                                             name={key}
                                                             value={String(item[key as keyof typeof item])}
                                                             onChange={(e) =>
-                                                                handleArrayChange(
-                                                                    field,
-                                                                    index,
-                                                                    key as keyof typeof item,
-                                                                    e.target.value
-                                                                )
+                                                                handleArrayChange(field, index, key as keyof typeof item, e.target.value)
                                                             }
                                                             className="w-full"
                                                             error={errorMessage}

@@ -84,44 +84,52 @@ export async function createTeacher(formData: FormData) {
     });
 }
 
+function safeParseJSON<T>(data: string, fallback: T): T {
+    try {
+        return JSON.parse(data);
+    } catch (error) {
+        console.error("JSON parse error:", error);
+        return fallback;
+    }
+}
+
 export async function addCourse(formData: FormData) {
     try {
         const title = formData.get("title") as string;
-        const slug = createSlug(title);
-        const image = formData.get("image") as string || "";
-        const bannerImage = formData.get("bannerImage") as string || "";
-        const intro = formData.get("intro") as string || "";
-        const description = formData.get("description") as string || "";
-        const thumbnail = formData.get("thumbnail") as string || "";
-        const introVideo = formData.get("introVideo") as string || "";
+        if (!title) throw new Error("Title is required.");
+
+        const slug = createSlug(title) || title.toLowerCase().replace(/\s+/g, "-");
+        const image = (formData.get("image") as string) || "";
+        const bannerImage = (formData.get("bannerImage") as string) || "";
+        const intro = (formData.get("intro") as string) || "";
+        const description = (formData.get("description") as string) || "";
+        const thumbnail = (formData.get("thumbnail") as string) || "";
+        const introVideo = (formData.get("introVideo") as string) || "";
         const price = parseFloat(formData.get("price") as string) || 0;
         const discount = parseFloat(formData.get("discount") as string) || 0;
-        const certification = formData.get("certification") as string || "";
+        const certification = (formData.get("certification") as string) || "";
 
         const chaptersString = formData.get("chapters") as string;
         const faqsString = formData.get("faqs") as string;
 
-        let chapters: Chapter[] = [];
-        let faqs: FAQ[] = [];
-
-        try {
-            chapters = JSON.parse(chaptersString);
-            faqs = JSON.parse(faqsString);
-
-            if (!Array.isArray(chapters)) {
-                chapters = [chapters];
-            }
-            if (!Array.isArray(faqs)) {
-                faqs = [faqs];
-            }
-
-        } catch (error) {
-            throw new Error(`Invalid JSON format for chapters or FAQs : ${error}`);
+        if (!chaptersString || !faqsString) {
+            throw new Error("Chapters or FAQs are missing from the form data.");
         }
 
-        const chaptersWithSlugs = chapters.map((chapter: Chapter) => ({
+        const chapters = safeParseJSON<Chapter[]>(chaptersString, []);
+        const faqs = safeParseJSON<FAQ[]>(faqsString, []);
+
+        if (!Array.isArray(chapters) || chapters.length === 0) {
+            throw new Error("Chapters must be a non-empty array.");
+        }
+
+        if (!Array.isArray(faqs)) {
+            throw new Error("FAQs must be an array.");
+        }
+
+        const chaptersWithSlugs = chapters.map((chapter) => ({
             ...chapter,
-            duration: parseInt(chapter.duration as unknown as string, 10) || 0,
+            duration: Number.isNaN(Number(chapter.duration)) ? 0 : parseInt(chapter.duration as unknown as string, 10),
             slug: createSlug(chapter.title),
         }));
 
@@ -138,7 +146,7 @@ export async function addCourse(formData: FormData) {
             discount,
             certification,
             chapters: {
-                create: chaptersWithSlugs.map((chapter: Chapter) => ({
+                create: chaptersWithSlugs.map((chapter) => ({
                     title: chapter.title,
                     description: chapter.description,
                     videoUrl: chapter.videoUrl,
@@ -147,11 +155,13 @@ export async function addCourse(formData: FormData) {
                 })),
             },
             faqs: {
-                create: faqs.map((faq: FAQ) => ({
+                create: faqs.map((faq) => ({
                     question: faq.question,
                     answer: faq.answer,
                 })),
             },
+            createdAt: new Date(),
+            // status: "draft",
         };
 
         const newCourse = await prisma.course.create({
@@ -164,6 +174,10 @@ export async function addCourse(formData: FormData) {
 
         return { success: true, course: newCourse };
     } catch (error) {
-        return { success: false, error: error instanceof Error ? error.message : "Failed to add course" };
+        console.error("Error adding course:", error);
+        return {
+            success: false,
+            error: error instanceof Error ? error.message : "Failed to add course",
+        };
     }
 }

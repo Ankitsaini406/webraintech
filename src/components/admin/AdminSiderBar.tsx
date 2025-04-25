@@ -33,12 +33,8 @@ const data = {
       icon: Users2,
       items: [
         {
-          title: "Add Teachers",
-          url: "#",
-        },
-        {
           title: "Salery",
-          url: "#",
+          url: "/admin/students/fees",
         },
       ],
     },
