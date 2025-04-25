@@ -1,10 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState, useRef } from "react";
-import { useParams } from "next/navigation";
+import { useRef } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { getCourse } from "@/actions/GetCourse";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { BuyButton } from "@/utils/Buttons";
 import { Button } from "@/components/ui/button";
@@ -49,23 +47,8 @@ interface Course {
     updatedAt: Date;
 }
 
-export default function CoursePage() {
-    const { slug } = useParams();
-    const [course, setCourse] = useState<Course | null>(null);
+export default function CoursePage({ course }: { course: Course }) {
     const enrollButtonRef = useRef<HTMLButtonElement | null>(null);
-
-    useEffect(() => {
-        if (!slug) return;
-
-        const fetchCourse = async () => {
-            const data = await getCourse(slug as string);
-            if (data) {
-                setCourse(data);
-            }
-        };
-
-        fetchCourse();
-    }, [slug]);
 
     const scrollToEnroll = () => {
         if (enrollButtonRef.current) {
