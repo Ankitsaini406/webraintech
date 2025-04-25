@@ -76,7 +76,7 @@ function TestimonialsSection() {
                     {testimonials.map((testimonial, index) => (
                         <div
                             key={index}
-                            className="border p-4 border-black dark:border-white bg-white dark:bg-black flex flex-col w-[calc(100%/1-1rem)] flex-shrink-0 sm:w-[calc(100%/3-1rem)] snap-center cursor-pointer hover:border-red-500 dark:hover:border-red-500 duration-150"
+                            className="border p-4 border-black dark:border-white bg-white dark:bg-black flex flex-col w-[calc(100%/1-1rem)] shrink-0 sm:w-[calc(100%/3-1rem)] snap-center cursor-pointer hover:border-red-500 dark:hover:border-red-500 duration-150"
                         >
                             <div className="text-red-500 pb-2 sm:pb-4 text-xl">{testimonial.rating}</div>
                             <div className="pb-2 sm:pb-4">{testimonial.text}</div>

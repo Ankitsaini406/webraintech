@@ -53,7 +53,7 @@ export function Enroll() {
 
     return (
         <div className="mb-7 p-4 sm:p-8 bg-gray-100 dark:bg-zinc-800">
-            <div className="container">
+            <div className="container mx-auto">
                 <h1 className="text-4xl sm:text-5xl font-bold mb-6 sm:w-full">
                     Start Your Future IT Journey With Us.
                 </h1>
@@ -78,7 +78,7 @@ export function Enroll() {
 export function FeatureSection() {
 
     return (
-        <div className="container my-7 p-4 sm:p-8 flex flex-col-reverse sm:flex-row gap-4">
+        <div className="container mx-auto my-7 p-4 sm:p-8 flex flex-col-reverse sm:flex-row gap-4">
             <div className="flex flex-col gap-4 w-full">
                 <p className="text-red-500">A Vision for Next-Gen</p>
                 <h2 className="text-3xl sm:text-5xl font-bold sm:mb-6">Excellence In Education</h2>
@@ -102,14 +102,14 @@ export function FeatureSection() {
 
 export function FeatureListSection() {
     return (
-        <div className="container relative my-7 h-auto">
+        <div className="container mx-auto relative my-7 h-auto">
             {/* Background Image */}
             <div className="absolute inset-0 bg-cover bg-center">
                 <video autoPlay muted loop playsInline>
                     <source src="/video/potential.mp4" type="video/mp4" />
                 </video>
             </div>
-            <div className=" container bg-gradient-to-b from-transparent to-black/30 aspect-video w-full">
+            <div className=" container bg-linear-to-b from-transparent to-black/30 aspect-video w-full">
 
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-black/60"></div>
@@ -125,7 +125,7 @@ export function FeatureListSection() {
 
 export function CtaSection() {
     return (
-        <div className="container border border-black dark:border-white m-auto my-8 w-4/5 flex flex-col sm:flex-row justify-between">
+        <div className="container mx-auto border border-black dark:border-white m-auto my-8 w-4/5 flex flex-col sm:flex-row justify-between">
             <div className="p-4 sm:p-8">
                 <h2 className="text-2xl sm:text-5xl pb-4 sm:pb-8 font-bold">Discover Your Next Course</h2>
                 <h4>Explore our diverse course offerings and find the perfect fit for your learning journey.</h4>
@@ -134,7 +134,7 @@ export function CtaSection() {
                     <ButtonWhite title="Learn More" />
                 </div>
             </div>
-            <div className="bg-gradient-to-b from-transparent to-black/30 w-full xl:h-96 sm:w-1/2 overflow-hidden relative z-10">
+            <div className="bg-linear-to-b from-transparent to-black/30 w-full xl:h-96 sm:w-1/2 overflow-hidden relative z-10">
                 <Image className="object-cover h-full hover:scale-105 transition-transform duration-300" src='/images/code.png' alt="cta" width={720} height={300} />
             </div>
         </div>
@@ -168,7 +168,7 @@ export function BlogSection() {
     ]
 
     return (
-        <div className="container p-4 sm:p-8">
+        <div className="container mx-auto p-4 sm:p-8">
             <div className="flex flex-col gap-4 sm:gap-8">
                 <div className="flex flex-col md:flex-row justify-between items-start gap-4 md:gap-0 md:items-end pb-4 sm:pb-8">
                     <div>
@@ -185,7 +185,7 @@ export function BlogSection() {
                             return (
                                 <div key={index} className="block cursor-pointer w-full hover:text-red-500 transition-all duration-300">
                                     <div>
-                                        <div className="bg-gradient-to-b from-transparent to-black/30 mb-4 overflow-hidden relative z-10">
+                                        <div className="bg-linear-to-b from-transparent to-black/30 mb-4 overflow-hidden relative z-10">
                                             <Image className="h-60 w-full object-cover hover:scale-105 transition-transform duration-300" src={blog.images} alt={blog.title} width={500} height={400} />
                                         </div>
                                         <div className="flex flex-row gap-4 sm:gap-8 items-center mb-2">
@@ -243,7 +243,7 @@ export function Events() {
 
     return (
         <div className="mb-7 p-4 sm:p-8 bg-gray-100 dark:bg-zinc-800">
-            <div className="container">
+            <div className="container mx-auto">
                 <p className="pb-6 text-red-500">Events</p>
                 <h1 className="text-2xl sm:text-5xl font-bold mb-6">Explore Our Exciting Events</h1>
                 <h2 className="w-full sm:text-xl pb-8">Join our carefully curated events to gain hands-on experience and expand your knowledge.</h2>
@@ -256,7 +256,7 @@ export function Events() {
 
 export function CourseSection() {
     return (
-        <div className="container p-4 sm:p-8">
+        <div className="container mx-auto p-4 sm:p-8">
             <p className="text-red-500 text-center pb-4 sm:pb-8">Courses</p>
             <h3 className="text-center text-2xl sm:text-5xl pb-4 sm:pb-8 font-bold">Explore Our Course Offerings</h3>
             <p className="text-center pb-4 sm:pb-8">Diverse course tailored for every learner&#39;s needs.</p>
@@ -264,7 +264,7 @@ export function CourseSection() {
             <div className="flex flex-col md:flex-row gap-4 sm:gap-6 justify-center">
 
                 <div className="flex flex-col justify-between gap-4 lg:flex-row">
-                    <div className="group relative border border-black hover:border-red-500 hover:dark:border-red-500 dark:border-white p-2 sm:p-4 flex flex-col justify-between gap-10 overflow-hidden">
+                    <div className="group relative border border-black hover:border-red-500 dark:hover:border-red-500 dark:border-white p-2 sm:p-4 flex flex-col justify-between gap-10 overflow-hidden">
                         <div className="absolute -inset-1 -translate-x-full group-hover:translate-x-0 bg-red-500 transition-transform duration-300"></div>
 
                         <div className="relative z-10">
@@ -274,7 +274,7 @@ export function CourseSection() {
                         <ButtonLink className="relative z-10 group-hover:text-white transition-colors duration-300" title="Learn" />
                     </div>
 
-                    <div className="group relative border border-black hover:border-red-500 hover:dark:border-red-500 dark:border-white p-2 sm:p-4 flex flex-col justify-between gap-10 overflow-hidden">
+                    <div className="group relative border border-black hover:border-red-500 dark:hover:border-red-500 dark:border-white p-2 sm:p-4 flex flex-col justify-between gap-10 overflow-hidden">
                         <div className="absolute -inset-1 -translate-x-full group-hover:translate-x-0 bg-red-500 transition-transform duration-300"></div>
 
                         <div className="relative z-10">
@@ -286,7 +286,7 @@ export function CourseSection() {
                 </div>
 
                 <div className="border border-black dark:border-white flex flex-col lg:flex-row gap-4">
-                    <div className="bg-gradient-to-b from-transparent to-black/30 w-full h-40 lg:w-80 lg:h-60 overflow-hidden relative z-10">
+                    <div className="bg-linear-to-b from-transparent to-black/30 w-full h-40 lg:w-80 lg:h-60 overflow-hidden relative z-10">
                         <Image className="object-cover w-full h-full hover:scale-105 transition-transform duration-300" src='/images/course.png' alt="cta" width={1500} height={900} />
                     </div>
                     <div className="flex flex-col gap-4 justify-center p-2 lg:p-0">
@@ -304,7 +304,7 @@ export function CourseSection() {
 
 export function AboutSection() {
     return (
-        <div className="container p-4 sm:p-8">
+        <div className="container mx-auto p-4 sm:p-8">
             <div className="flex gap-4 flex-col">
                 <div className="flex flex-col lg:flex-row gap-8">
                     <div>
@@ -321,7 +321,7 @@ export function AboutSection() {
                         </div>
                     </div>
                 </div>
-                <div className="bg-gradient-to-b from-transparent to-black/30 aspect-video overflow-hidden relative z-10">
+                <div className="bg-linear-to-b from-transparent to-black/30 aspect-video overflow-hidden relative z-10">
                     <Image className="object-cover h-full hover:scale-105 transition-transform duration-300" src='/images/about-us.png' alt="cta" width={1500} height={900} />
                 </div>
             </div>

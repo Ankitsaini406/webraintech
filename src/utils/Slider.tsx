@@ -70,8 +70,8 @@ export function HorizontalScroll({ data }: HorizontalScrollProps) {
                 className="relative flex gap-4 sm:gap-8 overflow-x-auto w-full scroll-smooth no-scrollbar"
             >
                 {data.map((item) => (
-                    <Link href={item.href} key={item.title} className="z-10 w-60 sm:w-60 lg:w-96 flex-shrink-0 flex flex-col items-start cursor-pointer hover:bg-red-500 hover:text-white transition-all duration-300 p-4">
-                        <div className="bg-gradient-to-b from-transparent to-black/30 aspect-square w-full overflow-hidden relative z-10">
+                    <Link href={item.href} key={item.title} className="z-10 w-60 sm:w-60 lg:w-96 shrink-0 flex flex-col items-start cursor-pointer hover:bg-red-500 hover:text-white transition-all duration-300 p-4">
+                        <div className="bg-linear-to-b from-transparent to-black/30 aspect-square w-full overflow-hidden relative z-10">
                             <Image className="object-cover h-full hover:scale-105 transition-transform duration-300" src={item.image} alt={item.title} width={720} height={300} />
                         </div>
                         <h3 className="py-2 sm:py-4 text-base sm:text-xl font-bold">{item.title}</h3>

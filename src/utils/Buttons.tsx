@@ -2,7 +2,6 @@ import React, { forwardRef } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { RefreshCcw } from "lucide-react";
-import { motion } from "framer-motion";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -110,14 +109,12 @@ export default function RefreshButton({ handleRefresh }: { handleRefresh: () => 
         <TooltipProvider>
             <Tooltip>
                 <TooltipTrigger asChild>
-                    <motion.button
+                    <Button
                         onClick={handleRefresh}
-                        whileTap={{ rotate: 360 }}
-                        transition={{ duration: 1, ease: "linear" }}
                         className="p-2 rounded-full hover:bg-gray-200 transition"
                     >
                         <RefreshCcw />
-                    </motion.button>
+                    </Button>
                 </TooltipTrigger>
                 <TooltipContent>
                     <p>Refresh</p>

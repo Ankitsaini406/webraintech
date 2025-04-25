@@ -40,7 +40,7 @@ export default function ThemeSwitcher() {
                     <button
                         onClick={handleThemeToggle}
                         aria-label={`${theme === "light" ? "dark" : "light"} mode`}
-                        className="text-foreground hover:opacity-80 transition-opacity p-2 rounded-md"
+                        className="hover:opacity-80 transition-opacity p-2 rounded-md"
                     >
                         {theme === "light" ? <Moon /> : <Sun />}
                     </button>

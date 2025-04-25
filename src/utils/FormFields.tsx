@@ -31,7 +31,7 @@ export function Input({ title, placeholder, value, name, onChange, type = 'text'
                 name={name}
                 onChange={onChange}
                 placeholder={placeholder || title}
-                className={`w-full mt-1 block px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-1 sm:text-sm 
+                className={`w-full mt-1 block px-3 py-2 border rounded-md shadow-sm focus:outline-hidden focus:ring-1 sm:text-sm 
                     ${error ? 'border-red-500 focus:ring-red-500 dark:border-red-500 dark:focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400'} 
                     dark:bg-gray-700 dark:text-white ${className}`}
             />
@@ -57,7 +57,7 @@ export function TextArea({ title, value, name, onChange, error, className }: {
                 onChange={onChange}
                 placeholder={title}
                 rows={4}
-                className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-1 sm:text-sm 
+                className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-hidden focus:ring-1 sm:text-sm 
                     ${error ? 'border-red-500 focus:ring-red-500 dark:border-red-500 dark:focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400'} 
                     dark:bg-gray-700 dark:text-white ${className}`}
             />
@@ -80,7 +80,7 @@ export function MultipleSlection({ label, options, selectedOptions, error, onSel
         <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">{label}</label>
             <select
-                className={`mt-1 block p-2 border rounded-md shadow-sm focus:ring-1 sm:text-sm dark:bg-gray-700 dark:text-white ${error ? 'border-red-500 focus:ring-red-500 dark:border-red-500 dark:focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400'} `}
+                className={`mt-1 block p-2 border rounded-md shadow-xs focus:ring-1 sm:text-sm dark:bg-gray-700 dark:text-white ${error ? 'border-red-500 focus:ring-red-500 dark:border-red-500 dark:focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400'} `}
                 onChange={(e) => onSelect(e.target.value)}
                 value=""
             >
@@ -217,7 +217,7 @@ export function Password({ title, placeholder, value, name, onChange, error, cla
                     name={name}
                     onChange={onChange}
                     placeholder={placeholder ? placeholder : title}
-                    className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-1 sm:text-sm 
+                    className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-hidden focus:ring-1 sm:text-sm 
                         ${error ? 'border-red-500 focus:ring-red-500 dark:border-red-500 dark:focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400'} 
                         dark:bg-gray-700 dark:text-white pr-10 ${className}`}
                 />
@@ -257,7 +257,7 @@ export function NewsLetter({ email, setEmail, loading, error, onSubmit }: NewsLe
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
-                    className={`mt-1 block min-w-[300px] w-full sm:max-w-[500px] px-2 py-[6px] md:px-3 md:py-2 border rounded-md shadow-sm focus:outline-none focus:ring-1 sm:text-sm 
+                    className={`mt-1 block min-w-[300px] w-full sm:max-w-[500px] px-2 py-[6px] md:px-3 md:py-2 border rounded-md shadow-sm focus:outline-hidden focus:ring-1 sm:text-sm 
                     ${error ? 'border-red-500 focus:ring-red-500 dark:border-red-500 dark:focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400'} 
                     dark:bg-gray-700 dark:text-white`}
                 />

@@ -6,7 +6,7 @@ import Link from "next/link";
 function Hero() {
     return (
         <>
-            <div className="container my-7 p-4 rounded-lg flex justify-around gap-4 sm:gap-0 flex-col-reverse sm:flex-row relative items-center">
+            <div className="container mx-auto my-7 p-4 rounded-lg flex justify-around gap-4 sm:gap-0 flex-col-reverse sm:flex-row relative items-center">
                 <Image className="absolute top-1/4 left-8 animate-moveLeftToRight" alt="pen" src="/svg/pen.svg" width={50} height={50} />
                 <Image className="absolute top-10 right-10 animate-moveLeftToRight" alt="pen" src="/svg/airoplan.svg" width={50} height={50} />
 
@@ -24,9 +24,9 @@ function Hero() {
                 </div>
 
                 <div className="w-2/4 justify-center flex relative">
-                    <Image className="bg-gradient-to-b from-transparent to-black-opacity-30 rounded-full max-w-56 sm:max-w-full" alt="WeBrainTech" src="/svg/1.png" width={500} height={500} />
-                    <Image className="bg-gradient-to-b from-transparent to-black-opacity-30 rounded-full absolute bottom-0 right-0 animation-delay-2s animate-moveImageUpTODown w-0 sm:w-24 lg:w-32" alt="WeBrainTech" src="/svg/hero-1.webp" width={150} height={150} />
-                    <Image className="bg-gradient-to-b from-transparent to-black-opacity-30 rounded-full absolute bottom-0 left-0 animate-moveImageUpTODown w-0 sm:w-24 lg:w-32" alt="WeBrainTech" src="/svg/hero-2.webp" width={150} height={150} />
+                    <Image className="bg-linear-to-b from-transparent to-black-opacity-30 rounded-full max-w-56 sm:max-w-full" alt="WeBrainTech" src="/svg/1.png" width={500} height={500} />
+                    <Image className="bg-linear-to-b from-transparent to-black-opacity-30 rounded-full absolute bottom-0 right-0 animation-delay-2s animate-moveImageUpTODown w-0 sm:w-24 lg:w-32" alt="WeBrainTech" src="/svg/hero-1.webp" width={150} height={150} />
+                    <Image className="bg-linear-to-b from-transparent to-black-opacity-30 rounded-full absolute bottom-0 left-0 animate-moveImageUpTODown w-0 sm:w-24 lg:w-32" alt="WeBrainTech" src="/svg/hero-2.webp" width={150} height={150} />
                 </div>
             </div>
 

@@ -83,8 +83,8 @@ function MobileNav() {
                                 </div>
                             </AccordionItem>
                         </Accordion>
-                        <Link href="/about-us" className="!mt-0 pl-4 py-4 text-xl w-full">About Us</Link>
-                        <Link href="/contact-us" className="!mt-0 pl-4 py-4 text-xl w-full">Contact Us</Link>
+                        <Link href="/about-us" className="mt-0! pl-4 py-4 text-xl w-full">About Us</Link>
+                        <Link href="/contact-us" className="mt-0! pl-4 py-4 text-xl w-full">Contact Us</Link>
                     </div>
                 </SheetContent>
             </Sheet>

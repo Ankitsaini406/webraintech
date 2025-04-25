@@ -28,13 +28,13 @@ function MainNav() {
                         <NavigationMenuList>
                             <NavigationMenuItem>
                                 <NavigationMenuTrigger
-                                    className={`rounded-none !py-5 border-2 transition duration-300 transform !bg-white dark:!bg-black
-                                    ${pathname === '/courses' ? 'text-red-500 border-red-500' : 'border-transparent hover:border-red-500 text-base hover:!bg-white dark:hover:!bg-black'}`}
+                                    className={`rounded-none !py-5 border-2 transition duration-300 transform 
+                                    ${pathname === '/courses' ? 'text-red-500 border-red-500' : 'border-transparent hover:border-red-500 text-base '}`}
                                 >
                                     Courses
                                 </NavigationMenuTrigger>
                                 <NavigationMenuContent>
-                                    <ul className="grid w-[300px] gap-3 p-4 md:w-[450px] md:grid-cols-2">
+                                    <ul className="grid w-[300px] gap-3 p-4 md:w-[450px] md:grid-cols-2 bg-background text-foreground dark:bg-foreground dark:text-background">
                                         {courses.map((course) => (
                                             <Link
                                                 key={course.title}
@@ -49,13 +49,13 @@ function MainNav() {
                             </NavigationMenuItem>
                             <NavigationMenuItem>
                                 <NavigationMenuTrigger
-                                    className={`rounded-none !py-5 border-2 transition duration-300 transform !bg-white dark:!bg-black
-                                    ${pathname === '/services' ? 'text-red-500 border-red-500' : 'border-transparent hover:border-red-500 text-base hover:!bg-white dark:hover:!bg-black'}`}
+                                    className={`rounded-none !py-5 border-2 transition duration-300 transform 
+                                    ${pathname === '/services' ? 'text-red-500 border-red-500' : 'border-transparent hover:border-red-500 text-base'}`}
                                 >
                                     Services
                                 </NavigationMenuTrigger>
                                 <NavigationMenuContent>
-                                    <ul className="grid w-[300px] gap-3 p-4 md:w-[450px] md:grid-cols-2">
+                                    <ul className="grid w-[300px] gap-3 p-4 md:w-[450px] md:grid-cols-2 bg-background text-foreground dark:bg-foreground dark:text-background">
                                         {services.map((service) => (
                                             <Link
                                                 key={service.title}

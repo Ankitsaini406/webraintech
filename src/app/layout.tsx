@@ -93,7 +93,7 @@ export default function RootLayout({
         <GoogleTagManagerAndAnalytics />
         <FacebookAnalytics />
       </head>
-      <body className="antialiased flex flex-col min-h-screen bg-background text-foreground selection:bg-blue-600 selection:text-white dark:selection:text-blue-600 dark:selection:bg-white">
+      <body className="antialiased flex flex-col min-h-screen bg-background text-foreground dark:bg-foreground dark:text-background">
         <StoreProvider>
           <ChildLayout>
             {children}

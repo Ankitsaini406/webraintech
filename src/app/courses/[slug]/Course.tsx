@@ -66,7 +66,7 @@ export default function CoursePage({ course }: { course: Course }) {
                 !course ? (
                     <>
                         <Skeleton className="w-full h-[500px]" />
-                        <div className="container p-4 sm:p-8">
+                        <div className="container mx-auto p-4 sm:p-8">
                             <div className="flex justify-between gap-8 flex-col md:flex-row">
                                 <Skeleton className="w-full" />
                                 <Skeleton className="border w-full max-w-[500px] aspect-video" />
@@ -86,7 +86,7 @@ export default function CoursePage({ course }: { course: Course }) {
                     <>
 
                         {/* Courses Banner */}
-                        <div className="relative bg-gradient-to-b from-transparent to-black/30 aspect-square w-full h-[500px] overflow-hidden">
+                        <div className="relative bg-linear-to-b from-transparent to-black/30 aspect-square w-full h-[500px] overflow-hidden">
                             {/* Image */}
                             <Image
                                 className="object-cover h-full hover:scale-105 transition-transform duration-300"
@@ -103,14 +103,14 @@ export default function CoursePage({ course }: { course: Course }) {
                             </div>
                         </div>
 
-                        <div className="container p-4 sm:p-8">
+                        <div className="container mx-auto p-4 sm:p-8">
 
                             {/* Course Introduction */}
                             <div className="flex justify-between gap-8 flex-col xl:flex-row">
                                 <p className="text-xl first-letter:text-5xl first-letter:font-bold first-letter:text-red-500 leading-8">
                                     {course.description}
                                 </p>
-                                {/* <div className="relative bg-gradient-to-b from-transparent to-black/30 border w-full lg:min-w-[500px] h-[300px] aspect-video">Video</div> */}
+                                {/* <div className="relative bg-linear-to-b from-transparent to-black/30 border w-full lg:min-w-[500px] h-[300px] aspect-video">Video</div> */}
                             </div>
 
                             {/* Course Chapters */}
@@ -131,7 +131,7 @@ export default function CoursePage({ course }: { course: Course }) {
                             {/* Course Teacher */}
                             {course.teacher && (
                                 <div className="mt-20 mb-10 w-full lg:w-11/12 xl:w-3/4 mx-auto flex flex-col md:flex-row justify-between gap-8">
-                                    <div className="relative bg-gradient-to-b from-transparent to-black/30 border w-full max-w-[500px] aspect-video">Photo</div>
+                                    <div className="relative bg-linear-to-b from-transparent to-black/30 border w-full max-w-[500px] aspect-video">Photo</div>
                                     <div>
                                         <h4 className="text-2xl font-bold mb-4">{course.teacher.name}</h4>
                                         <p className="leading-6">{course.teacher.brief}</p>

@@ -71,13 +71,13 @@ function ContactUs() {
 
     return (
         <div className="flex flex-col gap-4 md:gap-8 mb-8">
-            <div className="relative bg-gradient-to-b from-transparent to-black-opacity-30 h-[500px] w-full">
-                <div className="absolute inset-0 bg-gradient-to-t from-transparent to-black/40 z-[2]" />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/40 z-[2]" />
+            <div className="relative bg-linear-to-b from-transparent to-black-opacity-30 h-[500px] w-full">
+                <div className="absolute inset-0 bg-linear-to-t from-transparent to-black/40 z-2" />
+                <div className="absolute inset-0 bg-linear-to-b from-transparent to-black/40 z-2" />
                 <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-bold text-6xl z-10 text-white">Contact Us</h1>
                 <Image src='/contactus.webp' alt="Contact Us" title="Contact Us" className="object-cover" fill />
             </div>
-            <div className="container px-4">
+            <div className="container mx-auto px-4">
 
                 <h2 className="font-bold text-xl md:text-3xl text-center mb-4 md:mb-10">Let&apos;s Start a Conversation</h2>
 

@@ -51,7 +51,7 @@ export default function TeachersSection({ studentId }: { studentId: string }) {
                 teachers.map((teacher: Users) => {
                     return (
                         <div key={teacher.id} className="w-full shadow-md p-4 flex flex-col md:flex-row gap-4 border items-center">
-                            <div className="bg-gradient-to-b from-transparent to-black-opacity-30 w-[150px] h-[150px] rounded-full shrink-0">
+                            <div className="bg-linear-to-b from-transparent to-black-opacity-30 w-[150px] h-[150px] rounded-full shrink-0">
                             </div>
                             <div className="flex flex-col">
                                 <p className="font-bold">{teacher.course}</p>

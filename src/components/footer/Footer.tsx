@@ -83,13 +83,13 @@ function Footer() {
                     <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 w-full items-start sm:justify-around">
                         <div className="hidden md:flex flex-col gap-2 sm:gap-4 items-start">
                             <h5 className="font-bold text-xl sm:text-2xl">Courses</h5>
-                            <Link className="hover:text-red-500 transition-all duration-300" href='/' >Web Technlogy</Link>
-                            <Link className="hover:text-red-500 transition-all duration-300" href='/' >AI Python</Link>
-                            <Link className="hover:text-red-500 transition-all duration-300" href='/' >Ethical Hacking</Link>
-                            <Link className="hover:text-red-500 transition-all duration-300" href='/' >Digital Marketing</Link>
-                            <Link className="hover:text-red-500 transition-all duration-300" href='/' >Graphic Animation</Link>
-                            <Link className="hover:text-red-500 transition-all duration-300" href='/' >German Language</Link>
-                            <Link className="hover:text-red-500 transition-all duration-300" href='/' >Spoken English</Link>
+                            <Link className="hover:text-red-500 transition-all duration-300" href='/courses' >Web Technlogy</Link>
+                            <Link className="hover:text-red-500 transition-all duration-300" href='/courses' >AI Python</Link>
+                            <Link className="hover:text-red-500 transition-all duration-300" href='/courses' >Ethical Hacking</Link>
+                            <Link className="hover:text-red-500 transition-all duration-300" href='/courses' >Digital Marketing</Link>
+                            <Link className="hover:text-red-500 transition-all duration-300" href='/courses' >Graphic Animation</Link>
+                            <Link className="hover:text-red-500 transition-all duration-300" href='/courses' >German Language</Link>
+                            <Link className="hover:text-red-500 transition-all duration-300" href='/courses' >Spoken English</Link>
                         </div>
 
                         <div className="hidden md:flex flex-col gap-2 sm:gap-4 items-start">

@@ -40,7 +40,7 @@ export const metadata = {
 
 function AboutUs() {
     return (
-        <div className="container py-4 sm:py-8 px-4 sm:px-8">
+        <div className="container mx-auto py-4 sm:py-8 px-4 sm:px-8">
             <h1 className="text-3xl sm:text-4xl font-bold pb-2 sm:pb-4">About Us</h1>
             <p className="sm:leading-8 text-lg sm:text-xl pb-4 sm:pb-8"> In this era of technology there will be an the increasing demand for trained technical persons
                 capable of driving our country to the 21 Century. Day by day the industries are orienting themselves
@@ -59,7 +59,7 @@ function AboutUs() {
             <h2 className="text-2xl sm:text-3xl font-bold pb-2 sm:pb-4">Founder&apos;s Message</h2>
             <div className="border border-black object-top h-[300px] max-w-[400px] min-w-[200px] relative float-left mr-4 sm:mr-6">
                 <Image alt="Directer Image"
-                    className="bg-gradient-to-b from-transparent to-black-opacity-30 object-cover h-full max-w-full"
+                    className="bg-linear-to-b from-transparent to-black-opacity-30 object-cover h-full max-w-full"
                     src='/faculty/founder.webp'
                     fill />
             </div>

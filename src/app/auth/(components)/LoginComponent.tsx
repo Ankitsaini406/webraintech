@@ -71,7 +71,7 @@ const LoginComponent = () => {
                             <Input title="Email" name="email" type="email" value={formData.email} onChange={handleInputChange} className="rounded-none" />
                             <Password title="Password" name="password" value={formData.password} onChange={handleInputChange} className="rounded-none" />
                             {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
-                            <FormButton title={loading ? "Please Wait" : "Sign In"} disabled={loading} className="rounded-none !bg-black dark:!bg-neutral-800 dark:hover:!shadow-slate-500 hover:!shadow-lg mt-6 !text-white !w-full" />
+                            <FormButton title={loading ? "Please Wait" : "Sign In"} disabled={loading} className="rounded-none bg-black! dark:bg-neutral-800! dark:hover:shadow-slate-500! hover:shadow-lg! mt-6 text-white! w-full!" />
                         </form>
                     </div>
                 </div>
@@ -81,7 +81,7 @@ const LoginComponent = () => {
                     <div className="relative overflow-hidden w-full h-full">
                         <div className="image-slider flex transition-transform duration-500 h-full" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
                             {images.map((item, index) => (
-                                <div key={index} className="image-slide w-full h-full relative flex-shrink-0">
+                                <div key={index} className="image-slide w-full h-full relative shrink-0">
                                     <Image src={item.image} alt={item.alt} layout="fill" />
                                 </div>
                             ))}

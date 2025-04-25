@@ -30,7 +30,7 @@ export const metadata = {
 
 export default function PrivacyPolicy() {
     return (
-        <div className="container p-4 sm:py-8">
+        <div className="container mx-auto p-4 sm:py-8">
             <h1 className="font-bold text-xl sm:text-4xl pb-4">Privacy Policy for Webraintech Academy</h1>
             <h4 className="font-bold">Effective Date: 10-Feb-2025</h4>
             <h4 className="font-bold">Last Upddate: 10-Feb-2025</h4>
