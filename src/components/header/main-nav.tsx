@@ -28,8 +28,8 @@ function MainNav() {
                         <NavigationMenuList>
                             <NavigationMenuItem>
                                 <NavigationMenuTrigger
-                                    className={`rounded-none !py-5 border-2 transition duration-300 transform 
-                                    ${pathname === '/courses' ? 'text-red-500 border-red-500' : 'border-transparent hover:border-red-500 text-base '}`}
+                                    className={`rounded-none !py-5 border-2 transition duration-300 transform !text-base
+                                    ${pathname === '/courses' ? 'text-red-500 border-red-500' : 'border-transparent hover:border-red-500 '}`}
                                 >
                                     Courses
                                 </NavigationMenuTrigger>
@@ -49,7 +49,7 @@ function MainNav() {
                             </NavigationMenuItem>
                             <NavigationMenuItem>
                                 <NavigationMenuTrigger
-                                    className={`rounded-none !py-5 border-2 transition duration-300 transform 
+                                    className={`rounded-none !py-5 border-2 transition duration-300 transform !text-base
                                     ${pathname === '/services' ? 'text-red-500 border-red-500' : 'border-transparent hover:border-red-500 text-base'}`}
                                 >
                                     Services
