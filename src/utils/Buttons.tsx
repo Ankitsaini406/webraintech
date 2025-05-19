@@ -10,13 +10,15 @@ interface ButtonBlackProps {
     title: string;
     className?: string;
     isLoading?: boolean;
+    type?: "button" | "submit" | "reset" | undefined;
 }
 
-export function ButtonWhite({ title, className, isLoading = false }: ButtonBlackProps) {
+export function ButtonWhite({ title, className, isLoading = false, type = "button" }: ButtonBlackProps) {
     return (
         <Button
             variant='outline'
             disabled={isLoading}
+            type={type}
             className={cn(
                 "p-2 px-8 border transition-all duration-300 transform hover:scale-105",
                 className)}

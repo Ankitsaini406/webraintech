@@ -18,7 +18,7 @@ type Action =
         field: keyof CourseState;
         index: number;
         subField: string;
-        value: string | number;
+        value: string | number | object;
     }
     | { type: "ADD_ITEM"; field: keyof CourseState; newItem: Chapter | FAQ }
     | { type: "REMOVE_ITEM"; field: keyof CourseState; index: number }
@@ -88,7 +88,7 @@ const AddCourse = () => {
         dispatch({ type: "REMOVE_ITEM", field, index });
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         setIsLoading(true);
@@ -118,10 +118,20 @@ const AddCourse = () => {
             form.append("image", course.image);
             form.append("bannerImage", course.bannerImage);
 
-            addCourse(form);
-            toast.success("🎉 Course added successfully!");
-            dispatch({ type: "RESET" });
+            console.log(`This is app data : `, form);
+
+            const responce = await addCourse(form);
+            if (responce.success) {
+                toast.success("🎉 Course added successfully!");
+                dispatch({ type: "RESET" });
+            } else {
+                toast.error("Failed to add course.");
+            }
         } catch (error) {
+            toast.error(
+                "Failed to add course." +
+                (error instanceof Error ? ` ${error.message}` : ` ${String(error)}`)
+            );
             if (error instanceof z.ZodError) {
                 const formattedErrors: Record<string, Record<number, Record<string, string>>> = {};
 
@@ -208,14 +218,8 @@ const AddCourse = () => {
                                                                 <Editor
                                                                     onChange={(content) =>
                                                                         dispatch({
-                                                                            type: "UPDATE_ARRAY_FIELD",
-                                                                            field,
-                                                                            index,
-                                                                            subField: key,
-                                                                            value:
-                                                                                typeof content === "string"
-                                                                                    ? content
-                                                                                    : JSON.stringify(content),
+                                                                            type: "UPDATE_ARRAY_FIELD", field, index, subField: key,
+                                                                            value: JSON.stringify(content),
                                                                         })
                                                                     }
                                                                 />
@@ -261,7 +265,7 @@ const AddCourse = () => {
 
 
                 <div className="flex justify-center">
-                    <ButtonBlack className="mt-4" title={isLoading ? "Submitting..." : "Add Course"} isLoading={isLoading}
+                    <ButtonBlack type="submit" className="mt-4" title={isLoading ? "Submitting..." : "Add Course"} isLoading={isLoading}
                     />
                 </div>
             </form>

@@ -127,21 +127,33 @@ export async function addCourse(formData: FormData) {
             throw new Error("FAQs must be an array.");
         }
 
-        const chaptersWithSlugs = chapters.map((chapter) => ({
-            ...chapter,
-            duration: Number.isNaN(Number(chapter.duration)) ? 0 : parseInt(chapter.duration as unknown as string, 10),
+        const chaptersWithSlugs = chapters.map((chapter, index) => ({
+            title: chapter.title,
             slug: createSlug(chapter.title),
+            description: typeof chapter.description === "string"
+                ? JSON.parse(chapter.description)
+                : chapter.description,
+            videoUrl: chapter.videoUrl || "",
+            duration: Number.isNaN(Number(chapter.duration)) ? 0 : parseInt(chapter.duration as unknown as string, 10),
+            pdf: chapter.pdf || null,
+            order: chapter.order ?? index,
+            isVisible: typeof chapter.isVisible === "boolean" ? chapter.isVisible : true,
         }));
 
-        const payload = { title, slug, image, bannerImage, intro, description, thumbnail, introVideo, price, discount, certification,
+        const payload = {
+            title,
+            slug,
+            image,
+            bannerImage,
+            intro,
+            description,
+            thumbnail,
+            introVideo,
+            price,
+            discount,
+            certification,
             chapters: {
-                create: chaptersWithSlugs.map((chapter) => ({
-                    title: chapter.title,
-                    description: chapter.description,
-                    videoUrl: chapter.videoUrl,
-                    duration: chapter.duration,
-                    slug: chapter.slug,
-                })),
+                create: chaptersWithSlugs,
             },
             faqs: {
                 create: faqs.map((faq) => ({
@@ -150,7 +162,6 @@ export async function addCourse(formData: FormData) {
                 })),
             },
             createdAt: new Date(),
-            // status: "draft",
         };
 
         const newCourse = await prisma.course.create({
