@@ -8,51 +8,11 @@ import { toast } from "sonner";
 import { courseSchema } from "@/utils/ValidationSchema";
 import { ButtonBlack } from "@/utils/Buttons";
 import { z } from "zod";
-
-const initialState = {
-    title: "",
-    image: "",
-    bannerImage: "",
-    intro: "",
-    description: "",
-    thumbnail: "",
-    introVideo: "",
-    price: 0,
-    discount: 0,
-    certification: "",
-    chapters: [],
-    faqs: [],
-};
-
-interface CourseState {
-    title: string;
-    image: string;
-    bannerImage: string;
-    intro: string;
-    description: string;
-    thumbnail: string;
-    introVideo: string;
-    price: number;
-    discount: number;
-    certification: string;
-    chapters: Chapter[];
-    faqs: FAQ[];
-}
-
-interface Chapter {
-    title: string;
-    description: string;
-    videoUrl?: string;
-    duration?: number;
-}
-
-interface FAQ {
-    question: string;
-    answer: string;
-}
+import Editor from "@/utils/Editor/Editor";
+import { Chapter, courseinitial, CourseState, FAQ } from "@/types/types";
 
 type Action =
-    | { type: "UPDATE_FIELD"; field: string; value: string | number }
+    | { type: "UPDATE_FIELD"; field: string; value: string | number | object }
     | {
         type: "UPDATE_ARRAY_FIELD";
         field: keyof CourseState;
@@ -86,14 +46,14 @@ const reducer = (state: CourseState, action: Action): CourseState => {
                 [action.field]: (state[action.field] as (Chapter | FAQ)[]).filter((_, idx) => idx !== action.index),
             };
         case "RESET":
-            return initialState;
+            return courseinitial;
         default:
             return state;
     }
 };
 
 const AddCourse = () => {
-    const [course, dispatch] = useReducer(reducer, initialState);
+    const [course, dispatch] = useReducer(reducer, courseinitial);
     const [errors, setErrors] = useReducer(
         (
             state: Record<string, Record<number, Record<string, string>>>,
@@ -128,11 +88,11 @@ const AddCourse = () => {
         dispatch({ type: "REMOVE_ITEM", field, index });
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) : void => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
-    
+
         setIsLoading(true);
-    
+
         try {
             const validatedData = courseSchema.parse(course);
             const form = new FormData();
@@ -159,12 +119,12 @@ const AddCourse = () => {
             form.append("bannerImage", course.bannerImage);
 
             addCourse(form);
-                toast.success("🎉 Course added successfully!");
-                dispatch({ type: "RESET" });
+            toast.success("🎉 Course added successfully!");
+            dispatch({ type: "RESET" });
         } catch (error) {
             if (error instanceof z.ZodError) {
                 const formattedErrors: Record<string, Record<number, Record<string, string>>> = {};
-    
+
                 error.errors.forEach((err) => {
                     if (err.path.length === 1) {
                         formattedErrors[err.path[0]] = { 0: { "": err.message } };
@@ -222,67 +182,73 @@ const AddCourse = () => {
 
                 {(["chapters", "faqs"] as (keyof CourseState)[]).map((field) => {
                     const label = field.charAt(0).toUpperCase() + field.slice(1);
-                    const template =
+                    const template: Chapter | FAQ =
                         field === "chapters"
-                            ? { title: "", description: "", 
-                                // videoUrl: "", duration: 0 
-                            }
-                            : { question: "", answer: "" };
+                            ? { title: "", description: {} } as Chapter
+                            : { question: "", answer: "" } as FAQ;
 
                     return (
                         <div key={field} className="mb-6">
                             <h3 className="font-bold text-lg mb-2">{label}</h3>
-                            {(course[field] as Chapter[] | FAQ[]).map((item, index) => (
-                                <div key={index} className="text-center">
-                                    <div className="flex flex-wrap gap-4 text-left">
-                                        {Object.keys(template).map((key) => {
-                                            const isTextArea =
-                                                (field === "chapters" && key === "description") ||
-                                                (field === "faqs" && key === "answer");
+                            {Array.isArray(course[field]) &&
+                                (course[field] as Chapter[] | FAQ[]).map((item, index) => (
+                                    <div key={index} className="text-center">
+                                        <div className="flex flex-wrap gap-4 text-left">
+                                            {Object.keys(template).map((key) => {
+                                                const value = item[key as keyof typeof item];
+                                                const errorMessage = errors?.[field]?.[index]?.[key];
 
-                                            const errorMessage = errors?.[field]?.[index]?.[key];
-
-                                            return (
-                                                <div key={key} className="w-full">
-                                                    {isTextArea ? (
-                                                        <TextArea
-                                                            title={key.charAt(0).toUpperCase() + key.slice(1)}
-                                                            name={key}
-                                                            value={String(item[key as keyof typeof item])}
-                                                            onChange={(e) =>
-                                                                handleArrayChange(field, index, key as keyof typeof item, e.target.value)
-                                                            }
-                                                            className="w-full h-[100px]"
-                                                            error={errorMessage}
-                                                        />
-                                                    ) : (
-                                                        <Input
-                                                            title={key.charAt(0).toUpperCase() + key.slice(1)}
-                                                            name={key}
-                                                            value={String(item[key as keyof typeof item])}
-                                                            onChange={(e) =>
-                                                                handleArrayChange(field, index, key as keyof typeof item, e.target.value)
-                                                            }
-                                                            className="w-full"
-                                                            error={errorMessage}
-                                                        />
-                                                    )}
-                                                </div>
-                                            );
-                                        })}
+                                                return (
+                                                    <div key={key} className="w-full">
+                                                        {field === "chapters" && key === "description" ? (
+                                                            <div className="mb-4">
+                                                                <label className="block font-medium mb-2">
+                                                                    {key.charAt(0).toUpperCase() + key.slice(1)}
+                                                                </label>
+                                                                <Editor
+                                                                    onChange={(content) =>
+                                                                        dispatch({
+                                                                            type: "UPDATE_ARRAY_FIELD",
+                                                                            field,
+                                                                            index,
+                                                                            subField: key,
+                                                                            value:
+                                                                                typeof content === "string"
+                                                                                    ? content
+                                                                                    : JSON.stringify(content),
+                                                                        })
+                                                                    }
+                                                                />
+                                                            </div>
+                                                        ) : (
+                                                            <Input
+                                                                title={key.charAt(0).toUpperCase() + key.slice(1)}
+                                                                name={key}
+                                                                value={String(value)}
+                                                                onChange={(e) =>
+                                                                    handleArrayChange(field, index, key, e.target.value)
+                                                                }
+                                                                className="w-full"
+                                                                error={errorMessage}
+                                                            />
+                                                        )}
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                        <div>
+                                            <Button
+                                                variant="outline"
+                                                className="mt-4"
+                                                onClick={() => removeItem(field, index)}
+                                            >
+                                                Remove {label.slice(0, -1)}
+                                            </Button>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <Button
-                                            variant="outline"
-                                            className="mt-4"
-                                            onClick={() => removeItem(field, index)}
-                                        >
-                                            Remove {label.slice(0, -1)}
-                                        </Button>
-                                    </div>
-                                </div>
-                            ))}
+                                ))}
                             <Button
+                                type="button"
                                 className="mt-6"
                                 variant="outline"
                                 onClick={() => addMore(field, template)}
@@ -293,9 +259,10 @@ const AddCourse = () => {
                     );
                 })}
 
+
                 <div className="flex justify-center">
-                <ButtonBlack className="mt-4" title={isLoading ? "Submitting..." : "Add Course"} isLoading={isLoading}
-                />
+                    <ButtonBlack className="mt-4" title={isLoading ? "Submitting..." : "Add Course"} isLoading={isLoading}
+                    />
                 </div>
             </form>
         </div>
