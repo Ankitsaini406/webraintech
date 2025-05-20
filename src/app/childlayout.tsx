@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useEffect } from "react";
-import Header from "@/components/header/header";
-import Footer from "@/components/footer/Footer";
+import Header from "@/components/layout/header/header";
+import Footer from "@/components/layout/footer/Footer";
 import TailwindIndicator from "@/lib/tailwindIndicater";
 import { setTheme } from "@/store/actions/ThemeActions";
 import WhatsAppWidget from "@/components/whatsappWidget";

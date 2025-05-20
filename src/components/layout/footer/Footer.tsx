@@ -9,7 +9,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { AppDispatch, RootState } from "@/store/store";
 import { updateNewsLetter } from "@/store/actions/NewsLetterActions";
 import { toast } from "sonner";
-import ThankYouDialog from "../dialogs/Thankyou";
+import ThankYouDialog from "../../dialogs/Thankyou";
 
 function Footer() {
     const dispatch = useDispatch<AppDispatch>();
@@ -41,7 +41,7 @@ function Footer() {
                     <div className="flex flex-col md:flex-row gap-8 md:gap-0 w-full items-start sm:justify-around">
                         <div className="w-full md:w-auto flex items-center flex-col justify-around md:items-start gap-4">
                             <div className="flex flex-col gap-4 items-center md:items-start">
-                                <Image className="h-12 w-12 sm:h-full" src='/favicon.ico' alt="WeBrainTech" width={100} height={100} />
+                                <Image className="sm:h-full" src='/favicon.png' alt="WeBrainTech" width={100} height={100} />
                                 <p>Acedmic vencher of <Link href={'https://eduengine.in/'} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-red-500 hover:underline hover:underline-offset-4 transition-all duration-300">Eduengine Technologies Pvt. Ltd.</Link></p>
                             </div>
                             {/* Social Media Section */}
