@@ -9,7 +9,6 @@ import Link from "next/link";
 export default function CoursesSection() {
 
     const { courses, loading } = useCourses();
-
     const course = courses.filter(item => item.isPublish === true);
 
     return (
@@ -56,7 +55,7 @@ export default function CoursesSection() {
                                 <div key={item.title} className="border shrink-0 flex flex-col bg-primary-foreground dark:shadow-slate-950 justify-between hover:shadow-lg transition-all duration-300 p-4">
                                     <div>
                                         <div className="bg-linear-to-b from-transparent to-black/30 aspect-square w-full overflow-hidden relative z-10">
-                                            {item.image === '' ? null : <Image className="object-cover h-full hover:scale-105 transition-transform duration-300" src={item.image} alt={item.image} width={720} height={300} />}
+                                            {item.image === '' ? null : <Image className="object-cover h-full hover:scale-105 transition-transform duration-300" src={item.image} alt={item.image} width={720} height={300} onError={() => "/webrainPlaceholder.webp"} blurDataURL="/webrainPlaceholder.webp" placeholder="blur" />}
                                         </div>
                                         <h3 className="py-2 sm:py-4 text-base sm:text-xl font-bold">{item.title}</h3>
                                         <h4>{item.intro}</h4>

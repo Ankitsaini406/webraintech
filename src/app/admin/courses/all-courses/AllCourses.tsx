@@ -5,7 +5,7 @@ import { ColumnDef, ColumnFiltersState, SortingState, VisibilityState, flexRende
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import axios from "axios";
@@ -13,13 +13,17 @@ import { formatterPrice, truncateText } from "@/utils/Utils";
 import { Course } from "@/types/types";
 import { toast } from "sonner";
 import { deleteCourse, publishCourse } from "@/actions/Courses";
+import { useRouter } from "next/navigation";
+import { useAppSelector } from "@/hooks/useReduxhook";
 
 export default function AllCourses() {
     const [courses, setCourses] = useState<Course[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
-    console.log(`This is course : `, courses);
+    const { user } = useAppSelector((state) => state.user);
+
+    const router = useRouter();
 
     // Fetch course data from API
     useEffect(() => {
@@ -161,7 +165,8 @@ export default function AllCourses() {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                            <DropdownMenuItem
+                            <DropdownMenuItem onClick={() => router.push(`/courses/${course.slug}`)}>View Course</DropdownMenuItem>
+                            {user?.role === 'ADMIN' && <DropdownMenuItem
                                 onClick={async () => {
 
                                     const res = await publishCourse({
@@ -182,16 +187,13 @@ export default function AllCourses() {
                                 }}
                             >
                                 {course.isPublish ? 'Unpublish News' : 'Publish News'}
-                            </DropdownMenuItem>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem
+                            </DropdownMenuItem>}
+                            {user?.role === 'ADMIN' && <DropdownMenuItem
                                 onClick={async () => {
-
                                     const res = await deleteCourse({
                                         slug: course.slug,
                                         Delete: !course.isDelete,
                                     });
-
                                     if (res.success) {
                                         toast.success(
                                             course.isDelete
@@ -205,8 +207,7 @@ export default function AllCourses() {
                                 }}
                             >
                                 {course.isDelete ? 'Restore News' : 'Delete News'}
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>View Details</DropdownMenuItem>
+                            </DropdownMenuItem>}
                         </DropdownMenuContent>
                     </DropdownMenu>
                 );
