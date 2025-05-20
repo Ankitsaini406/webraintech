@@ -1,13 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-
-interface Course {
-    title: string;
-    image: string;
-    intro: string;
-    slug: string;
-    isPublish: boolean;
-}
+import { Course } from "@/types/types";
 
 const useCourses = () => {
     const [courses, setCourses] = useState<Course[]>([]);

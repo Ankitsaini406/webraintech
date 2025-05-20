@@ -33,15 +33,13 @@ export default function CoursePage({ course }: { course: Course }) {
                                 <Skeleton className="w-full" />
                                 <Skeleton className="border w-full max-w-[500px] aspect-video" />
                             </div>
-                            <Skeleton className="mt-4 h-[50px] w-full md:w-1/2 mx-auto" />
-                            <Skeleton className="mt-4 h-[50px] w-full md:w-1/2 mx-auto" />
-                            <Skeleton className="mt-4 h-[50px] w-full md:w-1/2 mx-auto" />
-
+                            {[...Array(3)].map((_, i) => (
+                                <Skeleton key={i} className="mt-4 h-[50px] w-full md:w-1/2 mx-auto" />
+                            ))}
                             <Skeleton className="w-3/4 h-[300px] my-6 mx-auto" />
-
-                            <Skeleton className="mt-4 h-[50px] w-full md:w-1/2 mx-auto" />
-                            <Skeleton className="mt-4 h-[50px] w-full md:w-1/2 mx-auto" />
-                            <Skeleton className="mt-4 h-[50px] w-full md:w-1/2 mx-auto" />
+                            {[...Array(3)].map((_, i) => (
+                                <Skeleton key={i + 3} className="mt-4 h-[50px] w-full md:w-1/2 mx-auto" />
+                            ))}
                         </div>
                     </>
                 ) : (
@@ -52,16 +50,26 @@ export default function CoursePage({ course }: { course: Course }) {
                             {/* Image */}
                             <Image
                                 className="object-cover h-full hover:scale-105 transition-transform duration-300"
-                                src={course.bannerImage}
+                                src={course.bannerImage || "/webrainBannerPlaceHolder.webp"}
                                 alt={course.title}
                                 title={course.title}
                                 fill
+                                placeholder="blur"
+                                blurDataURL="/webrainBannerPlaceHolder.webp"
                             />
 
+                            {/* Dark Overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/60 z-10" />
+
                             {/* Overlay with course name and button */}
-                            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white w-full">
-                                <h2 className="text-4xl font-bold mb-4">{course.title}</h2>
-                                <Button className="bg-red-500 hover:bg-red-600 text-xl font-bold px-10 py-6 dark:text-white" onClick={scrollToEnroll}>Enroll Now</Button>
+                            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full px-4 z-20">
+                                <h2 className="text-4xl font-bold mb-4 text-white drop-shadow-lg">{course.title}</h2>
+                                <Button
+                                    className="bg-red-500 hover:bg-red-600 text-xl font-bold px-10 py-6 text-white shadow-lg"
+                                    onClick={scrollToEnroll}
+                                >
+                                    Enroll Now
+                                </Button>
                             </div>
                         </div>
 

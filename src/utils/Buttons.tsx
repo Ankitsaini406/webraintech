@@ -20,7 +20,7 @@ export function ButtonWhite({ title, className, isLoading = false, type = "butto
             disabled={isLoading}
             type={type}
             className={cn(
-                "p-2 px-8 border transition-all duration-300 transform hover:scale-105",
+                "cursor-pointer p-2 px-8 border transition-all duration-300 transform hover:scale-105",
                 className)}
         >
             {isLoading && <svg className="mr-3 size-5 animate-spin ..." viewBox="0 0 24 24"></svg>}
@@ -35,7 +35,7 @@ export function ButtonBlack({ title, className, isLoading = false }: ButtonBlack
             variant='default'
             disabled={isLoading}
             className={cn(
-                "p-2 px-8 border border-transparent transition-all duration-300 transform hover:scale-105",
+                "p-2 px-8 border border-transparent transition-all duration-300 transform hover:scale-105 cursor-pointer",
                 className
             )}
         >
@@ -53,7 +53,7 @@ export const ButtonLink = React.forwardRef<HTMLButtonElement | HTMLAnchorElement
     onClick?: () => void;
 }>(
     ({ title, href, className, onClick }, ref) => {
-        const buttonClass = `flex gap-2 transition-all duration-300 transform hover:scale-105 ${className}`;
+        const buttonClass = `flex gap-2 transition-all duration-300 transform hover:scale-105 cursor-pointer ${className}`;
 
         if (href) {
             return (
@@ -78,7 +78,7 @@ export function FormButton({ title, disabled, className }: { title: string; disa
         <button
             disabled={disabled}
             type="submit"
-            className={`w-auto sm:w-40 ${disabled ? 'bg-zinc-500' : 'bg-red-500'} ${disabled ? '' : 'hover:bg-red-600'} text-white px-4 py-2 rounded-md  transition ${className}`}
+            className={`cursor-pointer w-auto sm:w-40 ${disabled ? 'bg-zinc-500' : 'bg-red-500'} ${disabled ? '' : 'hover:bg-red-600'} text-white px-4 py-2 rounded-md  transition ${className}`}
         >
             {disabled ? "Loading..." : title}
         </button>
@@ -98,7 +98,7 @@ export const BuyButton = forwardRef<
             <button
                 ref={ref}  // Pass ref here to forward it to the button element
                 disabled={disabled}
-                className={`${disabled ? 'bg-zinc-500' : 'bg-red-500'} ${disabled ? '' : 'hover:bg-red-600'} text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 ${className}`}
+                className={`${disabled ? 'bg-zinc-500' : 'bg-red-500'} ${disabled ? '' : 'hover:bg-red-600'} cursor-pointer text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 ${className}`}
             >
                 {disabled ? "Please Wait..." : title}
             </button>
