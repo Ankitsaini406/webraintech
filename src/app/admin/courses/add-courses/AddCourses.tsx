@@ -263,7 +263,6 @@ const AddCourse = () => {
                     );
                 })}
 
-
                 <div className="flex justify-center">
                     <ButtonBlack type="submit" className="mt-4" title={isLoading ? "Submitting..." : "Add Course"} isLoading={isLoading}
                     />

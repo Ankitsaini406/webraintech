@@ -52,3 +52,49 @@ export interface FAQ {
     question: string;
     answer: string;
 }
+
+export type LexicalDescription = {
+    root: {
+        children: LexicalNode[];
+    };
+};
+
+export interface Course {
+    id: string;
+    title: string;
+    slug: string;
+    image: string;
+    bannerImage: string;
+    intro: string;
+    description: string;
+    price: number;
+    certification: string;
+    introVideo?: string;
+    thumbnail: string;
+    teacher: {
+        id: string;
+        name: string;
+        email: string;
+        brief: string | null;
+        phoneNumber: string;
+    } | null;
+    enrollments: {
+        studentId: string
+    }[];
+    chapters: {
+        id: string;
+        title: string;
+        description: LexicalDescription;
+        videoUrl: string;
+        duration: number;
+        slug: string;
+        order: number;
+    }[];
+    faqs: {
+        id: string;
+        question: string;
+        answer: string;
+    }[];
+    createdAt: Date;
+    updatedAt: Date;
+}

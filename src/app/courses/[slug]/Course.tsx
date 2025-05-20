@@ -6,46 +6,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { BuyButton } from "@/utils/Buttons";
 import { Button } from "@/components/ui/button";
-
-interface Course {
-    id: string;
-    title: string;
-    slug: string;
-    image: string;
-    bannerImage: string;
-    intro: string;
-    description: string;
-    price: number;
-    certification: string;
-    introVideo?: string;
-    thumbnail: string;
-    teacher: {
-        id: string;
-        name: string;
-        email: string;
-        brief: string | null;
-        phoneNumber: string;
-    } | null;
-    enrollments: {
-        studentId: string
-    }[];
-    chapters: {
-        id: string;
-        title: string;
-        description: string;
-        videoUrl: string;
-        duration: number;
-        slug: string;
-        order: number;
-    }[];
-    faqs: {
-        id: string;
-        question: string;
-        answer: string;
-    }[];
-    createdAt: Date;
-    updatedAt: Date;
-}
+import { Course } from "@/types/types";
+import RichTextPreview from "@/utils/Editor/RichTextPreview";
 
 export default function CoursePage({ course }: { course: Course }) {
     const enrollButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -120,7 +82,7 @@ export default function CoursePage({ course }: { course: Course }) {
                                     {course.chapters.map((item, index) => (
                                         <AccordionItem key={item.id} value={item.id}>
                                             <AccordionTrigger className="text-xl">{`${index + 1}. ${item.title}`}</AccordionTrigger>
-                                            <AccordionContent className="text-lg px-4">{item.description}</AccordionContent>
+                                            <AccordionContent className="text-lg px-4"><RichTextPreview lexicalJson={item.description} /></AccordionContent>
                                         </AccordionItem>
                                     ))}
                                 </Accordion>
