@@ -71,6 +71,8 @@ export interface Course {
     certification: string;
     introVideo?: string;
     thumbnail: string;
+    isPublish: boolean;
+    isDelete: boolean;
     teacher: {
         id: string;
         name: string;

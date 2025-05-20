@@ -10,14 +10,9 @@ import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import axios from "axios";
 import { formatterPrice, truncateText } from "@/utils/Utils";
-
-interface Course {
-    id: string;
-    name: string;
-    teacher: {
-        name: string;
-    },
-}
+import { Course } from "@/types/types";
+import { toast } from "sonner";
+import { deleteCourse, publishCourse } from "@/actions/Courses";
 
 export default function AllCourses() {
     const [courses, setCourses] = useState<Course[]>([]);
@@ -135,13 +130,13 @@ export default function AllCourses() {
         {
             accessorKey: "discount",
             header: () => <div>Discount</div>,
-            cell: ({ row }) =>{
+            cell: ({ row }) => {
                 const discount = row.getValue("discount") as string;
                 return (
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger asChild>
-                            <div className="font-medium">{row.getValue("discount")}%</div>
+                                <div className="font-medium">{row.getValue("discount")}%</div>
                             </TooltipTrigger>
                             <TooltipContent className="max-w-80">
                                 <p>{discount}</p>
@@ -166,11 +161,51 @@ export default function AllCourses() {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(course.id)}>
-                                Copy Course ID
+                            <DropdownMenuItem
+                                onClick={async () => {
+
+                                    const res = await publishCourse({
+                                        slug: course.slug,
+                                        publish: !course.isPublish,
+                                    });
+
+                                    if (res.success) {
+                                        toast.success(
+                                            course.isPublish
+                                                ? 'Unpublished successfully. Refreshing...'
+                                                : 'Published successfully. Refreshing...'
+                                        );
+                                        window.location.reload();
+                                    } else {
+                                        toast.error('Failed to update status: ' + res.error);
+                                    }
+                                }}
+                            >
+                                {course.isPublish ? 'Unpublish News' : 'Publish News'}
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
-                            <DropdownMenuItem>View Course</DropdownMenuItem>
+                            <DropdownMenuItem
+                                onClick={async () => {
+
+                                    const res = await deleteCourse({
+                                        slug: course.slug,
+                                        Delete: !course.isDelete,
+                                    });
+
+                                    if (res.success) {
+                                        toast.success(
+                                            course.isDelete
+                                                ? 'Restore successfully. Refreshing...'
+                                                : 'Delete successfully. Refreshing...'
+                                        );
+                                        window.location.reload();
+                                    } else {
+                                        toast.error('Failed to update status: ' + res.error);
+                                    }
+                                }}
+                            >
+                                {course.isDelete ? 'Restore News' : 'Delete News'}
+                            </DropdownMenuItem>
                             <DropdownMenuItem>View Details</DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>

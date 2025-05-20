@@ -48,6 +48,8 @@ export async function getCourse(slug: string): Promise<Course> {
             certification: course.certification,
             introVideo: course.introVideo ?? undefined,
             thumbnail: course.thumbnail,
+            isDelete: false,
+            isPublish: false,
             teacher: course.teacher
                 ? {
                     id: course.teacher.id,
@@ -73,13 +75,29 @@ export async function getCourse(slug: string): Promise<Course> {
     }
 }
 
-export async function DeleteCourse(slug: string) {
+export async function deleteCourse({ slug, Delete }: { slug: string, Delete: boolean }) {
     try {
         await prisma.course.update({
             where: { slug },
             data: {
-                isDelete: true,
+                isDelete: Delete,
                 isPublish: false,
+            },
+        });
+
+        return { success: true };
+    } catch (error) {
+        console.error(error);
+        return { success: false, error: String(error) };
+    }
+}
+
+export async function publishCourse({ slug, publish }: { slug: string, publish: boolean }) {
+    try {
+        await prisma.course.update({
+            where: { slug },
+            data: {
+                isPublish: publish,
             },
         });
 
