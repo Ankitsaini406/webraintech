@@ -75,7 +75,7 @@ function ContactUs() {
                 <div className="absolute inset-0 bg-linear-to-t from-transparent to-black/40 z-2" />
                 <div className="absolute inset-0 bg-linear-to-b from-transparent to-black/40 z-2" />
                 <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-bold text-6xl z-10 text-white">Contact Us</h1>
-                <Image src='/contactus.webp' alt="Contact Us" title="Contact Us" className="object-cover" fill />
+                <Image src='/contactus.webp' alt="Contact Us" title="Contact Us" className="object-cover" placeholder="blur" blurDataURL="/webrainBannerPlaceHolder.webp" fill />
             </div>
             <div className="container mx-auto px-4">
 

@@ -61,6 +61,8 @@ function AboutUs() {
                 <Image alt="Directer Image"
                     className="bg-linear-to-b from-transparent to-black-opacity-30 object-cover h-full max-w-full"
                     src='/faculty/founder.webp'
+                    placeholder="blur"
+                    blurDataURL="/webrainPlaceholder.webp"
                     fill />
             </div>
             <p className="sm:leading-8 text-lg sm:text-xl pb-4 sm:pb-8"> Information Technology has become a fastest growing Industry in
