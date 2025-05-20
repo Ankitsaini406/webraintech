@@ -1,5 +1,6 @@
 'use client'
 
+import { motion } from "framer-motion";
 import { Skeleton } from "@/components/ui/skeleton";
 import useCourses from "@/hooks/useCoursesList";
 import { Course } from "@/types/types";
@@ -22,6 +23,30 @@ export default function CoursesSection() {
                             <Skeleton className="h-[300px] w-full rounded-none" />
                             <Skeleton className="h-[200px] w-full rounded-none" />
                         </div>
+                    ))
+                ) : publishedCourses.length === 0 ? (
+                    Array(3).fill(0).map((_, i) => (
+                    <motion.div key={i}
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, ease: "easeOut" }}
+                        className="text-center py-16 flex flex-col items-center justify-center gap-4"
+                    >
+                        <div className="relative w-32 h-32">
+                            <Image
+                                src="/webrainPlaceholder.webp"
+                                alt="No courses"
+                                className=" opacity-70"
+                                fill
+                            />
+                        </div>
+                        <h2 className="text-xl sm:text-2xl font-semibold text-gray-600 dark:text-gray-300">
+                            No courses available yet
+                        </h2>
+                        <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg max-w-md">
+                            We’re working on something awesome! Please check back soon.
+                        </p>
+                    </motion.div>
                     ))
                 ) : (
                     publishedCourses.map(course => (
