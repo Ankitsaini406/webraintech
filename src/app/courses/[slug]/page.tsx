@@ -1,6 +1,6 @@
 export const dynamic = "force-dynamic";
 
-import { getCourse } from "@/actions/GetCourse";
+import { getCourse } from "@/actions/Courses";
 import CoursePage from "./Course";
 
 export default async function Page({ params, }: { params: Promise<{ slug: string }> }) {

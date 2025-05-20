@@ -72,3 +72,20 @@ export async function getCourse(slug: string): Promise<Course> {
         throw error;
     }
 }
+
+export async function DeleteCourse(slug: string) {
+    try {
+        await prisma.course.update({
+            where: { slug },
+            data: {
+                isDelete: true,
+                isPublish: false,
+            },
+        });
+
+        return { success: true };
+    } catch (error) {
+        console.error(error);
+        return { success: false, error: String(error) };
+    }
+}

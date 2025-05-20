@@ -6,6 +6,7 @@ interface Course {
     image: string;
     intro: string;
     slug: string;
+    isPublish: boolean;
 }
 
 const useCourses = () => {

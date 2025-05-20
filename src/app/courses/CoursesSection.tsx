@@ -10,6 +10,8 @@ export default function CoursesSection() {
 
     const { courses, loading } = useCourses();
 
+    const course = courses.filter(item => item.isPublish === true);
+
     return (
         <div>
 
@@ -50,7 +52,7 @@ export default function CoursesSection() {
                                     </div>
                                 </>
                             )
-                            : (courses.map((item) => (
+                            : (course.map((item) => (
                                 <div key={item.title} className="border shrink-0 flex flex-col bg-primary-foreground dark:shadow-slate-950 justify-between hover:shadow-lg transition-all duration-300 p-4">
                                     <div>
                                         <div className="bg-linear-to-b from-transparent to-black/30 aspect-square w-full overflow-hidden relative z-10">

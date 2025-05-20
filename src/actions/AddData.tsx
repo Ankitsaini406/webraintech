@@ -152,6 +152,7 @@ export async function addCourse(formData: FormData) {
             price,
             discount,
             certification,
+            isPublish: true,
             chapters: {
                 create: chaptersWithSlugs,
             },

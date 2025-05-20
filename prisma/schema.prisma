@@ -15,7 +15,7 @@ model Enquery {
   message     String
   fatherName  String
   phoneNumber String
-  read        Boolean @default(false)
+  read        Boolean  @default(false)
   createdAt   DateTime @default(now())
 }
 
@@ -25,7 +25,7 @@ model ContactUs {
   email       String
   message     String
   phoneNumber String
-  read        Boolean @default(false)
+  read        Boolean  @default(false)
   createdAt   DateTime @default(now())
 }
 
@@ -36,103 +36,104 @@ enum Role {
 }
 
 model User {
-  id                String   @id @default(cuid())
+  id                String    @id @default(cuid())
   name              String
-  email             String   @unique
-  phoneNumber       String   @unique
-  fatherName        String?  @default("")
-  motherName        String?  @default("")
-  alternativeNumber String?  @default("")
-  aadhaarNumber     String?  @unique
+  email             String    @unique
+  phoneNumber       String    @unique
+  fatherName        String?   @default("")
+  motherName        String?   @default("")
+  alternativeNumber String?   @default("")
+  aadhaarNumber     String?   @unique
   dob               DateTime?
   address           String
   password          String
-  isDeleted         Boolean  @default(false)
-  
+  isDeleted         Boolean   @default(false)
+
   // Relations
-  coursesAsign      Course[]  @relation("TeacherCourses")
-  enrollments       Enrollment[]
-  role              Role     @default(STUDENT)
-  session           Session[]
-  accounts          Account[]
+  coursesAsign Course[]     @relation("TeacherCourses")
+  enrollments  Enrollment[]
+  role         Role         @default(STUDENT)
+  session      Session[]
+  accounts     Account[]
 
   // Teacher-specific fields
-  details          String?  @default("")
-  brief            String?  @default("")
-  facebook         String?  @default("")
-  instagram        String?  @default("")
-  linkdin          String?  @default("")
-  youtube          String?  @default("")
-  x                String?  @default("")
+  details   String? @default("")
+  brief     String? @default("")
+  facebook  String? @default("")
+  instagram String? @default("")
+  linkdin   String? @default("")
+  youtube   String? @default("")
+  x         String? @default("")
 
-  updatedAt        DateTime @updatedAt
-  createdAt        DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
 }
 
 model Course {
-  id             String      @id @default(cuid())
-  title          String
-  slug           String      @unique
-  image          String
-  bannerImage    String
-  intro          String
-  description    String
-  thumbnail      String
-  introVideo     String     // URL for introduction video
-  pdf            String?
-  price          Float
-  discount       Float
-  certification  String
-  
+  id            String  @id @default(cuid())
+  title         String
+  slug          String  @unique
+  image         String
+  bannerImage   String
+  intro         String
+  description   String
+  thumbnail     String
+  introVideo    String
+  pdf           String?
+  price         Float
+  discount      Float
+  certification String
+
   // Relations
-  teacherId      String?
-  teacher        User?       @relation("TeacherCourses", fields: [teacherId], references: [id], onDelete: Cascade)
-  chapters       Chapter[]  // One-to-Many relation with chapters
-  enrollments    Enrollment[]  // Students enrolled in this course
-  faqs           FAQ[]         // FAQs related to this course
-  
-  createdAt      DateTime   @default(now())
-  updatedAt      DateTime   @updatedAt
+  teacherId   String?
+  teacher     User?        @relation("TeacherCourses", fields: [teacherId], references: [id], onDelete: Cascade)
+  chapters    Chapter[] // One-to-Many relation with chapters
+  enrollments Enrollment[] // Students enrolled in this course
+  faqs        FAQ[] // FAQs related to this course
+  isPublish   Boolean      @default(false)
+  isDelete    Boolean      @default(false)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
 }
 
 model Chapter {
-  id          String    @id @default(cuid())
+  id          String  @id @default(cuid())
   title       String
-  slug        String    @unique
+  slug        String  @unique
   description Json?
-  videoUrl    String    @default("")
-  duration    Int       @default(0)
+  videoUrl    String  @default("")
+  duration    Int     @default(0)
   pdf         String?
   courseId    String
-  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  order       Int      @default(0)
-  isVisible   Boolean  @default(true)
+  course      Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  order       Int     @default(0)
+  isVisible   Boolean @default(true)
 
-  updatedAt        DateTime @updatedAt
-  createdAt        DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
 }
 
 model FAQ {
-  id          String   @id @default(cuid())
-  question    String
-  answer      String
-  category    String?
-  order       Int      @default(0)
-  isVisible   Boolean  @default(true)
-  courseId    String
-  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  id        String  @id @default(cuid())
+  question  String
+  answer    String
+  category  String?
+  order     Int     @default(0)
+  isVisible Boolean @default(true)
+  courseId  String
+  course    Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Enrollment {
-  id         String   @id @default(cuid())
-  studentId  String
-  courseId   String
-  student    User     @relation(fields: [studentId], references: [id], onDelete: Cascade)
-  course     Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  
+  id        String @id @default(cuid())
+  studentId String
+  courseId  String
+  student   User   @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  course    Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
   enrolledAt DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }
@@ -164,16 +165,16 @@ model Account {
 }
 
 model VerificationToken {
-  identifier String @id
-  token      String @unique
+  identifier String   @id
+  token      String   @unique
   expires    DateTime
 }
 
 model NewsLetter {
-  id          String   @id @default(cuid())
-  email       String   @unique
-  subscribed  Boolean
-  read        Boolean @default(false)
-  updatedAt   DateTime @updatedAt
-  createdAt   DateTime @default(now())
+  id         String   @id @default(cuid())
+  email      String   @unique
+  subscribed Boolean
+  read       Boolean  @default(false)
+  updatedAt  DateTime @updatedAt
+  createdAt  DateTime @default(now())
 }
