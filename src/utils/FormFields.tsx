@@ -261,7 +261,7 @@ export function NewsLetter({ email, setEmail, loading, error, onSubmit }: NewsLe
                     ${error ? 'border-red-500 focus:ring-red-500 dark:border-red-500 dark:focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400'} 
                     dark:bg-gray-700 dark:text-white`}
                 />
-                <FormButton title="Subscribe" disabled={loading} className="sm:w-32 absolute z-10 top-[2px] -right-[13px] sm:-right-[1px] sm:top-[2.2px]" />
+                <FormButton title="Subscribe" disabled={loading} className="sm:w-32 absolute z-10 top-[2px] -right-[5px] sm:-right-px sm:top-[2.2px]" />
             </form>
         </div>
     );

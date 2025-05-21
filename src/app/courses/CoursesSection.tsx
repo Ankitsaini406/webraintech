@@ -65,7 +65,7 @@ export function CourseCard({ course }: { course: Course }) {
     return (
         <div className="border shrink-0 flex flex-col dark:shadow-slate-950 justify-between hover:shadow-lg transition-all duration-300 p-4">
             <div>
-                <div className="bg-gradient-to-b from-transparent to-black/30 dark:to-white/50 aspect-square w-full overflow-hidden relative z-10">
+                <div className="bg-linear-to-b from-transparent to-black/30 dark:to-white/50 aspect-square w-full overflow-hidden relative z-10">
                     <Image
                         className="object-cover h-full hover:scale-105 transition-transform duration-300"
                         src={imgSrc}

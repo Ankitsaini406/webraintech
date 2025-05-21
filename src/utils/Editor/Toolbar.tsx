@@ -186,18 +186,18 @@ export default function Toolbar() {
 
     return (
         <>
-            <div ref={toolbarRef} className="flex items-center flex-wrap gap-2 border-b-[1px] pb-2.5 mb-2.5">
+            <div ref={toolbarRef} className="flex items-center flex-wrap gap-2 border-b pb-2.5 mb-2.5">
                 <TooltipButton label="Undo" variant={canUndo ? 'secondary' : 'outline'} onClick={() => editor.dispatchCommand(UNDO_COMMAND, undefined)}> <Undo /></TooltipButton>
                 <TooltipButton label="Redo" variant={canRedo ? 'secondary' : 'outline'} onClick={() => editor.dispatchCommand(REDO_COMMAND, undefined)}><Redo /></TooltipButton>
-                <Separator orientation="vertical" className="!h-[30px]" />
+                <Separator orientation="vertical" className="h-[30px]!" />
                 <TooltipButton label="Bold" variant={isBold ? 'secondary' : 'outline'} onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold')}><Bold /></TooltipButton>
                 <TooltipButton label="Italic" variant={isItalic ? 'secondary' : 'outline'} onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic')}><Italic /></TooltipButton>
                 <TooltipButton label="UnderLine" variant={isUnderline ? 'secondary' : 'outline'} onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline')}><Underline /></TooltipButton>
                 <TooltipButton label="Strike Through" variant={isStrikethrough ? 'secondary' : 'outline'} onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'strikethrough')}><Strikethrough /></TooltipButton>
                 <TooltipButton label="High Light" variant={isHighlighted ? 'secondary' : 'outline'} onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'highlight')}><Highlighter /></TooltipButton>
-                <Separator orientation="vertical" className="!h-[30px]" />
+                <Separator orientation="vertical" className="h-[30px]!" />
                 <Select value={headingSelect} onValueChange={(value) => handleHeadingChange(value as 'paragraph' | 'h1' | 'h2')}>
-                    <SelectTrigger className="!w-[150px]">
+                    <SelectTrigger className="w-[150px]!">
                         <SelectValue placeholder="Select Heading" />
                     </SelectTrigger>
                     <SelectContent>
@@ -207,7 +207,7 @@ export default function Toolbar() {
                     </SelectContent>
                 </Select>
                 <Select value={listType ?? ''} onValueChange={(value: 'bullet' | 'number') => toggleListType(value)}>
-                    <SelectTrigger className="!w-[150px]">
+                    <SelectTrigger className="w-[150px]!">
                         <SelectValue placeholder="Select List" />
                     </SelectTrigger>
                     <SelectContent>
@@ -220,7 +220,7 @@ export default function Toolbar() {
                     editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, value);
                     setBlockAlignment(value in alignmentOptions ? value as keyof typeof alignmentOptions : null);
                 }}>
-                    <SelectTrigger className="!w-[150px]">
+                    <SelectTrigger className="w-[150px]!">
                         <SelectValue placeholder="Select Align" />
                     </SelectTrigger>
                     <SelectContent>
@@ -229,7 +229,7 @@ export default function Toolbar() {
                         ))}
                     </SelectContent>
                 </Select> */}
-                <Separator orientation="vertical" className="!h-[30px]" />
+                <Separator orientation="vertical" className="h-[30px]!" />
                 <TooltipButton label="Link" variant="outline" onClick={() => {
                     const url = prompt('Enter the URL');
                     if (url) editor.dispatchCommand(TOGGLE_LINK_COMMAND, url);

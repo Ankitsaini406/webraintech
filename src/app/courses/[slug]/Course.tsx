@@ -59,7 +59,7 @@ export default function CoursePage({ course }: { course: Course }) {
                             />
 
                             {/* Dark Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/60 z-10" />
+                            <div className="absolute inset-0 bg-linear-to-b from-black/60 via-black/30 to-black/60 z-10" />
 
                             {/* Overlay with course name and button */}
                             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full px-4 z-20">
