@@ -3,7 +3,7 @@
 import clsx from "clsx"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ChevronRight, Contact, Home, UserPlus, UsersIcon, Rss, MessageSquareDot, type LucideIcon } from "lucide-react"
+import { ChevronRight, Contact, Home, UserPlus, UsersIcon, Rss, MessageSquareDot, type LucideIcon, Goal } from "lucide-react"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem } from "@/components/ui/sidebar"
 import { useEffect, useState } from "react"
@@ -62,6 +62,7 @@ export function NavMain({ items }: { items: NavItem[] }) {
         <SidebarLink title="Enquery" url="/admin/enquery" icon={MessageSquareDot} />
         <SidebarLink title="Contact Us" url="/admin/contact-us" icon={Contact} unreadCount={unreadCounts.contactus} />
         <SidebarLink title="News Letter" url="/admin/news-letter" icon={Rss} unreadCount={unreadCounts.newsletter} />
+        <SidebarLink title="Placement" url="/admin/placement" icon={Goal} unreadCount={unreadCounts.newsletter} />
 
         {/* Dynamic Menu Items */}
         {items.map((item) => {

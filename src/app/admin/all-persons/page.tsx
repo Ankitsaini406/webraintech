@@ -1,43 +1,16 @@
 "use client";
 
-import React, { useEffect, useState, useMemo } from "react";
-import { fetchAllUsers } from "@/store/actions/UserActions";
 import { Users } from "@/utils/InitialState";
-import {
-    ColumnDef,
-    ColumnFiltersState,
-    SortingState,
-    VisibilityState,
-    flexRender,
-    getCoreRowModel,
-    getFilteredRowModel,
-    getPaginationRowModel,
-    getSortedRowModel,
-    useReactTable,
-} from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-import {
-    DropdownMenu,
-    DropdownMenuCheckboxItem,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { fetchAllUsers } from "@/store/actions/UserActions";
+import React, { useEffect, useState, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/useReduxhook";
+import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { ColumnDef, ColumnFiltersState, SortingState, VisibilityState, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table";
 
 const AllStudents = () => {
     const dispatch = useAppDispatch();
@@ -177,7 +150,7 @@ const AllStudents = () => {
                     onValueChange={(value) => setRoleFilter(value)}
                     value={roleFilter}
                 >
-                    <SelectTrigger className="w-[200px] dark:bg-gray-700 dark:text-white">
+                    <SelectTrigger className="!w-[200px] dark:bg-gray-700 dark:text-white">
                         <SelectValue placeholder="Select Role" />
                     </SelectTrigger>
                     <SelectContent>
