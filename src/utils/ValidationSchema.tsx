@@ -62,3 +62,15 @@ export const courseSchema = z.object({
     ).min(1, "At least one FAQ is required"),
 });
 
+export const placementSchema = z.object({
+    firstName: z.string().min(1, "First Name is required"),
+    lastName: z.string().min(1, "Last Name is required"),
+    email: z.string().email("Invalid email address"),
+    phoneNumber: z.string().min(10, "Phone number must be at least 10 digits"),
+    website: z.string().url("Invalid URL").optional().or(z.literal("")),
+    linkedin: z.string().url("Invalid LinkedIn URL").optional().or(z.literal("")),
+    companyName: z.string().min(1, "Company Name is required"),
+    address: z.string().min(1, "Address is required"),
+});
+
+export type PlacementFormData = z.infer<typeof placementSchema>;

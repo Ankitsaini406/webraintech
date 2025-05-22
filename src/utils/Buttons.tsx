@@ -13,6 +13,31 @@ interface ButtonBlackProps {
     type?: "button" | "submit" | "reset" | undefined;
 }
 
+export function LoadingSpinner({ className = "text-white" }) {
+    return (
+        <svg
+            className={`animate-spin mr-2 h-5 w-5 ${className}`}
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+        >
+            <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+            ></circle>
+            <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+            ></path>
+        </svg>
+    );
+}
+
 export function ButtonWhite({ title, className, isLoading = false, type = "button" }: ButtonBlackProps) {
     return (
         <Button
@@ -23,7 +48,7 @@ export function ButtonWhite({ title, className, isLoading = false, type = "butto
                 "cursor-pointer p-2 px-8 border transition-all duration-300 transform hover:scale-105",
                 className)}
         >
-            {isLoading && <svg className="mr-3 size-5 animate-spin ..." viewBox="0 0 24 24"></svg>}
+            {isLoading && <LoadingSpinner/>}
             {title}
         </Button>
     );
@@ -39,7 +64,7 @@ export function ButtonBlack({ title, className, isLoading = false }: ButtonBlack
                 className
             )}
         >
-            {isLoading && <svg className="mr-3 size-5 animate-spin ..." viewBox="0 0 24 24"></svg>}
+            {isLoading && <LoadingSpinner />}
             {title}
         </Button>
     );
@@ -80,7 +105,7 @@ export function FormButton({ title, disabled, className }: { title: string; disa
             type="submit"
             className={`cursor-pointer w-auto sm:w-40 ${disabled ? 'bg-zinc-500' : 'bg-red-500'} ${disabled ? '' : 'hover:bg-red-600'} text-white px-4 py-2 rounded-md  transition ${className}`}
         >
-            {disabled ? "Loading..." : title}
+            {disabled ? <span className="flex items-center"><LoadingSpinner /> {title}</span>: title}
         </button>
     );
 }
@@ -100,7 +125,7 @@ export const BuyButton = forwardRef<
                 disabled={disabled}
                 className={`${disabled ? 'bg-zinc-500' : 'bg-red-500'} ${disabled ? '' : 'hover:bg-red-600'} cursor-pointer text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 ${className}`}
             >
-                {disabled ? "Please Wait..." : title}
+                {disabled ? <span className="flex items-center"><LoadingSpinner /> {title}</span>: title}
             </button>
         </div>
     );

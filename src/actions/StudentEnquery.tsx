@@ -25,3 +25,17 @@ export async function createContactUs(formData: FormData) {
         }
     });
 }
+
+export async function createPlacementEnquery(formData: FormData) {
+    await prisma.placement.create({
+        data: {
+            name: formData.get("name") as string,
+            email: formData.get("email") as string,
+            phoneNumber: formData.get("phoneNumber") as string,
+            website: formData.get("website") as string,
+            linkedin: formData.get("linkedin") as string,
+            companyName: formData.get("companyName") as string,
+            address: formData.get("address") as string,
+        }
+    });
+}

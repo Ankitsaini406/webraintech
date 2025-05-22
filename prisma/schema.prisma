@@ -178,3 +178,17 @@ model NewsLetter {
   updatedAt  DateTime @updatedAt
   createdAt  DateTime @default(now())
 }
+
+model Placement {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  phoneNumber String
+  website     String?
+  linkedin    String?
+  companyName String
+  address     String
+  read        Boolean  @default(false)
+  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now())
+}

@@ -100,3 +100,25 @@ export interface Course {
     createdAt: Date;
     updatedAt: Date;
 }
+
+type PlacementFormData = {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber: string;
+    website: string;
+    linkedin: string;
+    companyName: string;
+    address: string;
+};
+
+export const initialPlacement: PlacementFormData = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: '',
+    website: '',
+    linkedin: '',
+    companyName: '',
+    address: '',
+};

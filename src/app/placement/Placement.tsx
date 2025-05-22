@@ -1,10 +1,14 @@
 "use client";
 
+import { useState } from "react";
+import { createPlacementEnquery } from "@/actions/StudentEnquery";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { ButtonBlack } from "@/utils/Buttons";
+import { FormButton } from "@/utils/Buttons";
+import { PlacementFormData, placementSchema } from "@/utils/ValidationSchema";
 import Image from "next/image";
-import { useState } from "react";
+import { initialPlacement } from "@/types/types";
+import { toast } from "sonner";
 
 const levrageData = [
     {
@@ -53,33 +57,62 @@ const fields = [
     { label: "First Name", name: "firstName", placeholder: "John" },
     { label: "Last Name", name: "lastName", placeholder: "Doe" },
     { label: "Email Id", name: "email", placeholder: "john@example.com", type: "email" },
-    { label: "Phone Number", name: "phone", placeholder: "123-456-7890", type: "tel" },
+    { label: "Phone Number", name: "phoneNumber", placeholder: "123-456-7890", type: "tel" },
     { label: "Website", name: "website", placeholder: "www.john.com" },
     { label: "Linkedin id", name: "linkedin", placeholder: "Linkedin" },
-    { label: "Company", name: "company", placeholder: "Company Name" },
+    { label: "Company", name: "companyName", placeholder: "Company Name" },
     { label: "Address", name: "address", placeholder: "123 Apt." },
 ]
-type FormData = {
-    [key: string]: string
-}
-
 
 export default function Placement() {
-
-    const [formdata, setFormData] = useState<FormData>({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        website: '',
-        linkedin: '',
-        company: '',
-        address: '',
-    });
+    const [formdata, setFormData] = useState(initialPlacement);
+    const [errors, setErrors] = useState<Partial<Record<keyof PlacementFormData, string>>>({});
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData({ ...formdata, [e.target.name]: e.target.value })
-    }
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+        setErrors(prev => ({ ...prev, [name]: '' }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+
+        const parsed = placementSchema.safeParse(formdata);
+
+        if (!parsed.success) {
+            const fieldErrors: Partial<Record<keyof PlacementFormData, string>> = {};
+            parsed.error.errors.forEach((err) => {
+                const field = err.path[0] as keyof PlacementFormData;
+                fieldErrors[field] = err.message;
+            });
+            setErrors(fieldErrors);
+            setIsSubmitting(false);
+            return;
+        }
+
+        try {
+            const payload = new FormData();
+            payload.append("name", `${formdata.firstName} ${formdata.lastName}`);
+            payload.append("email", formdata.email);
+            payload.append("phoneNumber", formdata.phoneNumber);
+            payload.append("website", formdata.website);
+            payload.append("linkedin", formdata.linkedin);
+            payload.append("companyName", formdata.companyName);
+            payload.append("address", formdata.address);
+
+            await createPlacementEnquery(payload);
+
+            toast.success("Form submitted successfully!");
+            setFormData(initialPlacement);
+            setErrors({});
+        } catch {
+            toast.error("Something went wrong. Please try again.");
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     return (
         <div className="pb-10">
@@ -137,28 +170,28 @@ export default function Placement() {
             <h5 className="text-center font-bold text-3xl sm:text-5xl py-10 uppercase">Get in touch with our training & placement Team</h5>
             <Separator orientation='horizontal' className="my-7 h-4 !w-3/4 mx-auto" />
 
-            <form className="max-w-5xl mx-auto px-4 py-10">
-                <div className="grid gap-10 md:grid-cols-2">
+            <form onSubmit={handleSubmit} className="max-w-5xl mx-auto px-5 py-10">
+                <div className="grid gap-5 lg:gap-10 md:grid-cols-2">
                     {fields.map(({ label, name, placeholder, type = "text" }) => (
                         <div key={name}>
-                            <label htmlFor={name} className="block mb-2 font-medium">
-                                {label} :
-                            </label>
+                            <label htmlFor={name} className="block mb-2 font-medium">{label} :</label>
                             <Input
                                 id={name}
                                 name={name}
                                 type={type}
                                 placeholder={placeholder}
-                                value={(formdata)[name]}
+                                value={formdata[name as keyof PlacementFormData]}
                                 onChange={handleChange}
-                                className="bg-white text-foreground md:h-14 text-lg"
-                                required
+                                className="bg-white text-foreground md:h-14 md:!text-lg"
                             />
+                            {errors[name as keyof PlacementFormData] && (
+                                <p className="text-red-500 text-sm mt-1">{errors[name as keyof PlacementFormData]}</p>
+                            )}
                         </div>
                     ))}
                 </div>
                 <div className="text-center mt-10">
-                <ButtonBlack title="Submit" className="items-center" />
+                    <FormButton title={isSubmitting ? "Submitting..." : "Submit"} className="items-center" disabled={isSubmitting} />
                 </div>
             </form>
         </div>
