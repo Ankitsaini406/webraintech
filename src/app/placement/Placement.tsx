@@ -2,6 +2,7 @@
 
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+import { ButtonBlack } from "@/utils/Buttons";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -51,23 +52,29 @@ const levrageData = [
 const fields = [
     { label: "First Name", name: "firstName", placeholder: "John" },
     { label: "Last Name", name: "lastName", placeholder: "Doe" },
-    { label: "Email Address", name: "email", placeholder: "john@example.com", type: "email" },
+    { label: "Email Id", name: "email", placeholder: "john@example.com", type: "email" },
     { label: "Phone Number", name: "phone", placeholder: "123-456-7890", type: "tel" },
+    { label: "Website", name: "website", placeholder: "www.john.com" },
+    { label: "Linkedin id", name: "linkedin", placeholder: "Linkedin" },
     { label: "Company", name: "company", placeholder: "Company Name" },
-    { label: "Position", name: "position", placeholder: "Your Role" },
-    { label: "City", name: "city", placeholder: "City Name" },
-    { label: "Country", name: "country", placeholder: "Country Name" },
+    { label: "Address", name: "address", placeholder: "123 Apt." },
 ]
+type FormData = {
+    [key: string]: string
+}
+
 
 export default function Placement() {
 
-    const [formdata, setFormData] = useState({
-        name: '',
+    const [formdata, setFormData] = useState<FormData>({
+        firstName: '',
+        lastName: '',
         email: '',
         phone: '',
+        website: '',
+        linkedin: '',
         company: '',
-        position: '',
-        message: ''
+        address: '',
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -131,11 +138,11 @@ export default function Placement() {
             <Separator orientation='horizontal' className="my-7 h-4 !w-3/4 mx-auto" />
 
             <form className="max-w-5xl mx-auto px-4 py-10">
-                <div className="grid gap-6 md:grid-cols-2">
+                <div className="grid gap-10 md:grid-cols-2">
                     {fields.map(({ label, name, placeholder, type = "text" }) => (
                         <div key={name}>
-                            <label htmlFor={name} className="block mb-2 text-sm font-medium text-gray-700">
-                                {label}
+                            <label htmlFor={name} className="block mb-2 font-medium">
+                                {label} :
                             </label>
                             <Input
                                 id={name}
@@ -144,11 +151,14 @@ export default function Placement() {
                                 placeholder={placeholder}
                                 value={(formdata)[name]}
                                 onChange={handleChange}
-                                className="bg-white"
+                                className="bg-white text-foreground md:h-14 text-lg"
                                 required
                             />
                         </div>
                     ))}
+                </div>
+                <div className="text-center mt-10">
+                <ButtonBlack title="Submit" className="items-center" />
                 </div>
             </form>
         </div>
