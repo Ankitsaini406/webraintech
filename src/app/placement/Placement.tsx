@@ -116,36 +116,66 @@ export default function Placement() {
 
     return (
         <div className="pb-10">
-            <div className="bg-linear-to-b from-primary">
-                <div className="container mx-auto p-4 sm:py-8 flex flex-col items-center">
+            <div className="bg-gradient-to-b from-primary/5 to-transparent dark:from-primary dark:to-transparent">
+                <div className="container mx-auto p-4 sm:py-12 flex flex-col items-center">
                     <div className="relative h-[200px] sm:h-[400px] aspect-square">
-                        <Image src='/placement/placement.webp' alt="Placement Image" fill />
+                        <Image 
+                            src='/placement/placement.webp' 
+                            alt="Placement Image" 
+                            fill 
+                            className="object-contain"
+                            priority
+                        />
                     </div>
-                    <h1 className="font-bold text-2xl md:text-4xl lg:text-5xl pb-4 uppercase text-center max-w-[900px]">Welcome to the placement cell bridging talent and industry.</h1>
-                    <p className="pt-4 pb-15 leading-5 lg:leading-8 font-light md:text-lg lg:text-3xl text-center max-w-[1000px]">We build strong industry-academia relations to ensure successful
+                    <h1 className="font-bold text-2xl md:text-4xl lg:text-5xl pb-4 text-center max-w-[900px] bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 bg-clip-text text-transparent">
+                        Welcome to the placement cell bridging talent and industry.
+                    </h1>
+                    <p className="pt-4 pb-15 leading-relaxed text-gray-600 dark:text-gray-300 md:text-lg lg:text-xl text-center max-w-[1000px]">
+                        We build strong industry-academia relations to ensure successful
                         placements for our students and valuable hires for your organization.
-                        Let&apos;s work together to create career opportunities.</p>
+                        Let&apos;s work together to create career opportunities.
+                    </p>
                 </div>
 
-                <h2 className="uppercase font-bold text-2xl md:text-4xl lg:text-5xl text-center">Meet our Hr</h2>
-                <Separator orientation='horizontal' className="my-7 h-4 !w-3/4 mx-auto" />
+                <h2 className="uppercase font-bold text-2xl md:text-4xl lg:text-5xl text-center bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 bg-clip-text text-transparent">
+                    Meet our Hr
+                </h2>
+                <Separator orientation='horizontal' className="my-7 !w-1/2 mx-auto bg-primary/20" />
             </div>
 
             {/* HR Section */}
-            <div className="lg:container mx-auto p-4 flex flex-col md:flex-row gap-12 md:gap-0 justify-around items-center ">
-                <div className="relative h-[300px] lg:h-[330px] xl:h-[400px] w-1/2 sm:w-1/3 lg:w-1/5">
-                    <Image src='/placement/hr-background.webp' alt='Hr Image' fill className="z-10 !left-5" />
-                    <Image src='/placement/hr-image.webp' alt='Hr Image' fill className="z-10 !w-[200px] lg:!w-[250px]" />
+            <div className="lg:container mx-auto p-4 flex flex-col md:flex-row gap-12 md:gap-16 justify-center items-center bg-gray-50 dark:bg-gray-800/50 rounded-2xl my-8">
+                <div className="relative h-[300px] lg:h-[330px] xl:h-[400px] w-full md:w-1/3 lg:w-1/4">
+                    <Image 
+                        src='/placement/hr-background.webp' 
+                        alt='Hr Background' 
+                        fill 
+                        className="z-10 object-contain" 
+                    />
+                    <Image 
+                        src='/placement/hr-image.webp' 
+                        alt='HR Portrait' 
+                        fill 
+                        className="z-20 !left-16 sm:!left-0 !w-[200px] lg:!w-[250px] object-contain" 
+                    />
                 </div>
 
-                <div className="flex flex-col gap-8">
-                    <h3 className="uppercase font-bold text-3xl sm:text-5xl">Divya vyas</h3>
-                    <h3 className="font-bold text-xl sm:text-3xl">About</h3>
-                    <p className="md:max-w-[300px] lg:max-w-[500px]">A dedicated and results-oriented MBA candidate with a
-                        strong foundation in finance and business analytics.
-                        Seeking to leverage my analytical skills and strategic
-                        thinking to contribute to a dynamic and innovative
-                        organization.</p>
+                <div className="flex flex-col gap-6 md:w-1/2">
+                    <h3 className="font-bold text-3xl sm:text-4xl bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 bg-clip-text text-transparent">
+                        Divya Vyas
+                    </h3>
+                    <div>
+                        <h4 className="font-semibold text-xl sm:text-2xl text-gray-800 dark:text-gray-200 mb-4">
+                            About
+                        </h4>
+                        <p className="text-gray-600 dark:text-gray-300 leading-relaxed max-w-[500px]">
+                            A dedicated and results-oriented MBA candidate with a
+                            strong foundation in finance and business analytics.
+                            Seeking to leverage my analytical skills and strategic
+                            thinking to contribute to a dynamic and innovative
+                            organization.
+                        </p>
+                    </div>
                 </div>
             </div>
 
@@ -156,25 +186,38 @@ export default function Placement() {
             <div className="lg:container mx-auto p-4 md:my-10 grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 {
                     levrageData.map((item) => (
-                        <div key={item.title} className="p-5 rounded-lg dark:bg-gray-300 flex flex-col gap-5 border">
-                            <div className="relative w-12 aspect-square">
-                                <Image src={item.image} alt={item.title} fill className="shadow p-1 rounded-lg" />
+                        <div key={item.title} className="group relative border border-gray-200 dark:border-gray-700 hover:border-primary dark:hover:border-primary rounded-xl p-5 flex flex-col gap-5 bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition-all duration-300">
+                            <div className="relative w-12 aspect-square bg-gray-50 dark:bg-gray-700 rounded-lg p-2">
+                                <Image 
+                                    src={item.image} 
+                                    alt={item.title} 
+                                    fill 
+                                    className="p-1 rounded-lg object-contain transition-transform duration-300 group-hover:scale-110" 
+                                />
                             </div>
-                            <h5 className="text-foreground font-bold text-xl">{item.title}</h5>
-                            <h6 className="text-foreground">{item.descriprtion}</h6>
+                            <div>
+                                <h5 className="font-bold text-xl mb-2 text-gray-900 dark:text-gray-100 group-hover:text-primary dark:group-hover:text-primary transition-colors duration-300">
+                                    {item.title}
+                                </h5>
+                                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                    {item.descriprtion}
+                                </p>
+                            </div>
                         </div>
                     ))
                 }
             </div>
 
             <h5 className="text-center font-bold text-3xl sm:text-5xl py-10 uppercase">Get in touch with our training & placement Team</h5>
-            <Separator orientation='horizontal' className="my-7 h-4 !w-3/4 mx-auto" />
+            <Separator orientation='horizontal' className="my-7 !h-1 !w-3/4 mx-auto" />
 
-            <form onSubmit={handleSubmit} className="max-w-5xl mx-auto px-5 py-10">
-                <div className="grid gap-5 lg:gap-10 md:grid-cols-2">
+            <form onSubmit={handleSubmit} className="max-w-5xl mx-auto px-5 py-10 bg-white dark:bg-gray-800 rounded-xl shadow-sm">
+                <div className="grid gap-6 lg:gap-8 md:grid-cols-2">
                     {fields.map(({ label, name, placeholder, type = "text" }) => (
-                        <div key={name}>
-                            <label htmlFor={name} className="block mb-2 font-medium">{label} :</label>
+                        <div key={name} className="space-y-2">
+                            <label htmlFor={name} className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                {label}
+                            </label>
                             <Input
                                 id={name}
                                 name={name}
@@ -182,7 +225,7 @@ export default function Placement() {
                                 placeholder={placeholder}
                                 value={formdata[name as keyof PlacementFormData]}
                                 onChange={handleChange}
-                                className="bg-white text-foreground md:h-14 md:!text-lg"
+                                className="w-full bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600 focus:ring-primary dark:focus:ring-primary text-gray-900 dark:text-gray-100"
                             />
                             {errors[name as keyof PlacementFormData] && (
                                 <p className="text-red-500 text-sm mt-1">{errors[name as keyof PlacementFormData]}</p>
@@ -190,8 +233,12 @@ export default function Placement() {
                         </div>
                     ))}
                 </div>
-                <div className="text-center mt-10">
-                    <FormButton title={isSubmitting ? "Submitting..." : "Submit"} className="items-center" disabled={isSubmitting} />
+                <div className="text-center mt-8">
+                    <FormButton 
+                        title={isSubmitting ? "Submitting..." : "Submit"} 
+                        className="w-full md:w-auto min-w-[200px] bg-primary hover:bg-primary/90 text-white dark:text-white font-medium py-2.5 rounded-lg transition-all duration-300 disabled:opacity-50" 
+                        disabled={isSubmitting} 
+                    />
                 </div>
             </form>
         </div>
