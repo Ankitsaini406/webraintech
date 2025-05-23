@@ -1,13 +1,11 @@
 "use client";
 
 import React, { useEffect, useState, useMemo } from "react";
-import { ColumnDef, ColumnFiltersState, SortingState, VisibilityState, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table";
+import { ColumnDef } from "@tanstack/react-table";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
+import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import axios from "axios";
 import { formatterPrice, truncateText } from "@/utils/Utils";
 import { Course } from "@/types/types";
@@ -15,6 +13,7 @@ import { toast } from "sonner";
 import { deleteCourse, publishCourse } from "@/actions/Courses";
 import { useRouter } from "next/navigation";
 import { useAppSelector } from "@/hooks/useReduxhook";
+import { DataTable } from "@/components/DataTable";
 
 export default function AllCourses() {
     const [courses, setCourses] = useState<Course[]>([]);
@@ -22,35 +21,37 @@ export default function AllCourses() {
     const [error, setError] = useState<string | null>(null);
 
     const { user } = useAppSelector((state) => state.user);
-
     const router = useRouter();
 
-    // Fetch course data from API
-    useEffect(() => {
-        const fetchCourses = async () => {
-            try {
-                const response = await axios.get("/api/courses");
-                setCourses(response.data.data);
-            } catch (err) {
-                setError("Failed to fetch courses");
-                console.error("❌ Error fetching courses:", err);
-            } finally {
-                setLoading(false);
-            }
-        };
+    const handleRefresh = async () => {
+        setLoading(true);
+        try {
+            const response = await axios.get("/api/courses");
+            setCourses(response.data.data);
+        } catch (err) {
+            setError("Failed to fetch courses");
+            console.error("❌ Error fetching courses:", err);
+        } finally {
+            setLoading(false);
+        }
+    };
 
-        fetchCourses();
+    useEffect(() => {
+        handleRefresh();
     }, []);
 
-    // Memoize the data for performance
-    const persons = useMemo(() => courses, [courses]);
+    const data = useMemo(() => courses, [courses]);
 
     const columns: ColumnDef<Course>[] = [
         {
             accessorKey: "title",
             header: ({ column }) => (
-                <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-                    Title <ArrowUpDown />
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Title
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
             ),
             cell: ({ row }) => {
@@ -71,7 +72,7 @@ export default function AllCourses() {
         },
         {
             accessorKey: "intro",
-            header: () => <div>Intro</div>,
+            header: "Intro",
             cell: ({ row }) => {
                 const intro = row.getValue("intro") as string;
                 return (
@@ -90,7 +91,7 @@ export default function AllCourses() {
         },
         {
             id: "teacher",
-            header: () => <div>Teacher</div>,
+            header: "Teacher",
             cell: ({ row }) => {
                 const teacher = row.original.teacher;
                 const teacherName = teacher && teacher.name && teacher.name !== ''
@@ -111,8 +112,12 @@ export default function AllCourses() {
         {
             accessorKey: "price",
             header: ({ column }) => (
-                <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-                    Price <ArrowUpDown />
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Price
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
             ),
             cell: ({ row }) => {
@@ -121,7 +126,7 @@ export default function AllCourses() {
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger asChild>
-                                <div className="font-medium">₹{formatterPrice(row.getValue("price"))}</div>
+                                <div className="font-medium">₹{price}</div>
                             </TooltipTrigger>
                             <TooltipContent className="max-w-80">
                                 <p>{price}</p>
@@ -133,14 +138,14 @@ export default function AllCourses() {
         },
         {
             accessorKey: "discount",
-            header: () => <div>Discount</div>,
+            header: "Discount",
             cell: ({ row }) => {
                 const discount = row.getValue("discount") as string;
                 return (
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger asChild>
-                                <div className="font-medium">{row.getValue("discount")}%</div>
+                                <div className="font-medium">{discount}%</div>
                             </TooltipTrigger>
                             <TooltipContent className="max-w-80">
                                 <p>{discount}</p>
@@ -160,54 +165,59 @@ export default function AllCourses() {
                         <DropdownMenuTrigger asChild>
                             <Button variant="ghost" className="h-8 w-8 p-0">
                                 <span className="sr-only">Open menu</span>
-                                <MoreHorizontal />
+                                <MoreHorizontal className="h-4 w-4" />
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                            <DropdownMenuItem onClick={() => router.push(`/courses/${course.slug}`)}>View Course</DropdownMenuItem>
-                            {user?.role === 'ADMIN' && <DropdownMenuItem
-                                onClick={async () => {
+                            <DropdownMenuItem onClick={() => router.push(`/courses/${course.slug}`)}>
+                                View Course
+                            </DropdownMenuItem>
+                            {user?.role === 'ADMIN' && (
+                                <>
+                                    <DropdownMenuItem
+                                        onClick={async () => {
+                                            const res = await publishCourse({
+                                                slug: course.slug,
+                                                publish: !course.isPublish,
+                                            });
 
-                                    const res = await publishCourse({
-                                        slug: course.slug,
-                                        publish: !course.isPublish,
-                                    });
-
-                                    if (res.success) {
-                                        toast.success(
-                                            course.isPublish
-                                                ? 'Unpublished successfully. Refreshing...'
-                                                : 'Published successfully. Refreshing...'
-                                        );
-                                        window.location.reload();
-                                    } else {
-                                        toast.error('Failed to update status: ' + res.error);
-                                    }
-                                }}
-                            >
-                                {course.isPublish ? 'Unpublish News' : 'Publish News'}
-                            </DropdownMenuItem>}
-                            {user?.role === 'ADMIN' && <DropdownMenuItem
-                                onClick={async () => {
-                                    const res = await deleteCourse({
-                                        slug: course.slug,
-                                        Delete: !course.isDelete,
-                                    });
-                                    if (res.success) {
-                                        toast.success(
-                                            course.isDelete
-                                                ? 'Restore successfully. Refreshing...'
-                                                : 'Delete successfully. Refreshing...'
-                                        );
-                                        window.location.reload();
-                                    } else {
-                                        toast.error('Failed to update status: ' + res.error);
-                                    }
-                                }}
-                            >
-                                {course.isDelete ? 'Restore News' : 'Delete News'}
-                            </DropdownMenuItem>}
+                                            if (res.success) {
+                                                toast.success(
+                                                    course.isPublish
+                                                        ? 'Unpublished successfully. Refreshing...'
+                                                        : 'Published successfully. Refreshing...'
+                                                );
+                                                handleRefresh();
+                                            } else {
+                                                toast.error('Failed to update status: ' + res.error);
+                                            }
+                                        }}
+                                    >
+                                        {course.isPublish ? 'Unpublish Course' : 'Publish Course'}
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem
+                                        onClick={async () => {
+                                            const res = await deleteCourse({
+                                                slug: course.slug,
+                                                Delete: !course.isDelete,
+                                            });
+                                            if (res.success) {
+                                                toast.success(
+                                                    course.isDelete
+                                                        ? 'Restored successfully. Refreshing...'
+                                                        : 'Deleted successfully. Refreshing...'
+                                                );
+                                                handleRefresh();
+                                            } else {
+                                                toast.error('Failed to delete course: ' + res.error);
+                                            }
+                                        }}
+                                    >
+                                        {course.isDelete ? 'Restore Course' : 'Delete Course'}
+                                    </DropdownMenuItem>
+                                </>
+                            )}
                         </DropdownMenuContent>
                     </DropdownMenu>
                 );
@@ -215,100 +225,14 @@ export default function AllCourses() {
         },
     ];
 
-    const [sorting, setSorting] = useState<SortingState>([]);
-    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-    const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
-    const [rowSelection, setRowSelection] = useState({});
-
-    const table = useReactTable({
-        data: persons,
-        columns,
-        onSortingChange: setSorting,
-        onColumnFiltersChange: setColumnFilters,
-        getCoreRowModel: getCoreRowModel(),
-        getPaginationRowModel: getPaginationRowModel(),
-        getSortedRowModel: getSortedRowModel(),
-        getFilteredRowModel: getFilteredRowModel(),
-        onColumnVisibilityChange: setColumnVisibility,
-        onRowSelectionChange: setRowSelection,
-        state: {
-            sorting,
-            columnFilters,
-            columnVisibility,
-            rowSelection,
-        },
-    });
-
     return (
-        <div className="w-full px-8">
-            <div className="flex items-center py-4">
-                <Input
-                    placeholder="Filter Title..."
-                    value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
-                    onChange={(event) => table.getColumn("title")?.setFilterValue(event.target.value)}
-                    className="max-w-sm"
-                />
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="outline" className="ml-auto">
-                            Columns <ChevronDown />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        {table.getAllColumns().filter((column) => column.getCanHide()).map((column) => (
-                            <DropdownMenuCheckboxItem
-                                key={column.id}
-                                className="capitalize"
-                                checked={column.getIsVisible()}
-                                onCheckedChange={(value) => column.toggleVisibility(!!value)}
-                            >
-                                {column.id}
-                            </DropdownMenuCheckboxItem>
-                        ))}
-                    </DropdownMenuContent>
-                </DropdownMenu>
-            </div>
-
-            {error && <div className="text-red-500 text-sm">{error}</div>}
-
-            {loading ? (
-                <div className="text-center py-4">Loading courses...</div>
-            ) : (
-                <div className="rounded-md border">
-                    <Table>
-                        <TableHeader>
-                            {table.getHeaderGroups().map((headerGroup) => (
-                                <TableRow key={headerGroup.id}>
-                                    {headerGroup.headers.map((header) => (
-                                        <TableHead key={header.id}>
-                                            {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                                        </TableHead>
-                                    ))}
-                                </TableRow>
-                            ))}
-                        </TableHeader>
-                        <TableBody>
-                            {table.getRowModel().rows.length ? (
-                                table.getRowModel().rows.map((row) => (
-                                    <TableRow key={row.id}>
-                                        {row.getVisibleCells().map((cell) => (
-                                            <TableCell key={cell.id}>
-                                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                            </TableCell>
-                                        ))}
-                                    </TableRow>
-                                ))
-                            ) : (
-                                <TableRow>
-                                    <TableCell colSpan={columns.length} className="h-24 text-center">
-                                        No Course found.
-                                    </TableCell>
-                                </TableRow>
-                            )}
-                        </TableBody>
-                    </Table>
-                </div>
-            )}
-        </div>
+        <DataTable
+            data={data}
+            columns={columns}
+            loading={loading}
+            error={error}
+            onRefresh={handleRefresh}
+            searchKey="title"
+        />
     );
 }

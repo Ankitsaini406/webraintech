@@ -1,6 +1,5 @@
+import PlacementPage from "./Placement";
 
 export default function Page() {
-    return (
-        <div>Placement</div>
-    )
+    return <PlacementPage />;
 }
