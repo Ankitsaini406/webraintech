@@ -1,3 +1,5 @@
+"use client";
+
 import { addCourse } from "@/actions/AddData";
 import CourseForm from "../CourseForm";
 

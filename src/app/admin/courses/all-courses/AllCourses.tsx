@@ -42,8 +42,6 @@ export default function AllCourses() {
 
     const data = useMemo(() => courses, [courses]);
 
-    console.log("Courses data:", data);
-
     const columns: ColumnDef<Course>[] = [
         {
             accessorKey: "title",
