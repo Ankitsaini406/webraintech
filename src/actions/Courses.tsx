@@ -138,7 +138,9 @@ export async function editCourse(
             isDelete = existing.isDelete,
         } = data;
 
-        console.log(`This is data : `, data);
+        console.log("Incoming course data:", data);
+        console.log("Chapters:", data.chapters);
+        console.log("FAQs:", data.faqs);
 
         const price = data.price !== undefined ? parseFloat(data.price.toString()) : existing.price;
         const discount = data.discount !== undefined ? parseFloat(data.discount.toString()) : existing.discount;
@@ -163,31 +165,39 @@ export async function editCourse(
             },
         });
 
-        if (Array.isArray(data.chapters)) {
-            // Delete old chapters
-            await prisma.chapter.deleteMany({ where: { courseId: updated.id } });
+        const parsedChapters = typeof data.chapters === "string"
+            ? JSON.parse(data.chapters)
+            : data.chapters;
 
-            // Create new chapters
-            await prisma.chapter.createMany({
-                data: data.chapters.map((chapter) => ({
-                    courseId: updated.id,
-                    slug: createSlug(chapter.title),
-                    title: chapter.title,
-                    description: JSON.stringify(chapter.description),
-                })),
-            });
+        if (Array.isArray(parsedChapters)) {
+            await prisma.chapter.deleteMany({ where: { courseId: updated.id } });
+            if (parsedChapters.length > 0) {
+                await prisma.chapter.createMany({
+                    data: parsedChapters.map((chapter) => ({
+                        courseId: updated.id,
+                        slug: createSlug(chapter.title),
+                        title: chapter.title,
+                        description: chapter.description,
+                    })),
+                });
+            }
         }
 
-        if (Array.isArray(data.faqs)) {
-            await prisma.fAQ.deleteMany({ where: { courseId: updated.id } });
+        const parsedFaqs = typeof data.faqs === "string"
+            ? JSON.parse(data.faqs)
+            : data.faqs;
 
-            await prisma.fAQ.createMany({
-                data: data.faqs.map((faq) => ({
-                    courseId: updated.id,
-                    question: faq.question,
-                    answer: faq.answer,
-                })),
-            });
+        if (Array.isArray(parsedFaqs)) {
+            await prisma.fAQ.deleteMany({ where: { courseId: updated.id } });
+            if (parsedFaqs.length > 0) {
+                await prisma.fAQ.createMany({
+                    data: parsedFaqs.map((faq) => ({
+                        courseId: updated.id,
+                        question: faq.question,
+                        answer: faq.answer,
+                    })),
+                });
+            }
         }
 
         return { success: true };
