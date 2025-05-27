@@ -68,6 +68,7 @@ export interface Course {
     intro: string;
     description: string;
     price: number;
+    discount: number;
     certification: string;
     introVideo?: string;
     thumbnail: string;

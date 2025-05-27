@@ -42,6 +42,8 @@ export default function AllCourses() {
 
     const data = useMemo(() => courses, [courses]);
 
+    console.log("Courses data:", data);
+
     const columns: ColumnDef<Course>[] = [
         {
             accessorKey: "title",
@@ -172,6 +174,9 @@ export default function AllCourses() {
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
                             <DropdownMenuItem onClick={() => router.push(`/courses/${course.slug}`)}>
                                 View Course
+                            </DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => router.push(`/admin/courses/edit-course/${course.slug}`)}>
+                                Edit Course
                             </DropdownMenuItem>
                             {user?.role === 'ADMIN' && (
                                 <>

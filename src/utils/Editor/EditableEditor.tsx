@@ -81,7 +81,7 @@ function EditorCore({ initialValue, onChange }: Props) {
             <HashtagPlugin />
             <RichTextPlugin
                 contentEditable={
-                    <ContentEditable className="min-h-[200px] border rounded p-2" />
+                    <ContentEditable className="min-h-[200px] border rounded p-2 focus:outline-1 focus:outline-blue-500" />
                 }
                 placeholder={<div className="text-gray-400">Enter content...</div>}
                 ErrorBoundary={({ children }) => <>{children}</>}

@@ -44,14 +44,15 @@ export const courseSchema = z.object({
     bannerImage: z.string().min(1, "Invalid URL format for Banner Image"),
     intro: z.string().min(1, "Intro is required"),
     description: z.string().min(1, "Description is required"),
-    price: z.string().min(1, "Price must be a positive number").optional(),
+    price: z.number().nonnegative("Price must be a positive number"),
+    discount: z.number().nonnegative("Discount must be a non-negative number").optional(),
     certification: z.string().min(1, "Certification is required"),
     introVideo: z.string().min(1, "Invalid URL format for Intro Video"),
     thumbnail: z.string().min(1, "Invalid URL format for Thumbnail"),
     chapters: z.array(
         z.object({
             title: z.string().min(1, "Chapter title is required"),
-            description: z.string().min(1, "Chapter description is required"),
+            description: z.record(z.any()),
         })
     ).min(1, "At least one chapter is required"),
     faqs: z.array(
